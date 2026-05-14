@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allProperties = await getCollection('proprietati');
+
+// Sort properties by date or price, we'll just display them for now
+// Helper function to format price
+const formatPrice = (price: number, currency: string) => {
+  return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(price);
+};
+---
+
+<Layout title="Proprietăți de Vânzare și Închiriere | Casa Mult Visată Piatra Neamț" description="Apartamente, case, terenuri și spații comerciale de vânzare și închiriere în Piatra Neamț. Filtrează după zonă, preț și tip.">
+	
+	<div class="container">
+		<div class="page-header reveal">
+			<p class="label">Proprietăți disponibile</p>
+			<h1>Portofoliul Meu</h1>
+			<p class="intro">Apartamente, case, terenuri și spații comerciale de vânzare și închiriere în Piatra Neamț și împrejurimi.</p>
+		</div>
+
+		<!-- Simplu UI pentru JS filtering pe client -->
+		<div class="filter-bar">
+			<select aria-label="Tip proprietate" id="filter-type">
+				<option value="all">Toate tipurile</option>
+				<option value="Apartament">Apartamente</option>
+				<option value="Casă">Case / Vile</option>
+				<option value="Teren">Terenuri</option>
+				<option value="Spațiu Comercial">Spații Comerciale</option>
+			</select>
+			<select aria-label="Tranzacție" id="filter-status">
+				<option value="all">Vânzare + Închiriere</option>
+				<option value="Vânzare">De vânzare</option>
+				<option value="Închiriere">De închiriat</option>
+			</select>
+			<button id="filter-btn">Filtrează</button>
+		</div>
+
+		<div class="results-info">
+			<span>Se afișează <strong id="results-count">{allProperties.length}</strong> proprietăți</span>
+		</div>
+
+		<hr class="rule">
+
+		<div class="contact-sheet" style="margin-top:2rem;" id="properties-grid">
+			{allProperties.map((prop, index) => {
+				const isMain = index === 0;
+				const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png');
+				
+				let metaDetails = [];
+				if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} camere`);
+				if (prop.data.bathrooms) metaDetails.push(`${prop.data.bathrooms} băi`);
+				if (prop.data.surface) metaDetails.push(`${prop.data.surface} mp`);
+				if (prop.data.landSurface && prop.data.propertyType === 'Teren') metaDetails.push(`Teren: ${prop.data.landSurface} mp`);
+				
+				return (
+					<article class="cs-item reveal" data-type={prop.data.propertyType} data-status={prop.data.status}>
+						<a href={`/proprietati/${prop.id}`}>
+							<img src={imageSrc} alt={prop.data.title} loading="lazy">
+						</a>
+						<div class="cs-caption">
+							<span class="tag">
+								De {prop.data.status.toLowerCase()} 
+								{prop.data.exclusive ? " · Exclusiv" : ""}
+								{prop.data.comisionZero ? " · Comision 0%" : ""}
+							</span>
+							<h3><a href={`/proprietati/${prop.id}`}>{prop.data.title}</a></h3>
+							<span class="price">
+								{prop.data.pricePerUnit ? prop.data.pricePerUnit : formatPrice(prop.data.price, prop.data.currency)}
+							</span>
+							<p class="meta">{prop.data.zone ? `${prop.data.zone} · ` : ""}{metaDetails.join(" · ")}</p>
+						</div>
+					</article>
+				)
+			})}
+		</div>
+	</div>
+
+	<script is:inline>
+		// Client-side filtering logic
+		document.addEventListener('DOMContentLoaded', () => {
+			const filterBtn = document.getElementById('filter-btn');
+			const typeSelect = document.getElementById('filter-type');
+			const statusSelect = document.getElementById('filter-status');
+			const properties = document.querySelectorAll('.cs-item');
+			const resultsCount = document.getElementById('results-count');
+
+			filterBtn.addEventListener('click', () => {
+				const type = typeSelect.value;
+				const status = statusSelect.value;
+				let visibleCount = 0;
+
+				properties.forEach(prop => {
+					const propType = prop.getAttribute('data-type');
+					const propStatus = prop.getAttribute('data-status');
+					
+					const typeMatch = type === 'all' || propType === type;
+					const statusMatch = status === 'all' || propStatus === status;
+
+					if (typeMatch && statusMatch) {
+						prop.style.display = 'block';
+						visibleCount++;
+					} else {
+						prop.style.display = 'none';
+					}
+				});
+
+				resultsCount.textContent = visibleCount;
+			});
+		});
+	</script>
+</Layout>

@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to main)
+
+media_folder: "public/images"
+public_folder: "/images"
+
+site_url: https://casa-mult-visata.netlify.app
+display_url: https://casa-mult-visata.netlify.app
+
+locale: 'ro'
+
+collections:
+  - name: "proprietati"
+    label: "Proprietăți"
+    label_singular: "Proprietate"
+    folder: "src/content/proprietati"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - {label: "Titlu", name: "title", widget: "string"}
+      - {label: "Status", name: "status", widget: "select", options: ["Vânzare", "Închiriere"], default: "Vânzare"}
+      - {label: "Tip Proprietate", name: "propertyType", widget: "select", options: ["Apartament", "Casă", "Teren", "Spațiu Comercial"]}
+      - {label: "Preț", name: "price", widget: "number", value_type: "int"}
+      - {label: "Monedă", name: "currency", widget: "select", options: ["EUR", "RON"], default: "EUR"}
+      - {label: "Preț pe unitate (ex. 35 €/mp) - Opțional", name: "pricePerUnit", widget: "string", required: false}
+      
+      - {label: "Locație (Completă)", name: "location", widget: "string"}
+      - {label: "Zonă / Cartier / Sat", name: "zone", widget: "string", required: false}
+      
+      - {label: "Număr Camere", name: "rooms", widget: "number", value_type: "int", required: false}
+      - {label: "Număr Băi", name: "bathrooms", widget: "number", value_type: "int", required: false}
+      - {label: "Suprafață Utilă/Construită (mp)", name: "surface", widget: "number", value_type: "int", required: false}
+      - {label: "Suprafață Teren (mp)", name: "landSurface", widget: "number", value_type: "int", required: false}
+      - {label: "Etaj", name: "floor", widget: "string", required: false}
+      - {label: "An Construcție", name: "yearBuilt", widget: "number", value_type: "int", required: false}
+      
+      - {label: "Caracteristici / Facilități (Listă)", name: "features", widget: "list", required: false}
+      
+      - {label: "Exclusivitate?", name: "exclusive", widget: "boolean", default: false, required: false}
+      - {label: "Comision 0%?", name: "comisionZero", widget: "boolean", default: true, required: false}
+      
+      - {label: "Imagine Principală", name: "featuredImage", widget: "image", required: false}
+      - {label: "Galerie Foto", name: "gallery", widget: "list", field: {label: "Imagine", name: "image", widget: "image"}, required: false}
+      
+      - {label: "Descriere Completă", name: "body", widget: "markdown"}
+
+      # CÂMPURI PRIVATE - NU APAR PE SITE
+      - label: "--- DATE PRIVATE (Nu apar pe site) ---"
+        name: "private_separator"
+        widget: "hidden"
+        default: "separator"
+        required: false
+      - {label: "Nume / Contact Proprietar (PRIVAT)", name: "privateOwnerContact", widget: "string", required: false, hint: "Acest câmp NU va fi vizibil pe site. Este doar pentru gestiunea ta."}
+      - {label: "Notițe Interne (PRIVAT)", name: "privateNotes", widget: "text", required: false, hint: "Orice detalii confidențiale (adresa exactă, cod interfon, etc). NU apare pe site."}
