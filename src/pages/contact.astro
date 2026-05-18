@@ -2,8 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact | Casa Mult Visată — Agent Imobiliar Piatra Neamț" description="Contactează-l pe Cozma Vasile — agent imobiliar Piatra Neamț. Telefon: 0747 814 263. Email: vascozma@gmail.com. WhatsApp disponibil.">
-	
+<Layout title="Contact | Casa Mult Visată — Cozma Vasile Agent Piatra Neamț" description="Contactează-mă pentru o consultanță gratuită. Telefon, WhatsApp, formular online. Răspund rapid." ogImage="/images/hero.png">
+
 	<section style="padding: var(--section-padding);">
 		<div class="container">
 			<div class="page-header reveal">
@@ -15,19 +15,30 @@ import Layout from '../layouts/Layout.astro';
 			<div class="contact-grid reveal">
 				<div>
 					<h3 style="font-family:var(--font-display); font-size:1.5rem; font-weight:500; margin-bottom:2rem;">Trimite-mi un Mesaj</h3>
-					<!-- Replace with real Formspree endpoint -->
-					<form action="https://formspree.io/f/placeholder" method="POST" id="contact-form">
+					<form
+						name="contact"
+						method="POST"
+						action="/multumesc"
+						data-netlify="true"
+						netlify-honeypot="bot-field"
+						id="contact-form"
+					>
+						<input type="hidden" name="form-name" value="contact">
+						<p hidden>
+							<label>Don't fill: <input name="bot-field"></label>
+						</p>
+
 						<div class="form-group">
 							<label for="name">Nume complet</label>
-							<input type="text" id="name" name="name" required placeholder="Ion Popescu">
+							<input type="text" id="name" name="name" required aria-required="true" autocomplete="name" placeholder="Ion Popescu">
 						</div>
 						<div class="form-group">
 							<label for="phone">Telefon</label>
-							<input type="tel" id="phone" name="phone" required placeholder="07XX XXX XXX">
+							<input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" pattern="(\+4)?0[27][0-9]{8}" placeholder="07XX XXX XXX">
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input type="email" id="email" name="email" placeholder="email@exemplu.ro">
+							<input type="email" id="email" name="email" autocomplete="email" placeholder="email@exemplu.ro">
 						</div>
 						<div class="form-group">
 							<label for="interest">Interes</label>
@@ -40,11 +51,15 @@ import Layout from '../layouts/Layout.astro';
 								<option>Altceva</option>
 							</select>
 						</div>
+						<div class="form-group" id="proprietate-group" style="display:none;">
+							<label for="proprietate">Proprietate de interes</label>
+							<input type="text" id="proprietate" name="proprietate" readonly>
+						</div>
 						<div class="form-group">
 							<label for="message">Mesaj</label>
-							<textarea id="message" name="message" placeholder="Descrie pe scurt ce cauți..."></textarea>
+							<textarea id="message" name="message" required aria-required="true" minlength="10" placeholder="Descrie pe scurt ce cauți..."></textarea>
 						</div>
-						<button type="submit" class="btn-primary" style="width:100%; text-align:center;">Trimite Mesaj</button>
+						<button type="submit" id="submit-btn" class="btn-primary" style="width:100%; text-align:center;">Trimite Mesaj</button>
 					</form>
 				</div>
 
@@ -75,8 +90,8 @@ import Layout from '../layouts/Layout.astro';
 						<div class="contact-info-item">
 							<h4>Social Media</h4>
 							<p>
-								<a href="https://www.facebook.com/profile.php?id=100075290402563" target="_blank" rel="noopener">Facebook</a> · 
-								<a href="https://www.instagram.com/cozma276/" target="_blank" rel="noopener">Instagram</a> · 
+								<a href="https://www.facebook.com/profile.php?id=100075290402563" target="_blank" rel="noopener">Facebook</a> ·
+								<a href="https://www.instagram.com/cozma276/" target="_blank" rel="noopener">Instagram</a> ·
 								<a href="https://www.tiktok.com/@cozmavasile_si_ana_lory" target="_blank" rel="noopener">TikTok</a>
 							</p>
 						</div>
@@ -88,9 +103,94 @@ import Layout from '../layouts/Layout.astro';
 							<p>Duminică: La cerere</p>
 						</div>
 					</div>
+
+					<div style="margin-top:2rem;">
+						<iframe
+							src="https://www.google.com/maps?q=Piatra+Neamț,+Județul+Neamț,+România&output=embed"
+							title="Piatra Neamț"
+							width="100%"
+							height="300"
+							style="border:0; display:block;"
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+						></iframe>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
+	<script is:inline>
+		document.addEventListener('DOMContentLoaded', function () {
+			var form = document.getElementById('contact-form');
+			var phone = document.getElementById('phone');
+			var message = document.getElementById('message');
+			var submitBtn = document.getElementById('submit-btn');
+			var interest = document.getElementById('interest');
+			var propGroup = document.getElementById('proprietate-group');
+			var propInput = document.getElementById('proprietate');
+
+			// Pre-fill from ?proprietate=
+			try {
+				var params = new URLSearchParams(window.location.search);
+				var prop = params.get('proprietate');
+				if (prop) {
+					propInput.value = prop;
+					propGroup.style.display = '';
+					if (!message.value) {
+						message.value = 'Bună ziua, vreau mai multe informații despre proprietatea: [' + prop + ']. Vă rog să mă contactați.';
+					}
+					if (interest) {
+						for (var i = 0; i < interest.options.length; i++) {
+							if (interest.options[i].text === 'Vreau să cumpăr') {
+								interest.selectedIndex = i;
+								break;
+							}
+						}
+					}
+				}
+			} catch (e) {}
+
+			// Custom RO validation messages
+			function setMessages() {
+				var name = document.getElementById('name');
+				if (name) {
+					name.addEventListener('invalid', function () {
+						name.setCustomValidity('Te rog completează numele tău.');
+					});
+					name.addEventListener('input', function () { name.setCustomValidity(''); });
+				}
+				if (phone) {
+					phone.addEventListener('invalid', function () {
+						if (phone.validity.valueMissing) {
+							phone.setCustomValidity('Te rog completează numărul de telefon.');
+						} else {
+							phone.setCustomValidity('Introdu un număr valid (ex: 0747 814 263 sau +40747814263).');
+						}
+					});
+					phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+				}
+				if (message) {
+					message.addEventListener('invalid', function () {
+						if (message.validity.valueMissing) {
+							message.setCustomValidity('Te rog scrie un mesaj scurt.');
+						} else if (message.validity.tooShort) {
+							message.setCustomValidity('Mesajul trebuie să aibă cel puțin 10 caractere.');
+						}
+					});
+					message.addEventListener('input', function () { message.setCustomValidity(''); });
+				}
+			}
+			setMessages();
+
+			// Submit state
+			if (form && submitBtn) {
+				form.addEventListener('submit', function () {
+					submitBtn.disabled = true;
+					submitBtn.textContent = 'Se trimite...';
+				});
+			}
+		});
+	</script>
 
 </Layout>

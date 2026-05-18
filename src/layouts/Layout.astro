@@ -2,26 +2,142 @@
 interface Props {
 	title: string;
 	description?: string;
+	ogImage?: string;
+	canonicalPath?: string;
+	noIndex?: boolean;
 }
 
-const { title, description = "Agenție imobiliară de încredere în Piatra Neamț. Apartamente, case, terenuri — vânzare și închiriere. Agent Cozma Vasile." } = Astro.props;
+const {
+	title,
+	description = "Agenție imobiliară de încredere în Piatra Neamț. Apartamente, case, terenuri — vânzare și închiriere. Agent Cozma Vasile.",
+	ogImage = "/images/hero.png",
+	canonicalPath,
+	noIndex = false,
+} = Astro.props;
+
 const currentPath = Astro.url.pathname;
+const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://casa-mult-visata.netlify.app";
+const canonicalUrl = canonicalPath
+	? `${siteOrigin}${canonicalPath.startsWith("/") ? canonicalPath : "/" + canonicalPath}`
+	: `${siteOrigin}${currentPath}`;
+const absoluteOgImage = ogImage.startsWith("http") ? ogImage : `${siteOrigin}${ogImage.startsWith("/") ? ogImage : "/" + ogImage}`;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "RealEstateAgent",
+			"@id": `${siteOrigin}/#agent`,
+			"name": "Cozma Vasile",
+			"brand": {
+				"@type": "Brand",
+				"name": "Casa Mult Visată"
+			},
+			"image": absoluteOgImage,
+			"url": siteOrigin,
+			"telephone": "+40747814263",
+			"email": "vascozma@gmail.com",
+			"areaServed": {
+				"@type": "City",
+				"name": "Piatra Neamț"
+			},
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Piatra Neamț",
+				"addressRegion": "Neamț",
+				"addressCountry": "RO"
+			},
+			"sameAs": [
+				"https://www.facebook.com/profile.php?id=100075290402563",
+				"https://www.instagram.com/cozma276/",
+				"https://www.tiktok.com/@cozmavasile_si_ana_lory"
+			]
+		},
+		{
+			"@type": "LocalBusiness",
+			"@id": `${siteOrigin}/#business`,
+			"name": "Casa Mult Visată",
+			"image": absoluteOgImage,
+			"url": siteOrigin,
+			"telephone": "+40747814263",
+			"email": "vascozma@gmail.com",
+			"priceRange": "€€",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Piatra Neamț",
+				"addressRegion": "Neamț",
+				"addressCountry": "RO"
+			},
+			"areaServed": "Piatra Neamț"
+		},
+		{
+			"@type": "Organization",
+			"@id": `${siteOrigin}/#organization`,
+			"name": "Casa Mult Visată",
+			"url": siteOrigin,
+			"logo": absoluteOgImage
+		},
+		{
+			"@type": "WebSite",
+			"@id": `${siteOrigin}/#website`,
+			"url": siteOrigin,
+			"name": "Casa Mult Visată",
+			"inLanguage": "ro-RO",
+			"publisher": { "@id": `${siteOrigin}/#organization` },
+			"potentialAction": {
+				"@type": "SearchAction",
+				"target": {
+					"@type": "EntryPoint",
+					"urlTemplate": `${siteOrigin}/proprietati?q={search_term_string}`
+				},
+				"query-input": "required name=search_term_string"
+			}
+		}
+	]
+};
 ---
 
 <!doctype html>
 <html lang="ro">
 	<head>
-		<meta charset="UTF-8" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#1a3a5c" />
+		{noIndex && <meta name="robots" content="noindex, nofollow" />}
+		<link rel="canonical" href={canonicalUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 		<title>{title}</title>
-		
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Casa Mult Visată" />
+		<meta property="og:locale" content="ro_RO" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={absoluteOgImage} />
+		<meta property="og:image:alt" content={`${title} — Casa Mult Visată, Piatra Neamț`} />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteOgImage} />
+
+		<!-- Fonts: preconnect + dns-prefetch + stylesheet -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-		
+
 		<link rel="stylesheet" href="/style.css" />
+
+		<!-- JSON-LD Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 		<!-- Netlify Identity Widget -->
 		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

@@ -18,16 +18,68 @@ const formatPrice = (price: number, currency: string) => {
   return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(price);
 };
 
-const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png');
+const fallbackImage = prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png';
+const imageSrc = prop.data.featuredImage || fallbackImage;
+
+// Build gallery images: featured + gallery, dedupe, filter empty
+const galleryRaw = [prop.data.featuredImage, ...(prop.data.gallery || [])].filter((v): v is string => typeof v === 'string' && v.trim().length > 0);
+const images = Array.from(new Set(galleryRaw));
 
 // Contact strings
 const contactPhone = "0747814263";
 const displayPhone = "0747 814 263";
 const whatsappMsg = `Bună ziua! Vreau informații despre proprietatea: ${prop.data.title}`;
+
+// SEO / OG
+const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://casa-mult-visata.netlify.app';
+const absoluteOgImage = imageSrc.startsWith('http') ? imageSrc : `${siteOrigin}${imageSrc.startsWith('/') ? imageSrc : '/' + imageSrc}`;
+const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
+
+// Description: first 160 chars from body or fallback
+const rawBody = (prop.body || '').replace(/[#*_>`\-\[\]\(\)!]/g, '').replace(/\s+/g, ' ').trim();
+const metaDescription = rawBody.length > 0
+  ? rawBody.slice(0, 160)
+  : `${prop.data.propertyType} de ${prop.data.status.toLowerCase()} în ${prop.data.location}.`;
+const jsonLdDescription = rawBody.length > 0 ? rawBody.slice(0, 200) : metaDescription;
+
+// JSON-LD RealEstateListing
+const realEstateListing: Record<string, any> = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateListing",
+  "name": prop.data.title,
+  "description": jsonLdDescription,
+  "url": canonicalUrl,
+  "image": absoluteOgImage,
+  "price": prop.data.price,
+  "priceCurrency": prop.data.currency,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": prop.data.zone || prop.data.location,
+    "addressRegion": "Neamț",
+    "addressCountry": "RO"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": prop.data.price,
+    "priceCurrency": prop.data.currency,
+    "availability": "https://schema.org/InStock"
+  }
+};
+if (prop.data.surface) {
+  realEstateListing.floorSize = { "@type": "QuantitativeValue", "value": prop.data.surface, "unitCode": "MTK" };
+}
+if (prop.data.rooms) realEstateListing.numberOfRooms = prop.data.rooms;
+if (prop.data.yearBuilt) realEstateListing.yearBuilt = prop.data.yearBuilt;
+
+const contactHref = `/contact?proprietate=${encodeURIComponent(prop.data.title)}`;
 ---
 
-<Layout title={`${prop.data.title} | Casa Mult Visată Piatra Neamț`} description={`${prop.data.propertyType} de ${prop.data.status.toLowerCase()} în ${prop.data.location}. ${prop.data.price ? formatPrice(prop.data.price, prop.data.currency) : ''}`}>
-	
+<Layout
+	title={`${prop.data.title} | Casa Mult Visată Piatra Neamț`}
+	description={metaDescription}
+	ogImage={absoluteOgImage}
+>
+
 	<div class="container" style="padding-top: 3rem;">
         <div style="margin-bottom: 2rem;">
             <a href="/proprietati" style="font-family: var(--font-accent); font-size: 0.8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary);">&larr; Înapoi la proprietăți</a>
@@ -36,14 +88,34 @@ const whatsappMsg = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
 		<div class="about-editorial reveal">
 			<div class="body-text">
                 <span class="tag" style="font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.875rem; color: var(--accent); display: block; margin-bottom: 0.5rem;">
-                    De {prop.data.status.toLowerCase()} 
-                    {prop.data.exclusive ? " · Exclusiv" : ""}
-                    {prop.data.comisionZero ? " · Comision 0%" : ""}
+                    De {prop.data.status.toLowerCase()}
                 </span>
+                {(prop.data.exclusive || prop.data.comisionZero) && (
+                    <div class="prop-badges" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        {prop.data.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
+                        {prop.data.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
+                    </div>
+                )}
 				<h1 style="font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">{prop.data.title}</h1>
                 <p style="font-family: var(--font-accent); font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 2rem;">{prop.data.location}</p>
 
                 <img src={imageSrc} alt={prop.data.title} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 2rem;">
+
+                {images.length > 1 && (
+                    <section class="gallery-grid" aria-label="Galerie foto" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem; margin-bottom: 2rem;">
+                        {images.map((src, i) => (
+                            <button
+                                type="button"
+                                class="gallery-item"
+                                data-index={i}
+                                style="padding:0; border:0; background:none; cursor:pointer;"
+                                aria-label={`Deschide imaginea ${i + 1}`}
+                            >
+                                <img src={src} alt={`${prop.data.title} — imagine ${i + 1}`} loading="lazy" style="width:100%; aspect-ratio: 4/3; object-fit: cover; display:block;" />
+                            </button>
+                        ))}
+                    </section>
+                )}
 
                 <div style="font-size: 1.125rem; line-height: 1.8;">
                     <Content />
@@ -62,13 +134,29 @@ const whatsappMsg = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                         </ul>
                     </div>
                 )}
+
+                {prop.data.location && (
+                    <div style="margin-top: 3rem;">
+                        <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 1.5rem;">Localizare</h3>
+                        <iframe
+                            src={`https://www.google.com/maps?q=${encodeURIComponent((prop.data.zone ? prop.data.zone + ', ' : '') + prop.data.location + ', Neamț, România')}&output=embed`}
+                            width="100%"
+                            height="320"
+                            style="border:0; display:block;"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title={`Hartă ${prop.data.location}`}
+                        ></iframe>
+                    </div>
+                )}
 			</div>
-            
+
 			<aside class="sidebar" style="position: sticky; top: 100px;">
                 <div style="background: var(--surface-secondary); padding: 2rem; margin-bottom: 2rem;">
                     <h4 style="margin-top:0;">Preț</h4>
                     <div class="stat">
-                        <span class="stat-number" style="font-size: 2rem;">{prop.data.pricePerUnit ? prop.data.pricePerUnit : formatPrice(prop.data.price, prop.data.currency)}</span>
+                        <span class="stat-number" style="font-size: 2rem;">{formatPrice(prop.data.price, prop.data.currency)}</span>
+                        {prop.data.pricePerUnit && <span class="stat-label" style="display:block; margin-top:0.25rem; color: var(--text-secondary);">{prop.data.pricePerUnit}</span>}
                         {prop.data.comisionZero && <span class="stat-label" style="color: var(--accent-green); font-weight: 600; display:block; margin-top:0.5rem;">COMISION 0% CUMPĂRĂTOR</span>}
                     </div>
 
@@ -123,7 +211,7 @@ const whatsappMsg = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                             Mesaj pe WhatsApp
                         </a>
-                        <a href="/contact" style="font-family: var(--font-accent); font-size: 0.875rem; font-weight: 500; text-align: center; color: var(--accent); border: 2px solid var(--accent); padding: 0.75rem 1.5rem; transition: 0.2s;">Programează Vizionare</a>
+                        <a href={contactHref} style="font-family: var(--font-accent); font-size: 0.875rem; font-weight: 500; text-align: center; color: var(--accent); padding: 0.75rem 1.5rem; transition: 0.2s;">Programează Vizionare</a>
                     </div>
                 </div>
 
@@ -137,5 +225,67 @@ const whatsappMsg = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
 			</aside>
 		</div>
 	</div>
+
+    {images.length > 1 && (
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Galerie foto">
+            <button type="button" class="lightbox-close" aria-label="Închide">&times;</button>
+            <button type="button" class="lightbox-prev" aria-label="Imaginea anterioară">&#10094;</button>
+            <img class="lightbox-image" src="" alt="" />
+            <button type="button" class="lightbox-next" aria-label="Imaginea următoare">&#10095;</button>
+            <div class="lightbox-counter" aria-live="polite"></div>
+        </div>
+    )}
+
+    <script type="application/ld+json" set:html={JSON.stringify(realEstateListing)} />
+
+    {images.length > 1 && (
+        <script is:inline define:vars={{ images, title: prop.data.title }}>
+            document.addEventListener('DOMContentLoaded', function () {
+                const lb = document.getElementById('lightbox');
+                if (!lb) return;
+                const img = lb.querySelector('.lightbox-image');
+                const counter = lb.querySelector('.lightbox-counter');
+                const btnClose = lb.querySelector('.lightbox-close');
+                const btnPrev = lb.querySelector('.lightbox-prev');
+                const btnNext = lb.querySelector('.lightbox-next');
+                let idx = 0;
+
+                function show(i) {
+                    idx = (i + images.length) % images.length;
+                    img.src = images[idx];
+                    img.alt = title + ' — imagine ' + (idx + 1);
+                    if (counter) counter.textContent = (idx + 1) + ' / ' + images.length;
+                }
+                function open(i) {
+                    show(i);
+                    lb.classList.add('open');
+                    lb.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                }
+                function close() {
+                    lb.classList.remove('open');
+                    lb.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                }
+
+                document.querySelectorAll('.gallery-item').forEach(function (el) {
+                    el.addEventListener('click', function () {
+                        const i = parseInt(el.getAttribute('data-index') || '0', 10);
+                        open(i);
+                    });
+                });
+                btnClose && btnClose.addEventListener('click', close);
+                btnPrev && btnPrev.addEventListener('click', function () { show(idx - 1); });
+                btnNext && btnNext.addEventListener('click', function () { show(idx + 1); });
+                lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+                document.addEventListener('keydown', function (e) {
+                    if (!lb.classList.contains('open')) return;
+                    if (e.key === 'Escape') close();
+                    else if (e.key === 'ArrowLeft') show(idx - 1);
+                    else if (e.key === 'ArrowRight') show(idx + 1);
+                });
+            });
+        </script>
+    )}
 
 </Layout>
