@@ -56,57 +56,6 @@ const totalCount = allProperties.length;
       </div>
 
       <div class="filter-field">
-        <label for="filter-zone" class="sr-only">Zonă / Cartier</label>
-        <select id="filter-zone" aria-label="Zonă sau cartier">
-          <option value="all">Toate zonele</option>
-          {uniqueZones.map(z => <option value={z}>{z}</option>)}
-        </select>
-      </div>
-
-      <div class="filter-field">
-        <label for="filter-rooms" class="sr-only">Număr camere</label>
-        <select id="filter-rooms" aria-label="Număr camere">
-          <option value="all">Orice nr. camere</option>
-          <option value="1">1 cameră</option>
-          <option value="2">2 camere</option>
-          <option value="3">3 camere</option>
-          <option value="4">4 camere</option>
-          <option value="5">5+ camere</option>
-        </select>
-      </div>
-
-      <div class="filter-field">
-        <label for="filter-price-min" class="sr-only">Preț minim (EUR)</label>
-        <input type="number" id="filter-price-min" placeholder="Preț min €" min="0" step="1000" aria-label="Preț minim în euro">
-      </div>
-      <div class="filter-field">
-        <label for="filter-price-max" class="sr-only">Preț maxim (EUR)</label>
-        <input type="number" id="filter-price-max" placeholder="Preț max €" min="0" step="1000" aria-label="Preț maxim în euro">
-      </div>
-
-      <div class="filter-field">
-        <label for="filter-surface-min" class="sr-only">Suprafață minimă (mp)</label>
-        <input type="number" id="filter-surface-min" placeholder="Supr. min mp" min="0" step="1" aria-label="Suprafață minimă în metri pătrați">
-      </div>
-      <div class="filter-field">
-        <label for="filter-surface-max" class="sr-only">Suprafață maximă (mp)</label>
-        <input type="number" id="filter-surface-max" placeholder="Supr. max mp" min="0" step="1" aria-label="Suprafață maximă în metri pătrați">
-      </div>
-
-      <div class="filter-field filter-check">
-        <label>
-          <input type="checkbox" id="filter-comision">
-          <span>Doar Comision 0%</span>
-        </label>
-      </div>
-      <div class="filter-field filter-check">
-        <label>
-          <input type="checkbox" id="filter-exclusive">
-          <span>Doar Exclusivități</span>
-        </label>
-      </div>
-
-      <div class="filter-field">
         <label for="sort-select" class="sr-only">Sortare</label>
         <select id="sort-select" class="sort-dropdown" aria-label="Sortează rezultatele">
           <option value="default">Cele mai noi</option>
@@ -116,6 +65,64 @@ const totalCount = allProperties.length;
           <option value="surface-desc">Suprafață descrescător</option>
           <option value="exclusive-first">Exclusivități primele</option>
         </select>
+      </div>
+
+      <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-advanced" type="button">
+        <span class="filter-toggle-label">Filtre avansate</span>
+        <span class="filter-toggle-count" id="filter-active-count" aria-live="polite" hidden>0</span>
+      </button>
+
+      <div id="filter-advanced" class="filter-advanced" hidden>
+        <div class="filter-field">
+          <label for="filter-zone" class="sr-only">Zonă / Cartier</label>
+          <select id="filter-zone" aria-label="Zonă sau cartier">
+            <option value="all">Toate zonele</option>
+            {uniqueZones.map(z => <option value={z}>{z}</option>)}
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-rooms" class="sr-only">Număr camere</label>
+          <select id="filter-rooms" aria-label="Număr camere">
+            <option value="all">Orice nr. camere</option>
+            <option value="1">1 cameră</option>
+            <option value="2">2 camere</option>
+            <option value="3">3 camere</option>
+            <option value="4">4 camere</option>
+            <option value="5">5+ camere</option>
+          </select>
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-price-min" class="sr-only">Preț minim (EUR)</label>
+          <input type="number" id="filter-price-min" placeholder="Preț min €" min="0" step="1000" aria-label="Preț minim în euro">
+        </div>
+        <div class="filter-field">
+          <label for="filter-price-max" class="sr-only">Preț maxim (EUR)</label>
+          <input type="number" id="filter-price-max" placeholder="Preț max €" min="0" step="1000" aria-label="Preț maxim în euro">
+        </div>
+
+        <div class="filter-field">
+          <label for="filter-surface-min" class="sr-only">Suprafață minimă (mp)</label>
+          <input type="number" id="filter-surface-min" placeholder="Supr. min mp" min="0" step="1" aria-label="Suprafață minimă în metri pătrați">
+        </div>
+        <div class="filter-field">
+          <label for="filter-surface-max" class="sr-only">Suprafață maximă (mp)</label>
+          <input type="number" id="filter-surface-max" placeholder="Supr. max mp" min="0" step="1" aria-label="Suprafață maximă în metri pătrați">
+        </div>
+
+        <div class="filter-field filter-check">
+          <label>
+            <input type="checkbox" id="filter-comision">
+            <span>Doar Comision 0%</span>
+          </label>
+        </div>
+        <div class="filter-field filter-check">
+          <label>
+            <input type="checkbox" id="filter-exclusive">
+            <span>Doar Exclusivități</span>
+          </label>
+        </div>
       </div>
 
       <button type="button" class="filter-reset" id="filter-reset">Resetează filtrele</button>
@@ -205,6 +212,9 @@ const totalCount = allProperties.length;
       const exclusiveChk   = document.getElementById('filter-exclusive');
       const sortSel        = document.getElementById('sort-select');
       const resetBtn       = document.getElementById('filter-reset');
+      const filterToggle   = document.getElementById('filter-toggle');
+      const filterAdvanced = document.getElementById('filter-advanced');
+      const activeCount    = document.getElementById('filter-active-count');
 
       const items = Array.from(document.querySelectorAll('#properties-grid .cs-item'));
       // Salvăm ordinea inițială pentru sort = default
@@ -334,6 +344,39 @@ const totalCount = allProperties.length;
         }
 
         writeFiltersToURL();
+        updateActiveCount();
+      }
+
+      function updateActiveCount() {
+        let n = 0;
+        if (zoneSel    && zoneSel.value    !== 'all') n++;
+        if (roomsSel   && roomsSel.value   !== 'all') n++;
+        if (priceMinInp && priceMinInp.value.trim()) n++;
+        if (priceMaxInp && priceMaxInp.value.trim()) n++;
+        if (surfMinInp  && surfMinInp.value.trim())  n++;
+        if (surfMaxInp  && surfMaxInp.value.trim())  n++;
+        if (comisionChk  && comisionChk.checked)  n++;
+        if (exclusiveChk && exclusiveChk.checked) n++;
+        if (!activeCount) return;
+        if (n > 0) {
+          activeCount.textContent = n + ' active';
+          activeCount.hidden = false;
+        } else {
+          activeCount.textContent = '0';
+          activeCount.hidden = true;
+        }
+      }
+
+      if (filterToggle && filterAdvanced) {
+        filterToggle.addEventListener('click', () => {
+          const expanded = filterToggle.getAttribute('aria-expanded') === 'true';
+          filterToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          if (expanded) {
+            filterAdvanced.setAttribute('hidden', '');
+          } else {
+            filterAdvanced.removeAttribute('hidden');
+          }
+        });
       }
 
       // Wire-up events
@@ -375,4 +418,55 @@ const totalCount = allProperties.length;
       applyFilters();
     });
   </script>
+
+  <style>
+    /* Filter mobile collapse */
+    .filter-toggle {
+      display: none; /* hidden on desktop */
+      background: none;
+      border: none;
+      padding: 0.5rem 0;
+      font-family: var(--font-accent);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      cursor: pointer;
+      text-align: left;
+    }
+    .filter-toggle-count {
+      display: inline-block;
+      margin-left: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+    .filter-toggle::after {
+      content: " ▼";
+      font-size: 0.6em;
+      margin-left: 0.25rem;
+    }
+    .filter-toggle[aria-expanded="true"]::after {
+      content: " ▲";
+    }
+
+    /* Desktop: advanced container always visible, even with [hidden] attr (set for mobile-first) */
+    @media (min-width: 641px) {
+      .filter-advanced,
+      .filter-advanced[hidden] {
+        display: contents;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .filter-toggle { display: block; }
+      .filter-advanced[hidden] { display: none; }
+      .filter-advanced {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+    }
+  </style>
 </Layout>

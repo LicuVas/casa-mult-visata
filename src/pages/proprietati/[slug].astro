@@ -71,7 +71,7 @@ if (prop.data.surface) {
 if (prop.data.rooms) realEstateListing.numberOfRooms = prop.data.rooms;
 if (prop.data.yearBuilt) realEstateListing.yearBuilt = prop.data.yearBuilt;
 
-const contactHref = `/contact?proprietate=${encodeURIComponent(prop.data.title)}`;
+const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)}`;
 ---
 
 <Layout
@@ -213,6 +213,31 @@ const contactHref = `/contact?proprietate=${encodeURIComponent(prop.data.title)}
                         </a>
                         <a href={contactHref} style="font-family: var(--font-accent); font-size: 0.875rem; font-weight: 500; text-align: center; color: var(--accent); padding: 0.75rem 1.5rem; transition: 0.2s;">Programează Vizionare</a>
                     </div>
+
+                    {prop.data.price && prop.data.rooms && (
+                        <div class="mortgage-calc" data-price={prop.data.price} data-currency={prop.data.currency}>
+                            <h4>Calculator credit ipotecar</h4>
+                            <p class="mortgage-disclaimer">Estimare informativă. Vorbește cu banca pentru oferta exactă.</p>
+
+                            <label>Avans (%): <span id="mc-down-pct">15</span>%</label>
+                            <input type="range" id="mc-down" min="15" max="50" value="15" step="5">
+
+                            <label>Perioadă (ani): <span id="mc-years-val">25</span></label>
+                            <input type="range" id="mc-years" min="5" max="30" value="25" step="1">
+
+                            <label>Dobândă anuală (%): <span id="mc-rate-val">7.5</span>%</label>
+                            <input type="range" id="mc-rate" min="3" max="12" value="7.5" step="0.1">
+
+                            <div class="mortgage-result">
+                                <span class="mortgage-label">Rată lunară estimată</span>
+                                <span class="mortgage-amount" id="mc-monthly">— EUR</span>
+                            </div>
+                            <div class="mortgage-meta">
+                                <span>Sumă împrumutată: <strong id="mc-loan">—</strong></span>
+                                <span>Total dobândă: <strong id="mc-total-interest">—</strong></span>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 1rem;">
@@ -237,6 +262,60 @@ const contactHref = `/contact?proprietate=${encodeURIComponent(prop.data.title)}
     )}
 
     <script type="application/ld+json" set:html={JSON.stringify(realEstateListing)} />
+
+    {prop.data.price && prop.data.rooms && (
+        <script is:inline define:vars={{ price: prop.data.price, currency: prop.data.currency }}>
+            document.addEventListener('DOMContentLoaded', function () {
+                var elDown = document.getElementById('mc-down');
+                var elYears = document.getElementById('mc-years');
+                var elRate = document.getElementById('mc-rate');
+                var elDownPct = document.getElementById('mc-down-pct');
+                var elYearsVal = document.getElementById('mc-years-val');
+                var elRateVal = document.getElementById('mc-rate-val');
+                var elMonthly = document.getElementById('mc-monthly');
+                var elLoan = document.getElementById('mc-loan');
+                var elTotalInterest = document.getElementById('mc-total-interest');
+                if (!elDown || !elYears || !elRate || !elMonthly) return;
+
+                var fmt = new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency, maximumFractionDigits: 0 });
+
+                function calc() {
+                    var downPct = parseFloat(elDown.value);
+                    var years = parseInt(elYears.value, 10);
+                    var ratePct = parseFloat(elRate.value);
+
+                    if (elDownPct) elDownPct.textContent = downPct;
+                    if (elYearsVal) elYearsVal.textContent = years;
+                    if (elRateVal) elRateVal.textContent = ratePct.toFixed(1);
+
+                    var loan = price * (1 - downPct / 100);
+                    var n = years * 12;
+                    var r = (ratePct / 100) / 12;
+
+                    var monthly;
+                    if (r === 0) {
+                        monthly = loan / n;
+                    } else {
+                        var pow = Math.pow(1 + r, n);
+                        monthly = loan * r * pow / (pow - 1);
+                    }
+                    var totalPaid = monthly * n;
+                    var totalInterest = totalPaid - loan;
+
+                    elMonthly.textContent = fmt.format(Math.round(monthly));
+                    if (elLoan) elLoan.textContent = fmt.format(Math.round(loan));
+                    if (elTotalInterest) elTotalInterest.textContent = fmt.format(Math.round(totalInterest));
+                }
+
+                ['input', 'change'].forEach(function (ev) {
+                    elDown.addEventListener(ev, calc);
+                    elYears.addEventListener(ev, calc);
+                    elRate.addEventListener(ev, calc);
+                });
+                calc();
+            });
+        </script>
+    )}
 
     {images.length > 1 && (
         <script is:inline define:vars={{ images, title: prop.data.title }}>

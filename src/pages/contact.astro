@@ -130,24 +130,43 @@ import Layout from '../layouts/Layout.astro';
 			var propGroup = document.getElementById('proprietate-group');
 			var propInput = document.getElementById('proprietate');
 
-			// Pre-fill from ?proprietate=
+			// Helper: select option by visible text
+			function selectInterestByText(targetText) {
+				if (!interest || !targetText) return;
+				for (var i = 0; i < interest.options.length; i++) {
+					if (interest.options[i].text === targetText) {
+						interest.selectedIndex = i;
+						return;
+					}
+				}
+			}
+
+			// Pre-fill from ?proprietate= and ?interes=
 			try {
 				var params = new URLSearchParams(window.location.search);
 				var prop = params.get('proprietate');
+				var interes = params.get('interes');
+
 				if (prop) {
 					propInput.value = prop;
 					propGroup.style.display = '';
 					if (!message.value) {
 						message.value = 'Bună ziua, vreau mai multe informații despre proprietatea: [' + prop + ']. Vă rog să mă contactați.';
 					}
-					if (interest) {
-						for (var i = 0; i < interest.options.length; i++) {
-							if (interest.options[i].text === 'Vreau să cumpăr') {
-								interest.selectedIndex = i;
-								break;
-							}
-						}
-					}
+					selectInterestByText('Vreau să cumpăr');
+				}
+
+				if (interes) {
+					var interesMap = {
+						'cumparare': 'Vreau să cumpăr',
+						'vanzare': 'Vreau să vând',
+						'inchiriere-vreau': 'Vreau să închiriez',
+						'inchiriere-caut': 'Caut chiriași',
+						'evaluare': 'Evaluare proprietate',
+						'altceva': 'Altceva'
+					};
+					var mapped = interesMap[interes];
+					if (mapped) selectInterestByText(mapped);
 				}
 			} catch (e) {}
 

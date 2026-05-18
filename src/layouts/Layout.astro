@@ -138,9 +138,6 @@ const jsonLd = {
 
 		<!-- JSON-LD Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-
-		<!-- Netlify Identity Widget -->
-		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
 	<body>
 		<a href="#main-content" class="skip-link">Salt la conținut</a>
@@ -233,17 +230,6 @@ const jsonLd = {
 			}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 			document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 		})();
-
-		// Setup Netlify Identity redirect
-		if (window.netlifyIdentity) {
-			window.netlifyIdentity.on("init", user => {
-				if (!user) {
-					window.netlifyIdentity.on("login", () => {
-						document.location.href = "/admin/";
-					});
-				}
-			});
-		}
 		</script>
 	</body>
 </html>

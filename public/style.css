@@ -303,6 +303,25 @@ ul { list-style: none; }
     .gallery-grid img:hover { transform: none; }
 }
 
+/* === EVALUATION CTA (home, editorial, no box) === */
+.evaluation-cta { padding: 3rem 0; border-top: var(--rule-width) solid var(--rule-color); border-bottom: var(--rule-width) solid var(--rule-color); margin: 4rem 0; text-align: center; }
+.evaluation-cta .label { margin-bottom: 0.75rem; }
+.evaluation-cta h2 { font-family: var(--font-display); font-size: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; color: var(--accent); }
+.evaluation-cta .evaluation-sub { font-family: var(--font-body); color: var(--text-secondary); max-width: 50ch; margin: 0 auto 1.5rem; line-height: 1.6; }
+
+/* === MORTGAGE CALCULATOR (editorial, no surrounding box) === */
+.mortgage-calc { margin-top: 2rem; padding-top: 2rem; border-top: var(--rule-width) solid var(--rule-color); }
+.mortgage-calc h4 { font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; }
+.mortgage-calc .mortgage-disclaimer { font-family: var(--font-body); font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.5; }
+.mortgage-calc label { display: block; font-family: var(--font-accent); font-size: 0.875rem; color: var(--text-primary); margin-bottom: 0.25rem; margin-top: 1rem; }
+.mortgage-calc label:first-of-type { margin-top: 0; }
+.mortgage-calc input[type="range"] { width: 100%; accent-color: var(--accent); background: transparent; margin-bottom: 0.25rem; }
+.mortgage-result { display: flex; flex-direction: column; gap: 0.25rem; margin-top: 1.5rem; padding-top: 1rem; border-top: var(--rule-width) solid var(--rule-color); }
+.mortgage-result .mortgage-label { font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.75rem; color: var(--text-secondary); }
+.mortgage-result .mortgage-amount { font-family: var(--font-display); font-size: clamp(1.75rem, 1.25rem + 1vw, 2rem); font-weight: 500; line-height: 1.1; color: var(--accent); }
+.mortgage-meta { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.75rem; font-family: var(--font-accent); font-size: 0.75rem; color: var(--text-secondary); }
+.mortgage-meta strong { font-weight: 600; color: var(--text-primary); }
+
 /* === WAVE 2/3 RESPONSIVE === */
 @media (max-width: 640px) {
     .filter-bar { flex-direction: column; align-items: stretch; gap: 1.25rem; }
