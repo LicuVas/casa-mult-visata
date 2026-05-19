@@ -139,10 +139,15 @@ const totalCount = allProperties.length;
         const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png');
 
         const metaDetails: string[] = [];
-        if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} camere`);
-        if (prop.data.bathrooms) metaDetails.push(`${prop.data.bathrooms} băi`);
+        if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} ${prop.data.rooms === 1 ? 'cam' : 'cam'}`);
+        if (prop.data.bathrooms) metaDetails.push(`${prop.data.bathrooms} ${prop.data.bathrooms === 1 ? 'baie' : 'băi'}`);
         if (prop.data.surface) metaDetails.push(`${prop.data.surface} mp`);
-        if (prop.data.landSurface && prop.data.propertyType === 'Teren') metaDetails.push(`Teren: ${prop.data.landSurface} mp`);
+        if (prop.data.landSurface) {
+          metaDetails.push(prop.data.propertyType === 'Teren'
+            ? `${prop.data.landSurface} mp teren`
+            : `+${prop.data.landSurface} mp teren`);
+        }
+        if (prop.data.floor) metaDetails.push(`Et. ${prop.data.floor}`);
 
         // Suprafață folosită pt filtru: surface (construit) sau landSurface (teren)
         const surfaceForFilter = prop.data.surface ?? prop.data.landSurface ?? 0;
@@ -161,13 +166,17 @@ const totalCount = allProperties.length;
             data-exclusive={prop.data.exclusive ? '1' : '0'}
             data-index={index}
           >
-            <a href={`/proprietati/${prop.id}`}>
-              <img src={imageSrc} alt={prop.data.title} loading="lazy">
-            </a>
-            <div class="cs-caption">
-              <span class="tag">
-                De {prop.data.status.toLowerCase()}
+            <div class="cs-media">
+              <span class="cs-status-tag">De {prop.data.status.toLowerCase()}</span>
+              <span class="cs-price-tag">
+                {formatPrice(prop.data.price, prop.data.currency)}
+                {prop.data.pricePerUnit && <small>{prop.data.pricePerUnit}</small>}
               </span>
+              <a href={`/proprietati/${prop.id}`}>
+                <img src={imageSrc} alt={prop.data.title} loading="lazy">
+              </a>
+            </div>
+            <div class="cs-caption">
               {(prop.data.exclusive || prop.data.comisionZero) && (
                 <div class="prop-badges">
                   {prop.data.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
@@ -175,13 +184,12 @@ const totalCount = allProperties.length;
                 </div>
               )}
               <h3><a href={`/proprietati/${prop.id}`}>{prop.data.title}</a></h3>
-              <span class="price">
-                {formatPrice(prop.data.price, prop.data.currency)}
-                {prop.data.pricePerUnit && (
-                  <small class="price-per-unit">{prop.data.pricePerUnit}</small>
-                )}
-              </span>
-              <p class="meta">{prop.data.zone ? `${prop.data.zone} · ` : ""}{metaDetails.join(" · ")}</p>
+              {(prop.data.zone || prop.data.location) && (
+                <p class="cs-zone">{prop.data.zone || prop.data.location}</p>
+              )}
+              {metaDetails.length > 0 && (
+                <p class="meta">{metaDetails.map(d => <span>{d}</span>)}</p>
+              )}
             </div>
           </article>
         )
