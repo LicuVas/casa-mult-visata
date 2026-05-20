@@ -36,8 +36,24 @@ jobs:
           test -d dist/admin || (echo "::error::dist/admin missing"; exit 1)
           echo "dist OK ($(ls dist | wc -l) entries, $(ls dist/images | wc -l) images)"
 
+      - name: Check secret presence
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN secret is missing or empty"
+            exit 1
+          fi
+          echo "Token present, length: ${#NETLIFY_AUTH_TOKEN}"
+
       - name: Deploy to Netlify
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: 661dcad7-eac6-4f24-9249-4536939163e3
-        run: npx netlify-cli@latest deploy --prod --dir=dist --site=$NETLIFY_SITE_ID
+        run: |
+          npx netlify-cli@17 deploy \
+            --prod \
+            --dir=dist \
+            --site=661dcad7-eac6-4f24-9249-4536939163e3 \
+            --auth="$NETLIFY_AUTH_TOKEN" \
+            --message="GitHub Action: $GITHUB_SHA"
