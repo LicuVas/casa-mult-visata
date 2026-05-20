@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway
-  branch: master # Branch to update (optional; defaults to main)
+  name: github
+  repo: LicuVas/casa-mult-visata
+  branch: master
 
 media_folder: "public/images"
 public_folder: "/images"
@@ -26,7 +27,32 @@ collections:
       - {label: "Preț pe unitate (ex. 35 €/mp) - Opțional", name: "pricePerUnit", widget: "string", required: false}
       
       - {label: "Locație (Completă)", name: "location", widget: "string"}
-      - {label: "Zonă / Cartier / Sat", name: "zone", widget: "string", required: false}
+      - label: "Zonă / Cartier / Sat"
+        name: "zone"
+        widget: "select"
+        required: false
+        options:
+          - "1 Mai"
+          - "Bodești de Jos"
+          - "Centru"
+          - "Ciritei"
+          - "Dărmănești"
+          - "Doamna"
+          - "Dobreni"
+          - "Doina"
+          - "Dumbrava Roșie"
+          - "Gura Văii"
+          - "Mărăței"
+          - "Nisiporești"
+          - "Obor"
+          - "Pietricica"
+          - "Precista"
+          - "Sărata"
+          - "Speranța"
+          - "Tei"
+          - "Văleni"
+          - "Vânători"
+      - {label: "Stradă", name: "street", widget: "string", required: false, hint: "Numele străzii (ex. Strada Orhei, Aleea Ulmilor). Lasă gol dacă nu se aplică."}
       
       - {label: "Număr Camere", name: "rooms", widget: "number", value_type: "int", required: false}
       - {label: "Număr Băi", name: "bathrooms", widget: "number", value_type: "int", required: false}
@@ -39,7 +65,34 @@ collections:
       
       - {label: "Exclusivitate?", name: "exclusive", widget: "boolean", default: false, required: false}
       - {label: "Comision 0%?", name: "comisionZero", widget: "boolean", default: true, required: false}
-      
+
+      # CICLU DE VIAȚĂ — folosit pentru filtrare/afișare
+      - {label: "Status anunț", name: "listingStatus", widget: "select", options: ["Activ", "Rezervat", "Vândut", "Retras"], default: "Activ", hint: "Activ = vizibil normal. Rezervat = afișat cu badge. Vândut/Retras = ascuns din listare implicită."}
+      - label: "Actualizat la"
+        name: "updatedAt"
+        widget: "datetime"
+        required: false
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        picker_utc: false
+        hint: "Data ultimei modificări semnificative. Apare ca 'Actualizat la ...' pe pagina anunțului."
+
+      # LOCAȚIE PE HARTĂ — opțional, dacă vrei marker exact (altfel se folosește centroid de cartier)
+      - label: "Locație pe hartă"
+        name: "coords"
+        widget: "map"
+        required: false
+        type: "Point"
+        decimals: 6
+        # Default: centrul Piatra Neamț (lng,lat în format GeoJSON)
+        default: '{"type":"Point","coordinates":[26.371,46.929]}'
+        hint: "Trage markerul roșu pe locația exactă a proprietății. Implicit: centrul Piatra Neamț."
+
+      # MEDIA EXTRA
+      - {label: "URL Video (YouTube/Vimeo embed)", name: "videoUrl", widget: "string", required: false, hint: "Ex: https://www.youtube.com/embed/..."}
+      - {label: "URL Tur Virtual (Matterport/360)", name: "virtualTourUrl", widget: "string", required: false}
+      - {label: "Plan / Schiță (imagine)", name: "floorPlan", widget: "image", required: false}
+
       - {label: "Imagine Principală", name: "featuredImage", widget: "image", required: false}
       - {label: "Galerie Foto", name: "gallery", widget: "list", field: {label: "Imagine", name: "image", widget: "image"}, required: false}
       

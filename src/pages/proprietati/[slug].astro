@@ -1,6 +1,31 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import imageDims from '../../data/image_dims.json';
+
+const DIMS = imageDims as Record<string, [number, number]>;
+function getDims(src: string): [number, number] {
+  return DIMS[src] || [1200, 900];
+}
+
+// Normalize coords from either legacy [lat,lng] tuple OR Sveltia GeoJSON string Point.
+// GeoJSON Point coordinates are [lng, lat] (longitude first).
+function normalizeCoords(raw: unknown): [number, number] | null {
+  if (Array.isArray(raw) && raw.length === 2 && typeof raw[0] === 'number' && typeof raw[1] === 'number') {
+    return [raw[0], raw[1]];
+  }
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    try {
+      const g = JSON.parse(raw);
+      if (g && g.type === 'Point' && Array.isArray(g.coordinates) && g.coordinates.length === 2) {
+        const lng = Number(g.coordinates[0]);
+        const lat = Number(g.coordinates[1]);
+        if (Number.isFinite(lat) && Number.isFinite(lng)) return [lat, lng];
+      }
+    } catch { /* not JSON */ }
+  }
+  return null;
+}
 
 export async function getStaticPaths() {
   const allProps = await getCollection('proprietati');
@@ -18,7 +43,7 @@ const formatPrice = (price: number, currency: string) => {
   return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(price);
 };
 
-const fallbackImage = prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png';
+const fallbackImage = prop.data.propertyType === 'Apartament' ? '/images/apartament.webp' : prop.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp';
 const imageSrc = prop.data.featuredImage || fallbackImage;
 
 // Build gallery images: featured + gallery, dedupe, filter empty
@@ -43,6 +68,17 @@ const metaDescription = rawBody.length > 0
 const jsonLdDescription = rawBody.length > 0 ? rawBody.slice(0, 200) : metaDescription;
 
 // JSON-LD RealEstateListing
+const listingStatusForLd = prop.data.listingStatus || 'Activ';
+const availabilityUrl = listingStatusForLd === 'Vândut'
+  ? 'https://schema.org/SoldOut'
+  : (listingStatusForLd === 'Rezervat' ? 'https://schema.org/Reserved' : 'https://schema.org/InStock');
+
+// datePosted: updatedAt (ISO YYYY-MM-DD) if set, else today
+const todayIso = new Date().toISOString().slice(0, 10);
+const datePostedLd = (prop.data.updatedAt && /^\d{4}-\d{2}-\d{2}/.test(prop.data.updatedAt))
+  ? prop.data.updatedAt.slice(0, 10)
+  : todayIso;
+
 const realEstateListing: Record<string, any> = {
   "@context": "https://schema.org",
   "@type": "RealEstateListing",
@@ -50,11 +86,10 @@ const realEstateListing: Record<string, any> = {
   "description": jsonLdDescription,
   "url": canonicalUrl,
   "image": absoluteOgImage,
-  "price": prop.data.price,
-  "priceCurrency": prop.data.currency,
+  "datePosted": datePostedLd,
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": prop.data.zone || prop.data.location,
+    "addressLocality": prop.data.location,
     "addressRegion": "Neamț",
     "addressCountry": "RO"
   },
@@ -62,30 +97,141 @@ const realEstateListing: Record<string, any> = {
     "@type": "Offer",
     "price": prop.data.price,
     "priceCurrency": prop.data.currency,
-    "availability": "https://schema.org/InStock"
+    "availability": availabilityUrl,
+    "url": canonicalUrl
   }
 };
+const normalizedCoords = normalizeCoords(prop.data.coords);
+if (normalizedCoords) {
+  realEstateListing.geo = {
+    "@type": "GeoCoordinates",
+    "latitude": normalizedCoords[0],
+    "longitude": normalizedCoords[1]
+  };
+}
 if (prop.data.surface) {
   realEstateListing.floorSize = { "@type": "QuantitativeValue", "value": prop.data.surface, "unitCode": "MTK" };
 }
 if (prop.data.rooms) realEstateListing.numberOfRooms = prop.data.rooms;
+if (prop.data.bathrooms) realEstateListing.numberOfBathroomsTotal = prop.data.bathrooms;
 if (prop.data.yearBuilt) realEstateListing.yearBuilt = prop.data.yearBuilt;
 
 const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)}`;
+
+// === DETAIL ENRICH ===
+const listingStatus = prop.data.listingStatus || 'Activ';
+const isFaded = listingStatus === 'Vândut' || listingStatus === 'Retras';
+
+// Romanian-formatted updatedAt
+const RO_MONTHS = ['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'];
+let updatedAtFormatted: string | null = null;
+if (prop.data.updatedAt) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(prop.data.updatedAt);
+  if (m) {
+    const y = parseInt(m[1], 10);
+    const mo = parseInt(m[2], 10);
+    const d = parseInt(m[3], 10);
+    if (mo >= 1 && mo <= 12) updatedAtFormatted = `${d} ${RO_MONTHS[mo - 1]} ${y}`;
+  }
+}
+
+// Map coordinates
+const ZONE_CENTROIDS_SERVER: Record<string, [number, number]> = {
+  // Cartiere PN (canonical v3 — primăria nomenclator)
+  'Centru': [46.9276, 26.3714],
+  'Precista': [46.9299, 26.3638],
+  'Mărăței': [46.9214, 26.3834],
+  'Dărmănești': [46.9224, 26.3868],
+  '1 Mai': [46.9216, 26.3806],
+  'Tei': [46.9412, 26.3961],
+  'Ciritei': [46.9320, 26.4088],
+  'Văleni': [46.9040, 26.3460],
+  'Speranța': [46.9455, 26.3700],
+  'Sărata': [46.9354, 26.3535],
+  'Doamna': [46.9510, 26.3690],
+  'Pietricica': [46.9172, 26.3684],
+  'Vânători': [46.9150, 26.3870],
+  'Obor': [46.9260, 26.3790],
+  // Localități împrejurimi
+  'Dumbrava Roșie': [46.8832, 26.4383],
+  'Doina': [46.9186, 26.5104],
+  'Gura Văii': [46.9569, 26.4503],
+  'Bodești de Jos': [47.0275, 26.4448],
+  'Nisiporești': [47.0772, 26.7379],
+  'Dobreni': [46.9918, 26.4228]
+};
+let mapLat: number;
+let mapLng: number;
+let mapZoom: number;
+let mapApproximate: boolean;
+// Privacy policy: ALL property locations rendered as approximate circles, never precise pins.
+// (Real-estate agents don't publish exact addresses online.)
+if (normalizedCoords) {
+  mapLat = normalizedCoords[0];
+  mapLng = normalizedCoords[1];
+  mapZoom = 15;
+} else if (prop.data.zone && ZONE_CENTROIDS_SERVER[prop.data.zone]) {
+  mapLat = ZONE_CENTROIDS_SERVER[prop.data.zone][0];
+  mapLng = ZONE_CENTROIDS_SERVER[prop.data.zone][1];
+  mapZoom = 14;
+} else {
+  mapLat = 46.929;
+  mapLng = 26.371;
+  mapZoom = 13;
+}
+mapApproximate = true; // Always approximate — circle, not pin
+
+// Similar properties: pick 3
+const allForSimilar = await getCollection('proprietati');
+const eligibleForSimilar = allForSimilar.filter(p => {
+  if (p.id === prop.id) return false;
+  const st = p.data.listingStatus || 'Activ';
+  if (st === 'Vândut' || st === 'Retras') return false;
+  return true;
+});
+const sameType = eligibleForSimilar.filter(p => p.data.propertyType === prop.data.propertyType);
+let similar = sameType.slice(0, 3);
+if (similar.length < 3) {
+  const sameZone = eligibleForSimilar.filter(p =>
+    p.data.zone && prop.data.zone && p.data.zone === prop.data.zone &&
+    !similar.find(s => s.id === p.id)
+  );
+  for (const cand of sameZone) {
+    if (similar.length >= 3) break;
+    similar.push(cand);
+  }
+}
+similar = similar.slice(0, 3);
+
+const isPNloc = (loc?: string): boolean => !!loc && /Piatra Neam/i.test(loc);
+
+// Share URLs
+const shareUrl = canonicalUrl;
+const shareText = `Uite ce am găsit: ${prop.data.title} — ${shareUrl}`;
+const waShareHref = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+const fbShareHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+
+// Inquiry default message
+const inquiryDefaultMsg = `Bună ziua! Sunt interesat(ă) de proprietatea ${prop.data.title}. Vă rog să mă contactați.`;
+
+const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
 ---
 
 <Layout
 	title={`${prop.data.title} | Casa Mult Visată Piatra Neamț`}
 	description={metaDescription}
 	ogImage={absoluteOgImage}
+	preloadImage={imageSrc}
 >
 
-	<div class="container" style="padding-top: 3rem;">
+	<link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.4/dist/photoswipe.css" crossorigin />
+
+	<div class={`container property-detail${isFaded ? ' is-faded' : ''}`} style="padding-top: 3rem;" data-listing-status={listingStatus}>
         <div style="margin-bottom: 2rem;">
             <a href="/proprietati" style="font-family: var(--font-accent); font-size: 0.8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary);">&larr; Înapoi la proprietăți</a>
         </div>
 
-		<div class="about-editorial reveal">
+		<div class="about-editorial">
 			<div class="body-text">
                 <span class="tag" style="font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.875rem; color: var(--accent); display: block; margin-bottom: 0.5rem;">
                     De {prop.data.status.toLowerCase()}
@@ -96,26 +242,106 @@ const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)
                         {prop.data.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
                     </div>
                 )}
-				<h1 style="font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">{prop.data.title}</h1>
-                <p style="font-family: var(--font-accent); font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 2rem;">{prop.data.location}</p>
+                <div class="title-row">
+                    <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">{prop.data.title}</h1>
+                    {listingStatus && listingStatus !== 'Activ' && (
+                        <span class={`status-pill status-pill--${listingStatus === 'Vândut' ? 'vandut' : listingStatus === 'Rezervat' ? 'rezervat' : 'retras'}`}>{listingStatus}</span>
+                    )}
+                    <button type="button" class="fav-toggle fav-toggle--detail" id="detail-fav-btn" data-fav-id={prop.id} aria-pressed="false" aria-label="Salvează la favorite" title="Salvează la favorite">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        <span class="fav-toggle-label">Salvează</span>
+                    </button>
+                </div>
+                <p style="font-family: var(--font-accent); font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                  {prop.data.street ? `${prop.data.street} · ` : ''}{prop.data.location}
+                </p>
+                {updatedAtFormatted && (
+                    <p class="updated-stamp">Actualizat la {updatedAtFormatted}</p>
+                )}
 
-                <img src={imageSrc} alt={prop.data.title} style="width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 2rem;">
+                <div class={`hero-image-wrap${isFaded ? ' has-watermark' : ''}`} data-has-gallery={images.length > 1 ? "true" : "false"}>
+                    {isFaded && (
+                        <span class="hero-watermark" aria-hidden="true">{listingStatus === 'Vândut' ? 'VÂNDUT' : 'RETRAS'}</span>
+                    )}
+                    <picture>
+                        <source id="hero-source-avif" srcset={imageSrc.replace(/\.webp$/, '.avif')} type="image/avif" />
+                        <source id="hero-source-webp" srcset={imageSrc} type="image/webp" />
+                        <img
+                            id="hero-image"
+                            src={imageSrc}
+                            alt={prop.data.title}
+                            width="1200"
+                            height="800"
+                            fetchpriority="high"
+                            decoding="async"
+                            data-index="0"
+                        >
+                    </picture>
+                    {images.length > 1 && (
+                        <button type="button" class="hero-zoom-hint" aria-label="Deschide galeria în mod ecran complet">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+                            <span>Mărește · {images.length} foto</span>
+                        </button>
+                    )}
+                </div>
 
                 {images.length > 1 && (
-                    <section class="gallery-grid" aria-label="Galerie foto" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem; margin-bottom: 2rem;">
-                        {images.map((src, i) => (
-                            <button
-                                type="button"
-                                class="gallery-item"
+                    <section id="pswp-gallery" class="gallery-grid" aria-label="Galerie foto" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem; margin-bottom: 2rem;">
+                        {images.map((src, i) => {
+                            const [w, h] = getDims(src);
+                            return (
+                            <a
+                                href={src}
+                                data-pswp-src={src}
+                                data-pswp-srcset={`${src.replace(/\.webp$/, '.avif')} ${w}w`}
+                                data-pswp-width={w}
+                                data-pswp-height={h}
+                                class={`gallery-item ${i === 0 ? 'is-active' : ''}`}
                                 data-index={i}
-                                style="padding:0; border:0; background:none; cursor:pointer;"
-                                aria-label={`Deschide imaginea ${i + 1}`}
+                                aria-label={`Vezi imaginea ${i + 1}`}
                             >
-                                <img src={src} alt={`${prop.data.title} — imagine ${i + 1}`} loading="lazy" style="width:100%; aspect-ratio: 4/3; object-fit: cover; display:block;" />
-                            </button>
-                        ))}
+                                <picture>
+                                    <source srcset={src.replace(/\.webp$/, '.avif')} type="image/avif" />
+                                    <source srcset={src} type="image/webp" />
+                                    <img src={src} alt={`${prop.data.title} — imagine ${i + 1}`} width="160" height="120" loading="lazy" decoding="async" />
+                                </picture>
+                            </a>);
+                        })}
                     </section>
                 )}
+
+                <div class="share-row" aria-label="Distribuie această proprietate">
+                    <span class="share-row__label">Distribuie:</span>
+                    <a class="share-btn share-btn--wa" href={waShareHref} target="_blank" rel="noopener" aria-label="Distribuie pe WhatsApp">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a class="share-btn share-btn--fb" href={fbShareHref} target="_blank" rel="noopener" aria-label="Distribuie pe Facebook">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22.675 0h-21.35C.595 0 0 .593 0 1.326v21.348C0 23.408.595 24 1.325 24H12.82v-9.294H9.692V11.08h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.626h-3.12V24h6.116c.73 0 1.323-.592 1.323-1.326V1.326C24 .593 23.405 0 22.675 0z"/></svg>
+                        <span>Facebook</span>
+                    </a>
+                    <button type="button" class="share-btn share-btn--copy" id="share-copy-btn" aria-label="Copiază link-ul">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span id="share-copy-label">Copiază link</span>
+                    </button>
+                </div>
+
+                <section class="map-section" aria-labelledby="map-heading">
+                    <h3 id="map-heading" class="section-heading">Pe hartă</h3>
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+                    <div
+                        id="leaflet-map"
+                        class="leaflet-map"
+                        data-lat={mapLat}
+                        data-lng={mapLng}
+                        data-zoom={mapZoom}
+                        data-title={prop.data.title}
+                        data-approximate={mapApproximate ? "1" : "0"}
+                    ></div>
+                    {mapApproximate && (
+                        <p class="map-note">Zonă aproximativă. Adresa exactă se comunică doar persoanelor interesate, după contactul cu agentul.</p>
+                    )}
+                </section>
 
                 <div style="font-size: 1.125rem; line-height: 1.8;">
                     <Content />
@@ -135,19 +361,120 @@ const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)
                     </div>
                 )}
 
-                {prop.data.location && (
-                    <div style="margin-top: 3rem;">
-                        <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 1.5rem;">Localizare</h3>
-                        <iframe
-                            src={`https://www.google.com/maps?q=${encodeURIComponent((prop.data.zone ? prop.data.zone + ', ' : '') + prop.data.location + ', Neamț, România')}&output=embed`}
-                            width="100%"
-                            height="320"
-                            style="border:0; display:block;"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title={`Hartă ${prop.data.location}`}
-                        ></iframe>
-                    </div>
+                {hasTour && (
+                    <section class="tour-section" aria-labelledby="tour-heading">
+                        <h3 id="tour-heading" class="section-heading">Tur virtual</h3>
+                        {prop.data.virtualTourUrl && (
+                            <div class="tour-frame">
+                                <iframe
+                                    src={prop.data.virtualTourUrl}
+                                    title={`Tur virtual — ${prop.data.title}`}
+                                    loading="lazy"
+                                    allowfullscreen
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                ></iframe>
+                            </div>
+                        )}
+                        {prop.data.videoUrl && (
+                            <div class="tour-frame" style="margin-top: 1.25rem;">
+                                <iframe
+                                    src={prop.data.videoUrl}
+                                    title={`Video — ${prop.data.title}`}
+                                    loading="lazy"
+                                    allowfullscreen
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                ></iframe>
+                            </div>
+                        )}
+                    </section>
+                )}
+
+                <section class="inquiry-section" aria-labelledby="inquiry-heading">
+                    <h3 id="inquiry-heading" class="section-heading">Programează vizionare sau cere detalii</h3>
+                    <form
+                        class="inquiry-form"
+                        name="proprietate-inquiry"
+                        method="POST"
+                        action="/multumesc/"
+                        data-netlify="true"
+                        netlify-honeypot="bot-field"
+                    >
+                        <input type="hidden" name="form-name" value="proprietate-inquiry" />
+                        <input type="hidden" name="proprietate" value={prop.data.title} />
+                        <input type="hidden" name="proprietate-url" value={Astro.url.pathname} />
+                        <p class="inquiry-honeypot" hidden>
+                            <label>Nu completați acest câmp: <input name="bot-field" /></label>
+                        </p>
+                        <div class="inquiry-row">
+                            <label class="inquiry-field">
+                                <span>Nume <em>*</em></span>
+                                <input type="text" name="nume" required autocomplete="name" enterkeyhint="next" />
+                            </label>
+                            <label class="inquiry-field">
+                                <span>Telefon <em>*</em></span>
+                                <input type="tel" name="telefon" required autocomplete="tel" inputmode="tel" enterkeyhint="next" pattern="[0-9 +()-]{7,20}" />
+                            </label>
+                        </div>
+                        <label class="inquiry-field">
+                            <span>Email</span>
+                            <input type="email" name="email" autocomplete="email" inputmode="email" enterkeyhint="next" />
+                        </label>
+                        <label class="inquiry-field">
+                            <span>Mesaj</span>
+                            <textarea name="mesaj" rows="4" autocomplete="off" enterkeyhint="send">{inquiryDefaultMsg}</textarea>
+                        </label>
+                        <button type="submit" class="btn-primary inquiry-submit">Trimite mesajul</button>
+                    </form>
+                </section>
+
+                {similar.length > 0 && (
+                    <section class="similar-section" aria-labelledby="similar-heading">
+                        <h3 id="similar-heading" class="section-heading">Proprietăți similare</h3>
+                        <div class="contact-sheet similar-grid">
+                            {similar.map(s => {
+                                const sImg = s.data.featuredImage || (s.data.propertyType === 'Apartament' ? '/images/apartament.webp' : s.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+                                const sMeta: string[] = [];
+                                if (s.data.rooms) sMeta.push(`${s.data.rooms} cam`);
+                                if (s.data.bathrooms) sMeta.push(`${s.data.bathrooms} ${s.data.bathrooms === 1 ? 'baie' : 'băi'}`);
+                                if (s.data.surface) sMeta.push(`${s.data.surface} mp`);
+                                if (s.data.landSurface) sMeta.push(s.data.propertyType === 'Teren' ? `${s.data.landSurface} mp teren` : `+${s.data.landSurface} mp teren`);
+                                if (s.data.floor) sMeta.push(`Et. ${s.data.floor}`);
+                                return (
+                                    <article class="cs-item" data-id={s.id}>
+                                        <div class="cs-media">
+                                            <span class="cs-status-tag">De {s.data.status.toLowerCase()}</span>
+                                            <span class="cs-price-tag">
+                                                {formatPrice(s.data.price, s.data.currency)}
+                                                {s.data.pricePerUnit && <small>{s.data.pricePerUnit}</small>}
+                                            </span>
+                                            <a href={`/proprietati/${s.id}`}>
+                                                <picture>
+                                                    <source srcset={sImg.replace(/\.webp$/, '.avif')} type="image/avif" />
+                                                    <source srcset={sImg} type="image/webp" />
+                                                    <img src={sImg} alt={s.data.title} width="800" height="600" loading="lazy" decoding="async" />
+                                                </picture>
+                                            </a>
+                                        </div>
+                                        <div class="cs-caption">
+                                            {(s.data.exclusive || s.data.comisionZero) && (
+                                                <div class="prop-badges">
+                                                    {s.data.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
+                                                    {s.data.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
+                                                </div>
+                                            )}
+                                            <h3><a href={`/proprietati/${s.id}`}>{s.data.title}</a></h3>
+                                            {(s.data.zone || s.data.location) && (
+                                                <p class="cs-zone">{s.data.zone || s.data.location}</p>
+                                            )}
+                                            {sMeta.length > 0 && (
+                                                <p class="meta">{sMeta.map(d => <span>{d}</span>)}</p>
+                                            )}
+                                        </div>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </section>
                 )}
 			</div>
 
@@ -240,26 +567,21 @@ const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)
                     )}
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <img src="/images/agent.png" alt="Cozma Vasile" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                    <div>
-                        <span style="font-family: var(--font-accent); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); display: block;">Agent Imobiliar</span>
-                        <span style="font-family: var(--font-body); font-weight: 500; display: block;">Cozma Vasile</span>
+                <a href="/despre/" class="agent-card-link" aria-label="Vezi profilul agentului Cozma Vasile">
+                    <picture>
+                        <source srcset="/images/agent.avif" type="image/avif" />
+                        <source srcset="/images/agent.webp" type="image/webp" />
+                        <img src="/images/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async">
+                    </picture>
+                    <div class="agent-card-info">
+                        <span class="agent-card-role">Agent Imobiliar</span>
+                        <span class="agent-card-name">Cozma Vasile</span>
+                        <span class="agent-card-cta">Vezi profilul →</span>
                     </div>
-                </div>
+                </a>
 			</aside>
 		</div>
 	</div>
-
-    {images.length > 1 && (
-        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Galerie foto">
-            <button type="button" class="lightbox-close" aria-label="Închide">&times;</button>
-            <button type="button" class="lightbox-prev" aria-label="Imaginea anterioară">&#10094;</button>
-            <img class="lightbox-image" src="" alt="" />
-            <button type="button" class="lightbox-next" aria-label="Imaginea următoare">&#10095;</button>
-            <div class="lightbox-counter" aria-live="polite"></div>
-        </div>
-    )}
 
     <script type="application/ld+json" set:html={JSON.stringify(realEstateListing)} />
 
@@ -317,54 +639,156 @@ const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)
         </script>
     )}
 
-    {images.length > 1 && (
-        <script is:inline define:vars={{ images, title: prop.data.title }}>
+    {images.length >= 1 && (
+        <script type="module">
+            import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.js';
+            const lightbox = new PhotoSwipeLightbox({
+                gallery: '#pswp-gallery',
+                children: 'a',
+                pswpModule: () => import('https://unpkg.com/photoswipe@5.4.4/dist/photoswipe.esm.js'),
+                bgOpacity: 0.95,
+                showHideAnimationType: 'fade',
+                counter: true,
+                zoom: true,
+                pinchToClose: true,
+                closeOnVerticalDrag: true,
+            });
+            lightbox.init();
+            window.__pswpLightbox = lightbox;
+
             document.addEventListener('DOMContentLoaded', function () {
-                const lb = document.getElementById('lightbox');
-                if (!lb) return;
-                const img = lb.querySelector('.lightbox-image');
-                const counter = lb.querySelector('.lightbox-counter');
-                const btnClose = lb.querySelector('.lightbox-close');
-                const btnPrev = lb.querySelector('.lightbox-prev');
-                const btnNext = lb.querySelector('.lightbox-next');
-                let idx = 0;
+                const hero = document.getElementById('hero-image');
+                const heroHint = document.querySelector('.hero-zoom-hint');
+                const galleryAnchors = document.querySelectorAll('#pswp-gallery a');
 
-                function show(i) {
-                    idx = (i + images.length) % images.length;
-                    img.src = images[idx];
-                    img.alt = title + ' — imagine ' + (idx + 1);
-                    if (counter) counter.textContent = (idx + 1) + ' / ' + images.length;
+                function openFirst(e) {
+                    if (e) e.preventDefault();
+                    if (galleryAnchors.length > 0) {
+                        galleryAnchors[0].click();
+                    } else if (window.__pswpLightbox && window.__pswpLightbox.loadAndOpen) {
+                        window.__pswpLightbox.loadAndOpen(0);
+                    }
                 }
-                function open(i) {
-                    show(i);
-                    lb.classList.add('open');
-                    lb.setAttribute('aria-hidden', 'false');
-                    document.body.style.overflow = 'hidden';
+                if (hero) {
+                    hero.style.cursor = 'zoom-in';
+                    hero.addEventListener('click', openFirst);
                 }
-                function close() {
-                    lb.classList.remove('open');
-                    lb.setAttribute('aria-hidden', 'true');
-                    document.body.style.overflow = '';
-                }
-
-                document.querySelectorAll('.gallery-item').forEach(function (el) {
-                    el.addEventListener('click', function () {
-                        const i = parseInt(el.getAttribute('data-index') || '0', 10);
-                        open(i);
-                    });
-                });
-                btnClose && btnClose.addEventListener('click', close);
-                btnPrev && btnPrev.addEventListener('click', function () { show(idx - 1); });
-                btnNext && btnNext.addEventListener('click', function () { show(idx + 1); });
-                lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
-                document.addEventListener('keydown', function (e) {
-                    if (!lb.classList.contains('open')) return;
-                    if (e.key === 'Escape') close();
-                    else if (e.key === 'ArrowLeft') show(idx - 1);
-                    else if (e.key === 'ArrowRight') show(idx + 1);
-                });
+                if (heroHint) heroHint.addEventListener('click', openFirst);
             });
         </script>
     )}
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', function () {
+            var copyBtn = document.getElementById('share-copy-btn');
+            var copyLbl = document.getElementById('share-copy-label');
+            if (copyBtn && copyLbl) {
+                copyBtn.addEventListener('click', function () {
+                    var url = window.location.href;
+                    var done = function () {
+                        var orig = 'Copiază link';
+                        copyLbl.textContent = 'Link copiat!';
+                        copyBtn.classList.add('is-copied');
+                        setTimeout(function () {
+                            copyLbl.textContent = orig;
+                            copyBtn.classList.remove('is-copied');
+                        }, 1800);
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(url).then(done, function () {
+                            try {
+                                var ta = document.createElement('textarea');
+                                ta.value = url; document.body.appendChild(ta);
+                                ta.select(); document.execCommand('copy');
+                                document.body.removeChild(ta); done();
+                            } catch (e) {}
+                        });
+                    } else {
+                        try {
+                            var ta2 = document.createElement('textarea');
+                            ta2.value = url; document.body.appendChild(ta2);
+                            ta2.select(); document.execCommand('copy');
+                            document.body.removeChild(ta2); done();
+                        } catch (e) {}
+                    }
+                });
+            }
+
+            // Wire up detail-page favorite button to global CMV_FAV API
+            var favBtn = document.getElementById('detail-fav-btn');
+            if (favBtn && window.CMV_FAV) {
+                var id = favBtn.getAttribute('data-fav-id');
+                var lblSpan = favBtn.querySelector('.fav-toggle-label');
+                function syncState() {
+                    var active = window.CMV_FAV.has(id);
+                    favBtn.classList.toggle('is-active', active);
+                    favBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+                    favBtn.setAttribute('aria-label', active ? 'Elimină de la favorite' : 'Salvează la favorite');
+                    favBtn.setAttribute('title', active ? 'Elimină de la favorite' : 'Salvează la favorite');
+                    if (lblSpan) lblSpan.textContent = active ? 'Salvat' : 'Salvează';
+                    var svg = favBtn.querySelector('svg');
+                    if (svg) svg.setAttribute('fill', active ? 'currentColor' : 'none');
+                }
+                favBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.CMV_FAV.toggle(id);
+                    syncState();
+                });
+                document.addEventListener('favorites-changed', syncState);
+                syncState();
+            }
+        });
+    </script>
+
+    <script is:inline>
+        (function () {
+            var mapEl = document.getElementById('leaflet-map');
+            if (!mapEl) return;
+            var lat = parseFloat(mapEl.dataset.lat);
+            var lng = parseFloat(mapEl.dataset.lng);
+            var zoom = parseInt(mapEl.dataset.zoom, 10) || 14;
+            var title = mapEl.dataset.title || '';
+            var approximate = mapEl.dataset.approximate === '1';
+            if (isNaN(lat) || isNaN(lng)) return;
+
+            function initMap() {
+                if (!window.L) return;
+                var map = L.map(mapEl, { scrollWheelZoom: false }).setView([lat, lng], zoom);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+                if (approximate) {
+                    // Zonă aproximativă: cerc translucid în loc de pin
+                    L.circle([lat, lng], {
+                        radius: 350,
+                        color: '#8AA399',
+                        weight: 2,
+                        fillColor: '#8AA399',
+                        fillOpacity: 0.18
+                    }).addTo(map).bindPopup('Zonă aproximativă: ' + title);
+                } else {
+                    L.marker([lat, lng]).addTo(map).bindPopup(title);
+                }
+            }
+
+            if (window.L) {
+                initMap();
+            } else {
+                var s = document.createElement('script');
+                s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+                s.crossOrigin = '';
+                s.onload = initMap;
+                document.head.appendChild(s);
+            }
+        })();
+    </script>
+
+    <style>
+        #pswp-gallery a { display: block; line-height: 0; text-decoration: none; }
+        #pswp-gallery a img { display: block; width: 100%; height: auto; }
+        .pswp { --pswp-bg: #1a1a1a; }
+        .pswp__counter { font-family: var(--font-accent); }
+    </style>
 
 </Layout>

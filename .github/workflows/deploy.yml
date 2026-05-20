@@ -1,0 +1,43 @@
+name: Build and Deploy to Netlify
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-netlify
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Verify build artifacts
+        run: |
+          test -d dist || (echo "::error::dist/ missing"; exit 1)
+          test -d dist/images || (echo "::error::dist/images missing - would wipe Netlify CDN"; exit 1)
+          test -d dist/admin || (echo "::error::dist/admin missing"; exit 1)
+          echo "dist OK ($(ls dist | wc -l) entries, $(ls dist/images | wc -l) images)"
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 661dcad7-eac6-4f24-9249-4536939163e3
+        run: npx netlify-cli@latest deploy --prod --dir=dist --site=$NETLIFY_SITE_ID

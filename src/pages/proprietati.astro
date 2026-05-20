@@ -9,16 +9,90 @@ const formatPrice = (price: number, currency: string) => {
   return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(price);
 };
 
-// Zone unice (sortate alfabetic), pentru selectul dinamic
-const uniqueZones = Array.from(
-  new Set(
-    allProperties
-      .map(p => p.data.zone)
-      .filter((z): z is string => typeof z === 'string' && z.trim().length > 0)
-  )
-).sort((a, b) => a.localeCompare(b, 'ro'));
+// Region detection: Piatra Neamț (oraș) vs Împrejurimi (sate / comune)
+const isPN = (loc?: string): boolean => !!loc && /Piatra Neam/i.test(loc);
 
-const totalCount = allProperties.length;
+// Canonical PN cartiere + outside-PN localități (from tools/cartier_canon.json)
+const pnZones = [
+  '1 Mai', 'Centru', 'Ciritei', 'Doamna', 'Dărmănești', 'Mărăței',
+  'Obor', 'Pietricica', 'Precista', 'Sărata', 'Speranța',
+  'Tei', 'Vânători', 'Văleni'
+].sort((a, b) => a.localeCompare(b, 'ro'));
+const impZones = [
+  'Bodești de Jos', 'Dobreni', 'Doina', 'Dumbrava Roșie',
+  'Gura Văii', 'Nisiporești'
+].sort((a, b) => a.localeCompare(b, 'ro'));
+
+// Filter out Vândut/Retras by default — they're rendered into DOM with data-listing-status
+// so the JS can opt them back in via "includeArchived" if needed. To honor the requirement
+// strictly, we exclude them from the page entirely unless `?includeArchived=1`.
+const visibleProperties = allProperties;
+
+const totalCount = visibleProperties.filter(p => {
+  const ls = p.data.listingStatus || 'Activ';
+  return ls !== 'Vândut' && ls !== 'Retras';
+}).length;
+
+// Centroid lookup for known zones — kept server-side too in case we ever want SSR markers.
+const ZONE_CENTROIDS: Record<string, [number, number]> = {
+  // Cartiere PN (canonical v3 — Primăria nomenclator + ChatGPT cross-check)
+  'Centru': [46.9276, 26.3714],
+  'Precista': [46.9299, 26.3638],
+  'Mărăței': [46.9214, 26.3834],
+  'Dărmănești': [46.9224, 26.3868],
+  '1 Mai': [46.9216, 26.3806],
+  'Tei': [46.9412, 26.3961],
+  'Ciritei': [46.9320, 26.4088],
+  'Văleni': [46.9040, 26.3460],
+  'Speranța': [46.9455, 26.3700],
+  'Sărata': [46.9354, 26.3535],
+  'Doamna': [46.9510, 26.3690],
+  'Pietricica': [46.9172, 26.3684],
+  'Vânători': [46.9150, 26.3870],
+  'Obor': [46.9260, 26.3790],
+  // Localități împrejurimi
+  'Dumbrava Roșie': [46.8832, 26.4383],
+  'Doina': [46.9186, 26.5104],
+  'Gura Văii': [46.9569, 26.4503],
+  'Bodești de Jos': [47.0275, 26.4448],
+  'Nisiporești': [47.0772, 26.7379],
+  'Dobreni': [46.9918, 26.4228]
+};
+
+// Serializable property data for the map script.
+// Privacy: always prefer cartier centroid over exact coords (agent doesn't expose exact addresses).
+function normalizeCoords(raw: unknown): [number, number] | null {
+  if (Array.isArray(raw) && raw.length === 2 && typeof raw[0] === 'number' && typeof raw[1] === 'number') {
+    return [raw[0], raw[1]];
+  }
+  if (typeof raw === 'string' && raw.trim().length > 0) {
+    try {
+      const g = JSON.parse(raw);
+      if (g && g.type === 'Point' && Array.isArray(g.coordinates) && g.coordinates.length === 2) {
+        const lng = Number(g.coordinates[0]);
+        const lat = Number(g.coordinates[1]);
+        if (Number.isFinite(lat) && Number.isFinite(lng)) return [lat, lng];
+      }
+    } catch { /* not JSON */ }
+  }
+  return null;
+}
+
+const propsForMap = visibleProperties.map((p, index) => {
+  const coords = normalizeCoords(p.data.coords);
+  const zoneCentroid = p.data.zone && ZONE_CENTROIDS[p.data.zone] ? ZONE_CENTROIDS[p.data.zone] : null;
+  const imageSrc = p.data.featuredImage || (p.data.propertyType === 'Apartament' ? '/images/apartament.webp' : p.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+  return {
+    id: p.id,
+    index,
+    title: p.data.title,
+    image: imageSrc,
+    price: p.data.price,
+    currency: p.data.currency,
+    coords: zoneCentroid || coords || null,
+    hasExactCoords: false
+  };
+});
 ---
 
 <Layout
@@ -31,6 +105,42 @@ const totalCount = allProperties.length;
       <p class="label">Proprietăți disponibile</p>
       <h1>Portofoliul Meu</h1>
       <p class="intro">Apartamente, case, terenuri și spații comerciale de vânzare și închiriere în Piatra Neamț și împrejurimi.</p>
+    </div>
+
+    <!-- View toggle: Listă / Hartă -->
+    <div class="view-toggle" role="group" aria-label="Mod de afișare">
+      <button type="button" class="view-toggle-btn active" id="view-toggle-list" data-view="list" aria-pressed="true">Listă</button>
+      <button type="button" class="view-toggle-btn" id="view-toggle-map" data-view="map" aria-pressed="false">Hartă</button>
+    </div>
+
+    <!-- Search bar -->
+    <div class="filter-search-bar">
+      <label for="filter-search" class="sr-only">Caută</label>
+      <input
+        type="search"
+        id="filter-search"
+        placeholder="Caută după zonă, tip, dotări (ex: dumbrava, terasă, garaj)..."
+        aria-label="Caută proprietăți"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Price quick-presets -->
+    <div class="price-presets" role="group" aria-label="Preț — presetări rapide">
+      <button type="button" class="price-chip" data-pmin="" data-pmax="30000">Sub 30.000 €</button>
+      <button type="button" class="price-chip" data-pmin="30000" data-pmax="80000">30 – 80k €</button>
+      <button type="button" class="price-chip" data-pmin="80000" data-pmax="150000">80 – 150k €</button>
+      <button type="button" class="price-chip" data-pmin="150000" data-pmax="300000">150 – 300k €</button>
+      <button type="button" class="price-chip" data-pmin="300000" data-pmax="">300k €+</button>
+    </div>
+
+    <!-- Surface quick-presets -->
+    <div class="surface-presets" role="group" aria-label="Suprafață — presetări rapide">
+      <button type="button" class="surface-chip" data-smin="" data-smax="50">Sub 50 mp</button>
+      <button type="button" class="surface-chip" data-smin="50" data-smax="100">50 – 100 mp</button>
+      <button type="button" class="surface-chip" data-smin="100" data-smax="200">100 – 200 mp</button>
+      <button type="button" class="surface-chip" data-smin="200" data-smax="500">200 – 500 mp</button>
+      <button type="button" class="surface-chip" data-smin="500" data-smax="">500 mp+</button>
     </div>
 
     <!-- Filter bar (client-side JS filtering) -->
@@ -58,11 +168,11 @@ const totalCount = allProperties.length;
       <div class="filter-field">
         <label for="sort-select" class="sr-only">Sortare</label>
         <select id="sort-select" class="sort-dropdown" aria-label="Sortează rezultatele">
-          <option value="default">Cele mai noi</option>
+          <option value="default">Recente</option>
           <option value="price-asc">Preț crescător</option>
           <option value="price-desc">Preț descrescător</option>
-          <option value="surface-asc">Suprafață crescător</option>
-          <option value="surface-desc">Suprafață descrescător</option>
+          <option value="surface-desc">Suprafață ↓</option>
+          <option value="ppsqm-asc">€/mp ↑</option>
           <option value="exclusive-first">Exclusivități primele</option>
         </select>
       </div>
@@ -77,7 +187,18 @@ const totalCount = allProperties.length;
           <label for="filter-zone" class="sr-only">Zonă / Cartier</label>
           <select id="filter-zone" aria-label="Zonă sau cartier">
             <option value="all">Toate zonele</option>
-            {uniqueZones.map(z => <option value={z}>{z}</option>)}
+            <option value="region:PN">📍 Piatra Neamț (toată)</option>
+            <option value="region:imprejurimi">🌳 Împrejurimi Piatra Neamț</option>
+            {pnZones.length > 0 && (
+              <optgroup label="— Cartiere Piatra Neamț —">
+                {pnZones.map(z => <option value={z}>{z}</option>)}
+              </optgroup>
+            )}
+            {impZones.length > 0 && (
+              <optgroup label="— Localități împrejurimi —">
+                {impZones.map(z => <option value={z}>{z}</option>)}
+              </optgroup>
+            )}
           </select>
         </div>
 
@@ -123,6 +244,12 @@ const totalCount = allProperties.length;
             <span>Doar Exclusivități</span>
           </label>
         </div>
+        <div class="filter-field filter-check">
+          <label>
+            <input type="checkbox" id="filter-archived">
+            <span>Include vândute/retrase</span>
+          </label>
+        </div>
       </div>
 
       <button type="button" class="filter-reset" id="filter-reset">Resetează filtrele</button>
@@ -132,11 +259,26 @@ const totalCount = allProperties.length;
       <span>Se afișează <strong id="results-count">{totalCount}</strong> din <strong>{totalCount}</strong> proprietăți</span>
     </div>
 
+    <!-- Active filter chips strip -->
+    <div class="active-chips" id="active-chips" aria-label="Filtre active" hidden></div>
+
     <hr class="rule">
 
     <div class="contact-sheet" style="margin-top:2rem;" id="properties-grid">
       {allProperties.map((prop, index) => {
-        const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png');
+        const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.webp' : prop.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+        const region = isPN(prop.data.location) ? 'PN' : 'imprejurimi';
+        const searchBlobRaw = [
+          prop.data.title,
+          prop.data.location,
+          prop.data.zone,
+          prop.data.street,
+          prop.data.propertyType,
+          prop.data.status,
+          ...(prop.data.features || []),
+        ].filter(Boolean).join(' ').toLowerCase();
+        // Strip diacritics so user search "darmanesti" matches "Dărmănești" etc.
+        const searchBlob = searchBlobRaw.normalize('NFD').replace(/[̀-ͯ]/g, '');
 
         const metaDetails: string[] = [];
         if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} ${prop.data.rooms === 1 ? 'cam' : 'cam'}`);
@@ -156,14 +298,19 @@ const totalCount = allProperties.length;
         return (
           <article
             class="cs-item reveal"
+            data-id={prop.id}
             data-type={prop.data.propertyType}
             data-status={prop.data.status}
             data-zone={prop.data.zone ?? ''}
+            data-street={prop.data.street ?? ''}
             data-price={prop.data.price}
             data-surface={surfaceForFilter}
             data-rooms={roomsForFilter}
             data-comision={prop.data.comisionZero ? '1' : '0'}
             data-exclusive={prop.data.exclusive ? '1' : '0'}
+            data-listing-status={prop.data.listingStatus || 'Activ'}
+            data-region={region}
+            data-search={searchBlob}
             data-index={index}
           >
             <div class="cs-media">
@@ -173,7 +320,11 @@ const totalCount = allProperties.length;
                 {prop.data.pricePerUnit && <small>{prop.data.pricePerUnit}</small>}
               </span>
               <a href={`/proprietati/${prop.id}`}>
-                <img src={imageSrc} alt={prop.data.title} loading="lazy">
+                <picture>
+                  <source srcset={imageSrc.replace(/\.webp$/, '.avif')} type="image/avif" />
+                  <source srcset={imageSrc} type="image/webp" />
+                  <img src={imageSrc} alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
+                </picture>
               </a>
             </div>
             <div class="cs-caption">
@@ -196,18 +347,52 @@ const totalCount = allProperties.length;
       })}
     </div>
 
+    <!-- Map container (shown when ?view=map) -->
+    <div class="map-wrap" id="map-wrap" style="display:none;" aria-label="Hartă proprietăți">
+      <div id="properties-map"></div>
+    </div>
+
     <div class="empty-state" id="empty-state" style="display:none;">
       <h3>Nicio proprietate nu corespunde filtrelor.</h3>
-      <p>Modifică criteriile sau <a href="/contact">contactează-mă</a> — adesea am oferte care nu sunt încă pe site.</p>
+      <p>Încearcă să elimini un filtru:</p>
+      <div class="empty-suggestions" id="empty-suggestions"></div>
+      <p class="empty-fallback">Sau <a href="/contact">contactează-mă direct</a> — adesea am oferte care nu sunt încă pe site.</p>
     </div>
   </div>
 
+  <script is:inline set:html={`window.__PROPS__ = ${JSON.stringify(propsForMap)};`}></script>
+
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
+      // ---- Map / view-toggle state ----
+      const ZONE_CENTROIDS = {
+        'Centru': [46.9276, 26.3714],
+        'Precista': [46.9299, 26.3638],
+        'Mărăței': [46.9214, 26.3834],
+        'Dărmănești': [46.9224, 26.3868],
+        '1 Mai': [46.9216, 26.3806],
+        'Tei': [46.9412, 26.3961],
+        'Ciritei': [46.9320, 26.4088],
+        'Văleni': [46.9040, 26.3460],
+        'Speranța': [46.9455, 26.3700],
+        'Sărata': [46.9354, 26.3535],
+        'Doamna': [46.9510, 26.3690],
+        'Pietricica': [46.9172, 26.3684],
+        'Vânători': [46.9150, 26.3870],
+        'Obor': [46.9260, 26.3790],
+        'Dumbrava Roșie': [46.8832, 26.4383],
+        'Doina': [46.9186, 26.5104],
+        'Gura Văii': [46.9569, 26.4503],
+        'Bodești de Jos': [47.0275, 26.4448],
+        'Nisiporești': [47.0772, 26.7379],
+        'Dobreni': [46.9918, 26.4228]
+      };
       const grid           = document.getElementById('properties-grid');
       const emptyState     = document.getElementById('empty-state');
+      const emptySuggestions = document.getElementById('empty-suggestions');
       const resultsCount   = document.getElementById('results-count');
 
+      const searchInp     = document.getElementById('filter-search');
       const typeSel        = document.getElementById('filter-type');
       const statusSel      = document.getElementById('filter-status');
       const zoneSel        = document.getElementById('filter-zone');
@@ -218,18 +403,42 @@ const totalCount = allProperties.length;
       const surfMaxInp     = document.getElementById('filter-surface-max');
       const comisionChk    = document.getElementById('filter-comision');
       const exclusiveChk   = document.getElementById('filter-exclusive');
+      const archivedChk    = document.getElementById('filter-archived');
+      const activeChips    = document.getElementById('active-chips');
+      const mapWrap        = document.getElementById('map-wrap');
+      const viewBtnList    = document.getElementById('view-toggle-list');
+      const viewBtnMap     = document.getElementById('view-toggle-map');
       const sortSel        = document.getElementById('sort-select');
       const resetBtn       = document.getElementById('filter-reset');
       const filterToggle   = document.getElementById('filter-toggle');
       const filterAdvanced = document.getElementById('filter-advanced');
       const activeCount    = document.getElementById('filter-active-count');
+      const priceChips     = Array.from(document.querySelectorAll('.price-chip'));
+      const surfaceChips   = Array.from(document.querySelectorAll('.surface-chip'));
 
       const items = Array.from(document.querySelectorAll('#properties-grid .cs-item'));
-      // Salvăm ordinea inițială pentru sort = default
       const originalOrder = items.slice();
+
+      // View / map state — declared early so readURLToFilters can call setView()
+      let currentView = 'list';
+      let leafletReady = false;
+      let leafletLoading = null;
+      let mapInstance = null;
+      let clusterGroup = null;
+
+      // Cache option labels (so counts can be appended/refreshed without losing originals)
+      const SELECT_IDS = ['filter-type', 'filter-status', 'filter-zone', 'filter-rooms'];
+      SELECT_IDS.forEach(id => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        sel.querySelectorAll('option').forEach(opt => {
+          if (!opt.dataset.label) opt.dataset.label = opt.textContent;
+        });
+      });
 
       // --- URL <-> filtre ---
       const PARAM_MAP = {
+        q:           searchInp,
         type:        typeSel,
         status:      statusSel,
         zone:        zoneSel,
@@ -250,6 +459,10 @@ const totalCount = allProperties.length;
         }
         if (params.get('comision') === '1') comisionChk.checked = true;
         if (params.get('exclusive') === '1') exclusiveChk.checked = true;
+        if (params.get('includeArchived') === '1' && archivedChk) archivedChk.checked = true;
+        const viewParam = params.get('view');
+        if (viewParam === 'map') setView('map', false);
+        else setView('list', false);
       }
 
       function writeFiltersToURL() {
@@ -261,58 +474,179 @@ const totalCount = allProperties.length;
         }
         if (comisionChk.checked)  params.set('comision', '1');
         if (exclusiveChk.checked) params.set('exclusive', '1');
+        if (archivedChk && archivedChk.checked) params.set('includeArchived', '1');
+        if (currentView === 'map') params.set('view', 'map');
         const qs = params.toString();
         const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
         window.history.replaceState({}, '', url);
       }
 
-      // --- Filtrare + sortare ---
       function num(el) {
         const n = parseFloat(el.value);
         return isNaN(n) ? null : n;
       }
 
+      // Read current filter state into a plain object.
+      function readState() {
+        return {
+          q:      (searchInp.value || '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''),
+          type:   typeSel.value,
+          status: statusSel.value,
+          zone:   zoneSel.value,
+          rooms:  roomsSel.value,
+          pMin:   num(priceMinInp),
+          pMax:   num(priceMaxInp),
+          sMin:   num(surfMinInp),
+          sMax:   num(surfMaxInp),
+          onlyCom:  comisionChk.checked,
+          onlyExcl: exclusiveChk.checked,
+          includeArchived: !!(archivedChk && archivedChk.checked)
+        };
+      }
+
+      // Predicate: does ONE item pass a given filter state?
+      function passes(it, state) {
+        if (state.q) {
+          const blob = it.getAttribute('data-search') || '';
+          if (!blob.includes(state.q)) return false;
+        }
+        if (state.type !== 'all' && it.getAttribute('data-type') !== state.type) return false;
+        if (state.status !== 'all' && it.getAttribute('data-status') !== state.status) return false;
+
+        if (state.zone !== 'all') {
+          if (state.zone.startsWith('region:')) {
+            const want = state.zone.slice('region:'.length);
+            if ((it.getAttribute('data-region') || '') !== want) return false;
+          } else {
+            const normZ = (s) => (s || '').trim().normalize('NFC').toLowerCase();
+            const itemZ = normZ(it.getAttribute('data-zone'));
+            const stateZ = normZ(state.zone);
+            // Prefix-match so "Bodești" matches "Bodești de Jos", "Dărmănești" matches "Dărmănești (Aleea Ulmilor)" etc.
+            if (!(itemZ === stateZ || itemZ.startsWith(stateZ + ' ') || itemZ.startsWith(stateZ + '('))) return false;
+          }
+        }
+
+        if (state.rooms !== 'all') {
+          const dRooms = parseInt(it.getAttribute('data-rooms') || '0', 10);
+          if (state.rooms === '5') { if (dRooms < 5) return false; }
+          else { if (dRooms !== parseInt(state.rooms, 10)) return false; }
+        }
+
+        const dPrice   = parseFloat(it.getAttribute('data-price') || '0');
+        const dSurface = parseFloat(it.getAttribute('data-surface') || '0');
+        if (state.pMin !== null && dPrice   < state.pMin) return false;
+        if (state.pMax !== null && dPrice   > state.pMax) return false;
+        if (state.sMin !== null && dSurface < state.sMin) return false;
+        if (state.sMax !== null && dSurface > state.sMax) return false;
+
+        if (state.onlyCom  && it.getAttribute('data-comision')  !== '1') return false;
+        if (state.onlyExcl && it.getAttribute('data-exclusive') !== '1') return false;
+
+        // Hide Vândut/Retras unless includeArchived is on
+        if (!state.includeArchived) {
+          const ls = it.getAttribute('data-listing-status') || 'Activ';
+          if (ls === 'Vândut' || ls === 'Retras') return false;
+        }
+
+        return true;
+      }
+
+      // Count items that pass the given state.
+      function countMatching(state) {
+        let n = 0;
+        for (const it of items) if (passes(it, state)) n++;
+        return n;
+      }
+
+      // For each option in a select, compute how many items would match if THIS option were selected (other filters unchanged).
+      function updateDropdownCounts(state) {
+        const fieldMap = {
+          'filter-type':   'type',
+          'filter-status': 'status',
+          'filter-zone':   'zone',
+          'filter-rooms':  'rooms'
+        };
+        for (const [selId, stateKey] of Object.entries(fieldMap)) {
+          const sel = document.getElementById(selId);
+          if (!sel) continue;
+          sel.querySelectorAll('option').forEach(opt => {
+            const trial = Object.assign({}, state, { [stateKey]: opt.value });
+            const n = countMatching(trial);
+            const base = opt.dataset.label || opt.textContent;
+            opt.textContent = n > 0 ? `${base} (${n})` : `${base} (0)`;
+            opt.disabled = (n === 0 && opt.value !== 'all');
+          });
+        }
+      }
+
+      // Smart empty-state: suggest single-filter relaxations that would yield > 0 results.
+      function buildEmptySuggestions(state) {
+        if (!emptySuggestions) return;
+        emptySuggestions.innerHTML = '';
+
+        const candidates = [];
+        const addCandidate = (label, mutator, clearVal) => {
+          const trial = Object.assign({}, state);
+          mutator(trial);
+          const n = countMatching(trial);
+          if (n > 0) candidates.push({ label, n, apply: clearVal });
+        };
+
+        if (state.q)        addCandidate(`fără căutare „${state.q}"`,         s => s.q = '',        () => { searchInp.value = ''; });
+        if (state.type   !== 'all') addCandidate(`fără tipul „${typeSel.options[typeSel.selectedIndex].dataset.label || typeSel.value}"`, s => s.type = 'all', () => { typeSel.value = 'all'; });
+        if (state.status !== 'all') addCandidate(`oricare tranzacție`,         s => s.status = 'all', () => { statusSel.value = 'all'; });
+        if (state.zone   !== 'all') addCandidate(`în orice zonă`,              s => s.zone = 'all',   () => { zoneSel.value = 'all'; });
+        if (state.rooms  !== 'all') addCandidate(`orice nr. camere`,           s => s.rooms = 'all',  () => { roomsSel.value = 'all'; });
+        if (state.pMin !== null || state.pMax !== null)
+          addCandidate(`orice preț`, s => { s.pMin = null; s.pMax = null; }, () => { priceMinInp.value = ''; priceMaxInp.value = ''; clearPriceChips(); });
+        if (state.sMin !== null || state.sMax !== null)
+          addCandidate(`orice suprafață`, s => { s.sMin = null; s.sMax = null; }, () => { surfMinInp.value = ''; surfMaxInp.value = ''; clearSurfaceChips(); });
+        if (state.onlyCom)  addCandidate(`fără „Comision 0%"`,    s => s.onlyCom = false,  () => { comisionChk.checked = false; });
+        if (state.onlyExcl) addCandidate(`fără „Exclusivități"`,  s => s.onlyExcl = false, () => { exclusiveChk.checked = false; });
+
+        candidates.sort((a, b) => b.n - a.n);
+        const top = candidates.slice(0, 5);
+
+        top.forEach(c => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'empty-suggestion-btn';
+          btn.innerHTML = `<span class="es-label">${c.label}</span> <span class="es-count">+${c.n}</span>`;
+          btn.addEventListener('click', () => { c.apply(); applyFilters(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+          emptySuggestions.appendChild(btn);
+        });
+
+        const resetBtnEl = document.createElement('button');
+        resetBtnEl.type = 'button';
+        resetBtnEl.className = 'empty-suggestion-btn empty-suggestion-reset';
+        resetBtnEl.innerHTML = `<span class="es-label">Resetează tot</span> <span class="es-count">${items.length} rezultate</span>`;
+        resetBtnEl.addEventListener('click', () => { doReset(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        emptySuggestions.appendChild(resetBtnEl);
+      }
+
+      function clearPriceChips() {
+        priceChips.forEach(b => b.classList.remove('active'));
+      }
+
+      function clearSurfaceChips() {
+        surfaceChips.forEach(b => b.classList.remove('active'));
+      }
+
+      function syncSurfaceChipsToInputs() {
+        const cmin = surfMinInp.value.trim();
+        const cmax = surfMaxInp.value.trim();
+        surfaceChips.forEach(b => {
+          const match = (b.dataset.smin || '') === cmin && (b.dataset.smax || '') === cmax;
+          b.classList.toggle('active', match);
+        });
+      }
+
       function applyFilters() {
-        const type     = typeSel.value;
-        const status   = statusSel.value;
-        const zone     = zoneSel.value;
-        const rooms    = roomsSel.value;
-        const pMin     = num(priceMinInp);
-        const pMax     = num(priceMaxInp);
-        const sMin     = num(surfMinInp);
-        const sMax     = num(surfMaxInp);
-        const onlyCom  = comisionChk.checked;
-        const onlyExcl = exclusiveChk.checked;
+        const state = readState();
 
         let visible = [];
         items.forEach(it => {
-          const dType     = it.getAttribute('data-type');
-          const dStatus   = it.getAttribute('data-status');
-          const dZone     = it.getAttribute('data-zone') || '';
-          const dRooms    = parseInt(it.getAttribute('data-rooms') || '0', 10);
-          const dPrice    = parseFloat(it.getAttribute('data-price') || '0');
-          const dSurface  = parseFloat(it.getAttribute('data-surface') || '0');
-          const dCom      = it.getAttribute('data-comision') === '1';
-          const dExcl     = it.getAttribute('data-exclusive') === '1';
-
-          let ok = true;
-          if (type   !== 'all' && dType   !== type)   ok = false;
-          if (status !== 'all' && dStatus !== status) ok = false;
-          if (zone   !== 'all' && dZone   !== zone)   ok = false;
-
-          if (ok && rooms !== 'all') {
-            if (rooms === '5') { if (dRooms < 5) ok = false; }
-            else { if (dRooms !== parseInt(rooms, 10)) ok = false; }
-          }
-
-          if (ok && pMin !== null && dPrice   < pMin) ok = false;
-          if (ok && pMax !== null && dPrice   > pMax) ok = false;
-          if (ok && sMin !== null && dSurface < sMin) ok = false;
-          if (ok && sMax !== null && dSurface > sMax) ok = false;
-          if (ok && onlyCom  && !dCom)  ok = false;
-          if (ok && onlyExcl && !dExcl) ok = false;
-
-          if (ok) {
+          if (passes(it, state)) {
             it.style.display = '';
             visible.push(it);
           } else {
@@ -320,7 +654,7 @@ const totalCount = allProperties.length;
           }
         });
 
-        // Sortare
+        // Sort
         const sort = sortSel.value;
         let sorted = visible.slice();
         if (sort === 'price-asc') {
@@ -331,14 +665,19 @@ const totalCount = allProperties.length;
           sorted.sort((a, b) => parseFloat(a.dataset.surface) - parseFloat(b.dataset.surface));
         } else if (sort === 'surface-desc') {
           sorted.sort((a, b) => parseFloat(b.dataset.surface) - parseFloat(a.dataset.surface));
+        } else if (sort === 'ppsqm-asc') {
+          const ppsqm = (el) => {
+            const s = parseFloat(el.dataset.surface);
+            const p = parseFloat(el.dataset.price);
+            if (!s || s <= 0 || !p) return Infinity;
+            return p / s;
+          };
+          sorted.sort((a, b) => ppsqm(a) - ppsqm(b));
         } else if (sort === 'exclusive-first') {
           sorted.sort((a, b) => (b.dataset.exclusive === '1' ? 1 : 0) - (a.dataset.exclusive === '1' ? 1 : 0));
         } else {
-          // default = ordinea repo-ului
           sorted.sort((a, b) => parseInt(a.dataset.index, 10) - parseInt(b.dataset.index, 10));
         }
-
-        // Reordonare DOM (doar pentru cele vizibile; cele ascunse rămân unde sunt)
         sorted.forEach(el => grid.appendChild(el));
 
         // Counter + empty state
@@ -346,17 +685,27 @@ const totalCount = allProperties.length;
         if (visible.length === 0) {
           grid.style.display = 'none';
           emptyState.style.display = '';
+          buildEmptySuggestions(state);
         } else {
           grid.style.display = '';
           emptyState.style.display = 'none';
         }
 
+        updateDropdownCounts(state);
         writeFiltersToURL();
         updateActiveCount();
+        syncPriceChipsToInputs();
+        syncSurfaceChipsToInputs();
+        renderActiveChips(state);
+        updateMapMarkers(state);
+
+        // When in map view, hide grid + empty state regardless of count
+        applyViewVisibility(visible.length);
       }
 
       function updateActiveCount() {
         let n = 0;
+        if (searchInp && searchInp.value.trim()) n++;
         if (zoneSel    && zoneSel.value    !== 'all') n++;
         if (roomsSel   && roomsSel.value   !== 'all') n++;
         if (priceMinInp && priceMinInp.value.trim()) n++;
@@ -375,31 +724,75 @@ const totalCount = allProperties.length;
         }
       }
 
+      function syncPriceChipsToInputs() {
+        const cmin = priceMinInp.value.trim();
+        const cmax = priceMaxInp.value.trim();
+        priceChips.forEach(b => {
+          const match = (b.dataset.pmin || '') === cmin && (b.dataset.pmax || '') === cmax;
+          b.classList.toggle('active', match);
+        });
+      }
+
       if (filterToggle && filterAdvanced) {
         filterToggle.addEventListener('click', () => {
           const expanded = filterToggle.getAttribute('aria-expanded') === 'true';
           filterToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          if (expanded) {
-            filterAdvanced.setAttribute('hidden', '');
-          } else {
-            filterAdvanced.removeAttribute('hidden');
-          }
+          if (expanded) filterAdvanced.setAttribute('hidden', '');
+          else          filterAdvanced.removeAttribute('hidden');
         });
       }
 
       // Wire-up events
       const controls = [
-        typeSel, statusSel, zoneSel, roomsSel,
+        searchInp, typeSel, statusSel, zoneSel, roomsSel,
         priceMinInp, priceMaxInp, surfMinInp, surfMaxInp,
-        comisionChk, exclusiveChk, sortSel
+        comisionChk, exclusiveChk, archivedChk, sortSel
       ];
+      let debounceTimer = null;
       controls.forEach(el => {
         if (!el) return;
         const evt = (el.tagName === 'INPUT' && el.type !== 'checkbox') ? 'input' : 'change';
-        el.addEventListener(evt, applyFilters);
+        el.addEventListener(evt, () => {
+          if (el === searchInp) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(applyFilters, 120);
+          } else {
+            applyFilters();
+          }
+        });
       });
 
-      resetBtn.addEventListener('click', () => {
+      // Price preset chips
+      priceChips.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('active')) {
+            // toggle off
+            priceMinInp.value = '';
+            priceMaxInp.value = '';
+          } else {
+            priceMinInp.value = btn.dataset.pmin || '';
+            priceMaxInp.value = btn.dataset.pmax || '';
+          }
+          applyFilters();
+        });
+      });
+
+      // Surface preset chips
+      surfaceChips.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('active')) {
+            surfMinInp.value = '';
+            surfMaxInp.value = '';
+          } else {
+            surfMinInp.value = btn.dataset.smin || '';
+            surfMaxInp.value = btn.dataset.smax || '';
+          }
+          applyFilters();
+        });
+      });
+
+      function doReset() {
+        searchInp.value    = '';
         typeSel.value      = 'all';
         statusSel.value    = 'all';
         zoneSel.value      = 'all';
@@ -410,20 +803,225 @@ const totalCount = allProperties.length;
         surfMaxInp.value   = '';
         comisionChk.checked  = false;
         exclusiveChk.checked = false;
+        if (archivedChk) archivedChk.checked = false;
         sortSel.value      = 'default';
+        clearPriceChips();
+        clearSurfaceChips();
+        originalOrder.forEach(el => { el.style.display = ''; grid.appendChild(el); });
+        applyFilters();
+      }
 
-        // Restaurează ordinea inițială DOM
-        originalOrder.forEach(el => {
-          el.style.display = '';
-          grid.appendChild(el);
+      resetBtn.addEventListener('click', doReset);
+
+      // ===== Active chips strip =====
+      function renderActiveChips(state) {
+        if (!activeChips) return;
+        activeChips.innerHTML = '';
+        const chips = [];
+
+        const addChip = (label, onClear) => chips.push({ label, onClear });
+
+        if (state.q) addChip(`Căutare: „${state.q}"`, () => { searchInp.value = ''; });
+        if (state.type !== 'all') {
+          const opt = typeSel.options[typeSel.selectedIndex];
+          addChip(opt ? (opt.dataset.label || opt.textContent) : state.type, () => { typeSel.value = 'all'; });
+        }
+        if (state.status !== 'all') {
+          const opt = statusSel.options[statusSel.selectedIndex];
+          addChip(opt ? (opt.dataset.label || opt.textContent) : state.status, () => { statusSel.value = 'all'; });
+        }
+        if (state.zone !== 'all') {
+          const opt = zoneSel.options[zoneSel.selectedIndex];
+          addChip(opt ? (opt.dataset.label || opt.textContent) : state.zone, () => { zoneSel.value = 'all'; });
+        }
+        if (state.rooms !== 'all') {
+          const opt = roomsSel.options[roomsSel.selectedIndex];
+          addChip(opt ? (opt.dataset.label || opt.textContent) : `${state.rooms} cam`, () => { roomsSel.value = 'all'; });
+        }
+        if (state.pMin !== null || state.pMax !== null) {
+          let label;
+          if (state.pMin !== null && state.pMax !== null) label = `Preț ${state.pMin.toLocaleString('ro-RO')}–${state.pMax.toLocaleString('ro-RO')} €`;
+          else if (state.pMin !== null) label = `Preț ≥ ${state.pMin.toLocaleString('ro-RO')} €`;
+          else label = `Preț ≤ ${state.pMax.toLocaleString('ro-RO')} €`;
+          addChip(label, () => { priceMinInp.value = ''; priceMaxInp.value = ''; clearPriceChips(); });
+        }
+        if (state.sMin !== null || state.sMax !== null) {
+          let label;
+          if (state.sMin !== null && state.sMax !== null) label = `Supr. ${state.sMin}–${state.sMax} mp`;
+          else if (state.sMin !== null) label = `Supr. ≥ ${state.sMin} mp`;
+          else label = `Supr. ≤ ${state.sMax} mp`;
+          addChip(label, () => { surfMinInp.value = ''; surfMaxInp.value = ''; clearSurfaceChips(); });
+        }
+        if (state.onlyCom) addChip('Comision 0%', () => { comisionChk.checked = false; });
+        if (state.onlyExcl) addChip('Exclusivități', () => { exclusiveChk.checked = false; });
+        if (state.includeArchived) addChip('Include arhivate', () => { if (archivedChk) archivedChk.checked = false; });
+
+        if (chips.length === 0) {
+          activeChips.hidden = true;
+          return;
+        }
+        activeChips.hidden = false;
+
+        chips.forEach(c => {
+          const el = document.createElement('button');
+          el.type = 'button';
+          el.className = 'active-chip';
+          el.innerHTML = `<span class="active-chip-label"></span><span class="active-chip-x" aria-hidden="true">×</span>`;
+          el.querySelector('.active-chip-label').textContent = c.label;
+          el.setAttribute('aria-label', `Elimină filtrul ${c.label}`);
+          el.addEventListener('click', () => { c.onClear(); applyFilters(); });
+          activeChips.appendChild(el);
         });
 
-        applyFilters();
-      });
+        if (chips.length > 1) {
+          const clearAll = document.createElement('button');
+          clearAll.type = 'button';
+          clearAll.className = 'active-chip active-chip-clear';
+          clearAll.textContent = 'Resetează tot';
+          clearAll.addEventListener('click', doReset);
+          activeChips.appendChild(clearAll);
+        }
+      }
 
-      // Init: citește URL, apoi aplică
+      // ===== View toggle (list / map) =====
+      function setView(v, refresh) {
+        currentView = (v === 'map') ? 'map' : 'list';
+        if (viewBtnList && viewBtnMap) {
+          viewBtnList.classList.toggle('active', currentView === 'list');
+          viewBtnList.setAttribute('aria-pressed', currentView === 'list' ? 'true' : 'false');
+          viewBtnMap.classList.toggle('active', currentView === 'map');
+          viewBtnMap.setAttribute('aria-pressed', currentView === 'map' ? 'true' : 'false');
+        }
+        if (refresh) applyFilters();
+        else applyViewVisibility(null);
+        if (currentView === 'map') ensureLeaflet().then(() => updateMapMarkers(readState()));
+      }
+
+      function applyViewVisibility(visibleCount) {
+        if (currentView === 'map') {
+          if (grid) grid.style.display = 'none';
+          if (emptyState) emptyState.style.display = 'none';
+          if (mapWrap) mapWrap.style.display = '';
+        } else {
+          if (mapWrap) mapWrap.style.display = 'none';
+          // grid + empty-state visibility already handled by applyFilters when visibleCount != null
+          if (visibleCount === null) {
+            // fallback: just reveal grid
+            if (grid) grid.style.display = '';
+          }
+        }
+      }
+
+      if (viewBtnList) viewBtnList.addEventListener('click', () => { setView('list', false); writeFiltersToURL(); });
+      if (viewBtnMap)  viewBtnMap.addEventListener('click',  () => { setView('map',  false); writeFiltersToURL(); });
+
+      // ===== Leaflet loader =====
+      function loadScript(src) {
+        return new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = src; s.async = true;
+          s.onload = () => resolve();
+          s.onerror = () => reject(new Error('Failed to load ' + src));
+          document.head.appendChild(s);
+        });
+      }
+      function loadCSS(href) {
+        return new Promise((resolve) => {
+          const l = document.createElement('link');
+          l.rel = 'stylesheet'; l.href = href;
+          l.onload = () => resolve();
+          l.onerror = () => resolve();
+          document.head.appendChild(l);
+        });
+      }
+      function ensureLeaflet() {
+        if (leafletReady) return Promise.resolve();
+        if (leafletLoading) return leafletLoading;
+        leafletLoading = (async () => {
+          await Promise.all([
+            loadCSS('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'),
+            loadCSS('https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css'),
+            loadCSS('https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css')
+          ]);
+          await loadScript('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
+          await loadScript('https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js');
+          initMap();
+          leafletReady = true;
+        })();
+        return leafletLoading;
+      }
+
+      function initMap() {
+        const el = document.getElementById('properties-map');
+        if (!el || mapInstance) return;
+        mapInstance = L.map(el, { scrollWheelZoom: true }).setView([46.929, 26.371], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap'
+        }).addTo(mapInstance);
+        clusterGroup = L.markerClusterGroup();
+        mapInstance.addLayer(clusterGroup);
+      }
+
+      function formatPriceJS(price, currency) {
+        try {
+          return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency || 'EUR', maximumFractionDigits: 0 }).format(price);
+        } catch (e) {
+          return price + ' ' + (currency || 'EUR');
+        }
+      }
+
+      function updateMapMarkers(state) {
+        if (currentView !== 'map' || !leafletReady || !mapInstance || !clusterGroup) return;
+        clusterGroup.clearLayers();
+        const props = window.__PROPS__ || [];
+        const visibleIdx = new Set();
+        items.forEach(it => {
+          if (passes(it, state)) visibleIdx.add(parseInt(it.dataset.index, 10));
+        });
+        const markerCoords = [];
+        props.forEach(p => {
+          if (!p.coords) return;
+          if (!visibleIdx.has(p.index)) return;
+          const [lat, lng] = p.coords;
+          const m = L.marker([lat, lng]);
+          const html = `
+            <div class="map-popup">
+              <a href="/proprietati/${p.id}/" class="map-popup-thumb">
+                <img src="${p.image}" alt="" loading="lazy">
+              </a>
+              <div class="map-popup-body">
+                <h4><a href="/proprietati/${p.id}/">${p.title}</a></h4>
+                <p class="map-popup-price">${formatPriceJS(p.price, p.currency)}</p>
+                <a class="map-popup-link" href="/proprietati/${p.id}/">Vezi detalii →</a>
+              </div>
+            </div>`;
+          m.bindPopup(html, { minWidth: 220 });
+          clusterGroup.addLayer(m);
+          markerCoords.push([lat, lng]);
+        });
+
+        if (markerCoords.length === 1) {
+          mapInstance.setView(markerCoords[0], 14);
+        } else if (markerCoords.length > 1) {
+          const bounds = L.latLngBounds(markerCoords);
+          // If extent is very small (everything clustered), use zoom 14
+          if (bounds.getNorth() - bounds.getSouth() < 0.005 && bounds.getEast() - bounds.getWest() < 0.005) {
+            mapInstance.setView(bounds.getCenter(), 14);
+          } else {
+            mapInstance.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+          }
+        } else {
+          mapInstance.setView([46.929, 26.371], 12);
+        }
+        // Fix tile rendering when map container was just shown
+        setTimeout(() => mapInstance.invalidateSize(), 60);
+      }
+
+      // Init
       readURLToFilters();
       applyFilters();
+      if (currentView === 'map') ensureLeaflet().then(() => updateMapMarkers(readState()));
     });
   </script>
 
@@ -475,6 +1073,35 @@ const totalCount = allProperties.length;
         gap: 0.75rem;
         margin-top: 1rem;
       }
+    }
+
+    /* === SURFACE CHIPS === */
+    .surface-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 1rem;
+    }
+    .surface-chip {
+      font-family: var(--font-accent);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.45rem 0.9rem;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--rule-color);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .surface-chip:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .surface-chip.active {
+      background: var(--accent);
+      color: var(--surface-primary, #fff);
+      border-color: var(--accent);
     }
   </style>
 </Layout>
