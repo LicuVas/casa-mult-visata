@@ -27,13 +27,14 @@ features:
   - "Pomi fructiferi"
   - "Viță de vie"
 comisionZero: true
-featuredImage: "/images/scraped/post002_0.jpg"
+featuredImage: "/images/scraped/post002_0.webp"
 gallery:
-  - "/images/scraped/post002_0.jpg"
-  - "/images/scraped/post002_1.jpg"
-  - "/images/scraped/post002_2.jpg"
-  - "/images/scraped/post002_3.jpg"
-  - "/images/scraped/post002_4.jpg"
+  - "/images/scraped/post002_0.webp"
+  - "/images/scraped/post002_1.webp"
+  - "/images/scraped/post002_2.webp"
+  - "/images/scraped/post002_3.webp"
+  - "/images/scraped/post002_4.webp"
+coords: [46.9186, 26.5104]
 ---
 
 Casă în suprafață de 95 mp și teren intravilan aferent 5800 mp, situată în localitatea Doina, jud. Neamț.

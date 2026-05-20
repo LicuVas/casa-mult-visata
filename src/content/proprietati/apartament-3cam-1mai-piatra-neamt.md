@@ -27,13 +27,14 @@ features:
   - "Loc de parcare"
   - "Imobil cu 4 etaje"
 comisionZero: true
-featuredImage: "/images/scraped/post011_0.jpg"
+featuredImage: "/images/scraped/post011_0.webp"
 gallery:
-  - "/images/scraped/post011_0.jpg"
-  - "/images/scraped/post011_1.jpg"
-  - "/images/scraped/post011_2.jpg"
-  - "/images/scraped/post011_3.jpg"
-  - "/images/scraped/post011_4.jpg"
+  - "/images/scraped/post011_0.webp"
+  - "/images/scraped/post011_1.webp"
+  - "/images/scraped/post011_2.webp"
+  - "/images/scraped/post011_3.webp"
+  - "/images/scraped/post011_4.webp"
+coords: [46.9216, 26.3806]
 ---
 
 Apartament cu 3 camere decomandat în suprafață utilă de 80,10 mp, situat la **parter**, zona 1 Mai, Piatra Neamț.

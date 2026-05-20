@@ -25,13 +25,14 @@ features:
   - "Mobilat + utilat complet"
   - "Imobil cu 4 etaje"
 comisionZero: true
-featuredImage: "/images/scraped/post021_0.jpg"
+featuredImage: "/images/scraped/post021_0.webp"
 gallery:
-  - "/images/scraped/post021_0.jpg"
-  - "/images/scraped/post021_1.jpg"
-  - "/images/scraped/post021_2.jpg"
-  - "/images/scraped/post021_3.jpg"
-  - "/images/scraped/post021_4.jpg"
+  - "/images/scraped/post021_0.webp"
+  - "/images/scraped/post021_1.webp"
+  - "/images/scraped/post021_2.webp"
+  - "/images/scraped/post021_3.webp"
+  - "/images/scraped/post021_4.webp"
+coords: [46.9299, 26.3638]
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 56,47 mp, situat la **parter**, zona Precista, Piatra Neamț.

@@ -23,13 +23,14 @@ features:
   - "Garaj cu intrare din strada principală"
   - "Livadă cu pomi fructiferi"
 comisionZero: true
-featuredImage: "/images/scraped/post015_0.jpg"
+featuredImage: "/images/scraped/post015_0.webp"
 gallery:
-  - "/images/scraped/post015_0.jpg"
-  - "/images/scraped/post015_1.jpg"
-  - "/images/scraped/post015_2.jpg"
-  - "/images/scraped/post015_3.jpg"
-  - "/images/scraped/post015_4.jpg"
+  - "/images/scraped/post015_0.webp"
+  - "/images/scraped/post015_1.webp"
+  - "/images/scraped/post015_2.webp"
+  - "/images/scraped/post015_3.webp"
+  - "/images/scraped/post015_4.webp"
+coords: [46.8832, 26.4383]
 ---
 
 **Casă P+M din cărămidă** în suprafață de 226 mp și teren aferent 1286 mp, situată în Dumbrava Roșie, jud. Neamț.

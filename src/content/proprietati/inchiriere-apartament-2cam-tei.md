@@ -6,6 +6,7 @@ price: 1700
 currency: "RON"
 location: "Piatra Neamț"
 zone: "Tei"
+street: "Strada Tei"
 rooms: 2
 bathrooms: 1
 surface: 65
@@ -24,13 +25,14 @@ features:
   - "Loc de parcare"
   - "Aproape de mijloace transport în comun"
 comisionZero: true
-featuredImage: "/images/scraped/post014_0.jpg"
+featuredImage: "/images/scraped/post014_0.webp"
 gallery:
-  - "/images/scraped/post014_0.jpg"
-  - "/images/scraped/post014_1.jpg"
-  - "/images/scraped/post014_2.jpg"
-  - "/images/scraped/post014_3.jpg"
-  - "/images/scraped/post014_4.jpg"
+  - "/images/scraped/post014_0.webp"
+  - "/images/scraped/post014_1.webp"
+  - "/images/scraped/post014_2.webp"
+  - "/images/scraped/post014_3.webp"
+  - "/images/scraped/post014_4.webp"
+coords: [46.9412, 26.3961]
 ---
 
 Oferim spre **închiriere** apartament cu 2 camere în suprafață de 65 mp, situat la etajul 1, cartierul Tei din Piatra Neamț.

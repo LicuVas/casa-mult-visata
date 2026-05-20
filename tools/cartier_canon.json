@@ -1,0 +1,73 @@
+{
+  "version": 3,
+  "generatedAt": "2026-05-20T14:00:00Z",
+  "sources": [
+    "Primăria Piatra Neamț — nomenclator stradal (https://www.primariapn.ro/fisiere/formulare/115.pdf)",
+    "Primăria Piatra Neamț — activitate socială (lista cartiere uzuale)",
+    "Wikipedia: comuna Girov, comuna Botești, comuna Bodești, comuna Dobreni",
+    "OSM/Nominatim — coords streets/villages",
+    "Cross-check via ChatGPT-research aggregation (2026-05-20)"
+  ],
+  "notes": "v3: cartier names per primăria nomenclator authoritative; OSM admin boundaries (Cartier Tei lumping) ignored for colloquial usage. Dărmănești recentered to actual residential area (Aleea Ulmilor / Piața Dărmănești axis). Văleni placed under Cernegura on right bank of Bistrița per Primăria.",
+  "cartiere": [
+    { "name": "Centru",       "coords": [46.9276, 26.3714], "confidence": "înalt",  "aliases": ["Zona centrală", "Centrul orașului"] },
+    { "name": "Precista",     "coords": [46.9299, 26.3638], "confidence": "mediu",  "aliases": [] },
+    { "name": "Mărăței",     "coords": [46.9320, 26.3894], "confidence": "înalt",  "aliases": [] },
+    { "name": "Dărmănești", "coords": [46.9224, 26.3868], "confidence": "mediu",  "aliases": [], "notes": "Centroid recentrat la axa Piața Dărmănești / Aleea Ulmilor / Mihai Viteazul (per nomenclator primăria)." },
+    { "name": "1 Mai",        "coords": [46.9216, 26.3806], "confidence": "mediu",  "aliases": [] },
+    { "name": "Tei",          "coords": [46.9412, 26.3961], "confidence": "scăzut", "aliases": [], "notes": "Zonă informală — nomenclatorul are 'Teiului' la cartier Decebal." },
+    { "name": "Ciritei",      "coords": [46.9320, 26.4088], "confidence": "înalt",  "aliases": [] },
+    { "name": "Văleni",      "coords": [46.9040, 26.3460], "confidence": "mediu",  "aliases": [], "notes": "Localitate componentă/cartier pe dreapta Bistriței, sub Cernegura." },
+    { "name": "Speranța",    "coords": [46.9455, 26.3700], "confidence": "mediu",  "aliases": [] },
+    { "name": "Sărata",      "coords": [46.9354, 26.3535], "confidence": "înalt",  "aliases": [] },
+    { "name": "Doamna",       "coords": [46.9510, 26.3690], "confidence": "mediu",  "aliases": [] },
+    { "name": "Pietricica",   "coords": [46.9172, 26.3684], "confidence": "mediu",  "aliases": [] },
+    { "name": "Vânători",    "coords": [46.9150, 26.3870], "confidence": "mediu",  "aliases": [] },
+    { "name": "Obor",         "coords": [46.9260, 26.3790], "confidence": "mediu",  "aliases": ["Gara Veche", "Obor / Gara Veche"] }
+  ],
+  "outsidePN_localitati": [
+    { "name": "Dumbrava Roșie", "coords": [46.8832, 26.4383], "type": "comună",       "confidence": "înalt" },
+    { "name": "Doina",           "coords": [46.9186, 26.5104], "type": "sat (Girov)",  "confidence": "înalt" },
+    { "name": "Gura Văii",      "coords": [46.9569, 26.4503], "type": "sat (Girov)",  "confidence": "mediu" },
+    { "name": "Bodești de Jos", "coords": [47.0275, 26.4448], "type": "sat (Bodești)", "confidence": "înalt" },
+    { "name": "Nisiporești",    "coords": [47.0772, 26.7379], "type": "sat (Botești)", "confidence": "mediu" },
+    { "name": "Dobreni",         "coords": [46.9918, 26.4228], "type": "comună",       "confidence": "mediu" }
+  ],
+  "streetCoords": {
+    "Strada Ion Ionescu de la Brad": { "coords": [46.9327, 26.4130], "cartier": "Ciritei",      "source": "primăria + OSM" },
+    "Strada Orhei":                    { "coords": [46.9292, 26.3721], "cartier": "Centru",       "source": "primăria nomenclator" },
+    "Aleea Ulmilor":                   { "coords": [46.9223, 26.3866], "cartier": "Dărmănești", "source": "primăria nomenclator" },
+    "Strada Fermelor":                 { "coords": [46.9345, 26.3945], "cartier": "Obor",          "source": "primăria nomenclator (Gara Veche → Obor)" },
+    "Strada Tei":                      { "coords": [46.9412, 26.3961], "cartier": "Tei",           "source": "estimate" },
+    "Strada Mărăței":                 { "coords": [46.9320, 26.3894], "cartier": "Mărăței",      "source": "primăria + OSM" }
+  },
+  "propertyMigration": {
+    "apartament-2cam-maratei":                            { "zone": "Mărăței",       "coords": [46.9320, 26.3894] },
+    "apartament-2cam-precista-piatra-neamt-mobilat":      { "zone": "Precista",        "coords": [46.9299, 26.3638] },
+    "apartament-2cam-strada-orhei-piatra-neamt":          { "zone": "Centru",          "street": "Strada Orhei",                  "coords": [46.9292, 26.3721] },
+    "apartament-2cam-tei-piatra-neamt-65mp":              { "zone": "Tei",             "street": "Strada Tei",                    "coords": [46.9412, 26.3961] },
+    "apartament-3cam-1mai-piatra-neamt":                  { "zone": "1 Mai",           "coords": [46.9216, 26.3806] },
+    "casa-5dorm-centru":                                  { "zone": "Centru",          "coords": [46.9276, 26.3714] },
+    "casa-doina-5800mp":                                  { "zone": "Doina",           "coords": [46.9186, 26.5104] },
+    "casa-gura-vaii-268mp-cu-foisor":                     { "zone": "Gura Văii",      "coords": [46.9569, 26.4503] },
+    "casa-noua-ion-ionescu":                              { "zone": "Ciritei",         "street": "Strada Ion Ionescu de la Brad", "coords": [46.9327, 26.4130] },
+    "casa-noua-la-cheie-dumbrava-rosie-120mp":            { "zone": "Dumbrava Roșie", "coords": [46.8832, 26.4383] },
+    "casa-piatra-neamt-200mp-7min-centru":                { "zone": "Centru",          "coords": [46.9276, 26.3714] },
+    "casa-pm-caramida-dumbrava-rosie-226mp":              { "zone": "Dumbrava Roșie", "coords": [46.8832, 26.4383] },
+    "casa-spatiu-comercial-bodesti-106mp":                { "zone": "Bodești de Jos", "coords": [47.0275, 26.4448] },
+    "garsoniera-aleea-ulmilor-darmanesti-piatra-neamt":   { "zone": "Dărmănești",   "street": "Aleea Ulmilor",                "coords": [46.9223, 26.3866] },
+    "inchiriere-apartament-2cam-tei":                     { "zone": "Tei",             "street": "Strada Tei",                    "coords": [46.9412, 26.3961] },
+    "spatiu-comercial-500mp-zona-centrala-piatra-neamt":  { "zone": "Centru",          "coords": [46.9276, 26.3714] },
+    "teren-12-loturi-ciritei-piatra-neamt":               { "zone": "Ciritei",         "coords": [46.9320, 26.4088] },
+    "teren-2000mp-nisiporesti-langa-biserica":            { "zone": "Nisiporești",    "coords": [47.0772, 26.7379] },
+    "teren-3600mp-bodesti-de-jos":                        { "zone": "Bodești de Jos", "coords": [47.0275, 26.4448] },
+    "teren-3632mp-bodesti-de-jos":                        { "zone": "Bodești de Jos", "coords": [47.0275, 26.4448] },
+    "teren-3878mp-zona-fermelor-piatra-neamt":            { "zone": "Obor",            "street": "Strada Fermelor",               "coords": [46.9345, 26.3945] },
+    "teren-614mp-dumbrava-rosie":                         { "zone": "Dumbrava Roșie", "coords": [46.8832, 26.4383] },
+    "teren-635mp-dumbrava-rosie":                         { "zone": "Dumbrava Roșie", "coords": [46.8832, 26.4383] },
+    "teren-812mp-ciritei-piatra-neamt":                   { "zone": "Ciritei",         "coords": [46.9320, 26.4088] },
+    "teren-dobreni-5300mp":                               { "zone": "Dobreni",         "coords": [46.9918, 26.4228] },
+    "teren-dumbrava-rosie-1536mp-cu-temelie":             { "zone": "Dumbrava Roșie", "coords": [46.8832, 26.4383] },
+    "vila-piatra-neamt-200mp-renovata-2025":              { "zone": "Centru",          "coords": [46.9276, 26.3714] }
+  }
+}

@@ -30,13 +30,14 @@ features:
   - "Izolație pod vată 15 cm"
   - "Acceptă plată prin credit bancar"
 comisionZero: true
-featuredImage: "/images/scraped/post005_0.jpg"
+featuredImage: "/images/scraped/post005_0.webp"
 gallery:
-  - "/images/scraped/post005_0.jpg"
-  - "/images/scraped/post005_1.jpg"
-  - "/images/scraped/post005_2.jpg"
-  - "/images/scraped/post005_3.jpg"
-  - "/images/scraped/post005_4.jpg"
+  - "/images/scraped/post005_0.webp"
+  - "/images/scraped/post005_1.webp"
+  - "/images/scraped/post005_2.webp"
+  - "/images/scraped/post005_3.webp"
+  - "/images/scraped/post005_4.webp"
+coords: [46.8832, 26.4383]
 ---
 
 Casă în suprafață totală de 120 mp și teren aferent 500 mp, situată în Dumbrava Roșie, jud. Neamț.

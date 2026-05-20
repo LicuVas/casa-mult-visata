@@ -14,7 +14,8 @@ features:
   - "Fântână proprie"
   - "Gaz metan în curând"
 comisionZero: true
-featuredImage: "/images/scraped/post018_0.jpg"
+featuredImage: "/images/scraped/post018_0.webp"
+coords: [47.0275, 26.4448]
 ---
 
 Teren intravilan în suprafață de 3600 mp situat în localitatea Bodești de Jos, jud. Neamț.

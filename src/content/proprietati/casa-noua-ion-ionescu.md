@@ -4,7 +4,8 @@ status: "Vânzare"
 price: 274000
 currency: "EUR"
 location: "Str. Ion Ionescu de la Brad, Piatra Neamț"
-zone: "Ion Ionescu de la Brad"
+zone: "Ciritei"
+street: "Strada Ion Ionescu de la Brad"
 propertyType: "Casă"
 rooms: 5
 bathrooms: 3
@@ -21,6 +22,7 @@ features:
 exclusive: true
 comisionZero: true
 privateOwnerContact: ""
+coords: [46.9327, 26.413]
 ---
 
 Casă nouă, finalizată în 2024, cu regim P+E, situată pe strada Ion Ionescu de la Brad din Piatra Neamț. Suprafață construită 124 mp pe teren de 474 mp. Beneficiază de încălzire în pardoseală, finisaje premium și curte complet amenajată. Proprietate de top pentru familii care doresc confort maxim.

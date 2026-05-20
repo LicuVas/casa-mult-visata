@@ -3,191 +3,304 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allProperties = await getCollection('proprietati');
-const featuredProperties = allProperties.slice(0, 3);
 
-// Helper function to format price
+// Pick featured: prefer items with featuredImage + exclusive/comisionZero, fill up to 6
+const withImage = allProperties.filter(p => p.data.featuredImage);
+const priority = withImage.filter(p => p.data.exclusive || p.data.comisionZero);
+const rest = withImage.filter(p => !(p.data.exclusive || p.data.comisionZero));
+const featuredProperties = [...priority, ...rest].slice(0, 6);
+
+const totalCount = allProperties.length;
+
 const formatPrice = (price: number, currency: string) => {
   return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(price);
 };
+
+// Zone counts for clickable chips
+const zoneCounts: Record<string, number> = {};
+for (const p of allProperties) {
+  const z = p.data.zone || p.data.location;
+  if (z) zoneCounts[z] = (zoneCounts[z] || 0) + 1;
+}
+// Canonical PN cartiere from tools/cartier_canon.json, sorted alphabetically (Romanian locale)
+const zoneList = [
+  '1 Mai','Centru','Ciritei','Doamna','Dărmănești','Mărăței',
+  'Obor','Pietricica','Precista','Sărata','Speranța',
+  'Tei','Vânători','Văleni'
+].sort((a, b) => a.localeCompare(b, 'ro'));
 ---
 
-<Layout title="Casa Mult Visată — Agenție Imobiliară Piatra Neamț" description="Agent imobiliar Cozma Vasile Piatra Neamț. Apartamente, case, terenuri. Comision 0% cumpărător. Sună 0747 814 263 sau WhatsApp." ogImage="/images/hero.png">
-	
-	<!-- HERO -->
-	<section class="hero-cover">
-		<div class="hero-cover-text reveal">
-			<p class="label">Agenție imobiliară · Piatra Neamț</p>
-			<h1 class="headline">Găsește Casa<br>Mult Visată</h1>
-			<p class="subtitle">Proprietăți de vânzare și închiriere în Piatra Neamț și împrejurimi. Experiență, seriozitate și dedicare pentru fiecare client.</p>
-			<div class="hero-cta">
-				<a href="/proprietati" class="btn-primary" aria-label="Vezi lista completă de proprietăți disponibile">Vezi Proprietăți</a>
-				<a href="https://wa.me/40747814263?text=Bună%20ziua!%20Vreau%20informații%20despre%20o%20proprietate." class="btn-whatsapp" target="_blank" rel="noopener" aria-label="Contactează agentul pe WhatsApp">
-					<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-					WhatsApp
-				</a>
+<Layout
+	title="Casa Mult Visată — Agenție Imobiliară Piatra Neamț"
+	description="Agent imobiliar Cozma Vasile Piatra Neamț. Apartamente, case, terenuri. Comision 0% cumpărător. Sună 0747 814 263 sau WhatsApp."
+	ogImage="/images/hero.webp"
+	preloadImage="/images/hero-1440.webp"
+	preloadImageSrcset="/images/hero-720.webp 720w, /images/hero-1080.webp 1080w, /images/hero-1440.webp 1440w, /images/hero-1920.webp 1920w"
+	preloadImageSizes="100vw"
+>
+
+	<!-- HERO FULL-BLEED -->
+	<section class="home-hero">
+		<picture class="home-hero-bg">
+			<source srcset="/images/hero-720.avif 720w, /images/hero-1080.avif 1080w, /images/hero-1440.avif 1440w, /images/hero-1920.avif 1920w" sizes="100vw" type="image/avif" />
+			<source srcset="/images/hero-720.webp 720w, /images/hero-1080.webp 1080w, /images/hero-1440.webp 1440w, /images/hero-1920.webp 1920w" sizes="100vw" type="image/webp" />
+			<img src="/images/hero-1440.webp" alt="" width="1920" height="660" fetchpriority="high" decoding="async" />
+		</picture>
+		<div class="home-hero-overlay"></div>
+		<div class="home-hero-inner container">
+			<p class="home-hero-eyebrow">Agenție imobiliară · Piatra Neamț</p>
+			<h1 class="home-hero-headline">Acasă începe<br>cu alegerea potrivită.</h1>
+			<p class="home-hero-sub">Apartamente, case și terenuri în Piatra Neamț și împrejurimi. Comision 0% pentru cumpărători.</p>
+
+			<form class="home-search" action="/proprietati/" method="get" role="search">
+				<div class="home-search-field">
+					<label for="hs-type">Tip proprietate</label>
+					<select id="hs-type" name="type">
+						<option value="">Toate tipurile</option>
+						<option value="Apartament">Apartament</option>
+						<option value="Casă">Casă</option>
+						<option value="Teren">Teren</option>
+						<option value="Spațiu comercial">Spațiu comercial</option>
+					</select>
+				</div>
+				<div class="home-search-field">
+					<label for="hs-zone">Zonă</label>
+					<select id="hs-zone" name="zone">
+						<option value="">Toate zonele</option>
+						<optgroup label="Piatra Neamț">
+							<option>Centru</option>
+							<option>Precista</option>
+							<option>Mărăței</option>
+							<option>Dărmănești</option>
+							<option>1 Mai</option>
+							<option>Calea Romanului</option>
+							<option>Obor</option>
+							<option>Zona Fermelor</option>
+						</optgroup>
+						<optgroup label="Împrejurimi">
+							<option>Dumbrava Roșie</option>
+							<option>Alexandru cel Bun</option>
+							<option>Bodești</option>
+							<option>Dobreni</option>
+							<option>Doina</option>
+						</optgroup>
+					</select>
+				</div>
+				<div class="home-search-field">
+					<label for="hs-price">Preț maxim</label>
+					<select id="hs-price" name="priceMax">
+						<option value="">Orice preț</option>
+						<option value="30000">până în 30.000 €</option>
+						<option value="80000">până în 80.000 €</option>
+						<option value="150000">până în 150.000 €</option>
+						<option value="300000">până în 300.000 €</option>
+					</select>
+				</div>
+				<button type="submit" class="home-search-btn" aria-label="Caută proprietăți">
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+					<span>Caută</span>
+				</button>
+			</form>
+
+			<div class="home-hero-shortcuts">
+				<a href="/proprietati/?type=Apartament">Apartamente</a>
+				<a href="/proprietati/?type=Cas%C4%83">Case</a>
+				<a href="/proprietati/?type=Teren">Terenuri</a>
+				<a href="/proprietati/?comisionZero=true">Comision 0%</a>
+				<a href="/proprietati/?status=%C3%8Enchiriere">Închirieri</a>
 			</div>
 		</div>
-		<figure class="hero-cover-image">
-			<img src="/images/hero.png" alt="Proprietăți imobiliare în Piatra Neamț" loading="eager">
-			<figcaption>Piatra Neamț — Orașul la poalele Ceahlăului</figcaption>
-		</figure>
 	</section>
 
-	<hr class="rule">
+	<!-- VALUE PROPS BAND -->
+	<section class="home-valueprops">
+		<div class="container">
+			<div class="vp-grid reveal">
+				<div class="vp-card">
+					<div class="vp-icon">
+						<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7l-8-4-8 4 8 4 8-4z"/><path d="M4 12l8 4 8-4"/><path d="M4 17l8 4 8-4"/></svg>
+					</div>
+					<h3>Comision 0% cumpărător</h3>
+					<p>Nu plătești comision dacă te ajut să cumperi. Standard la mine.</p>
+				</div>
+				<div class="vp-card">
+					<div class="vp-icon">
+						<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+					</div>
+					<h3>Răspuns sub 2 ore</h3>
+					<p>WhatsApp și telefon, luni–sâmbătă 9–20. Niciun mesaj rătăcit.</p>
+				</div>
+				<div class="vp-card">
+					<div class="vp-icon">
+						<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 21V13h6v8"/></svg>
+					</div>
+					<h3>200+ tranzacții finalizate</h3>
+					<p>Peste 10 ani în piață, inclusiv Re/Max. Cunosc fiecare cartier.</p>
+				</div>
+				<div class="vp-card">
+					<div class="vp-icon">
+						<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+					</div>
+					<h3>Evaluare gratuită</h3>
+					<p>Analiză de piață obiectivă pentru proprietatea ta — fără cost, fără obligație.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
-	<!-- PROPRIETĂȚI RECOMANDATE -->
+	<!-- OFERTE SELECTATE -->
 	<section style="padding: var(--section-padding);">
 		<div class="container">
-			<div class="section-header reveal">
-				<hr>
-				<p class="label">Proprietăți recomandate</p>
-				<h2>Oferte Selectate</h2>
+			<div class="section-header reveal" style="display:flex; align-items:end; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
+				<div>
+					<p class="label">Proprietăți recomandate</p>
+					<h2 style="margin:0;">Oferte selectate</h2>
+				</div>
+				<a href="/proprietati/" class="editorial-link">Vezi toate ({totalCount}) &rarr;</a>
 			</div>
 
-			<div class="editorial-grid">
-				{featuredProperties.map((prop, index) => {
-					// Make the first one large (feature-main)
-					const isMain = index === 0;
-					const itemClass = isMain ? "property-editorial feature-main reveal" : "property-editorial feature-side reveal";
-					const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.png' : prop.data.propertyType === 'Casă' ? '/images/casa.png' : '/images/teren.png');
-					
+			<div class="contact-sheet reveal" style="margin-top:2.5rem;">
+				{featuredProperties.map((prop) => {
+					const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.webp' : prop.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
 					let metaDetails = [];
-					if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} camere`);
-					if (prop.data.bathrooms) metaDetails.push(`${prop.data.bathrooms} băi`);
+					if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} cam.`);
 					if (prop.data.surface) metaDetails.push(`${prop.data.surface} mp`);
-					if (prop.data.landSurface && prop.data.propertyType === 'Teren') metaDetails.push(`Teren: ${prop.data.landSurface} mp`);
-					
+					if (prop.data.landSurface && prop.data.propertyType === 'Teren') metaDetails.push(`${prop.data.landSurface} mp teren`);
 					return (
-						<article class={itemClass}>
-							<a href={`/proprietati/${prop.id}`}>
-								<img src={imageSrc} alt={prop.data.title}>
-							</a>
-							<div class="caption">
-								<span class="tag">De {prop.data.status.toLowerCase()}</span>
+						<article class="cs-item" data-id={prop.id}>
+							<div class="cs-media">
+								<a href={`/proprietati/${prop.id}/`}>
+									<picture>
+										<source srcset={imageSrc.replace(/\.webp$/, '.avif')} type="image/avif" />
+										<source srcset={imageSrc} type="image/webp" />
+										<img src={imageSrc} alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
+									</picture>
+								</a>
+								<span class="cs-status-tag">{prop.data.status}</span>
+								<span class="cs-price-tag">
+									{formatPrice(prop.data.price, prop.data.currency)}
+									{prop.data.pricePerUnit && <small>{prop.data.pricePerUnit}</small>}
+								</span>
+							</div>
+							<div class="cs-caption">
 								{(prop.data.exclusive || prop.data.comisionZero) && (
 									<div class="prop-badges">
 										{prop.data.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
 										{prop.data.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
 									</div>
 								)}
-								<h3><a href={`/proprietati/${prop.id}`}>{prop.data.title}</a></h3>
-								<span class="price">{formatPrice(prop.data.price, prop.data.currency)}</span>
-								{prop.data.pricePerUnit && <span class="price-per-unit">{prop.data.pricePerUnit}</span>}
-								<p class="meta">{prop.data.zone ? `${prop.data.zone} · ` : ""}{metaDetails.join(" · ")}</p>
+								<h3><a href={`/proprietati/${prop.id}/`}>{prop.data.title}</a></h3>
+								{prop.data.zone && <p class="cs-zone">{prop.data.zone}</p>}
+								{metaDetails.length > 0 && (
+									<p class="meta">
+										{metaDetails.map(m => <span>{m}</span>)}
+									</p>
+								)}
 							</div>
 						</article>
 					)
 				})}
 			</div>
-
-			<div style="text-align:right; margin-top:2rem;">
-				<a href="/proprietati" class="editorial-link">Vezi toate proprietățile &rarr;</a>
-			</div>
 		</div>
 	</section>
 
-	<!-- PULL QUOTE -->
-	<div class="container">
-		<div class="pull-quote reveal">
-			<blockquote>&ldquo;Fiecare casă are o poveste. Te ajut să o găsești pe a ta.&rdquo;</blockquote>
-			<cite>Cozma Vasile, Agent Imobiliar</cite>
-		</div>
-	</div>
-
-	<!-- SERVICII PREVIEW -->
-	<section class="services-editorial">
+	<!-- PROCES 4 PAȘI -->
+	<section class="home-process">
 		<div class="container">
 			<div class="section-header reveal">
 				<hr>
-				<p class="label">Ce pot face pentru tine</p>
-				<h2>Servicii</h2>
+				<p class="label">Cum lucrăm</p>
+				<h2>Procesul, în 4 pași simpli</h2>
 			</div>
-
-			<div class="service-item reveal">
-				<h3>Vânzare &amp; Cumpărare</h3>
-				<p>Te asist în întregul proces — de la evaluarea proprietății, fotografiere și promovare, până la negociere și semnarea actelor la notar.</p>
-			</div>
-			<div class="service-item reveal">
-				<h3>Închirieri</h3>
-				<p>Găsesc chiriași de încredere sau proprietăți potrivite nevoilor tale. Contract, proces-verbal de predare și suport continuu.</p>
-			</div>
-			<div class="service-item reveal">
-				<h3>Consultanță Imobiliară</h3>
-				<p>Evaluare gratuită a proprietății tale. Analiză de piață pentru zona Piatra Neamț și sfaturi bazate pe experiența mea în domeniu.</p>
-			</div>
-
-			<div style="margin-top:2rem;">
-				<a href="/servicii" class="editorial-link">Toate serviciile &rarr;</a>
+			<div class="process-grid reveal">
+				<div class="process-step">
+					<span class="process-num">01</span>
+					<h3>Discutăm</h3>
+					<p>Mă suni sau scrii pe WhatsApp. Înțeleg ce cauți sau ce vinzi, buget, calendar.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-num">02</span>
+					<h3>Selectăm</h3>
+					<p>Îți trimit doar opțiuni care se potrivesc. Fără spam cu listări irelevante.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-num">03</span>
+					<h3>Vizionăm</h3>
+					<p>Organizez vizionări, te însoțesc, semnalez aspecte tehnice și juridice.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-num">04</span>
+					<h3>Semnăm</h3>
+					<p>Negociez prețul, pregătesc documentele, te asist la notar până la cheie în mână.</p>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- STATS -->
-	<section class="dark-section">
+	<!-- PULL QUOTE + AGENT MINI -->
+	<section style="padding: 4rem 2rem 2rem;">
 		<div class="container">
-			<div class="stats-grid reveal">
-				<div class="stat">
-					<span class="stat-number">10+</span>
-					<span class="stat-label">Ani experiență<br>în imobiliare</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">200+</span>
-					<span class="stat-label">Tranzacții<br>finalizate</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">98%</span>
-					<span class="stat-label">Clienți<br>mulțumiți</span>
-				</div>
-				<div class="stat">
-					<span class="stat-number">30</span>
-					<span class="stat-label">Zile — timp mediu<br>de vânzare</span>
+			<div class="home-quote-block reveal">
+				<blockquote>&ldquo;Fiecare casă are o poveste. Te ajut să o găsești pe a ta.&rdquo;</blockquote>
+				<div class="home-quote-author">
+					<picture>
+						<source srcset="/images/agent.avif" type="image/avif" />
+						<source srcset="/images/agent.webp" type="image/webp" />
+						<img src="/images/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async" />
+					</picture>
+					<div>
+						<strong>Cozma Vasile</strong>
+						<span>Agent imobiliar · Piatra Neamț</span>
+						<a href="/despre/">Vezi profilul →</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- EVALUARE GRATUITĂ CTA -->
-	<section class="container">
-		<div class="evaluation-cta reveal">
-			<p class="label">Pentru proprietari</p>
-			<h2>Evaluez gratuit proprietatea ta</h2>
-			<p class="evaluation-sub">Analiză de piață pentru zona Piatra Neamț. Fără obligație, fără cost.</p>
-			<a href="/contact/?interes=evaluare" class="editorial-link">Solicită evaluarea &rarr;</a>
-		</div>
-	</section>
-
-	<!-- CTA -->
-	<div class="container">
-		<div class="cta-editorial reveal">
-			<h2>Vrei să Vinzi sau să Închiriezi?</h2>
-			<p>Listează proprietatea ta cu un expert. Ajunge la potențiali cumpărători și chiriași din Piatra Neamț și împrejurimi.</p>
-			<a href="/contact/">Contactează-mă &rarr;</a>
-		</div>
-	</div>
-
-	<!-- ZONE PIATRA NEAMT -->
-	<section style="padding: var(--section-padding);">
+	<!-- ZONE CLICKABLE -->
+	<section style="padding: 3rem 2rem 5rem;">
 		<div class="container">
 			<div class="section-header reveal">
 				<hr>
 				<p class="label">Zone acoperite</p>
-				<h2>Piatra Neamț și Împrejurimi</h2>
+				<h2>Piatra Neamț și împrejurimi</h2>
 			</div>
-			<div class="zones-grid reveal">
-				<div class="zone-tag">Centru</div>
-				<div class="zone-tag">Precista</div>
-				<div class="zone-tag">Mărăței</div>
-				<div class="zone-tag">Dărmănești</div>
-				<div class="zone-tag">1 Mai</div>
-				<div class="zone-tag">Calea Romanului</div>
-				<div class="zone-tag">Obor</div>
-				<div class="zone-tag">Dobreni</div>
-				<div class="zone-tag">Bodești</div>
-				<div class="zone-tag">Dumbrava Roșie</div>
-				<div class="zone-tag">Alexandru cel Bun</div>
-				<div class="zone-tag">Zona Fermelor</div>
-				<div class="zone-tag">Doina</div>
-				<div class="zone-tag">Județul Neamț</div>
+			<div class="zones-clickable reveal">
+				{zoneList.map(z => {
+					const count = zoneCounts[z] || 0;
+					return (
+						<a class="zone-link" href={`/proprietati/?zone=${encodeURIComponent(z)}`}>
+							<span class="zone-name">{z}</span>
+							{count > 0 && <span class="zone-count">{count}</span>}
+						</a>
+					)
+				})}
+				<a class="zone-link zone-link-all" href="/proprietati/">
+					<span class="zone-name">Județul Neamț</span>
+					<span class="zone-count">{totalCount}</span>
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA FINAL -->
+	<section class="home-final-cta">
+		<div class="container">
+			<div class="home-final-cta-inner reveal">
+				<div>
+					<p class="label">Hai să discutăm</p>
+					<h2>Prima consultație e gratuită și fără obligații.</h2>
+					<p class="home-final-sub">Indiferent dacă vinzi, cumperi sau închiriezi — primul pas e o conversație onestă.</p>
+				</div>
+				<div class="home-final-actions">
+					<a href="tel:0747814263" class="btn-primary">Sună · 0747 814 263</a>
+					<a href="https://wa.me/40747814263?text=Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20discut%C4%83m." class="btn-whatsapp" target="_blank" rel="noopener">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+						WhatsApp
+					</a>
+					<a href="/contact/" class="editorial-link">sau formular →</a>
+				</div>
 			</div>
 		</div>
 	</section>

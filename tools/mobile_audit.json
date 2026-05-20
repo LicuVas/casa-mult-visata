@@ -1,0 +1,153 @@
+{
+  "generatedAt": "2026-05-20T00:00:00Z",
+  "psi": {
+    "_status": "unavailable",
+    "_reason": "Google PageSpeed Insights API returned HTTP 429 RESOURCE_EXHAUSTED for all 3 calls. The anonymous/default per-day quota for the consumer project (583797351490) is 0. No Core Web Vitals or category scores could be captured this run. Saved error payloads to tools/psi_homepage.json, tools/psi_listings.json, tools/psi_detail.json. Re-run after providing a PSI API key (env PSI_API_KEY) appended as &key=... — that gives 25k queries/day for free.",
+    "homepage": null,
+    "listings": null,
+    "detail": null,
+    "fallback_recommendation": "Open https://pagespeed.web.dev/analysis?url=https://casa-mult-visata.netlify.app/ in browser to capture scores manually, OR set GOOGLE_PSI_API_KEY and re-run."
+  },
+  "gaps": {
+    "manifest_missing": true,
+    "apple_touch_icon_missing": true,
+    "viewport_fit_cover": false,
+    "safe_area_inset": false,
+    "hero_preload": false,
+    "img_dimensions_audit": "No <img> in src/ pages or layout has width/height attributes (only inline SVG icons do). High-traffic images missing dimensions: /images/hero.webp (home hero), /images/agent.webp (multiple pages), property featuredImage in card grid (proprietati.astro:305, index.astro:161), detail hero (slug.astro:237), gallery thumbs (slug.astro:260), similar cards (slug.astro:403). Net effect: layout-shift risk + CLS penalty on every page.",
+    "form_input_attrs": "contact.astro: autocomplete set on name/tel/email (good). MISSING on all inputs: inputmode (tel should be inputmode='tel', email should be inputmode='email'), enterkeyhint, and no inputmode='numeric' for phone. proprietati/[slug].astro inquiry form: autocomplete present on nume/tel/email, same missing inputmode/enterkeyhint. No spellcheck hints. No type='search' on any listing filters checked.",
+    "lazy_loading": "loading='lazy' applied on listing cards, gallery thumbs, similar cards, favorites cards, iframes (map, tour, video) — good. MISSING: decoding='async' on every <img> in repo (0 occurrences). MISSING: fetchpriority='high' on the LCP hero image (slug.astro:237 and homepage hero). Hero image has neither loading nor fetchpriority — browser default eager is OK but no priority hint.",
+    "reduced_motion": "Two @media (prefers-reduced-motion: reduce) blocks present in style.css (lines 248, 432). Layout.astro JS reveal observer also short-circuits when reduce-motion matches (line 229). Coverage is decent but partial — transitions on .share-btn, .fav-toggle, .view-toggle-btn, .active-chip etc. are not gated.",
+    "view_transitions": false,
+    "passive_listeners": "58 addEventListener calls across 5 page files. None pass {passive:true}. Touch/scroll listeners (zoom/swipe in slug.astro lightbox, scroll-based code) are likely non-passive, which can block scroll on mobile. Needs targeted audit of touchstart/touchmove/wheel handlers in [slug].astro and proprietati.astro."
+  },
+  "extra_observations": {
+    "good": [
+      "theme-color meta present (#8AA399)",
+      "skip-link to #main-content",
+      "JSON-LD structured data (RealEstateAgent + LocalBusiness + Organization + WebSite)",
+      "Mobile media queries at 540/600/640/700/740/900 px breakpoints — reasonable coverage",
+      "Sticky-ish floating WhatsApp CTA (.whatsapp-float) already exists",
+      "Netlify honeypot anti-spam on both forms",
+      "Custom RO validation messages on contact form",
+      "Fonts use preconnect + display=swap"
+    ],
+    "concerns": [
+      "External Google Fonts stylesheet is render-blocking (no media-print swap trick, no preload+onload)",
+      "Mobile hamburger uses inline onclick — fine but harder to a11y-audit; no focus trap when open",
+      ".whatsapp-float exists but no symmetric phone-call CTA on mobile (one-thumb reach)",
+      "Embedded Google Maps iframe on /contact (heavy ~600KB) — already lazy, but could be facade-loaded",
+      "Inline backslash bug at proprietati/[slug].astro:387 — '\\images\\apartament.webp' uses backslashes, will 404 on Linux/Netlify",
+      "favicon.svg only — no PNG fallback, no apple-touch-icon (180x180), no maskable icon"
+    ]
+  },
+  "prioritized_actions": [
+    {
+      "id": "img_dimensions",
+      "priority": "high",
+      "effort": "medium",
+      "impact": "Eliminates CLS on every page; directly improves PSI performance + CWV. Likely single biggest mobile win.",
+      "files_to_touch": ["src/pages/index.astro", "src/pages/proprietati.astro", "src/pages/proprietati/[slug].astro", "src/pages/despre.astro", "src/pages/proprietati/favorites.astro"]
+    },
+    {
+      "id": "hero_preload_and_fetchpriority",
+      "priority": "high",
+      "effort": "low",
+      "impact": "Faster LCP on home + detail pages. Add <link rel='preload' as='image' href={heroSrc}> in Layout (page-scoped via slot prop) and fetchpriority='high' decoding='async' on the hero <img>.",
+      "files_to_touch": ["src/layouts/Layout.astro", "src/pages/index.astro", "src/pages/proprietati/[slug].astro"]
+    },
+    {
+      "id": "decoding_async_all_imgs",
+      "priority": "high",
+      "effort": "low",
+      "impact": "Frees main thread during image decode — better INP/TBT on listings page with many cards.",
+      "files_to_touch": ["src/pages/index.astro", "src/pages/proprietati.astro", "src/pages/proprietati/[slug].astro", "src/pages/proprietati/favorites.astro", "src/pages/despre.astro"]
+    },
+    {
+      "id": "form_inputmode_enterkeyhint",
+      "priority": "high",
+      "effort": "low",
+      "impact": "Mobile keyboards show numeric for phone, email layout for email, 'send' enter key — measurable lead-form completion uplift.",
+      "files_to_touch": ["src/pages/contact.astro", "src/pages/proprietati/[slug].astro"]
+    },
+    {
+      "id": "manifest_and_apple_touch_icon",
+      "priority": "high",
+      "effort": "low",
+      "impact": "PWA installability, iOS home-screen icon, proper Android theme. Add public/site.webmanifest + 180x180 apple-touch-icon.png + 192/512 icons + maskable.",
+      "files_to_touch": ["src/layouts/Layout.astro", "public/site.webmanifest (new)", "public/apple-touch-icon.png (new)", "public/icon-192.png (new)", "public/icon-512.png (new)"]
+    },
+    {
+      "id": "sticky_bottom_cta_mobile",
+      "priority": "high",
+      "effort": "medium",
+      "impact": "Always-visible Call + WhatsApp bar on mobile (the floating WA exists but a phone-call CTA is missing). Big conversion lever for a real-estate lead site.",
+      "files_to_touch": ["src/layouts/Layout.astro", "public/style.css"]
+    },
+    {
+      "id": "viewport_fit_safe_area",
+      "priority": "medium",
+      "effort": "low",
+      "impact": "Edge-to-edge layout on iPhone notch/Dynamic Island; sticky CTA respects home-indicator. Change viewport meta to 'width=device-width, initial-scale=1, viewport-fit=cover' and add env(safe-area-inset-bottom) padding to footer + sticky CTA.",
+      "files_to_touch": ["src/layouts/Layout.astro", "public/style.css"]
+    },
+    {
+      "id": "fonts_non_blocking",
+      "priority": "medium",
+      "effort": "low",
+      "impact": "Removes render-blocking Google Fonts request from critical path; improves FCP/LCP. Use rel='preload' as='style' + onload swap, or self-host woff2.",
+      "files_to_touch": ["src/layouts/Layout.astro"]
+    },
+    {
+      "id": "passive_touch_listeners",
+      "priority": "medium",
+      "effort": "medium",
+      "impact": "Smoother scrolling on the detail-page lightbox/swipe; better INP. Audit touchstart/touchmove/wheel in [slug].astro and pass {passive:true} where preventDefault isn't needed.",
+      "files_to_touch": ["src/pages/proprietati/[slug].astro", "src/pages/proprietati.astro"]
+    },
+    {
+      "id": "reduced_motion_full_coverage",
+      "priority": "medium",
+      "effort": "low",
+      "impact": "Wrap remaining transitions (.share-btn, .fav-toggle, .view-toggle-btn, .active-chip, .map-popup-link, fav-clear-btn) in prefers-reduced-motion gate.",
+      "files_to_touch": ["public/style.css"]
+    },
+    {
+      "id": "fix_backslash_image_path_bug",
+      "priority": "medium",
+      "effort": "low",
+      "impact": "Line 387 of [slug].astro has '\\images\\apartament.webp' — backslashes will 404. Pure bug, easy fix.",
+      "files_to_touch": ["src/pages/proprietati/[slug].astro"]
+    },
+    {
+      "id": "maps_facade",
+      "priority": "low",
+      "effort": "medium",
+      "impact": "Replace contact-page Google Maps iframe with a static thumbnail + click-to-load — saves ~600KB on /contact mobile.",
+      "files_to_touch": ["src/pages/contact.astro"]
+    },
+    {
+      "id": "mobile_nav_focus_trap",
+      "priority": "low",
+      "effort": "medium",
+      "impact": "When hamburger menu is open, trap focus and close on Esc — a11y polish.",
+      "files_to_touch": ["src/layouts/Layout.astro"]
+    },
+    {
+      "id": "tap_target_audit",
+      "priority": "low",
+      "effort": "low",
+      "impact": "Verify all interactive elements >= 44x44 px on mobile (share-btn, view-toggle-btn, active-chip-x look borderline).",
+      "files_to_touch": ["public/style.css"]
+    }
+  ],
+  "out_of_scope": [
+    "Service worker / offline PWA",
+    "Full View Transitions API migration",
+    "Migrating to Astro <Image /> component (would require refactor of all img tags + content-collection schema changes)",
+    "Self-hosting Google Fonts (touched only at meta level — full migration is a separate effort)",
+    "Adding a real PSI CI workflow with API key + threshold gates",
+    "Replacing Netlify Forms with a custom backend",
+    "Internationalization (ro-RO only is fine for now)"
+  ]
+}

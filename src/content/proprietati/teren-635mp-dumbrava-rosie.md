@@ -13,13 +13,14 @@ features:
   - "Curent electric"
   - "Gaz metan la 50 m"
 comisionZero: true
-featuredImage: "/images/scraped/post009_0.jpg"
+featuredImage: "/images/scraped/post009_0.webp"
 gallery:
-  - "/images/scraped/post009_0.jpg"
-  - "/images/scraped/post009_1.jpg"
-  - "/images/scraped/post009_2.jpg"
-  - "/images/scraped/post009_3.jpg"
-  - "/images/scraped/post009_4.jpg"
+  - "/images/scraped/post009_0.webp"
+  - "/images/scraped/post009_1.webp"
+  - "/images/scraped/post009_2.webp"
+  - "/images/scraped/post009_3.webp"
+  - "/images/scraped/post009_4.webp"
+coords: [46.8832, 26.4383]
 ---
 
 Teren intravilan în suprafață de 635 mp situat în Dumbrava Roșie, jud. Neamț.

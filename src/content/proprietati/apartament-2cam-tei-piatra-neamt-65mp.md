@@ -6,6 +6,7 @@ price: 94500
 currency: "EUR"
 location: "Piatra Neamț"
 zone: "Tei"
+street: "Strada Tei"
 rooms: 2
 bathrooms: 1
 surface: 65
@@ -28,13 +29,14 @@ features:
   - "Garaj 20 mp (+15.000 € extra)"
   - "Imobil cu ascensor (5 etaje)"
 comisionZero: true
-featuredImage: "/images/scraped/post003_0.jpg"
+featuredImage: "/images/scraped/post003_0.webp"
 gallery:
-  - "/images/scraped/post003_0.jpg"
-  - "/images/scraped/post003_1.jpg"
-  - "/images/scraped/post003_2.jpg"
-  - "/images/scraped/post003_3.jpg"
-  - "/images/scraped/post003_4.jpg"
+  - "/images/scraped/post003_0.webp"
+  - "/images/scraped/post003_1.webp"
+  - "/images/scraped/post003_2.webp"
+  - "/images/scraped/post003_3.webp"
+  - "/images/scraped/post003_4.webp"
+coords: [46.9412, 26.3961]
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 65,3 mp, etajul 1, situat în cartierul Tei din Piatra Neamț.

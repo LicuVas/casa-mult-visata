@@ -5,7 +5,7 @@ propertyType: "Casă"
 price: 274000
 currency: "EUR"
 location: "Piatra Neamț"
-zone: "Piatra Neamț"
+zone: "Centru"
 rooms: 4
 bathrooms: 1
 surface: 200
@@ -32,13 +32,14 @@ features:
   - "Canalizare oraș"
   - "Renovată complet 2025"
 comisionZero: true
-featuredImage: "/images/scraped/post004_0.jpg"
+featuredImage: "/images/scraped/post004_0.webp"
 gallery:
-  - "/images/scraped/post004_0.jpg"
-  - "/images/scraped/post004_1.jpg"
-  - "/images/scraped/post004_2.jpg"
-  - "/images/scraped/post004_3.jpg"
-  - "/images/scraped/post004_4.jpg"
+  - "/images/scraped/post004_0.webp"
+  - "/images/scraped/post004_1.webp"
+  - "/images/scraped/post004_2.webp"
+  - "/images/scraped/post004_3.webp"
+  - "/images/scraped/post004_4.webp"
+coords: [46.9276, 26.3714]
 ---
 
 Vilă în suprafață utilă de 200 mp și teren aferent 400 mp, situată în Piatra Neamț. **Proprietatea este renovată complet în 2025.**

@@ -1,0 +1,454 @@
+{
+  "/images/agent.webp": [
+    1024,
+    1024
+  ],
+  "/images/apartament.webp": [
+    1024,
+    1024
+  ],
+  "/images/casa.webp": [
+    1024,
+    1024
+  ],
+  "/images/comercial.webp": [
+    1024,
+    1024
+  ],
+  "/images/hero-1080.webp": [
+    1080,
+    371
+  ],
+  "/images/hero-1440.webp": [
+    1440,
+    495
+  ],
+  "/images/hero-1920.webp": [
+    1920,
+    660
+  ],
+  "/images/hero-720.webp": [
+    720,
+    247
+  ],
+  "/images/hero.webp": [
+    2400,
+    826
+  ],
+  "/images/penthouse.webp": [
+    1024,
+    1024
+  ],
+  "/images/teren.webp": [
+    1024,
+    1024
+  ],
+  "/images/scraped/post000_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post000_1.webp": [
+    590,
+    469
+  ],
+  "/images/scraped/post000_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post001_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post001_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post001_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post001_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post001_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post002_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post002_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post002_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post002_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post002_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post003_0.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post003_1.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post003_2.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post003_3.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post003_4.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post004_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post004_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post004_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post004_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post004_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post005_0.webp": [
+    444,
+    590
+  ],
+  "/images/scraped/post005_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post005_2.webp": [
+    590,
+    438
+  ],
+  "/images/scraped/post005_3.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post005_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post006_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post006_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post006_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post006_3.webp": [
+    411,
+    590
+  ],
+  "/images/scraped/post007_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post007_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post007_2.webp": [
+    590,
+    430
+  ],
+  "/images/scraped/post007_3.webp": [
+    590,
+    336
+  ],
+  "/images/scraped/post007_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post008_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post008_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post008_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post008_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post009_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post009_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post009_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post009_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post009_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post010_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post010_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post010_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post010_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post010_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post011_0.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post011_1.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post011_2.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post011_3.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post011_4.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post012_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post012_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post012_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post012_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post012_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post013_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post013_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post014_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post014_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post014_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post014_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post014_4.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post015_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post015_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post015_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post015_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post015_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post016_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post016_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post016_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post016_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post017_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post017_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post017_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post017_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post017_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post018_0.webp": [
+    720,
+    540
+  ],
+  "/images/scraped/post019_0.webp": [
+    720,
+    540
+  ],
+  "/images/scraped/post020_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post020_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post021_0.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post021_1.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post021_2.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post021_3.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post021_4.webp": [
+    443,
+    590
+  ],
+  "/images/scraped/post022_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post022_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post022_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post022_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post022_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post023_0.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post023_1.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post023_2.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post023_3.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post023_4.webp": [
+    590,
+    443
+  ],
+  "/images/scraped/post024_0.webp": [
+    526,
+    525
+  ]
+}

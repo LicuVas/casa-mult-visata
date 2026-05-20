@@ -27,13 +27,14 @@ features:
   - "Foișor cu chiuvetă/grătar/afumătoare/cuptor/plită"
   - "Teren împrejmuit cu gard"
 comisionZero: true
-featuredImage: "/images/scraped/post007_0.jpg"
+featuredImage: "/images/scraped/post007_0.webp"
 gallery:
-  - "/images/scraped/post007_0.jpg"
-  - "/images/scraped/post007_1.jpg"
-  - "/images/scraped/post007_2.jpg"
-  - "/images/scraped/post007_3.jpg"
-  - "/images/scraped/post007_4.jpg"
+  - "/images/scraped/post007_0.webp"
+  - "/images/scraped/post007_1.webp"
+  - "/images/scraped/post007_2.webp"
+  - "/images/scraped/post007_3.webp"
+  - "/images/scraped/post007_4.webp"
+coords: [46.9569, 26.4503]
 ---
 
 Casă de vânzare în localitatea Gura Văii, jud. Neamț.

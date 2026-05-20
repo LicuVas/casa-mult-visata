@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allProperties = await getCollection('proprietati');
+
+// Serializable snapshot of all properties for client-side filtering by favorite IDs.
+const allPropsForClient = allProperties.map(p => {
+  const imageSrc = p.data.featuredImage || (p.data.propertyType === 'Apartament' ? '/images/apartament.webp' : p.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+  return {
+    id: p.id,
+    title: p.data.title,
+    status: p.data.status,
+    price: p.data.price,
+    currency: p.data.currency,
+    pricePerUnit: p.data.pricePerUnit || null,
+    propertyType: p.data.propertyType,
+    location: p.data.location,
+    zone: p.data.zone || null,
+    rooms: p.data.rooms || null,
+    bathrooms: p.data.bathrooms || null,
+    surface: p.data.surface || null,
+    landSurface: p.data.landSurface || null,
+    floor: p.data.floor || null,
+    exclusive: !!p.data.exclusive,
+    comisionZero: !!p.data.comisionZero,
+    listingStatus: p.data.listingStatus || 'Activ',
+    image: imageSrc
+  };
+});
+---
+
+<Layout
+  title="Favoritele mele | Casa Mult Visată Piatra Neamț"
+  description="Proprietățile pe care le-ai salvat din portofoliul Casa Mult Visată."
+  noIndex={true}
+>
+  <div class="container" style="padding-top: 3rem;">
+    <div class="page-header reveal">
+      <p class="label">Lista ta</p>
+      <h1>Favoritele mele</h1>
+      <p class="intro">Proprietățile pe care le-ai salvat de pe acest site. Lista este păstrată local, în browserul tău.</p>
+    </div>
+
+    <div class="favorites-toolbar">
+      <span class="favorites-count-line">Ai salvat <strong id="fav-total">0</strong> <span id="fav-total-noun">proprietăți</span>.</span>
+      <button type="button" class="fav-clear-btn" id="fav-clear-btn">Golește lista</button>
+    </div>
+
+    <hr class="rule" />
+
+    <div class="contact-sheet" id="favorites-grid" style="margin-top: 2rem;"></div>
+
+    <div class="empty-state" id="favorites-empty" style="display:none;">
+      <h3>Nu ai salvat încă nicio proprietate.</h3>
+      <p>Apasă pe inima de pe orice card să o adaugi aici.</p>
+      <p class="empty-fallback">Vezi <a href="/proprietati/">toate proprietățile</a>.</p>
+    </div>
+  </div>
+
+  <script is:inline set:html={`window.__ALL_PROPS__ = ${JSON.stringify(allPropsForClient)};`}></script>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+      var grid  = document.getElementById('favorites-grid');
+      var empty = document.getElementById('favorites-empty');
+      var totalEl = document.getElementById('fav-total');
+      var nounEl  = document.getElementById('fav-total-noun');
+      var clearBtn = document.getElementById('fav-clear-btn');
+      if (!grid || !window.CMV_FAV || !window.__ALL_PROPS__) return;
+
+      function formatPrice(price, currency) {
+        try {
+          return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: currency || 'EUR', maximumFractionDigits: 0 }).format(price);
+        } catch (e) { return price + ' ' + (currency || 'EUR'); }
+      }
+
+      function escapeHtml(s) {
+        return String(s == null ? '' : s)
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      function buildCard(p) {
+        var meta = [];
+        if (p.rooms) meta.push(p.rooms + ' cam');
+        if (p.bathrooms) meta.push(p.bathrooms + ' ' + (p.bathrooms === 1 ? 'baie' : 'băi'));
+        if (p.surface) meta.push(p.surface + ' mp');
+        if (p.landSurface) meta.push(p.propertyType === 'Teren' ? (p.landSurface + ' mp teren') : ('+' + p.landSurface + ' mp teren'));
+        if (p.floor) meta.push('Et. ' + p.floor);
+
+        var badges = '';
+        if (p.exclusive || p.comisionZero) {
+          badges = '<div class="prop-badges">'
+            + (p.exclusive ? '<span class="badge badge-exclusiv">Exclusiv</span>' : '')
+            + (p.comisionZero ? '<span class="badge badge-comision-zero">Comision 0%</span>' : '')
+            + '</div>';
+        }
+
+        var pricePerUnit = p.pricePerUnit ? ('<small>' + escapeHtml(p.pricePerUnit) + '</small>') : '';
+        var zone = (p.zone || p.location) ? ('<p class="cs-zone">' + escapeHtml(p.zone || p.location) + '</p>') : '';
+        var metaHtml = meta.length
+          ? ('<p class="meta">' + meta.map(function (m) { return '<span>' + escapeHtml(m) + '</span>'; }).join('') + '</p>')
+          : '';
+
+        var article = document.createElement('article');
+        article.className = 'cs-item';
+        article.setAttribute('data-id', p.id);
+        var avifSrc = String(p.image || '').replace(/\.webp$/, '.avif');
+        article.innerHTML =
+          '<div class="cs-media">'
+          +   '<span class="cs-status-tag">De ' + escapeHtml(String(p.status || '').toLowerCase()) + '</span>'
+          +   '<span class="cs-price-tag">' + escapeHtml(formatPrice(p.price, p.currency)) + pricePerUnit + '</span>'
+          +   '<a href="/proprietati/' + encodeURIComponent(p.id) + '/">'
+          +     '<picture>'
+          +       '<source srcset="' + escapeHtml(avifSrc) + '" type="image/avif">'
+          +       '<source srcset="' + escapeHtml(p.image) + '" type="image/webp">'
+          +       '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">'
+          +     '</picture>'
+          +   '</a>'
+          + '</div>'
+          + '<div class="cs-caption">'
+          +   badges
+          +   '<h3><a href="/proprietati/' + encodeURIComponent(p.id) + '/">' + escapeHtml(p.title) + '</a></h3>'
+          +   zone
+          +   metaHtml
+          + '</div>';
+        return article;
+      }
+
+      function render() {
+        var ids = window.CMV_FAV.get();
+        var all = window.__ALL_PROPS__ || [];
+        // Preserve user-add order (newest first)
+        var byId = {};
+        for (var i = 0; i < all.length; i++) byId[all[i].id] = all[i];
+
+        var saved = [];
+        for (var j = ids.length - 1; j >= 0; j--) {
+          var p = byId[ids[j]];
+          if (p) saved.push(p);
+        }
+
+        grid.innerHTML = '';
+        if (saved.length === 0) {
+          grid.style.display = 'none';
+          empty.style.display = '';
+        } else {
+          grid.style.display = '';
+          empty.style.display = 'none';
+          for (var k = 0; k < saved.length; k++) grid.appendChild(buildCard(saved[k]));
+        }
+
+        if (totalEl) totalEl.textContent = String(saved.length);
+        if (nounEl)  nounEl.textContent = saved.length === 1 ? 'proprietate' : 'proprietăți';
+
+        // Re-inject heart buttons on freshly created cards
+        if (window.CMV_FAV && typeof window.CMV_FAV.inject === 'function') {
+          window.CMV_FAV.inject(grid);
+        }
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          if (window.CMV_FAV.count() === 0) return;
+          var ok = window.confirm('Sigur vrei să golești lista de favorite?');
+          if (!ok) return;
+          var ids = window.CMV_FAV.get().slice();
+          for (var i = 0; i < ids.length; i++) window.CMV_FAV.toggle(ids[i]);
+          render();
+        });
+      }
+
+      document.addEventListener('favorites-changed', render);
+      render();
+    });
+  </script>
+</Layout>

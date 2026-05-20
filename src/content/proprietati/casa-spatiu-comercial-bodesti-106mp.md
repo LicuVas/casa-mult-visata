@@ -24,13 +24,14 @@ features:
   - "Autorizație DSP"
   - "Posibilități: sediu firmă, birouri, salon, magazin etc."
 comisionZero: true
-featuredImage: "/images/scraped/post022_0.jpg"
+featuredImage: "/images/scraped/post022_0.webp"
 gallery:
-  - "/images/scraped/post022_0.jpg"
-  - "/images/scraped/post022_1.jpg"
-  - "/images/scraped/post022_2.jpg"
-  - "/images/scraped/post022_3.jpg"
-  - "/images/scraped/post022_4.jpg"
+  - "/images/scraped/post022_0.webp"
+  - "/images/scraped/post022_1.webp"
+  - "/images/scraped/post022_2.webp"
+  - "/images/scraped/post022_3.webp"
+  - "/images/scraped/post022_4.webp"
+coords: [47.0275, 26.4448]
 ---
 
 Casă sau spațiu comercial în suprafață utilă de 106 mp, situat în localitatea Bodești de Jos, jud. Neamț.

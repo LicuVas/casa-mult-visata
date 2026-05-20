@@ -15,10 +15,11 @@ features:
   - "Gaz metan"
   - "Canalizare"
 comisionZero: true
-featuredImage: "/images/scraped/post020_0.jpg"
+featuredImage: "/images/scraped/post020_0.webp"
 gallery:
-  - "/images/scraped/post020_0.jpg"
-  - "/images/scraped/post020_1.jpg"
+  - "/images/scraped/post020_0.webp"
+  - "/images/scraped/post020_1.webp"
+coords: [46.932, 26.4088]
 ---
 
 Teren intravilan în suprafață de 812 mp situat în cartierul Ciritei din Piatra Neamț.

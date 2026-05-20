@@ -5,7 +5,8 @@ propertyType: "Apartament"
 price: 59700
 currency: "EUR"
 location: "Piatra Neamț"
-zone: "strada Orhei"
+zone: "Centru"
+street: "Strada Orhei"
 rooms: 2
 bathrooms: 1
 surface: 62
@@ -24,13 +25,14 @@ features:
   - "Necesită renovare"
   - "Imobil cu ascensor (10 etaje)"
 comisionZero: true
-featuredImage: "/images/scraped/post010_0.jpg"
+featuredImage: "/images/scraped/post010_0.webp"
 gallery:
-  - "/images/scraped/post010_0.jpg"
-  - "/images/scraped/post010_1.jpg"
-  - "/images/scraped/post010_2.jpg"
-  - "/images/scraped/post010_3.jpg"
-  - "/images/scraped/post010_4.jpg"
+  - "/images/scraped/post010_0.webp"
+  - "/images/scraped/post010_1.webp"
+  - "/images/scraped/post010_2.webp"
+  - "/images/scraped/post010_3.webp"
+  - "/images/scraped/post010_4.webp"
+coords: [46.9292, 26.3721]
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 62,82 mp, situat la etajul 2, strada Orhei din Piatra Neamț.

@@ -14,11 +14,12 @@ features:
   - "Deschidere 21 m"
   - "Temelie existentă 240 mp"
 comisionZero: true
-featuredImage: "/images/scraped/post000_0.jpg"
+featuredImage: "/images/scraped/post000_0.webp"
 gallery:
-  - "/images/scraped/post000_0.jpg"
-  - "/images/scraped/post000_1.jpg"
-  - "/images/scraped/post000_2.jpg"
+  - "/images/scraped/post000_0.webp"
+  - "/images/scraped/post000_1.webp"
+  - "/images/scraped/post000_2.webp"
+coords: [46.8832, 26.4383]
 ---
 
 Teren intravilan în suprafață de 1536 mp situat în Dumbrava Roșie, jud. Neamț, cu o deschidere de 21 metri. Vă oferă spre folosință și o temelie cu amprenta la sol de 240 mp.

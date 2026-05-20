@@ -5,7 +5,7 @@ propertyType: "Casă"
 price: 219500
 currency: "EUR"
 location: "Piatra Neamț"
-zone: "La 7 min de centru"
+zone: "Centru"
 rooms: 5
 bathrooms: 2
 surface: 200
@@ -22,13 +22,14 @@ features:
   - "Curte 830 mp"
   - "Acceptă schimb cu apartament + diferență"
 comisionZero: true
-featuredImage: "/images/scraped/post012_0.jpg"
+featuredImage: "/images/scraped/post012_0.webp"
 gallery:
-  - "/images/scraped/post012_0.jpg"
-  - "/images/scraped/post012_1.jpg"
-  - "/images/scraped/post012_2.jpg"
-  - "/images/scraped/post012_3.jpg"
-  - "/images/scraped/post012_4.jpg"
+  - "/images/scraped/post012_0.webp"
+  - "/images/scraped/post012_1.webp"
+  - "/images/scraped/post012_2.webp"
+  - "/images/scraped/post012_3.webp"
+  - "/images/scraped/post012_4.webp"
+coords: [46.9276, 26.3714]
 ---
 
 La doar **7 minute de centrul orașului Piatra Neamț** se află o casă pregătită să devină căminul unei noi familii.

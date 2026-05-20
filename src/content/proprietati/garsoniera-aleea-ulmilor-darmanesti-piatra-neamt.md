@@ -5,7 +5,8 @@ propertyType: "Apartament"
 price: 21800
 currency: "EUR"
 location: "Piatra Neamț"
-zone: "Dărmănești (Aleea Ulmilor)"
+zone: "Dărmănești"
+street: "Aleea Ulmilor"
 rooms: 1
 bathrooms: 1
 surface: 24
@@ -25,13 +26,14 @@ features:
   - "Între Maielvi și piața din Dărmănești"
   - "Aproape de mijloace transport în comun"
 comisionZero: true
-featuredImage: "/images/scraped/post023_0.jpg"
+featuredImage: "/images/scraped/post023_0.webp"
 gallery:
-  - "/images/scraped/post023_0.jpg"
-  - "/images/scraped/post023_1.jpg"
-  - "/images/scraped/post023_2.jpg"
-  - "/images/scraped/post023_3.jpg"
-  - "/images/scraped/post023_4.jpg"
+  - "/images/scraped/post023_0.webp"
+  - "/images/scraped/post023_1.webp"
+  - "/images/scraped/post023_2.webp"
+  - "/images/scraped/post023_3.webp"
+  - "/images/scraped/post023_4.webp"
+coords: [46.9223, 26.3866]
 ---
 
 **Garsonieră** în suprafață totală de 24 mp situată la etajul 4, strada Aleea Ulmilor, între Maielvi și piața din Dărmănești, Piatra Neamț.

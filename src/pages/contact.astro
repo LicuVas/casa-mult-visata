@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact | Casa Mult Visată — Cozma Vasile Agent Piatra Neamț" description="Contactează-mă pentru o consultanță gratuită. Telefon, WhatsApp, formular online. Răspund rapid." ogImage="/images/hero.png">
+<Layout title="Contact | Casa Mult Visată — Cozma Vasile Agent Piatra Neamț" description="Contactează-mă pentru o consultanță gratuită. Telefon, WhatsApp, formular online. Răspund rapid." ogImage="/images/hero.webp">
 
 	<section style="padding: var(--section-padding);">
 		<div class="container">
@@ -30,15 +30,15 @@ import Layout from '../layouts/Layout.astro';
 
 						<div class="form-group">
 							<label for="name">Nume complet</label>
-							<input type="text" id="name" name="name" required aria-required="true" autocomplete="name" placeholder="Ion Popescu">
+							<input type="text" id="name" name="name" required aria-required="true" autocomplete="name" enterkeyhint="next" placeholder="Ion Popescu">
 						</div>
 						<div class="form-group">
 							<label for="phone">Telefon</label>
-							<input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" pattern="(\+4)?0[27][0-9]{8}" placeholder="07XX XXX XXX">
+							<input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" enterkeyhint="next" pattern="[0-9 +()-]{7,20}" placeholder="07XX XXX XXX">
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input type="email" id="email" name="email" autocomplete="email" placeholder="email@exemplu.ro">
+							<input type="email" id="email" name="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="email@exemplu.ro">
 						</div>
 						<div class="form-group">
 							<label for="interest">Interes</label>
@@ -57,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 						<div class="form-group">
 							<label for="message">Mesaj</label>
-							<textarea id="message" name="message" required aria-required="true" minlength="10" placeholder="Descrie pe scurt ce cauți..."></textarea>
+							<textarea id="message" name="message" required aria-required="true" minlength="10" autocomplete="off" enterkeyhint="send" placeholder="Descrie pe scurt ce cauți..."></textarea>
 						</div>
 						<button type="submit" id="submit-btn" class="btn-primary" style="width:100%; text-align:center;">Trimite Mesaj</button>
 					</form>

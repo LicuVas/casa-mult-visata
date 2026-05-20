@@ -5,7 +5,7 @@ propertyType: "Spațiu Comercial"
 price: 750000
 currency: "EUR"
 location: "Piatra Neamț"
-zone: "Zona centrală"
+zone: "Centru"
 surface: 500
 features:
   - "TVA inclus"
@@ -24,13 +24,14 @@ features:
   - "Gaz metan"
   - "Posibilități: sediu firmă, birouri, etc."
 comisionZero: true
-featuredImage: "/images/scraped/post017_0.jpg"
+featuredImage: "/images/scraped/post017_0.webp"
 gallery:
-  - "/images/scraped/post017_0.jpg"
-  - "/images/scraped/post017_1.jpg"
-  - "/images/scraped/post017_2.jpg"
-  - "/images/scraped/post017_3.jpg"
-  - "/images/scraped/post017_4.jpg"
+  - "/images/scraped/post017_0.webp"
+  - "/images/scraped/post017_1.webp"
+  - "/images/scraped/post017_2.webp"
+  - "/images/scraped/post017_3.webp"
+  - "/images/scraped/post017_4.webp"
+coords: [46.9276, 26.3714]
 ---
 
 **Spațiu comercial** în suprafață totală de 500 mp, situat pe 2 nivele în zona centrală a Piatra Neamț.

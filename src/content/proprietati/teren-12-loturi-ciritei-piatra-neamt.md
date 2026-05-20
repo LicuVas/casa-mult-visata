@@ -14,12 +14,13 @@ features:
   - "Cale de acces 7 m"
   - "Utilități la ~190-200 m"
 comisionZero: true
-featuredImage: "/images/scraped/post006_0.jpg"
+featuredImage: "/images/scraped/post006_0.webp"
 gallery:
-  - "/images/scraped/post006_0.jpg"
-  - "/images/scraped/post006_1.jpg"
-  - "/images/scraped/post006_2.jpg"
-  - "/images/scraped/post006_3.jpg"
+  - "/images/scraped/post006_0.webp"
+  - "/images/scraped/post006_1.webp"
+  - "/images/scraped/post006_2.webp"
+  - "/images/scraped/post006_3.webp"
+coords: [46.932, 26.4088]
 ---
 
 De vânzare **12 loturi de teren** în suprafață de 10.000 mp, situat în cartierul Ciritei, Piatra Neamț.

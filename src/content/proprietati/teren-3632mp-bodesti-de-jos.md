@@ -14,10 +14,11 @@ features:
   - "Curent electric"
   - "Apă (în fața terenului)"
 comisionZero: true
-featuredImage: "/images/scraped/post013_0.jpg"
+featuredImage: "/images/scraped/post013_0.webp"
 gallery:
-  - "/images/scraped/post013_0.jpg"
-  - "/images/scraped/post013_1.jpg"
+  - "/images/scraped/post013_0.webp"
+  - "/images/scraped/post013_1.webp"
+coords: [47.0275, 26.4448]
 ---
 
 Teren intravilan în suprafață de 3632 mp situat în localitatea Bodești de Jos, jud. Neamț.
