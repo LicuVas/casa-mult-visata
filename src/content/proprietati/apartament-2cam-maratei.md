@@ -22,9 +22,7 @@ features:
   - Comision 0% cumpărător
 comisionZero: true
 updatedAt: ''
-coords:
-  - 46.929
-  - 26.371
+coords: 46.929
 videoUrl: ''
 virtualTourUrl: ''
 privateOwnerContact: ''
