@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "createdAt": "2026-05-21",
+  "scope": "Cozma Vasile real-estate site full-functionality audit + best-practices alignment",
+  "subQuestions": [
+    {
+      "id": "SQ1",
+      "topic": "Romania real-estate market norms 2025-2026 — required/expected fields on a property listing",
+      "deliverable": "List of fields currently missing from src/content.config.ts that RO buyers/sellers expect (per Storia.ro / Imobiliare.ro / OLX Imobiliare schemas)",
+      "sources_min": 3,
+      "must_include_year_filter": ">=2025"
+    },
+    {
+      "id": "SQ2",
+      "topic": "Listing card + detail page UX 2025-2026 + Schema.org RealEstateListing completeness",
+      "deliverable": "Card hierarchy + detail-page section order best practices; full Schema.org JSON-LD field set used by Google Rich Results for real-estate",
+      "sources_min": 2,
+      "must_include_year_filter": ">=2025"
+    },
+    {
+      "id": "SQ3",
+      "topic": "Sveltia/Decap CMS UX patterns for non-technical real-estate agents",
+      "deliverable": "Patterns for: field grouping (collections), inline hints, image upload+crop, draft preview, batch ops, validation feedback. Identify what causes most errors for non-technical users.",
+      "sources_min": 2,
+      "must_include_year_filter": ">=2024"
+    }
+  ],
+  "successCriteria": [
+    "Schema in content.config.ts extended with all RO-market expected fields",
+    "Detail page renders each new field conditionally (no empty placeholders)",
+    "Filter UI extended for filterable fields (energy class, parking, heating where applicable)",
+    "Search blob includes new searchable fields",
+    "CMS config.yml has hints on every non-obvious field, field grouping via collapsible sections where supported",
+    "Build: 0 errors / 0 warnings, all 27 properties validate",
+    "Zero placeholders, TODO, fake data, Lorem ipsum",
+    "Property cards remain visually clean — added info is on detail page, not card"
+  ],
+  "outOfScope": [
+    "Custom domain / DNS",
+    "Real photo replacement (waiting on client)",
+    "i18n",
+    "Backend changes (site is static)",
+    "Mortgage simulator beyond what exists",
+    "Live chat / chatbot"
+  ]
+}

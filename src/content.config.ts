@@ -54,6 +54,58 @@ const proprietati = defineCollection({
     floorPlan: optStr,
     privateOwnerContact: optStr,
     privateNotes: optStr,
+
+    // Câmpuri Romania-specifice (2025-2026 per Storia/Imobiliare best practices).
+    // Toate optional — proprietățile existente nu necesită migrare.
+    energyClass: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'în curs de obținere']).optional()
+    ),
+    intabulat: z.preprocess(
+      (v) => {
+        if (v === null || v === '' || v === undefined) return undefined;
+        if (v === 'true' || v === true) return true;
+        if (v === 'false' || v === false) return false;
+        return v;
+      },
+      z.boolean().optional()
+    ),
+    cadastralNumber: optStr,
+    compartimentare: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Decomandat', 'Semidecomandat', 'Nedecomandat', 'Circular', 'Open-space']).optional()
+    ),
+    floorsTotal: optNum,
+    heatingType: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Centrală proprie pe gaz', 'Centrală proprie pe lemne/peleți', 'Termoficare', 'Centrală de bloc', 'Sobă', 'Altă sursă']).optional()
+    ),
+    orientation: optStr,
+    parking: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Garaj', 'Loc subteran', 'Loc suprateran', 'Stradă', 'Niciun loc']).optional()
+    ),
+    balconies: optNum,
+    balconySurface: optNum,
+    condition: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Nou', 'Renovat recent', 'Bună stare', 'Necesită renovare']).optional()
+    ),
+    surfaceUtila: optNum,
+    surfaceConstruita: optNum,
+    availableFrom: optStr,
+    buildingType: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Bloc', 'Vilă', 'Casă', 'Ansamblu rezidențial', 'Clădire de birouri']).optional()
+    ),
+    structureType: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Cărămidă', 'BCA', 'Panou prefabricat', 'Mixt', 'Lemn']).optional()
+    ),
+    confortClass: z.preprocess(
+      (v) => (v === null || v === '' ? undefined : v),
+      z.enum(['Confort 1', 'Confort 1 sporit', 'Confort 2', 'Confort 3']).optional()
+    ),
   }),
 });
 

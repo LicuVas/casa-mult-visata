@@ -98,6 +98,75 @@ collections:
       
       - {label: "Descriere Completă", name: "body", widget: "markdown"}
 
+      # ─── DETALII TEHNICE RO (opționale, recomandate pentru ranking superior) ───
+      - label: "--- DETALII TEHNICE (Romania-specific) ---"
+        name: "tech_separator"
+        widget: "hidden"
+        default: "separator"
+        required: false
+      - label: "Clasă energetică"
+        name: "energyClass"
+        widget: "select"
+        required: false
+        options: ["A", "B", "C", "D", "E", "F", "G", "în curs de obținere"]
+        hint: 'Obligatorie legal la vânzare/închiriere (Legea 372/2005). Dacă nu ai certificatul încă, alege "în curs de obținere".'
+      - label: "Intabulat"
+        name: "intabulat"
+        widget: "boolean"
+        required: false
+        hint: "Bifează dacă proprietatea este înscrisă în Cartea Funciară. Prima întrebare a oricărui cumpărător serios."
+      - {label: "Număr Cadastral / CF (opțional)", name: "cadastralNumber", widget: "string", required: false, hint: "Ex: 12345/A/B. Nu apare pe site dacă nu vrei — pune-l doar dacă vrei să-l afișezi public."}
+      - label: "Compartimentare"
+        name: "compartimentare"
+        widget: "select"
+        required: false
+        options: ["Decomandat", "Semidecomandat", "Nedecomandat", "Circular", "Open-space"]
+        hint: "Pentru apartamente. Cel mai folosit filtru pe Storia/Imobiliare."
+      - {label: "Etaj total al clădirii", name: "floorsTotal", widget: "number", value_type: "int", required: false, hint: "Ex: 4 (dacă „Etaj" este „3/4")."}
+      - label: "Tip încălzire"
+        name: "heatingType"
+        widget: "select"
+        required: false
+        options: ["Centrală proprie pe gaz", "Centrală proprie pe lemne/peleți", "Termoficare", "Centrală de bloc", "Sobă", "Altă sursă"]
+      - {label: "Orientare", name: "orientation", widget: "string", required: false, hint: "Ex: Sud, Sud-Est, N-S (dacă ai și N și S). Important pentru lumină naturală."}
+      - label: "Parcare"
+        name: "parking"
+        widget: "select"
+        required: false
+        options: ["Garaj", "Loc subteran", "Loc suprateran", "Stradă", "Niciun loc"]
+      - {label: "Număr balcoane", name: "balconies", widget: "number", value_type: "int", required: false}
+      - {label: "Suprafață totală balcoane (mp)", name: "balconySurface", widget: "number", value_type: "int", required: false}
+      - label: "Stare proprietate"
+        name: "condition"
+        widget: "select"
+        required: false
+        options: ["Nou", "Renovat recent", "Bună stare", "Necesită renovare"]
+      - label: 'Suprafață utilă (mp) — separat de construită'
+        name: "surfaceUtila"
+        widget: "number"
+        value_type: "int"
+        required: false
+        hint: "Suprafața din interior, fără balcoane/ziduri. Diferă de suprafața construită."
+      - {label: "Suprafață construită (mp)", name: "surfaceConstruita", widget: "number", value_type: "int", required: false, hint: "Include balcoane și ziduri. Folosită pentru calcul preț/mp."}
+      - {label: "Disponibil de la (data)", name: "availableFrom", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false, hint: "Doar pentru închirieri sau preluare amânată. Lasă gol dacă e disponibil imediat."}
+      - label: "Tip clădire"
+        name: "buildingType"
+        widget: "select"
+        required: false
+        options: ["Bloc", "Vilă", "Casă", "Ansamblu rezidențial", "Clădire de birouri"]
+      - label: "Structură constructivă"
+        name: "structureType"
+        widget: "select"
+        required: false
+        options: ["Cărămidă", "BCA", "Panou prefabricat", "Mixt", "Lemn"]
+        hint: "Relevant pentru risc seismic (panou prefabricat = risc mai mare în Vrancea)."
+      - label: "Clasă confort (apartamente vechi)"
+        name: "confortClass"
+        widget: "select"
+        required: false
+        options: ["Confort 1", "Confort 1 sporit", "Confort 2", "Confort 3"]
+        hint: "Doar pentru apartamente construite înainte de 1990."
+
       # CÂMPURI PRIVATE - NU APAR PE SITE
       - label: "--- DATE PRIVATE (Nu apar pe site) ---"
         name: "private_separator"

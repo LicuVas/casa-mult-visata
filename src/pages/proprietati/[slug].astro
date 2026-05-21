@@ -127,9 +127,48 @@ if (normalizedCoords) {
 if (prop.data.surface) {
   realEstateListing.floorSize = { "@type": "QuantitativeValue", "value": prop.data.surface, "unitCode": "MTK" };
 }
-if (prop.data.rooms) realEstateListing.numberOfRooms = prop.data.rooms;
+if (prop.data.rooms) {
+  realEstateListing.numberOfRooms = prop.data.rooms;
+  // numberOfBedrooms = rooms - 1 pentru apartamente standard RO (sufrageria nu se numără).
+  // Pentru garsonieră (rooms=1) → 0 dormitoare separate, deci omitem field-ul.
+  if ((prop.data.propertyType === 'Apartament' || prop.data.propertyType === 'Casă') && prop.data.rooms >= 2) {
+    realEstateListing.numberOfBedrooms = prop.data.rooms - 1;
+  }
+}
 if (prop.data.bathrooms) realEstateListing.numberOfBathroomsTotal = prop.data.bathrooms;
 if (prop.data.yearBuilt) realEstateListing.yearBuilt = prop.data.yearBuilt;
+if (prop.data.floorsTotal) realEstateListing.numberOfFloors = prop.data.floorsTotal;
+realEstateListing.mainEntityOfPage = canonicalUrl;
+// dateModified din updatedAt dacă există
+if (prop.data.updatedAt && /^\d{4}-\d{2}-\d{2}/.test(prop.data.updatedAt)) {
+  realEstateListing.dateModified = prop.data.updatedAt.slice(0, 10);
+}
+// Offer enrichment: businessFunction (Sell vs LeaseOut) + seller
+realEstateListing.offers.businessFunction = prop.data.status === 'Închiriere'
+  ? 'https://schema.org/LeaseOut'
+  : 'https://schema.org/Sell';
+realEstateListing.offers.seller = { "@type": "RealEstateAgent", "name": "Cozma Vasile", "url": siteOrigin };
+// amenityFeature din features array. Pentru free-text features (RO real-estate),
+// omit `value: true` — Schema.org bool e pentru booleane proprii (ex: petsAllowed),
+// nu pentru caracteristici descriptive ("Terasă acoperită", "Mobilat").
+if (prop.data.features && prop.data.features.length > 0) {
+  realEstateListing.amenityFeature = prop.data.features.map(f => ({
+    "@type": "LocationFeatureSpecification",
+    "name": f
+  }));
+}
+// additionalProperty pentru câmpuri RO-specifice care nu au mapping direct în Schema.org
+const additionalProps: any[] = [];
+if (prop.data.energyClass) additionalProps.push({ "@type": "PropertyValue", "name": "Clasă energetică", "value": prop.data.energyClass });
+if (prop.data.compartimentare) additionalProps.push({ "@type": "PropertyValue", "name": "Compartimentare", "value": prop.data.compartimentare });
+if (prop.data.heatingType) additionalProps.push({ "@type": "PropertyValue", "name": "Tip încălzire", "value": prop.data.heatingType });
+if (prop.data.parking) additionalProps.push({ "@type": "PropertyValue", "name": "Parcare", "value": prop.data.parking });
+if (prop.data.orientation) additionalProps.push({ "@type": "PropertyValue", "name": "Orientare", "value": prop.data.orientation });
+if (prop.data.condition) additionalProps.push({ "@type": "PropertyValue", "name": "Stare", "value": prop.data.condition });
+if (prop.data.intabulat === true) additionalProps.push({ "@type": "PropertyValue", "name": "Intabulat", "value": "Da" });
+if (prop.data.floor) additionalProps.push({ "@type": "PropertyValue", "name": "Etaj", "value": prop.data.floor });
+if (prop.data.balconies) additionalProps.push({ "@type": "PropertyValue", "name": "Balcoane", "value": prop.data.balconies });
+if (additionalProps.length > 0) realEstateListing.additionalProperty = additionalProps;
 
 const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)}`;
 
@@ -429,7 +468,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                         <h3 id="similar-heading" class="section-heading">Proprietăți similare</h3>
                         <div class="contact-sheet similar-grid">
                             {similar.map(s => {
-                                const sImg = s.data.featuredImage || (s.data.propertyType === 'Apartament' ? '/images/apartament.webp' : s.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+                                const sImg = s.data.featuredImage || pickFallbackImage(s.data.propertyType);
                                 const sMeta: string[] = [];
                                 if (s.data.rooms) sMeta.push(`${s.data.rooms} cam`);
                                 if (s.data.bathrooms) sMeta.push(`${s.data.bathrooms} ${s.data.bathrooms === 1 ? 'baie' : 'băi'}`);
@@ -525,6 +564,72 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                             <div>
                                 <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">An</h4>
                                 <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.yearBuilt}</span>
+                            </div>
+                        )}
+                        {prop.data.floorsTotal && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Etaje total</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.floorsTotal}</span>
+                            </div>
+                        )}
+                        {prop.data.compartimentare && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Compartimentare</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.compartimentare}</span>
+                            </div>
+                        )}
+                        {prop.data.energyClass && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Clasă energetică</h4>
+                                <span class={`energy-badge energy-${prop.data.energyClass.replace(/[^A-G]/g, '') || 'pending'}`} style="font-family: var(--font-body); font-weight: 600;">{prop.data.energyClass}</span>
+                            </div>
+                        )}
+                        {prop.data.heatingType && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Încălzire</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.heatingType}</span>
+                            </div>
+                        )}
+                        {prop.data.parking && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Parcare</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.parking}</span>
+                            </div>
+                        )}
+                        {prop.data.orientation && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Orientare</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.orientation}</span>
+                            </div>
+                        )}
+                        {prop.data.condition && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Stare</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.condition}</span>
+                            </div>
+                        )}
+                        {prop.data.balconies && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Balcoane</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.balconies}{prop.data.balconySurface ? ` (${prop.data.balconySurface} mp)` : ''}</span>
+                            </div>
+                        )}
+                        {prop.data.intabulat === true && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Cadastru</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500; color: var(--accent-green);">✓ Intabulat</span>
+                            </div>
+                        )}
+                        {prop.data.buildingType && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Tip clădire</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.buildingType}</span>
+                            </div>
+                        )}
+                        {prop.data.availableFrom && (
+                            <div>
+                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Disponibil din</h4>
+                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.availableFrom}</span>
                             </div>
                         )}
                     </div>
@@ -786,6 +891,110 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
         #pswp-gallery a img { display: block; width: 100%; height: auto; }
         .pswp { --pswp-bg: #1a1a1a; }
         .pswp__counter { font-family: var(--font-accent); }
+
+        /* Sticky CTA bar — only on mobile/small screens, conversion-lift pattern (2025 best practice). */
+        .sticky-cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: none;
+            grid-template-columns: 1fr auto;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom, 0)) 0.75rem;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-top: 1px solid var(--border-light, #e5e5e5);
+            box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+            z-index: 50;
+            align-items: center;
+        }
+        @media (max-width: 900px) {
+            .sticky-cta-bar { display: grid; }
+            .container.property-detail { padding-bottom: 5rem !important; }
+        }
+        .sticky-cta-bar .sticky-price {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+            min-width: 0;
+        }
+        .sticky-cta-bar .sticky-price strong {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sticky-cta-bar .sticky-price small {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 60vw;
+        }
+        .sticky-cta-bar .sticky-actions {
+            display: flex;
+            gap: 0.375rem;
+        }
+        .sticky-cta-bar .sticky-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+        .sticky-cta-bar .sticky-actions .cta-call { background: var(--accent, #5f7a4e); color: #fff; }
+        .sticky-cta-bar .sticky-actions .cta-wa { background: #25D366; color: #fff; }
+        .sticky-cta-bar .sticky-actions .cta-msg { background: var(--surface-secondary, #f3f1ec); color: var(--text-primary); border: 1px solid var(--border-light, #e5e5e5); }
+
+        /* Energy class badges — color-coded per UE standard */
+        .energy-badge {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.875rem;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .energy-A { background: #009933; }
+        .energy-B { background: #4caf50; }
+        .energy-C { background: #cddc39; color: #2b2b2b; }
+        .energy-D { background: #ffeb3b; color: #2b2b2b; }
+        .energy-E { background: #ffc107; color: #2b2b2b; }
+        .energy-F { background: #ff9800; }
+        .energy-G { background: #f44336; }
+        .energy-pending { background: var(--surface-secondary, #f3f1ec); color: var(--text-secondary); border: 1px dashed #999; }
     </style>
+
+    {!isFaded && (
+        <div class="sticky-cta-bar" role="region" aria-label="Acțiuni rapide pentru această proprietate">
+            <div class="sticky-price">
+                <strong>{formatPrice(prop.data.price, prop.data.currency)}</strong>
+                <small>{prop.data.title}</small>
+            </div>
+            <div class="sticky-actions">
+                <a class="cta-call" href={`tel:${contactPhone}`} aria-label="Sună agentul">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                </a>
+                <a class="cta-wa" href={`https://wa.me/40${contactPhone.substring(1)}?text=${encodeURIComponent(whatsappMsg)}`} target="_blank" rel="noopener" aria-label="Mesaj WhatsApp">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a class="cta-msg" href={contactHref} aria-label="Programează vizionare">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </a>
+            </div>
+        </div>
+    )}
 
 </Layout>

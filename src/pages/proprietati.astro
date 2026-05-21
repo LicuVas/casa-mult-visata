@@ -298,6 +298,9 @@ const propsForMap = visibleProperties.map((p, index) => {
         const imageSrc = prop.data.featuredImage || pickFallbackImage(prop.data.propertyType);
         const region = isPN(prop.data.location) ? 'PN' : 'imprejurimi';
         const zoneAliases = prop.data.zone && ZONE_ALIASES[prop.data.zone] ? ZONE_ALIASES[prop.data.zone] : [];
+        // Energy class as searchable token: "clasa A" / "clasa energetica B".
+        const energyTokens = prop.data.energyClass ? [`clasa ${prop.data.energyClass}`, `clasa energetica ${prop.data.energyClass}`] : [];
+        const intabulatTokens = prop.data.intabulat === true ? ['intabulat', 'carte funciara', 'CF'] : [];
         const searchBlobRaw = [
           prop.data.title,
           prop.data.location,
@@ -306,8 +309,18 @@ const propsForMap = visibleProperties.map((p, index) => {
           prop.data.propertyType,
           prop.data.status,
           prop.data.listingStatus,
+          prop.data.compartimentare,
+          prop.data.heatingType,
+          prop.data.parking,
+          prop.data.condition,
+          prop.data.orientation,
+          prop.data.buildingType,
+          prop.data.structureType,
+          prop.data.confortClass,
           ...(prop.data.features || []),
           ...zoneAliases,
+          ...energyTokens,
+          ...intabulatTokens,
         ].filter(Boolean).join(' ').toLowerCase();
         // Normalize: strip diacritics + collapse punctuation to spaces so multi-word
         // search "centru piatra" matches stored "Centru, Piatra Neamț" (comma was breaking it).
@@ -403,7 +416,7 @@ const propsForMap = visibleProperties.map((p, index) => {
     </div>
   </div>
 
-  <script is:inline set:html={`window.__PROPS__ = ${JSON.stringify(propsForMap)};window.__ZONE_CENTROIDS__ = ${JSON.stringify(ZONE_CENTROIDS)};`}></script>
+  <script is:inline set:html={`window.__PROPS__ = ${JSON.stringify(propsForMap).replace(/<\/script>/gi, '<\\/script>')};window.__ZONE_CENTROIDS__ = ${JSON.stringify(ZONE_CENTROIDS).replace(/<\/script>/gi, '<\\/script>')};`}></script>
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
@@ -538,7 +551,12 @@ const propsForMap = visibleProperties.map((p, index) => {
       function passes(it, state) {
         if (state.q) {
           const blob = it.getAttribute('data-search') || '';
-          if (!blob.includes(state.q)) return false;
+          // AND-match per word: split on whitespace, every term must appear somewhere in blob.
+          // "centru piatra" → ["centru", "piatra"] → both must be present, in any order.
+          // Cap la 8 cuvinte ca să nu degenereze performant la paste de query lung.
+          const terms = state.q.split(/\s+/).filter(Boolean).slice(0, 8);
+          if (terms.length === 0) { /* whitespace-only q → no filter */ }
+          else if (!terms.every(t => blob.includes(t))) return false;
         }
         if (state.type !== 'all' && it.getAttribute('data-type') !== state.type) return false;
         if (state.status !== 'all' && it.getAttribute('data-status') !== state.status) return false;
