@@ -29,4 +29,4 @@ privateOwnerContact: ''
 privateNotes: ''
 ---
 
-Apartament cu 2 camere, 54 mp, semidecomandat, situat la etajul 3 din 4, în cartierul Mărăței din Piatra Neamț. Zonă verde, liniștită, aproape de școli și magazine. Preț accesibil. Merită văzut!
+Apartament cu 2 camere, 54 mp, semidecomandat, situat la etajul 3 din 4, în cartierul Mărăței din Piatra Neamț. Zonă verde, liniștită, aproape de școli și magazine. Preț accesibil.
