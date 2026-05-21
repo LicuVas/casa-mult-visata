@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import cartierCanon from '../../tools/cartier_canon.json';
 
 const allProperties = await getCollection('proprietati');
 
@@ -12,76 +13,103 @@ const formatPrice = (price: number, currency: string) => {
 // Region detection: Piatra Neamț (oraș) vs Împrejurimi (sate / comune)
 const isPN = (loc?: string): boolean => !!loc && /Piatra Neam/i.test(loc);
 
-// Canonical PN cartiere + outside-PN localități (from tools/cartier_canon.json)
-const pnZones = [
-  '1 Mai', 'Centru', 'Ciritei', 'Doamna', 'Dărmănești', 'Mărăței',
-  'Obor', 'Pietricica', 'Precista', 'Sărata', 'Speranța',
-  'Tei', 'Vânători', 'Văleni'
-].sort((a, b) => a.localeCompare(b, 'ro'));
-const impZones = [
-  'Bodești de Jos', 'Dobreni', 'Doina', 'Dumbrava Roșie',
-  'Gura Văii', 'Nisiporești'
-].sort((a, b) => a.localeCompare(b, 'ro'));
+// SSOT: derive pnZones, impZones, ZONE_CENTROIDS from tools/cartier_canon.json.
+// Adding a new neighborhood requires editing canon.json only — dropdown, centroids,
+// and map markers update automatically. Also unifies with `[slug].astro`.
+type CanonEntry = { name: string; coords: [number, number]; aliases?: string[] };
+const canonPN = (cartierCanon.cartiere as CanonEntry[]).map(c => c.name);
+const canonImp = (cartierCanon.outsidePN_localitati as CanonEntry[]).map(c => c.name);
 
-// Filter out Vândut/Retras by default — they're rendered into DOM with data-listing-status
-// so the JS can opt them back in via "includeArchived" if needed. To honor the requirement
-// strictly, we exclude them from the page entirely unless `?includeArchived=1`.
+// Aliases lookup: search "Gara Veche" finds Obor properties, "Centrul orașului" finds Centru.
+const ZONE_ALIASES: Record<string, string[]> = Object.fromEntries(
+  (cartierCanon.cartiere as CanonEntry[])
+    .filter(c => Array.isArray(c.aliases) && c.aliases.length > 0)
+    .map(c => [c.name, c.aliases as string[]])
+);
+
+// Defense in depth: include any zone strings that appear in actual property data but
+// aren't in canon (e.g. hand-edit slipping a new zone before canon.json catches up).
+// Without this, such properties would be invisible to the zone filter dropdown.
+const dataZones = Array.from(new Set(
+  allProperties.map(p => p.data.zone).filter((z): z is string => typeof z === 'string' && z.trim().length > 0)
+));
+const orphanZones = dataZones.filter(z => !canonPN.includes(z) && !canonImp.includes(z));
+// Orphans are classified by region of their FIRST property using that zone.
+const orphanPN: string[] = [];
+const orphanImp: string[] = [];
+for (const z of orphanZones) {
+  const sample = allProperties.find(p => p.data.zone === z);
+  const region = sample && /Piatra Neam/i.test(sample.data.location) ? 'PN' : 'imprejurimi';
+  if (region === 'PN') orphanPN.push(z); else orphanImp.push(z);
+}
+
+const pnZones = [...canonPN, ...orphanPN].sort((a, b) => a.localeCompare(b, 'ro'));
+const impZones = [...canonImp, ...orphanImp].sort((a, b) => a.localeCompare(b, 'ro'));
+
+// All properties are rendered into the DOM so the "Include vândute/retrase" checkbox
+// can opt them back in client-side. Vândut/Retras articles get inline `display:none`
+// at render time (see `initialHidden` below) — that prevents FOUC without removing
+// them from DOM. SEO: detail pages of Vândut/Retras carry `noIndex` meta.
 const visibleProperties = allProperties;
 
-const totalCount = visibleProperties.filter(p => {
+const activeCount = allProperties.filter(p => {
   const ls = p.data.listingStatus || 'Activ';
   return ls !== 'Vândut' && ls !== 'Retras';
 }).length;
+const totalCount = activeCount;
+const totalAll = allProperties.length;
 
-// Centroid lookup for known zones — kept server-side too in case we ever want SSR markers.
-const ZONE_CENTROIDS: Record<string, [number, number]> = {
-  // Cartiere PN (canonical v3 — Primăria nomenclator + ChatGPT cross-check)
-  'Centru': [46.9276, 26.3714],
-  'Precista': [46.9299, 26.3638],
-  'Mărăței': [46.9214, 26.3834],
-  'Dărmănești': [46.9224, 26.3868],
-  '1 Mai': [46.9216, 26.3806],
-  'Tei': [46.9412, 26.3961],
-  'Ciritei': [46.9320, 26.4088],
-  'Văleni': [46.9040, 26.3460],
-  'Speranța': [46.9455, 26.3700],
-  'Sărata': [46.9354, 26.3535],
-  'Doamna': [46.9510, 26.3690],
-  'Pietricica': [46.9172, 26.3684],
-  'Vânători': [46.9150, 26.3870],
-  'Obor': [46.9260, 26.3790],
-  // Localități împrejurimi
-  'Dumbrava Roșie': [46.8832, 26.4383],
-  'Doina': [46.9186, 26.5104],
-  'Gura Văii': [46.9569, 26.4503],
-  'Bodești de Jos': [47.0275, 26.4448],
-  'Nisiporești': [47.0772, 26.7379],
-  'Dobreni': [46.9918, 26.4228]
-};
+// Bbox guard: reject coords outside Romania (~43-48 lat, ~20-30 lng) — catches [0,0],
+// Sveltia map default if user never dragged it (PN city-hall pin would mislead users),
+// and lat/lng swaps.
+const RO_LAT = [43.5, 48.5] as const;
+const RO_LNG = [20.0, 30.0] as const;
+function inRomania(lat: number, lng: number): boolean {
+  return lat >= RO_LAT[0] && lat <= RO_LAT[1] && lng >= RO_LNG[0] && lng <= RO_LNG[1];
+}
+
+// Centroid lookup for known zones — built from canon SSOT.
+const ZONE_CENTROIDS: Record<string, [number, number]> = Object.fromEntries(
+  [...(cartierCanon.cartiere as CanonEntry[]), ...(cartierCanon.outsidePN_localitati as CanonEntry[])]
+    .map(c => [c.name, c.coords] as [string, [number, number]])
+);
 
 // Serializable property data for the map script.
 // Privacy: always prefer cartier centroid over exact coords (agent doesn't expose exact addresses).
 function normalizeCoords(raw: unknown): [number, number] | null {
+  let lat: number | null = null;
+  let lng: number | null = null;
   if (Array.isArray(raw) && raw.length === 2 && typeof raw[0] === 'number' && typeof raw[1] === 'number') {
-    return [raw[0], raw[1]];
-  }
-  if (typeof raw === 'string' && raw.trim().length > 0) {
+    lat = raw[0]; lng = raw[1];
+  } else if (typeof raw === 'string' && raw.trim().length > 0) {
     try {
       const g = JSON.parse(raw);
       if (g && g.type === 'Point' && Array.isArray(g.coordinates) && g.coordinates.length === 2) {
-        const lng = Number(g.coordinates[0]);
-        const lat = Number(g.coordinates[1]);
-        if (Number.isFinite(lat) && Number.isFinite(lng)) return [lat, lng];
+        lng = Number(g.coordinates[0]);
+        lat = Number(g.coordinates[1]);
       }
     } catch { /* not JSON */ }
   }
-  return null;
+  if (lat === null || lng === null || !Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  if (!inRomania(lat, lng)) return null;
+  // Reject Sveltia map default = PN city center (user never dragged the marker).
+  // 5m radius = ~0.00005 deg — anything closer is treated as "no exact coords".
+  if (Math.abs(lat - 46.929) < 0.00005 && Math.abs(lng - 26.371) < 0.00005) return null;
+  return [lat, lng];
+}
+
+// Image fallback by property type — includes Spațiu Comercial (was falling through to /images/teren.webp).
+function pickFallbackImage(propertyType: string): string {
+  if (propertyType === 'Apartament') return '/images/apartament.webp';
+  if (propertyType === 'Casă') return '/images/casa.webp';
+  if (propertyType === 'Spațiu Comercial') return '/images/spatiu-comercial.webp';
+  return '/images/teren.webp';
 }
 
 const propsForMap = visibleProperties.map((p, index) => {
   const coords = normalizeCoords(p.data.coords);
   const zoneCentroid = p.data.zone && ZONE_CENTROIDS[p.data.zone] ? ZONE_CENTROIDS[p.data.zone] : null;
-  const imageSrc = p.data.featuredImage || (p.data.propertyType === 'Apartament' ? '/images/apartament.webp' : p.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+  const imageSrc = p.data.featuredImage || pickFallbackImage(p.data.propertyType);
   return {
     id: p.id,
     index,
@@ -172,6 +200,7 @@ const propsForMap = visibleProperties.map((p, index) => {
           <option value="price-asc">Preț crescător</option>
           <option value="price-desc">Preț descrescător</option>
           <option value="surface-desc">Suprafață ↓</option>
+          <option value="surface-asc">Suprafață ↑</option>
           <option value="ppsqm-asc">€/mp ↑</option>
           <option value="exclusive-first">Exclusivități primele</option>
         </select>
@@ -255,8 +284,8 @@ const propsForMap = visibleProperties.map((p, index) => {
       <button type="button" class="filter-reset" id="filter-reset">Resetează filtrele</button>
     </div>
 
-    <div class="results-info">
-      <span>Se afișează <strong id="results-count">{totalCount}</strong> din <strong>{totalCount}</strong> proprietăți</span>
+    <div class="results-info" data-total-active={totalCount} data-total-all={totalAll}>
+      <span>Se afișează <strong id="results-count">{totalCount}</strong> din <strong id="results-total">{totalCount}</strong> proprietăți</span>
     </div>
 
     <!-- Active filter chips strip -->
@@ -265,9 +294,10 @@ const propsForMap = visibleProperties.map((p, index) => {
     <hr class="rule">
 
     <div class="contact-sheet" style="margin-top:2rem;" id="properties-grid">
-      {allProperties.map((prop, index) => {
-        const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.webp' : prop.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+      {visibleProperties.map((prop, index) => {
+        const imageSrc = prop.data.featuredImage || pickFallbackImage(prop.data.propertyType);
         const region = isPN(prop.data.location) ? 'PN' : 'imprejurimi';
+        const zoneAliases = prop.data.zone && ZONE_ALIASES[prop.data.zone] ? ZONE_ALIASES[prop.data.zone] : [];
         const searchBlobRaw = [
           prop.data.title,
           prop.data.location,
@@ -275,10 +305,20 @@ const propsForMap = visibleProperties.map((p, index) => {
           prop.data.street,
           prop.data.propertyType,
           prop.data.status,
+          prop.data.listingStatus,
           ...(prop.data.features || []),
+          ...zoneAliases,
         ].filter(Boolean).join(' ').toLowerCase();
-        // Strip diacritics so user search "darmanesti" matches "Dărmănești" etc.
-        const searchBlob = searchBlobRaw.normalize('NFD').replace(/[̀-ͯ]/g, '');
+        // Normalize: strip diacritics + collapse punctuation to spaces so multi-word
+        // search "centru piatra" matches stored "Centru, Piatra Neamț" (comma was breaking it).
+        const searchBlob = searchBlobRaw
+          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/[,.;:()\[\]{}!?"„"'']/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        // Server-side hide Vândut/Retras (no FOUC) — JS will show them when archivedChk is on.
+        const initialHidden = prop.data.listingStatus === 'Vândut' || prop.data.listingStatus === 'Retras';
 
         const metaDetails: string[] = [];
         if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} ${prop.data.rooms === 1 ? 'cam' : 'cam'}`);
@@ -291,8 +331,10 @@ const propsForMap = visibleProperties.map((p, index) => {
         }
         if (prop.data.floor) metaDetails.push(`Et. ${prop.data.floor}`);
 
-        // Suprafață folosită pt filtru: surface (construit) sau landSurface (teren)
-        const surfaceForFilter = prop.data.surface ?? prop.data.landSurface ?? 0;
+        // Suprafață folosită pt filtru: surface (construit) sau landSurface (teren).
+        // Empty string = "necunoscut" → exclus din filtru min/max (vs `0` care făcea property fără surface
+        // să apară fals-pozitiv în "≤200 mp").
+        const surfaceForFilter = prop.data.surface ?? prop.data.landSurface ?? '';
         const roomsForFilter = prop.data.rooms ?? 0;
 
         return (
@@ -312,6 +354,7 @@ const propsForMap = visibleProperties.map((p, index) => {
             data-region={region}
             data-search={searchBlob}
             data-index={index}
+            style={initialHidden ? 'display:none' : undefined}
           >
             <div class="cs-media">
               <span class="cs-status-tag">De {prop.data.status.toLowerCase()}</span>
@@ -360,33 +403,14 @@ const propsForMap = visibleProperties.map((p, index) => {
     </div>
   </div>
 
-  <script is:inline set:html={`window.__PROPS__ = ${JSON.stringify(propsForMap)};`}></script>
+  <script is:inline set:html={`window.__PROPS__ = ${JSON.stringify(propsForMap)};window.__ZONE_CENTROIDS__ = ${JSON.stringify(ZONE_CENTROIDS)};`}></script>
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       // ---- Map / view-toggle state ----
-      const ZONE_CENTROIDS = {
-        'Centru': [46.9276, 26.3714],
-        'Precista': [46.9299, 26.3638],
-        'Mărăței': [46.9214, 26.3834],
-        'Dărmănești': [46.9224, 26.3868],
-        '1 Mai': [46.9216, 26.3806],
-        'Tei': [46.9412, 26.3961],
-        'Ciritei': [46.9320, 26.4088],
-        'Văleni': [46.9040, 26.3460],
-        'Speranța': [46.9455, 26.3700],
-        'Sărata': [46.9354, 26.3535],
-        'Doamna': [46.9510, 26.3690],
-        'Pietricica': [46.9172, 26.3684],
-        'Vânători': [46.9150, 26.3870],
-        'Obor': [46.9260, 26.3790],
-        'Dumbrava Roșie': [46.8832, 26.4383],
-        'Doina': [46.9186, 26.5104],
-        'Gura Văii': [46.9569, 26.4503],
-        'Bodești de Jos': [47.0275, 26.4448],
-        'Nisiporești': [47.0772, 26.7379],
-        'Dobreni': [46.9918, 26.4228]
-      };
+      // SSOT: ZONE_CENTROIDS is derived from cartier_canon.json server-side and injected
+      // via __ZONE_CENTROIDS__. No more hand-maintained duplicate here.
+      const ZONE_CENTROIDS = window.__ZONE_CENTROIDS__ || {};
       const grid           = document.getElementById('properties-grid');
       const emptyState     = document.getElementById('empty-state');
       const emptySuggestions = document.getElementById('empty-suggestions');
@@ -488,8 +512,14 @@ const propsForMap = visibleProperties.map((p, index) => {
 
       // Read current filter state into a plain object.
       function readState() {
+        // Same normalization as data-search blob: NFD diacritic strip + punctuation→space collapse.
+        const qNorm = (searchInp.value || '').trim().toLowerCase()
+          .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/[,.;:()\[\]{}!?"„"'']/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
         return {
-          q:      (searchInp.value || '').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''),
+          q:      qNorm,
           type:   typeSel.value,
           status: statusSel.value,
           zone:   zoneSel.value,
@@ -518,7 +548,10 @@ const propsForMap = visibleProperties.map((p, index) => {
             const want = state.zone.slice('region:'.length);
             if ((it.getAttribute('data-region') || '') !== want) return false;
           } else {
-            const normZ = (s) => (s || '').trim().normalize('NFC').toLowerCase();
+            // NFD + strip combining marks: unifies legacy `ţ` (U+0163) cu modern `ț` (U+021B),
+            // și e consistent cu data-search blob (line 281) și state.q (line 492).
+            const normZ = (s) => (s || '').trim().toLowerCase()
+              .normalize('NFD').replace(/[̀-ͯ]/g, '');
             const itemZ = normZ(it.getAttribute('data-zone'));
             const stateZ = normZ(state.zone);
             // Prefix-match so "Bodești" matches "Bodești de Jos", "Dărmănești" matches "Dărmănești (Aleea Ulmilor)" etc.
@@ -533,11 +566,14 @@ const propsForMap = visibleProperties.map((p, index) => {
         }
 
         const dPrice   = parseFloat(it.getAttribute('data-price') || '0');
-        const dSurface = parseFloat(it.getAttribute('data-surface') || '0');
+        const dSurfaceRaw = it.getAttribute('data-surface') || '';
+        const dSurface = parseFloat(dSurfaceRaw);
+        const surfaceKnown = !isNaN(dSurface) && dSurface > 0;
         if (state.pMin !== null && dPrice   < state.pMin) return false;
         if (state.pMax !== null && dPrice   > state.pMax) return false;
-        if (state.sMin !== null && dSurface < state.sMin) return false;
-        if (state.sMax !== null && dSurface > state.sMax) return false;
+        // Suprafață necunoscută → exclus din ORICE filtru de suprafață (evită fals-pozitiv în "≤X mp").
+        if (state.sMin !== null && (!surfaceKnown || dSurface < state.sMin)) return false;
+        if (state.sMax !== null && (!surfaceKnown || dSurface > state.sMax)) return false;
 
         if (state.onlyCom  && it.getAttribute('data-comision')  !== '1') return false;
         if (state.onlyExcl && it.getAttribute('data-exclusive') !== '1') return false;
@@ -682,6 +718,14 @@ const propsForMap = visibleProperties.map((p, index) => {
 
         // Counter + empty state
         resultsCount.textContent = visible.length;
+        // Denominator: total proprietăți activă (default) sau toate (cu Vândut/Retras) când e bifat.
+        const totalEl = document.getElementById('results-total');
+        const infoEl = document.querySelector('.results-info');
+        if (totalEl && infoEl) {
+          const totalActive = parseInt(infoEl.getAttribute('data-total-active') || '0', 10);
+          const totalAll = parseInt(infoEl.getAttribute('data-total-all') || '0', 10);
+          totalEl.textContent = state.includeArchived ? totalAll : totalActive;
+        }
         if (visible.length === 0) {
           grid.style.display = 'none';
           emptyState.style.display = '';
@@ -706,6 +750,8 @@ const propsForMap = visibleProperties.map((p, index) => {
       function updateActiveCount() {
         let n = 0;
         if (searchInp && searchInp.value.trim()) n++;
+        if (typeSel    && typeSel.value    !== 'all') n++;
+        if (statusSel  && statusSel.value  !== 'all') n++;
         if (zoneSel    && zoneSel.value    !== 'all') n++;
         if (roomsSel   && roomsSel.value   !== 'all') n++;
         if (priceMinInp && priceMinInp.value.trim()) n++;
@@ -714,6 +760,7 @@ const propsForMap = visibleProperties.map((p, index) => {
         if (surfMaxInp  && surfMaxInp.value.trim())  n++;
         if (comisionChk  && comisionChk.checked)  n++;
         if (exclusiveChk && exclusiveChk.checked) n++;
+        if (archivedChk  && archivedChk.checked)  n++;
         if (!activeCount) return;
         if (n > 0) {
           activeCount.textContent = n + ' active';
