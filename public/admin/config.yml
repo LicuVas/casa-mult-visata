@@ -122,7 +122,7 @@ collections:
         required: false
         options: ["Decomandat", "Semidecomandat", "Nedecomandat", "Circular", "Open-space"]
         hint: "Pentru apartamente. Cel mai folosit filtru pe Storia/Imobiliare."
-      - {label: "Etaj total al clădirii", name: "floorsTotal", widget: "number", value_type: "int", required: false, hint: "Ex: 4 (dacă „Etaj" este „3/4")."}
+      - {label: "Etaj total al clădirii", name: "floorsTotal", widget: "number", value_type: "int", required: false, hint: 'Ex: 4 (dacă „Etaj" este „3/4").'}
       - label: "Tip încălzire"
         name: "heatingType"
         widget: "select"
