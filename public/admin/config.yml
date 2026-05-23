@@ -84,7 +84,9 @@ collections:
         required: false
         type: "Point"
         decimals: 6
-        # Default: centrul Piatra Neamț (lng,lat în format GeoJSON)
+        # Centrul camerei pentru intrări noi (lng, lat) — Piatra Neamț centru
+        center: [26.371, 46.929]
+        zoom: 13
         default: '{"type":"Point","coordinates":[26.371,46.929]}'
         hint: "Trage markerul roșu pe locația exactă a proprietății. Implicit: centrul Piatra Neamț."
 

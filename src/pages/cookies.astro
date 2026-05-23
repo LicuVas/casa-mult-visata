@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+const lastUpdated = "23 mai 2026";
+---
+
+<Layout
+	title="Politica de Cookies | Casa Mult Visată"
+	description="Ce cookie-uri folosește acest site, în ce scop și cum îți poți gestiona consimțământul."
+	canonicalPath="/cookies/"
+>
+	<section style="padding: var(--section-padding);">
+		<div class="container" style="max-width:880px;">
+			<div class="page-header reveal">
+				<p class="label">Document legal</p>
+				<h1>Politica de Cookies</h1>
+				<p class="intro">Această politică descrie modul în care site-ul casa-mult-visata.netlify.app folosește cookie-uri și tehnologii similare, în conformitate cu Directiva ePrivacy (transpusă în Legea 506/2004) și GDPR.</p>
+				<p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.5rem;">Ultima actualizare: {lastUpdated}</p>
+			</div>
+
+			<article class="body-text reveal" style="margin-top:2rem;">
+
+				<h2>1. Ce sunt cookie-urile</h2>
+				<p>Cookie-urile sunt fișiere mici de text pe care un site le salvează în browser-ul tău pentru a-ți recunoaște dispozitivul la următoarea vizită. Pot fi temporare (cookie de sesiune) sau permanente (cookie persistent). Pe lângă cookie-uri, tehnologii similare includ <code>localStorage</code> și <code>sessionStorage</code> — pe care le tratăm la fel.</p>
+
+				<h2>2. Ce folosim noi</h2>
+
+				<h3>2.1. Strict necesare (fără consimțământ)</h3>
+				<p>Aceste tehnologii sunt indispensabile pentru funcționarea site-ului. Conform Art. 5(3) ePrivacy nu necesită consimțământ:</p>
+				<table style="width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.95rem;">
+					<thead>
+						<tr style="border-bottom:2px solid var(--rule-color);">
+							<th style="text-align:left; padding:0.5rem;">Nume</th>
+							<th style="text-align:left; padding:0.5rem;">Scop</th>
+							<th style="text-align:left; padding:0.5rem;">Durată</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="border-bottom:1px solid var(--rule-color);">
+							<td style="padding:0.5rem;"><code>cmv_consent</code></td>
+							<td style="padding:0.5rem;">Reține alegerea ta în bannerul de cookies (acceptat / refuzat)</td>
+							<td style="padding:0.5rem;">12 luni</td>
+						</tr>
+						<tr style="border-bottom:1px solid var(--rule-color);">
+							<td style="padding:0.5rem;"><code>cmv_favorites</code> (localStorage)</td>
+							<td style="padding:0.5rem;">Salvează proprietățile pe care le adaugi la favorite</td>
+							<td style="padding:0.5rem;">Până le ștergi tu</td>
+						</tr>
+						<tr>
+							<td style="padding:0.5rem;">Cookie-uri Netlify pentru formular</td>
+							<td style="padding:0.5rem;">Anti-spam, sesiunea formularului</td>
+							<td style="padding:0.5rem;">Sesiune</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3>2.2. Terțe părți (necesită consimțământ explicit)</h3>
+				<p>Site-ul include hartă Google Maps pe pagina de contact. <strong>Harta nu se încarcă automat</strong>. Apare un placeholder cu un buton — doar dacă apeși „Afișează harta”, browser-ul tău contactează serverele Google, care pot seta cookie-uri proprii.</p>
+				<table style="width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.95rem;">
+					<thead>
+						<tr style="border-bottom:2px solid var(--rule-color);">
+							<th style="text-align:left; padding:0.5rem;">Furnizor</th>
+							<th style="text-align:left; padding:0.5rem;">Scop</th>
+							<th style="text-align:left; padding:0.5rem;">Politică</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="padding:0.5rem;">Google LLC (Google Maps)</td>
+							<td style="padding:0.5rem;">Afișare hartă, prevenire abuz, măsurători tehnice</td>
+							<td style="padding:0.5rem;"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">policies.google.com</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3>2.3. Ce NU folosim</h3>
+				<ul>
+					<li>Fără Google Analytics, Meta Pixel, TikTok Pixel sau alte instrumente de analitică.</li>
+					<li>Fără reclame, retargeting sau publicitate comportamentală.</li>
+					<li>Fără cookie-uri „social media” care urmăresc activitatea în afara site-ului.</li>
+				</ul>
+
+				<h2>3. Cum îți retragi consimțământul</h2>
+				<p>Poți reseta alegerea în orice moment apăsând butonul de mai jos. Bannerul va apărea din nou la următoarea pagină.</p>
+				<p><button type="button" id="reset-consent" class="btn-primary" style="cursor:pointer;">Resetează alegerea privind cookies</button></p>
+				<p>Alternativ, poți șterge cookie-urile direct din setările browser-ului tău (Chrome, Firefox, Safari, Edge — căutați „șterge cookie-uri”).</p>
+
+				<h2>4. Drepturile tale</h2>
+				<p>Pentru drepturile tale conform GDPR (acces, ștergere, opoziție, plângere la ANSPDCP) consultă <a href="/confidentialitate/">Politica de Confidențialitate</a>.</p>
+
+				<h2>5. Modificări</h2>
+				<p>Dacă adăugăm vreodată instrumente de analitică sau publicitate, vom actualiza această politică și vom relansa banner-ul de consimțământ.</p>
+
+				<p style="margin-top:2rem; padding:1rem; background:var(--surface-secondary); border-left:3px solid var(--accent-green);">Vezi și: <a href="/confidentialitate/">Politica de Confidențialitate</a> · <a href="/termeni/">Termeni și Condiții</a></p>
+
+			</article>
+		</div>
+	</section>
+
+	<script is:inline>
+		document.addEventListener('DOMContentLoaded', function () {
+			var btn = document.getElementById('reset-consent');
+			if (!btn) return;
+			btn.addEventListener('click', function () {
+				try {
+					document.cookie = 'cmv_consent=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+					localStorage.removeItem('cmv_consent');
+				} catch (e) {}
+				btn.textContent = 'Alegere resetată. Reîncarcă pagina.';
+				btn.disabled = true;
+			});
+		});
+	</script>
+</Layout>

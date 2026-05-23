@@ -59,6 +59,13 @@ import Layout from '../layouts/Layout.astro';
 							<label for="message">Mesaj</label>
 							<textarea id="message" name="message" required aria-required="true" minlength="10" autocomplete="off" enterkeyhint="send" placeholder="Descrie pe scurt ce cauți..."></textarea>
 						</div>
+						<div class="cmv-gdpr">
+							<input type="checkbox" id="gdpr-consent" name="gdpr-consent" required aria-required="true" value="da">
+							<label for="gdpr-consent">
+								Sunt de acord ca datele mele să fie folosite pentru a primi un răspuns. Am citit
+								<a href="/confidentialitate/" target="_blank" rel="noopener">Politica de Confidențialitate</a>.
+							</label>
+						</div>
 						<button type="submit" id="submit-btn" class="btn-primary" style="width:100%; text-align:center;">Trimite Mesaj</button>
 					</form>
 				</div>
@@ -105,15 +112,15 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 
 					<div style="margin-top:2rem;">
-						<iframe
-							src="https://www.google.com/maps?q=Piatra+Neamț,+Județul+Neamț,+România&output=embed"
-							title="Piatra Neamț"
-							width="100%"
-							height="300"
-							style="border:0; display:block;"
-							loading="lazy"
-							referrerpolicy="no-referrer-when-downgrade"
-						></iframe>
+						<div class="cmv-map-placeholder" id="map-placeholder" data-map-loaded="false">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+								<circle cx="12" cy="10" r="3"/>
+							</svg>
+							<p>Harta este oferită de Google Maps și poate seta cookie-uri. Apasă butonul pentru a o încărca.</p>
+							<button type="button" id="load-map-btn" class="btn-primary">Afișează harta</button>
+							<p style="font-size:0.8rem;"><a href="/cookies/">Politica de Cookies</a></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -209,6 +216,49 @@ import Layout from '../layouts/Layout.astro';
 					submitBtn.textContent = 'Se trimite...';
 				});
 			}
+
+			// GDPR checkbox validation message
+			var gdpr = document.getElementById('gdpr-consent');
+			if (gdpr) {
+				gdpr.addEventListener('invalid', function () {
+					gdpr.setCustomValidity('Te rog confirmă că ești de acord cu Politica de Confidențialitate.');
+				});
+				gdpr.addEventListener('change', function () { gdpr.setCustomValidity(''); });
+			}
+
+			// Click-to-load Google Maps (GDPR — no third-party request before user consent)
+			var mapBtn = document.getElementById('load-map-btn');
+			var mapHolder = document.getElementById('map-placeholder');
+			function loadMap() {
+				if (!mapHolder || mapHolder.dataset.mapLoaded === 'true') return;
+				var iframe = document.createElement('iframe');
+				iframe.src = 'https://www.google.com/maps?q=Piatra+Neam%C8%9B,+Jude%C8%9Bul+Neam%C8%9B,+Rom%C3%A2nia&output=embed';
+				iframe.title = 'Piatra Neamț pe Google Maps';
+				iframe.width = '100%';
+				iframe.height = '300';
+				iframe.style.border = '0';
+				iframe.style.display = 'block';
+				iframe.loading = 'lazy';
+				iframe.referrerPolicy = 'no-referrer-when-downgrade';
+				mapHolder.innerHTML = '';
+				mapHolder.appendChild(iframe);
+				mapHolder.style.padding = '0';
+				mapHolder.style.background = 'transparent';
+				mapHolder.style.border = '0';
+				mapHolder.dataset.mapLoaded = 'true';
+			}
+			if (mapBtn) mapBtn.addEventListener('click', loadMap);
+			// Auto-load if user previously accepted cookies (and on future consent events)
+			function autoLoadIfConsented() {
+				try {
+					var m = document.cookie.match(/(?:^|;\s*)cmv_consent=([^;]+)/);
+					if (m && decodeURIComponent(m[1]) === 'accepted') loadMap();
+				} catch (e) {}
+			}
+			autoLoadIfConsented();
+			window.addEventListener('cmv:consent', function (ev) {
+				if (ev && ev.detail && ev.detail.value === 'accepted') loadMap();
+			});
 		});
 	</script>
 

@@ -151,6 +151,9 @@ const jsonLd = {
 
 		<!-- Favorites (localStorage) -->
 		<script src="/scripts/favorites.js" defer></script>
+
+		<!-- Cookie consent banner (no third-party scripts before consent) -->
+		<script src="/scripts/cookie-banner.js" defer></script>
 	</head>
 	<body>
 		<a href="#main-content" class="skip-link">Salt la conținut</a>
@@ -221,10 +224,18 @@ const jsonLd = {
 							<li><a href="https://www.tiktok.com/@cozmavasile_si_ana_lory" target="_blank" rel="noopener">TikTok</a></li>
 						</ul>
 					</div>
+					<div>
+						<h4>Legal</h4>
+						<ul>
+							<li><a href="/confidentialitate/">Confidențialitate</a></li>
+							<li><a href="/cookies/">Cookies</a></li>
+							<li><a href="/termeni/">Termeni și Condiții</a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="footer-bottom">
 					<span>&copy; {new Date().getFullYear()} Casa Mult Visată — Cozma Vasile. Toate drepturile rezervate.</span>
-					<span>Piatra Neamț, România</span>
+					<span>Piatra Neamț, România · <a href="/confidentialitate/">Confidențialitate</a> · <a href="/cookies/">Cookies</a> · <a href="/termeni/">Termeni</a></span>
 				</div>
 			</div>
 		</footer>
