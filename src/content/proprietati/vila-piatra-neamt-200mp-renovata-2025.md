@@ -1,45 +1,69 @@
 ---
-title: "Vilă 200 mp + 400 mp teren, renovată complet 2025 — Piatra Neamț"
-status: "Vânzare"
-propertyType: "Casă"
+title: Vilă 200 mp + 400 mp teren, renovată complet 2025 — Piatra Neamț
+status: Vânzare
+propertyType: Casă
 price: 274000
-currency: "EUR"
-location: "Piatra Neamț"
-zone: "Centru"
+currency: EUR
+pricePerUnit: ''
+location: Piatra Neamț
+zone: 1 Mai
+street: ''
 rooms: 4
 bathrooms: 1
 surface: 200
 landSurface: 400
+floor: ''
 yearBuilt: 2025
 features:
-  - "Vilă P+E"
-  - "4 camere"
-  - "Bucătărie"
-  - "Baie"
-  - "Dresing"
-  - "Balcon"
-  - "Terasă"
-  - "Spațiu depozitare"
-  - "Curte pavată"
-  - "Beci"
-  - "Structură beton + cărămidă"
-  - "Acoperiș tabla Lindab"
-  - "Centrală termică"
-  - "Termopan"
-  - "Gresie"
-  - "Faianță"
-  - "Parchet laminat"
-  - "Canalizare oraș"
-  - "Renovată complet 2025"
+  - Vilă P+E
+  - 4 camere
+  - Bucătărie
+  - Baie
+  - Dresing
+  - Balcon
+  - Terasă
+  - Spațiu depozitare
+  - Curte pavată
+  - Beci
+  - Structură beton + cărămidă
+  - Acoperiș tabla Lindab
+  - Centrală termică
+  - Termopan
+  - Gresie
+  - Faianță
+  - Parchet laminat
+  - Canalizare oraș
+  - Renovată complet 2025
+exclusive: true
 comisionZero: true
-featuredImage: "/images/scraped/post004_0.webp"
+updatedAt: ''
+coords: 46.9276
+videoUrl: ''
+virtualTourUrl: ''
+featuredImage: /images/scraped/post004_0.webp
 gallery:
-  - "/images/scraped/post004_0.webp"
-  - "/images/scraped/post004_1.webp"
-  - "/images/scraped/post004_2.webp"
-  - "/images/scraped/post004_3.webp"
-  - "/images/scraped/post004_4.webp"
-coords: [46.9276, 26.3714]
+  - /images/scraped/post004_0.webp
+  - /images/scraped/post004_1.webp
+  - /images/scraped/post004_2.webp
+  - /images/scraped/post004_3.webp
+  - /images/scraped/post004_4.webp
+intabulat: true
+cadastralNumber: ''
+floorsTotal: 1
+heatingType: Centrală proprie pe gaz
+orientation: ''
+parking: Stradă
+balconies: null
+balconySurface: null
+condition: Renovat recent
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+buildingType: Casă
+structureType: Cărămidă
+confortClass: Confort 1
+privateOwnerContact: ''
+privateNotes: ''
 ---
 
 Vilă în suprafață utilă de 200 mp și teren aferent 400 mp, situată în Piatra Neamț. **Proprietatea este renovată complet în 2025.**
