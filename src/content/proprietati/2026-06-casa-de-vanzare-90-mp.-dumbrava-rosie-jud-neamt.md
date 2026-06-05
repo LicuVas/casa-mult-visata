@@ -14,7 +14,8 @@ surface: 80
 landSurface: 500
 floor: ''
 yearBuilt: 2026
-features: []
+features:
+  - Casa in suprafata de 90 mp. si teren aferent 500 mp. situata in localitatea Dumbrava Rosie, jud. Neamt.  Proprietatea va ofera spre folosinta 2 dormitoare,baie,bucatarie,living si terasa. Locatia se preda la cheie cu gresie,faianta,parchet,usi,obiecte sanitare (alese de catre client),tamplarie termopan 3 sticle,centrala pe gaz,incalzire in pardoseala,fosa septica,izolatie exterioara cu polestiren 10 cm,sau optional vata bazaltica si pod izolat cu vata de 15 cm. Pentru mai multe detalii contactatine telefonic.
 exclusive: true
 comisionZero: true
 listingStatus: Activ
