@@ -1,5 +1,49 @@
+# robots.txt — casamultvisata.ro
+# Politică: deschidem site-ul către motoarele clasice ȘI către AI (GEO).
+# Un business local vrea vizibilitate maximă în ChatGPT/Claude/Gemini/Perplexity,
+# deci permitem explicit crawlerele AI de căutare/citare ȘI cele de antrenare.
+
+# --- Motoare de căutare clasice + implicit pentru oricine ---
 User-agent: *
 Allow: /
 Disallow: /admin/
+
+# --- OpenAI (ChatGPT) ---
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+# --- Anthropic (Claude) ---
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# --- Perplexity ---
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# --- Google AI (Gemini / AI Overviews) ---
+User-agent: Google-Extended
+Allow: /
+
+# --- Apple Intelligence ---
+User-agent: Applebot-Extended
+Allow: /
+
+# --- Microsoft Copilot / Bing ---
+User-agent: bingbot
+Allow: /
 
 Sitemap: https://casamultvisata.ro/sitemap-index.xml
