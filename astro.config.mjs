@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://casa-mult-visata.netlify.app',
+  site: 'https://casamultvisata.ro',
   output: 'static',
   integrations: [
     sitemap({

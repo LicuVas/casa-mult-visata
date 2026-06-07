@@ -22,7 +22,7 @@ const {
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
-const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://casa-mult-visata.netlify.app";
+const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, "") : "https://casamultvisata.ro";
 const canonicalUrl = canonicalPath
 	? `${siteOrigin}${canonicalPath.startsWith("/") ? canonicalPath : "/" + canonicalPath}`
 	: `${siteOrigin}${currentPath}`;
@@ -35,6 +35,8 @@ const jsonLd = {
 			"@type": "RealEstateAgent",
 			"@id": `${siteOrigin}/#agent`,
 			"name": "Cozma Vasile",
+			"legalName": "COZMA I. VASILE P.F.A.",
+			"taxID": "50412580",
 			"brand": {
 				"@type": "Brand",
 				"name": "Casa Mult Visată"
@@ -230,11 +232,13 @@ const jsonLd = {
 							<li><a href="/confidentialitate/">Confidențialitate</a></li>
 							<li><a href="/cookies/">Cookies</a></li>
 							<li><a href="/termeni/">Termeni și Condiții</a></li>
+								<li><a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener noreferrer">ANPC – SAL</a></li>
+								<li><a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer">ANPC – SOL</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="footer-bottom">
-					<span>&copy; {new Date().getFullYear()} Casa Mult Visată — Cozma Vasile. Toate drepturile rezervate.</span>
+					<span>&copy; {new Date().getFullYear()} Casa Mult Visată — Cozma I. Vasile P.F.A. · CUI 50412580. Toate drepturile rezervate.</span>
 					<span>Piatra Neamț, România · <a href="/confidentialitate/">Confidențialitate</a> · <a href="/cookies/">Cookies</a> · <a href="/termeni/">Termeni</a></span>
 				</div>
 				<div class="footer-credit">

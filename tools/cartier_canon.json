@@ -22,7 +22,7 @@
     { "name": "Sărata",      "coords": [46.9354, 26.3535], "confidence": "înalt",  "aliases": [] },
     { "name": "Doamna",       "coords": [46.9510, 26.3690], "confidence": "mediu",  "aliases": [] },
     { "name": "Pietricica",   "coords": [46.9172, 26.3684], "confidence": "mediu",  "aliases": [] },
-    { "name": "Vânători",    "coords": [46.9150, 26.3870], "confidence": "mediu",  "aliases": [] },
+    { "name": "Vânători (Piatra Neamț)", "coords": [46.9150, 26.3870], "confidence": "mediu",  "aliases": ["Vânători"] },
     { "name": "Obor",         "coords": [46.9260, 26.3790], "confidence": "mediu",  "aliases": ["Gara Veche", "Obor / Gara Veche"] }
   ],
   "outsidePN_localitati": [

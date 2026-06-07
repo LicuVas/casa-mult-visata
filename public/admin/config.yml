@@ -6,8 +6,8 @@ backend:
 media_folder: "public/images"
 public_folder: "/images"
 
-site_url: https://casa-mult-visata.netlify.app
-display_url: https://casa-mult-visata.netlify.app
+site_url: https://casamultvisata.ro
+display_url: https://casamultvisata.ro
 
 locale: 'ro'
 
@@ -51,7 +51,7 @@ collections:
           - "Speranța"
           - "Tei"
           - "Văleni"
-          - "Vânători"
+          - "Vânători (Piatra Neamț)"
       - {label: "Stradă", name: "street", widget: "string", required: false, hint: "Numele străzii (ex. Strada Orhei, Aleea Ulmilor). Lasă gol dacă nu se aplică."}
       
       - {label: "Număr Camere", name: "rooms", widget: "number", value_type: "int", required: false}

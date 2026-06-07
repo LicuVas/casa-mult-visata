@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://casa-mult-visata.netlify.app/sitemap-index.xml
+Sitemap: https://casamultvisata.ro/sitemap-index.xml
