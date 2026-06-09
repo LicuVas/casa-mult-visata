@@ -1,26 +1,35 @@
 ---
-title: "Teren intravilan 635 mp — Dumbrava Roșie"
-status: "Vânzare"
-propertyType: "Teren"
+title: Teren intravilan 635 mp — Dumbrava Roșie
+status: Vânzare
+propertyType: Teren
 price: 16500
-currency: "EUR"
-location: "Dumbrava Roșie, jud. Neamț"
-zone: "Dumbrava Roșie"
+currency: EUR
+pricePerUnit: ''
+location: Dumbrava Roșie, jud. Neamț
+zone: Dumbrava Roșie
+street: ''
+rooms: null
+bathrooms: null
+surface: null
 landSurface: 635
+floor: ''
+yearBuilt: null
 features:
-  - "Deschidere 17,5 m"
-  - "Apă"
-  - "Curent electric"
-  - "Gaz metan la 50 m"
+  - Deschidere 17,5 m
+  - Apă
+  - Curent electric
+  - Gaz metan la 50 m
 comisionZero: true
-featuredImage: "/images/scraped/post009_0.webp"
+listingStatus: Activ
+updatedAt: ''
+coords: 46.8832
+featuredImage: /images/scraped/post009_0.webp
 gallery:
-  - "/images/scraped/post009_0.webp"
-  - "/images/scraped/post009_1.webp"
-  - "/images/scraped/post009_2.webp"
-  - "/images/scraped/post009_3.webp"
-  - "/images/scraped/post009_4.webp"
-coords: [46.8832, 26.4383]
+  - /images/scraped/post009_0.webp
+  - /images/scraped/post009_1.webp
+  - /images/scraped/post009_2.webp
+  - /images/scraped/post009_3.webp
+  - /images/scraped/post009_4.webp
 ---
 
 Teren intravilan în suprafață de 635 mp situat în Dumbrava Roșie, jud. Neamț.
