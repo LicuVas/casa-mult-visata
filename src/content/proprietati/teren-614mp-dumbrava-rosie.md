@@ -1,25 +1,45 @@
 ---
-title: "Teren intravilan 614 mp — Dumbrava Roșie"
-status: "Vânzare"
-propertyType: "Teren"
+title: Teren intravilan 614 mp — Dumbrava Roșie
+status: Vânzare
+propertyType: Teren
 price: 18500
-currency: "EUR"
-location: "Dumbrava Roșie, jud. Neamț"
-zone: "Dumbrava Roșie"
+currency: EUR
+pricePerUnit: ''
+location: Dumbrava Roșie, jud. Neamț
+zone: Dumbrava Roșie
+street: ''
+rooms: null
+bathrooms: null
+surface: null
 landSurface: 614
+floor: ''
+yearBuilt: null
 features:
-  - "Deschidere 17,5 m"
-  - "Apă"
-  - "Curent electric"
-  - "Gaz metan la 50 m"
+  - Deschidere 17,5 m
+  - Apă
+  - Curent electric
+  - Gaz metan la 50 m
 comisionZero: true
-featuredImage: "/images/scraped/post008_0.webp"
+listingStatus: Activ
+updatedAt: ''
+coords: 46.8832
+videoUrl: ''
+virtualTourUrl: ''
+floorPlan: /images/20260430_141439.jpg
+featuredImage: /images/20260430_141419.jpg
 gallery:
-  - "/images/scraped/post008_0.webp"
-  - "/images/scraped/post008_1.webp"
-  - "/images/scraped/post008_2.webp"
-  - "/images/scraped/post008_3.webp"
-coords: [46.8832, 26.4383]
+  - /images/20260430_141442.jpg
+  - /images/20260430_141456.jpg
+cadastralNumber: ''
+floorsTotal: null
+orientation: ''
+balconies: null
+balconySurface: null
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+privateOwnerContact: ''
+privateNotes: ''
 ---
 
 Teren intravilan în suprafață de 614 mp situat în Dumbrava Roșie.
