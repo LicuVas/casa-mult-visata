@@ -1,40 +1,65 @@
 ---
-title: "Casă 268 mp pe 3 niveluri + 8807 mp teren — Gura Văii"
-status: "Vânzare"
-propertyType: "Casă"
+title: Casă 268 mp pe 3 niveluri + 8807 mp teren — Gura Văii
+status: Vânzare
+propertyType: Casă
 price: 270000
-currency: "EUR"
-location: "Gura Văii, jud. Neamț"
-zone: "Gura Văii"
+currency: EUR
+pricePerUnit: ''
+location: Gura Văii, jud. Neamț
+zone: Gura Văii
+street: ''
 rooms: 6
+bathrooms: null
 surface: 268
 landSurface: 8807
+floor: ''
 yearBuilt: 2012
 features:
-  - "3 niveluri (S+P+M)"
-  - "Terasă acoperită 21 mp"
-  - "Subsol: beci + 2 camere"
-  - "Parter: living, bucătărie, baie, camera centralei"
-  - "Garaj 2 locuri (uși automate cu telecomandă)"
-  - "Mansardă: 3 camere, hol, baie, depozit 70 mp"
-  - "Fundație beton, pereți cărămidă"
-  - "Acoperiș tip șarpantă, învelitoare tablă"
-  - "Centrală duală pe peleți (posibil schimb pe lemn)"
-  - "Calorifere aluminiu"
-  - "Șemineu pe lemne (parter)"
-  - "Puț propriu + hidrofor"
-  - "Fosă septică dublu compartimentată"
-  - "Foișor cu chiuvetă/grătar/afumătoare/cuptor/plită"
-  - "Teren împrejmuit cu gard"
+  - 3 niveluri (S+P+M)
+  - Terasă acoperită 21 mp
+  - 'Subsol: beci + 2 camere'
+  - 'Parter: living, bucătărie, baie, camera centralei'
+  - Garaj 2 locuri (uși automate cu telecomandă)
+  - 'Mansardă: 3 camere, hol, baie, depozit 70 mp'
+  - Fundație beton, pereți cărămidă
+  - Acoperiș tip șarpantă, învelitoare tablă
+  - Centrală duală pe peleți (posibil schimb pe lemn)
+  - Calorifere aluminiu
+  - Șemineu pe lemne (parter)
+  - Puț propriu + hidrofor
+  - Fosă septică dublu compartimentată
+  - Foișor cu chiuvetă/grătar/afumătoare/cuptor/plită
+  - Teren împrejmuit cu gard
 comisionZero: true
-featuredImage: "/images/scraped/post007_0.webp"
+listingStatus: Activ
+updatedAt: ''
+coords: 46.9569
+videoUrl: ''
+virtualTourUrl: ''
+featuredImage: /images/scraped/post007_0.avif
 gallery:
-  - "/images/scraped/post007_0.webp"
-  - "/images/scraped/post007_1.webp"
-  - "/images/scraped/post007_2.webp"
-  - "/images/scraped/post007_3.webp"
-  - "/images/scraped/post007_4.webp"
-coords: [46.9569, 26.4503]
+  - /images/scraped/post007_0.webp
+  - /images/scraped/post007_1.webp
+  - /images/scraped/post007_2.webp
+  - /images/scraped/post007_3.webp
+  - /images/scraped/post007_4.webp
+intabulat: true
+cadastralNumber: ''
+compartimentare: Decomandat
+floorsTotal: 1
+heatingType: Centrală proprie pe lemne/peleți
+orientation: ''
+parking: Garaj
+balconies: null
+balconySurface: null
+condition: Bună stare
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+buildingType: Casă
+structureType: Cărămidă
+privateOwnerContact: Tatiana    0744 430 771
+privateNotes: ''
 ---
 
 Casă de vânzare în localitatea Gura Văii, jud. Neamț.
