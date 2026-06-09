@@ -1,0 +1,3 @@
+# Force canonical host: 301 the Netlify subdomain to the custom domain.
+# Protects SEO against duplicate indexing of *.netlify.app.
+https://casa-mult-visata.netlify.app/* https://casamultvisata.ro/:splat 301!
