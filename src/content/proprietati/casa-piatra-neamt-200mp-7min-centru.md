@@ -1,40 +1,63 @@
 ---
-title: "Casă 200 mp + 830 mp curte, la 7 min de centru — Piatra Neamț"
-status: "Vânzare"
-propertyType: "Casă"
+title: Casă 200 mp + 830 mp curte, la 7 min de centru — Piatra Neamț
+status: Vânzare
+propertyType: Casă
 price: 219500
-currency: "EUR"
-location: "Piatra Neamț"
-zone: "Centru"
+currency: EUR
+pricePerUnit: ''
+location: Piatra Neamț
+zone: Centru
+street: ''
 rooms: 5
 bathrooms: 2
 surface: 200
 landSurface: 830
+floor: ''
+yearBuilt: null
 features:
-  - "5 dormitoare"
-  - "Salon primitor"
-  - "2 băi"
-  - "Recent renovată"
-  - "Centrală gaz"
-  - "Încălzire în pardoseală"
-  - "Apă"
-  - "Curent electric"
-  - "Curte 830 mp"
-  - "Acceptă schimb cu apartament + diferență"
+  - 5 dormitoare
+  - Salon primitor
+  - 2 băi
+  - Recent renovată
+  - Centrală gaz
+  - Încălzire în pardoseală
+  - Apă
+  - Curent electric
+  - Curte 830 mp
+  - Acceptă schimb cu apartament + diferență
 comisionZero: true
-featuredImage: "/images/scraped/post012_0.webp"
+updatedAt: ''
+coords: 46.9276
+videoUrl: ''
+virtualTourUrl: ''
+featuredImage: /images/scraped/post012_0.webp
 gallery:
-  - "/images/scraped/post012_0.webp"
-  - "/images/scraped/post012_1.webp"
-  - "/images/scraped/post012_2.webp"
-  - "/images/scraped/post012_3.webp"
-  - "/images/scraped/post012_4.webp"
-coords: [46.9276, 26.3714]
+  - /images/scraped/post012_0.webp
+  - /images/scraped/post012_1.webp
+  - /images/scraped/post012_2.webp
+  - /images/scraped/post012_3.webp
+  - /images/scraped/post012_4.webp
+cadastralNumber: ''
+floorsTotal: 1
+heatingType: Centrală proprie pe gaz
+orientation: ''
+parking: Loc suprateran
+balconies: null
+balconySurface: null
+condition: Renovat recent
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+buildingType: Casă
+structureType: Cărămidă
+privateOwnerContact: EMILIAN        0750 100 265
+privateNotes: ''
 ---
 
 La doar **7 minute de centrul orașului Piatra Neamț** se află o casă pregătită să devină căminul unei noi familii.
 
 Cu 200 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis:
+
 - 5 dormitoare
 - Un salon primitor
 - 2 băi pentru confortul zilnic
