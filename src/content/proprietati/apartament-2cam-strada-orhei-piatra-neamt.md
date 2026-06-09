@@ -11,6 +11,7 @@ street: Strada Orhei
 rooms: 2
 bathrooms: 1
 surface: 62
+landSurface: null
 floor: '2'
 yearBuilt: 1983
 features:
@@ -26,6 +27,9 @@ features:
   - Necesită renovare
   - Imobil cu ascensor (10 etaje)
 comisionZero: true
+listingStatus: Vândut
+updatedAt: ''
+coords: 46.9292
 featuredImage: /images/scraped/post010_0.webp
 gallery:
   - /images/scraped/post010_0.webp
@@ -33,9 +37,6 @@ gallery:
   - /images/scraped/post010_2.webp
   - /images/scraped/post010_3.webp
   - /images/scraped/post010_4.webp
-coords:
-  - 46.9292
-  - 26.3721
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 62,82 mp, situat la etajul 2, strada Orhei din Piatra Neamț.
