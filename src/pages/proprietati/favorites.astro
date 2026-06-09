@@ -107,8 +107,14 @@ const allPropsForClient = allProperties.map(p => {
         article.className = 'cs-item';
         article.setAttribute('data-id', p.id);
         var avifSrc = String(p.image || '').replace(/\.webp$/, '.avif');
+        var lsRibbon = '';
+        var lsMap = { 'Vândut': 'vandut', 'Închiriat': 'inchiriat', 'Rezervat': 'rezervat' };
+        if (lsMap[p.listingStatus]) {
+          lsRibbon = '<span class="cs-ribbon cs-ribbon--' + lsMap[p.listingStatus] + '">' + escapeHtml(p.listingStatus) + '</span>';
+        }
         article.innerHTML =
           '<div class="cs-media">'
+          +   lsRibbon
           +   '<span class="cs-status-tag">De ' + escapeHtml(String(p.status || '').toLowerCase()) + '</span>'
           +   '<span class="cs-price-tag">' + escapeHtml(formatPrice(p.price, p.currency)) + pricePerUnit + '</span>'
           +   '<a href="/proprietati/' + encodeURIComponent(p.id) + '/">'

@@ -84,7 +84,7 @@ const jsonLdDescription = rawBody.length > 0 ? rawBody.slice(0, 200) : metaDescr
 
 // JSON-LD RealEstateListing
 const listingStatusForLd = prop.data.listingStatus || 'Activ';
-const availabilityUrl = listingStatusForLd === 'Vândut'
+const availabilityUrl = (listingStatusForLd === 'Vândut' || listingStatusForLd === 'Închiriat')
   ? 'https://schema.org/SoldOut'
   : (listingStatusForLd === 'Rezervat' ? 'https://schema.org/Reserved' : 'https://schema.org/InStock');
 
@@ -174,7 +174,7 @@ const contactHref = `/contact/?proprietate=${encodeURIComponent(prop.data.title)
 
 // === DETAIL ENRICH ===
 const listingStatus = prop.data.listingStatus || 'Activ';
-const isFaded = listingStatus === 'Vândut' || listingStatus === 'Retras';
+const isFaded = listingStatus === 'Vândut' || listingStatus === 'Închiriat' || listingStatus === 'Retras';
 
 // Romanian-formatted updatedAt
 const RO_MONTHS = ['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'];
@@ -281,7 +281,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                 <div class="title-row">
                     <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">{prop.data.title}</h1>
                     {listingStatus && listingStatus !== 'Activ' && (
-                        <span class={`status-pill status-pill--${listingStatus === 'Vândut' ? 'vandut' : listingStatus === 'Rezervat' ? 'rezervat' : 'retras'}`}>{listingStatus}</span>
+                        <span class={`status-pill status-pill--${listingStatus === 'Vândut' ? 'vandut' : listingStatus === 'Închiriat' ? 'inchiriat' : listingStatus === 'Rezervat' ? 'rezervat' : 'retras'}`}>{listingStatus}</span>
                     )}
                     <button type="button" class="fav-toggle fav-toggle--detail" id="detail-fav-btn" data-fav-id={prop.id} aria-pressed="false" aria-label="Salvează la favorite" title="Salvează la favorite">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -297,7 +297,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
 
                 <div class={`hero-image-wrap${isFaded ? ' has-watermark' : ''}`} data-has-gallery={images.length > 1 ? "true" : "false"}>
                     {isFaded && (
-                        <span class="hero-watermark" aria-hidden="true">{listingStatus === 'Vândut' ? 'VÂNDUT' : 'RETRAS'}</span>
+                        <span class="hero-watermark" aria-hidden="true">{listingStatus === 'Vândut' ? 'VÂNDUT' : listingStatus === 'Închiriat' ? 'ÎNCHIRIAT' : 'RETRAS'}</span>
                     )}
                     <picture>
                         <source id="hero-source-avif" srcset={imageSrc.replace(/\.webp$/, '.avif')} type="image/avif" />
@@ -478,6 +478,9 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                                 return (
                                     <article class="cs-item" data-id={s.id}>
                                         <div class="cs-media">
+                                            {(s.data.listingStatus === 'Vândut' || s.data.listingStatus === 'Închiriat' || s.data.listingStatus === 'Rezervat') && (
+                                                <span class={`cs-ribbon cs-ribbon--${s.data.listingStatus === 'Vândut' ? 'vandut' : s.data.listingStatus === 'Închiriat' ? 'inchiriat' : 'rezervat'}`}>{s.data.listingStatus}</span>
+                                            )}
                                             <span class="cs-status-tag">De {s.data.status.toLowerCase()}</span>
                                             <span class="cs-price-tag">
                                                 {formatPrice(s.data.price, s.data.currency)}

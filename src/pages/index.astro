@@ -176,6 +176,9 @@ const zoneList = [
 										<img src={imageSrc} alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
 									</picture>
 								</a>
+								{(prop.data.listingStatus === 'Vândut' || prop.data.listingStatus === 'Închiriat' || prop.data.listingStatus === 'Rezervat') && (
+									<span class={`cs-ribbon cs-ribbon--${prop.data.listingStatus === 'Vândut' ? 'vandut' : prop.data.listingStatus === 'Închiriat' ? 'inchiriat' : 'rezervat'}`}>{prop.data.listingStatus}</span>
+								)}
 								<span class="cs-status-tag">{prop.data.status}</span>
 								<span class="cs-price-tag">
 									{formatPrice(prop.data.price, prop.data.currency)}

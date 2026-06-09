@@ -44,7 +44,7 @@ const proprietati = defineCollection({
     comisionZero: optBool(true),
     listingStatus: z.preprocess(
       (v) => (v === null || v === '' || v === undefined ? 'Activ' : v),
-      z.enum(['Activ', 'Rezervat', 'Vândut', 'Retras']).default('Activ')
+      z.enum(['Activ', 'Rezervat', 'Vândut', 'Închiriat', 'Retras']).default('Activ')
     ),
     updatedAt: optStr,
     // coords: legacy [lat,lng] tuple OR Sveltia GeoJSON Point string OR garbage (handled at runtime).

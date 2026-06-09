@@ -67,7 +67,7 @@ collections:
       - {label: "Comision 0%?", name: "comisionZero", widget: "boolean", default: true, required: false}
 
       # CICLU DE VIAȚĂ — folosit pentru filtrare/afișare
-      - {label: "Status anunț", name: "listingStatus", widget: "select", options: ["Activ", "Rezervat", "Vândut", "Retras"], default: "Activ", hint: "Activ = vizibil normal. Rezervat = afișat cu badge. Vândut/Retras = ascuns din listare implicită."}
+      - {label: "Status anunț", name: "listingStatus", widget: "select", options: ["Activ", "Rezervat", "Vândut", "Închiriat", "Retras"], default: "Activ", hint: "Activ = vizibil normal. Rezervat / Vândut / Închiriat = rămâne pe site cu o bandă diagonală pe poză (ex: VÂNDUT). Retras = ascuns din listare. Pune 'Vândut' pe proprietățile vândute ca să apară banda."}
       - label: "Actualizat la"
         name: "updatedAt"
         widget: "datetime"
@@ -96,7 +96,7 @@ collections:
       - {label: "Plan / Schiță (imagine)", name: "floorPlan", widget: "image", required: false}
 
       - {label: "Imagine Principală", name: "featuredImage", widget: "image", required: false}
-      - {label: "Galerie Foto", name: "gallery", widget: "list", field: {label: "Imagine", name: "image", widget: "image"}, required: false}
+      - {label: "Galerie Foto", name: "gallery", widget: "image", multiple: true, required: false, hint: "Poți selecta mai multe poze deodată (ține Ctrl sau Shift în fereastra de selecție, ori în media library). Trage de poze ca să le reordonezi."}
       
       - {label: "Descriere Completă", name: "body", widget: "markdown"}
 

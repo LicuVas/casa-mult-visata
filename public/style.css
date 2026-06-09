@@ -190,6 +190,16 @@ picture { display: contents; }
 .cs-status-tag { position: absolute; top: 0.85rem; left: 0.85rem; z-index: 2; background: rgba(255,255,255,0.95); color: var(--text-primary); padding: 0.38rem 0.75rem; font-family: var(--font-accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
 .cs-price-tag { position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2; background: var(--accent); color: var(--white); padding: 0.55rem 0.95rem; font-family: var(--font-accent); font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; box-shadow: 0 4px 14px rgba(0,0,0,0.20); text-align: right; line-height: 1.15; }
 .cs-price-tag small { display: block; font-weight: 500; font-size: 0.7rem; opacity: 0.9; margin-top: 2px; }
+/* Bandă diagonală de stare (Vândut / Închiriat / Rezervat) peste coperta cardului.
+   Clipată de .cs-media{overflow:hidden} → colț stânga-sus tăiat la 45°. */
+.cs-ribbon { position: absolute; top: 16px; left: -54px; z-index: 4; width: 200px; transform: rotate(-45deg); background: var(--accent); color: #fff; text-align: center; font-family: var(--font-accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; line-height: 1; padding: 8px 0; box-shadow: 0 3px 10px rgba(0,0,0,0.28); pointer-events: none; }
+.cs-ribbon--vandut { background: #c0392b; color: #fff; }
+.cs-ribbon--inchiriat { background: #1f6feb; color: #fff; }
+.cs-ribbon--rezervat { background: #d4a017; color: #1a1a1a; }
+/* Când există bandă, ascunde eticheta „De vânzare/închiriere" ca să nu se suprapună. */
+.cs-media:has(.cs-ribbon) .cs-status-tag { display: none; }
+.cs-item:has(.cs-ribbon--vandut) .cs-media img,
+.cs-item:has(.cs-ribbon--inchiriat) .cs-media img { filter: grayscale(0.35) brightness(0.96); }
 .cs-caption { padding: 1.05rem 1.15rem 1.25rem; display: flex; flex-direction: column; flex: 1; }
 .cs-caption .tag { display: none; }
 .cs-caption .price { display: none; }
@@ -857,6 +867,7 @@ a.agent-contact-value:hover { color: var(--accent); }
 .status-pill--activ { background: var(--accent-green); color: var(--white); }
 .status-pill--rezervat { background: oklch(78% 0.14 75); color: #3d2c00; }
 .status-pill--vandut { background: #8a8a8a; color: var(--white); }
+.status-pill--inchiriat { background: #1f6feb; color: var(--white); }
 .status-pill--retras { background: #6e6e6e; color: var(--white); }
 
 /* Updated-at stamp */
