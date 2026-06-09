@@ -23,11 +23,11 @@ features:
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.932
+coords: [46.932, 26.4088]
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: /images/Screenshot_20260508_061427_Gallery.jpg
-featuredImage: ''
+featuredImage: /images/scraped/post006_0.webp
 gallery:
   - /images/scraped/post006_0.webp
   - /images/scraped/post006_1.webp
