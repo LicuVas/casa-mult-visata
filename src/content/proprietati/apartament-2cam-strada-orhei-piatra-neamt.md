@@ -30,6 +30,8 @@ comisionZero: true
 listingStatus: Activ
 updatedAt: ''
 coords: 46.9292
+videoUrl: ''
+virtualTourUrl: ''
 featuredImage: /images/scraped/post010_0.webp
 gallery:
   - /images/scraped/post010_0.webp
@@ -37,6 +39,16 @@ gallery:
   - /images/scraped/post010_2.webp
   - /images/scraped/post010_3.webp
   - /images/scraped/post010_4.webp
+cadastralNumber: ''
+floorsTotal: null
+orientation: ''
+balconies: null
+balconySurface: null
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+privateOwnerContact: ''
+privateNotes: ana loredana 0768035144 ACC 50000
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 62,82 mp, situat la etajul 2, strada Orhei din Piatra Neamț.
