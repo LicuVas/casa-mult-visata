@@ -1,0 +1,29 @@
+<!--
+  Static form definition for Netlify Forms detection.
+  Astro pre-renders the real form, but Netlify's build-time form parser is
+  most reliable when it finds a plain static HTML form. This file mirrors the
+  contact form fields 1:1 so submissions are captured. Not linked anywhere.
+-->
+<html>
+  <head><title>Netlify Forms</title></head>
+  <body>
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" />
+      <input type="text" name="name" />
+      <input type="tel" name="phone" />
+      <input type="email" name="email" />
+      <select name="interest">
+        <option>Vreau să cumpăr</option>
+        <option>Vreau să vând</option>
+        <option>Vreau să închiriez</option>
+        <option>Caut chiriași</option>
+        <option>Evaluare proprietate</option>
+        <option>Altceva</option>
+      </select>
+      <input type="text" name="proprietate" />
+      <textarea name="message"></textarea>
+      <input type="checkbox" name="gdpr-consent" value="da" />
+    </form>
+  </body>
+</html>
