@@ -27,7 +27,7 @@ features:
   - Necesită renovare
   - Imobil cu ascensor (10 etaje)
 comisionZero: true
-listingStatus: Vândut
+listingStatus: Activ
 updatedAt: ''
 coords: 46.9292
 featuredImage: /images/scraped/post010_0.webp
