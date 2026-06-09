@@ -1,0 +1,193 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Single source of truth: same array feeds the visible accordion AND the
+// FAQPage JSON-LD below — they can never drift apart.
+// NOTE pt Cozma (de confirmat la telefon): întrebările #5 (documente) și #6
+// (notar) sunt draftate generic-corect pe practica standard RO. Confirmă/ajustează.
+const faqs = [
+	{
+		q: "Cât este comisionul agentului imobiliar?",
+		a: "Pentru cumpărători comisionul este <strong>0%</strong> — nu plătești nimic dacă te ajut să găsești și să cumperi o proprietate. Pentru vânzători comisionul standard este de 3% din prețul de vânzare și este negociabil, în funcție de proprietate și de serviciile incluse.",
+	},
+	{
+		q: "Ce zone acoperiți?",
+		a: "Activez în <strong>Piatra Neamț și în tot județul Neamț</strong> — inclusiv localități precum Dumbrava Roșie, Bodești, Doina, Gura Văii și împrejurimi. Cunosc piața locală în detaliu, fiecare cartier și tendințele de preț.",
+	},
+	{
+		q: "Cum decurge procesul de vânzare a unei proprietăți?",
+		a: "Procesul este simplu și te însoțesc la fiecare pas: (1) evaluare gratuită a proprietății, (2) fotografii profesionale, (3) promovare pe toate platformele — OLX, Storia, Facebook, Instagram, (4) gestionez vizionările și negociez în numele tău, (5) asistență completă până la semnarea actelor la notar.",
+	},
+	{
+		q: "În cât timp se vinde o proprietate?",
+		a: "Timpul mediu de vânzare pentru proprietățile pe care le intermediez este de aproximativ <strong>30 de zile</strong>. Durata reală depinde de tipul proprietății, zonă și de cât de corect este poziționat prețul față de piață — iar evaluarea corectă este exact ce fac la început.",
+	},
+	{
+		q: "Ce documente îmi trebuie ca să vând o proprietate?",
+		a: "De regulă sunt necesare: actul de proprietate (contract de vânzare-cumpărare, moștenire sau donație), extrasul de carte funciară actualizat, documentația cadastrală și de intabulare, certificatul fiscal de la primărie (atestă că taxele sunt achitate), certificatul de performanță energetică și actul tău de identitate. Verific eu împreună cu tine ce lipsește și te ajut să pregătești dosarul complet înainte de notar.",
+	},
+	{
+		q: "Cine plătește onorariul notarului și ce alte costuri apar?",
+		a: "Onorariul notarial pentru autentificarea actului de vânzare se achită, prin practica uzuală, de către cumpărător, însă acest aspect se poate negocia între părți. Pe lângă onorariul notarului mai pot apărea costuri pentru cadastru/intabulare și certificatul energetic. Îți explic clar toate costurile estimate încă de la început, ca să nu existe surprize.",
+	},
+	{
+		q: "Oferiți evaluare gratuită a proprietății?",
+		a: "Da. Evaluarea proprietății și prima consultație sunt <strong>gratuite și fără obligații</strong>. Fac o analiză comparativă de piață specifică zonei tale și îți spun realist la ce preț se poate vinde.",
+	},
+	{
+		q: "Cum verificați actele atunci când cumpăr o proprietate?",
+		a: "La cumpărare fac verificarea juridică a actelor înainte de orice angajament — mă asigur că proprietatea are situația cadastrală și de carte funciară în regulă, fără sarcini ascunse, ipoteci sau litigii. Te însoțesc cu suport complet până la predarea proprietății.",
+	},
+	{
+		q: "Ce servicii oferiți pentru închirieri?",
+		a: "Servicii complete atât pentru proprietari, cât și pentru chiriași: verificarea chiriașilor, întocmirea contractului de închiriere, procesul-verbal de predare-primire și suport pe toată durata contractului. Găsesc chiriași de încredere sau proprietatea ideală de închiriat.",
+	},
+	{
+		q: "Cum vă pot contacta și cât de repede răspundeți?",
+		a: "Mă suni direct la <a href=\"tel:0747814263\">0747 814 263</a> (Luni–Sâmbătă, 8:00–20:00) sau îmi scrii pe <a href=\"https://wa.me/40747814263\" target=\"_blank\" rel=\"noopener\">WhatsApp</a>, unde răspund de obicei în mai puțin de 2 ore. Poți folosi și formularul din pagina de <a href=\"/contact\">Contact</a>.",
+	},
+];
+
+// Strip HTML tags for the schema answer text (schema.org wants plain text)
+const stripTags = (s) => s.replace(/<[^>]+>/g, "");
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"@id": "https://casamultvisata.ro/intrebari-frecvente/#faq",
+	"mainEntity": faqs.map((f) => ({
+		"@type": "Question",
+		"name": f.q,
+		"acceptedAnswer": {
+			"@type": "Answer",
+			"text": stripTags(f.a),
+		},
+	})),
+};
+---
+
+<Layout
+	title="Întrebări Frecvente | Casa Mult Visată — Agent Imobiliar Piatra Neamț"
+	description="Răspunsuri la cele mai frecvente întrebări despre vânzarea, cumpărarea și închirierea proprietăților în Piatra Neamț: comision, documente, durată, costuri notar."
+	extraSchema={faqSchema}
+>
+	<section class="faq-editorial">
+		<div class="container">
+			<div class="page-header reveal">
+				<p class="label">Tot ce vrei să știi</p>
+				<h1>Întrebări Frecvente</h1>
+				<p class="intro">Răspunsuri clare și directe la întrebările pe care mi le pun cel mai des clienții din Piatra Neamț. Nu găsești ce cauți? <a href="/contact">Scrie-mi</a> — îți răspund personal.</p>
+			</div>
+
+			<div class="faq-list reveal">
+				{faqs.map((f, i) => (
+					<details class="faq-item" open={i === 0}>
+						<summary class="faq-question">
+							<span>{f.q}</span>
+							<span class="faq-icon" aria-hidden="true"></span>
+						</summary>
+						<div class="faq-answer">
+							<p set:html={f.a} />
+						</div>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<div class="container">
+		<div class="cta-editorial reveal">
+			<h2>Ai o întrebare la care nu am răspuns?</h2>
+			<p>Prima consultație este gratuită. Sună-mă sau scrie-mi pe WhatsApp.</p>
+			<a href="/contact">Contactează-mă &rarr;</a>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.faq-editorial {
+		padding: var(--section-padding);
+	}
+	.faq-list {
+		max-width: 820px;
+		margin: 3rem auto 0;
+	}
+	.faq-item {
+		border-bottom: 1px solid oklch(88% 0.008 80);
+	}
+	.faq-item:first-of-type {
+		border-top: 1px solid oklch(88% 0.008 80);
+	}
+	.faq-question {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 1.5rem 0.25rem;
+		cursor: pointer;
+		list-style: none;
+		font-family: var(--font-display, "Fraunces"), serif;
+		font-size: 1.2rem;
+		font-weight: 500;
+		line-height: 1.35;
+		color: var(--ink, #2b2b2b);
+		transition: color 0.2s ease;
+	}
+	.faq-question::-webkit-details-marker {
+		display: none;
+	}
+	.faq-question:hover {
+		color: var(--accent-green, #8aa399);
+	}
+	.faq-icon {
+		flex-shrink: 0;
+		position: relative;
+		width: 18px;
+		height: 18px;
+	}
+	.faq-icon::before,
+	.faq-icon::after {
+		content: "";
+		position: absolute;
+		background: var(--accent-green, #8aa399);
+		transition: transform 0.25s ease;
+	}
+	.faq-icon::before {
+		top: 50%;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		transform: translateY(-50%);
+	}
+	.faq-icon::after {
+		left: 50%;
+		top: 0;
+		width: 2px;
+		height: 100%;
+		transform: translateX(-50%);
+	}
+	.faq-item[open] .faq-icon::after {
+		transform: translateX(-50%) scaleY(0);
+	}
+	.faq-answer {
+		padding: 0 0.25rem 1.75rem;
+		max-width: 70ch;
+	}
+	.faq-answer p {
+		margin: 0;
+		font-size: 1.02rem;
+		line-height: 1.7;
+		color: oklch(40% 0.008 80);
+	}
+	.faq-answer a {
+		color: var(--accent-green, #8aa399);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.faq-icon::before,
+		.faq-icon::after {
+			transition: none;
+		}
+	}
+</style>

@@ -8,6 +8,7 @@ interface Props {
 	preloadImage?: string;
 	preloadImageSrcset?: string;
 	preloadImageSizes?: string;
+	extraSchema?: Record<string, unknown>;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
 	preloadImage,
 	preloadImageSrcset,
 	preloadImageSizes,
+	extraSchema,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -150,6 +152,7 @@ const jsonLd = {
 
 		<!-- JSON-LD Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		{extraSchema && <script type="application/ld+json" set:html={JSON.stringify(extraSchema)} />}
 
 		<!-- Favorites (localStorage) -->
 		<script src="/scripts/favorites.js" defer></script>
@@ -178,6 +181,7 @@ const jsonLd = {
 						<li><a href="/proprietati/favorites/" class="nav-fav" aria-label="Favorite salvate" aria-current={currentPath.startsWith('/proprietati/favorites') ? 'page' : undefined}><span class="nav-fav-heart" aria-hidden="true">♥</span> <span class="fav-count">0</span></a></li>
 						<li><a href="/servicii" aria-current={currentPath === '/servicii' ? 'page' : undefined}>Servicii</a></li>
 						<li><a href="/despre" aria-current={currentPath === '/despre' ? 'page' : undefined}>Despre Mine</a></li>
+						<li><a href="/intrebari-frecvente" aria-current={currentPath === '/intrebari-frecvente' ? 'page' : undefined}>Întrebări</a></li>
 						<li><a href="/contact" aria-current={currentPath === '/contact' ? 'page' : undefined}>Contact</a></li>
 					</ul>
 				</nav>
@@ -207,6 +211,7 @@ const jsonLd = {
 							<li><a href="/proprietati">Proprietăți</a></li>
 							<li><a href="/servicii">Servicii</a></li>
 							<li><a href="/despre">Despre Mine</a></li>
+							<li><a href="/intrebari-frecvente">Întrebări Frecvente</a></li>
 							<li><a href="/contact">Contact</a></li>
 						</ul>
 					</div>
