@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# temp/scratch
+tmp_*.png
+tmp_*.json
