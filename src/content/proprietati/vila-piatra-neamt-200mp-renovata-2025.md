@@ -36,6 +36,7 @@ features:
   - Renovată complet 2025
 exclusive: true
 comisionZero: true
+listingStatus: Activ
 updatedAt: ''
 coords: 46.9276
 videoUrl: ''
@@ -53,7 +54,7 @@ floorsTotal: 1
 heatingType: Centrală proprie pe gaz
 orientation: ''
 parking: Stradă
-balconies: null
+balconies: 1
 balconySurface: null
 condition: Renovat recent
 surfaceUtila: null
