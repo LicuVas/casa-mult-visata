@@ -1,40 +1,58 @@
 ---
-title: "Casă 95 mp + teren 5800 mp — Doina"
-status: "Vânzare"
-propertyType: "Casă"
+title: Casă 95 mp + teren 5800 mp — Doina
+status: Vânzare
+propertyType: Casă
 price: 65000
-currency: "EUR"
-location: "Doina, jud. Neamț"
-zone: "Doina"
+currency: EUR
+pricePerUnit: ''
+location: Doina, jud. Neamț
+zone: Doina
+street: ''
 rooms: 2
 bathrooms: 1
 surface: 95
 landSurface: 5800
+floor: ''
+yearBuilt: null
 features:
-  - "2 dormitoare"
-  - "2 holuri"
-  - "Bucătărie"
-  - "Spațiu depozitare"
-  - "Terasă"
-  - "Beci"
-  - "Mansardă cu balcon"
-  - "Ferestre lemn"
-  - "Uși interioare lemn"
-  - "Curent electric"
-  - "Apă rețea"
-  - "Garaj"
-  - "Anexe"
-  - "Pomi fructiferi"
-  - "Viță de vie"
+  - 2 dormitoare
+  - 2 holuri
+  - Bucătărie
+  - Spațiu depozitare
+  - Terasă
+  - Beci
+  - Mansardă cu balcon
+  - Ferestre lemn
+  - Uși interioare lemn
+  - Curent electric
+  - Apă rețea
+  - Garaj
+  - Anexe
+  - Pomi fructiferi
+  - Viță de vie
 comisionZero: true
-featuredImage: "/images/scraped/post002_0.webp"
+listingStatus: Activ
+updatedAt: ''
+coords: 46.9186
+videoUrl: ''
+virtualTourUrl: ''
+featuredImage: /images/scraped/post002_0.webp
 gallery:
-  - "/images/scraped/post002_0.webp"
-  - "/images/scraped/post002_1.webp"
-  - "/images/scraped/post002_2.webp"
-  - "/images/scraped/post002_3.webp"
-  - "/images/scraped/post002_4.webp"
-coords: [46.9186, 26.5104]
+  - /images/scraped/post002_0.webp
+  - /images/scraped/post002_1.webp
+  - /images/scraped/post002_2.webp
+  - /images/scraped/post002_3.webp
+  - /images/scraped/post002_4.webp
+cadastralNumber: ''
+floorsTotal: null
+orientation: ''
+balconies: null
+balconySurface: null
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+privateOwnerContact: 0751 355 003      ACC  60000
+privateNotes: ''
 ---
 
 Casă în suprafață de 95 mp și teren intravilan aferent 5800 mp, situată în localitatea Doina, jud. Neamț.
