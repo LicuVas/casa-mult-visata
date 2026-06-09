@@ -55,7 +55,8 @@ ul { list-style: none; }
 .masthead-top .date { font-family: var(--font-accent); font-size: 0.75rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
 .phone-header { transition: color 0.2s; }
 .phone-header:hover { color: var(--accent); }
-.masthead-logo { font-family: var(--font-display); font-size: clamp(1.5rem, 1.25rem + 1vw, 2.25rem); font-weight: 700; letter-spacing: -0.02em; color: var(--accent); text-align: center; }
+.masthead-logo { font-family: var(--font-display); font-size: clamp(1.5rem, 1.25rem + 1vw, 2.25rem); font-weight: 700; letter-spacing: -0.02em; color: var(--accent); text-align: center; display: inline-flex; align-items: center; gap: 0.5rem; line-height: 1; }
+.masthead-logo-mark { height: clamp(2rem, 1.6rem + 1.4vw, 2.9rem); width: auto; flex-shrink: 0; }
 .masthead-nav { display: flex; justify-content: center; gap: 2.5rem; padding: 0.75rem 0; }
 .masthead-nav a { font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.875rem; font-weight: 500; color: var(--text-primary); transition: color 0.2s; }
 .masthead-nav a:hover, .masthead-nav a[aria-current="page"] { color: var(--accent); }
@@ -226,10 +227,15 @@ picture { display: contents; }
 .contact-info-item p, .contact-info-item a { font-size: 1.0625rem; color: var(--text-primary); }
 .contact-info-item a:hover { color: var(--accent); }
 
+/* === BRAND VISUAL (despre) === */
+.brand-visual { padding: 1rem 0 3rem; text-align: center; }
+.brand-visual-img { display: block; margin: 0 auto; width: 100%; max-width: 420px; height: auto; border-radius: 12px; }
+
 /* === FOOTER === */
 .footer-editorial { border-top: var(--rule-width) solid var(--rule-color); padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-.footer-brand { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+.footer-brand { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+.footer-brand-mark { height: 2rem; width: auto; flex-shrink: 0; }
 .footer-desc { font-size: 0.9375rem; color: var(--text-secondary); }
 .footer-editorial h4 { font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 1rem; }
 .footer-editorial ul li { margin-bottom: 0.5rem; font-size: 0.9375rem; }
