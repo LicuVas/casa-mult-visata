@@ -1,21 +1,28 @@
 ---
-title: "Teren 3878 mp, toate utilitățile — Zona Fermelor, Piatra Neamț"
-status: "Vânzare"
-propertyType: "Teren"
+title: Teren 3878 mp, toate utilitățile — Zona Fermelor, Piatra Neamț
+status: Vânzare
+propertyType: Teren
 price: 135730
-currency: "EUR"
-pricePerUnit: "35 €/mp"
-location: "Piatra Neamț"
-zone: "Obor"
-street: "Strada Fermelor"
+currency: EUR
+pricePerUnit: 35 €/mp
+location: Piatra Neamț
+zone: Obor
+street: Strada Fermelor
+rooms: null
+bathrooms: null
+surface: null
 landSurface: 3878
+floor: ''
+yearBuilt: null
 features:
-  - "35 €/mp"
-  - "Front stradal 15,7 m"
-  - "Toate utilitățile"
+  - 35 €/mp
+  - Front stradal 15,7 m
+  - Toate utilitățile
 comisionZero: true
-featuredImage: "/images/scraped/post019_0.webp"
-coords: [46.9345, 26.3945]
+listingStatus: Activ
+updatedAt: ''
+coords: 46.9345
+featuredImage: /images/scraped/post019_0.webp
 ---
 
 Teren intravilan în suprafață de 3878 mp situat în zona Fermelor din Piatra Neamț.
