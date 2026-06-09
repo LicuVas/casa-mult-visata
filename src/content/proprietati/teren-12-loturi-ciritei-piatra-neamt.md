@@ -1,5 +1,5 @@
 ---
-title: 12 loturi de teren, 10.000 mp — Cartier Ciritei, Piatra Neamț
+title: Teren intravilan in suprafata de 10.000 mp — Cartier Ciritei, Piatra Neamț
 status: Vânzare
 propertyType: Teren
 price: 170000
@@ -21,11 +21,13 @@ features:
   - Cale de acces 7 m
   - Utilități la ~190-200 m
 comisionZero: true
+listingStatus: Activ
 updatedAt: ''
 coords: 46.932
 videoUrl: ''
 virtualTourUrl: ''
-featuredImage: /images/scraped/post006_0.webp
+floorPlan: /images/Screenshot_20260508_061427_Gallery.jpg
+featuredImage: ''
 gallery:
   - /images/scraped/post006_0.webp
   - /images/scraped/post006_1.webp
@@ -34,6 +36,10 @@ gallery:
 cadastralNumber: ''
 floorsTotal: null
 orientation: ''
+balconies: null
+balconySurface: null
+condition: Nou
+surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
 privateOwnerContact: ''
