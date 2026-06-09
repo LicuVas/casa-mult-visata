@@ -47,8 +47,8 @@ balconySurface: null
 surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
-privateOwnerContact: ''
-privateNotes: ana loredana 0768035144 ACC 50000
+privateOwnerContact: ana loredana 0768035144
+privateNotes: ACC 50000 din pretul de achizitie.
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 62,82 mp, situat la etajul 2, strada Orhei din Piatra Neamț.
