@@ -1,26 +1,43 @@
 ---
-title: "12 loturi de teren, 10.000 mp — Cartier Ciritei, Piatra Neamț"
-status: "Vânzare"
-propertyType: "Teren"
+title: 12 loturi de teren, 10.000 mp — Cartier Ciritei, Piatra Neamț
+status: Vânzare
+propertyType: Teren
 price: 170000
-currency: "EUR"
-location: "Piatra Neamț"
-zone: "Ciritei"
+currency: EUR
+pricePerUnit: ''
+location: Piatra Neamț
+zone: Ciritei
+street: ''
+rooms: null
+bathrooms: null
+surface: null
 landSurface: 10000
+floor: ''
+yearBuilt: null
 features:
-  - "Împărțit în 12 loturi"
-  - "Certificat de urbanism"
-  - "PUZ existent"
-  - "Cale de acces 7 m"
-  - "Utilități la ~190-200 m"
+  - Împărțit în 12 loturi
+  - Certificat de urbanism
+  - PUZ existent
+  - Cale de acces 7 m
+  - Utilități la ~190-200 m
 comisionZero: true
-featuredImage: "/images/scraped/post006_0.webp"
+updatedAt: ''
+coords: 46.932
+videoUrl: ''
+virtualTourUrl: ''
+featuredImage: /images/scraped/post006_0.webp
 gallery:
-  - "/images/scraped/post006_0.webp"
-  - "/images/scraped/post006_1.webp"
-  - "/images/scraped/post006_2.webp"
-  - "/images/scraped/post006_3.webp"
-coords: [46.932, 26.4088]
+  - /images/scraped/post006_0.webp
+  - /images/scraped/post006_1.webp
+  - /images/scraped/post006_2.webp
+  - /images/scraped/post006_3.webp
+cadastralNumber: ''
+floorsTotal: null
+orientation: ''
+surfaceConstruita: null
+availableFrom: ''
+privateOwnerContact: ''
+privateNotes: ''
 ---
 
 De vânzare **12 loturi de teren** în suprafață de 10.000 mp, situat în cartierul Ciritei, Piatra Neamț.
