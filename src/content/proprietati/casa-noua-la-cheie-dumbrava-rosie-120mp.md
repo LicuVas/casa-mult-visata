@@ -47,8 +47,9 @@ gallery:
   - /images/scraped/post005_3.webp
   - /images/scraped/post005_4.webp
 cadastralNumber: ''
+compartimentare: Decomandat
 floorsTotal: null
-heatingType: ''
+heatingType: Centrală proprie pe gaz
 orientation: ''
 parking: Stradă
 balconies: null
@@ -60,7 +61,7 @@ availableFrom: ''
 buildingType: Casă
 structureType: BCA
 confortClass: Confort 1
-privateOwnerContact: ''
+privateOwnerContact: Dragos
 privateNotes: ''
 ---
 
