@@ -129,7 +129,7 @@ collections:
         name: "heatingType"
         widget: "select"
         required: false
-        options: ["Centrală proprie pe gaz", "Centrală proprie pe lemne/peleți", "Termoficare", "Centrală de bloc", "Sobă", "Altă sursă"]
+        options: ["Centrală proprie pe gaz", "Centrală proprie pe lemne/peleți", "Termoficare", "Centrală de bloc", "Sobă", "Încălzire în pardoseală", "Altă sursă"]
       - {label: "Orientare", name: "orientation", widget: "string", required: false, hint: "Ex: Sud, Sud-Est, N-S (dacă ai și N și S). Important pentru lumină naturală."}
       - label: "Parcare"
         name: "parking"

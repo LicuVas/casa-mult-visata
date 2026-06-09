@@ -78,7 +78,7 @@ const proprietati = defineCollection({
     floorsTotal: optNum,
     heatingType: z.preprocess(
       (v) => (v === null || v === '' ? undefined : v),
-      z.enum(['Centrală proprie pe gaz', 'Centrală proprie pe lemne/peleți', 'Termoficare', 'Centrală de bloc', 'Sobă', 'Altă sursă']).optional()
+      z.enum(['Centrală proprie pe gaz', 'Centrală proprie pe lemne/peleți', 'Termoficare', 'Centrală de bloc', 'Sobă', 'Încălzire în pardoseală', 'Altă sursă']).optional()
     ),
     orientation: optStr,
     parking: z.preprocess(
