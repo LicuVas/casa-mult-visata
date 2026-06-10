@@ -23,7 +23,9 @@ comisionZero: true
 listingStatus: Activ
 updatedAt: ''
 coords: 46.8832
-featuredImage: /images/scraped/post009_0.webp
+videoUrl: ''
+virtualTourUrl: ''
+featuredImage: /images/20260430_141442.jpg
 gallery:
   - /images/scraped/post009_0.webp
   - /images/scraped/post009_1.webp
