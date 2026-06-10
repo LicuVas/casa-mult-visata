@@ -23,15 +23,17 @@ coords: '{"type":"Point","coordinates":[26.378219,46.923333]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/20260129_165707.jpg
+featuredImage: ''
 gallery:
-  - /images/20260129_170020.jpg
-  - /images/20260129_165935.jpg
+  - /images/20260129_165707.jpg
+  - /images/20260129_165713.jpg
   - /images/20260129_165723.jpg
   - /images/20260129_165727.jpg
   - /images/20260129_165735.jpg
+  - /images/20260129_165928.jpg
+  - /images/20260129_165935.jpg
   - /images/20260129_165953.jpg
-  - /images/20260129_165713.jpg
+  - /images/20260129_170020.jpg
 tech_separator: separator
 energyClass: ''
 intabulat: false
