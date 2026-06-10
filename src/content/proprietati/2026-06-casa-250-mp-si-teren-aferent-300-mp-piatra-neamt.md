@@ -7,7 +7,7 @@ currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
 zone: Centru
-street: Stefan cel Mare
+street: ''
 rooms: 4
 bathrooms: 2
 surface: 240
@@ -23,16 +23,14 @@ coords: '{"type":"Point","coordinates":[26.365727,46.935202]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: ''
+featuredImage: /images/20260203_163945.jpg
 gallery:
-  - /images/20260203_163900.jpg
-  - /images/20260203_163909.jpg
-  - /images/20260203_163918.jpg
   - /images/20260203_163937.jpg
-  - /images/20260203_163945.jpg
+  - /images/20260203_163918.jpg
+  - /images/20260203_163909.jpg
   - /images/20260203_164048.jpg
-  - /images/20260203_164104.jpg
-  - /images/20260203_164107.jpg
+  - /images/20260203_163945.jpg
+  - /images/20260203_163900.jpg
 tech_separator: separator
 energyClass: ''
 intabulat: false
