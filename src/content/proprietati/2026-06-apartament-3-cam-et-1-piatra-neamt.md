@@ -23,7 +23,7 @@ coords: '{"type":"Point","coordinates":[26.378219,46.923333]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: ''
+featuredImage: /images/20260129_170020.jpg
 gallery:
   - /images/20260129_165707.jpg
   - /images/20260129_165713.jpg
