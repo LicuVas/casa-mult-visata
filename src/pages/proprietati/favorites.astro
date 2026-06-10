@@ -6,7 +6,7 @@ const allProperties = await getCollection('proprietati');
 
 // Serializable snapshot of all properties for client-side filtering by favorite IDs.
 const allPropsForClient = allProperties.map(p => {
-  const imageSrc = p.data.featuredImage || (p.data.propertyType === 'Apartament' ? '/images/apartament.webp' : p.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+  const imageSrc = p.data.featuredImage || (p.data.propertyType === 'Apartament' ? '/sistem/apartament.webp' : p.data.propertyType === 'Casă' ? '/sistem/casa.webp' : '/sistem/teren.webp');
   return {
     id: p.id,
     title: p.data.title,

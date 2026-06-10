@@ -36,10 +36,10 @@ function normalizeCoords(raw: unknown): [number, number] | null {
 
 // Image fallback by property type — includes Spațiu Comercial.
 function pickFallbackImage(propertyType: string): string {
-  if (propertyType === 'Apartament') return '/images/apartament.webp';
-  if (propertyType === 'Casă') return '/images/casa.webp';
-  if (propertyType === 'Spațiu Comercial') return '/images/spatiu-comercial.webp';
-  return '/images/teren.webp';
+  if (propertyType === 'Apartament') return '/sistem/apartament.webp';
+  if (propertyType === 'Casă') return '/sistem/casa.webp';
+  if (propertyType === 'Spațiu Comercial') return '/sistem/comercial.webp';
+  return '/sistem/teren.webp';
 }
 
 export async function getStaticPaths() {
@@ -674,9 +674,9 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
 
                 <a href="/despre/" class="agent-card-link" aria-label="Vezi profilul agentului Cozma Vasile">
                     <picture>
-                        <source srcset="/images/agent.avif" type="image/avif" />
-                        <source srcset="/images/agent.webp" type="image/webp" />
-                        <img src="/images/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async">
+                        <source srcset="/sistem/agent.avif" type="image/avif" />
+                        <source srcset="/sistem/agent.webp" type="image/webp" />
+                        <img src="/sistem/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async">
                     </picture>
                     <div class="agent-card-info">
                         <span class="agent-card-role">Agent Imobiliar</span>

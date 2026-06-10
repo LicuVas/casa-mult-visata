@@ -99,12 +99,12 @@ function normalizeCoords(raw: unknown): [number, number] | null {
   return [lat, lng];
 }
 
-// Image fallback by property type — includes Spațiu Comercial (was falling through to /images/teren.webp).
+// Image fallback by property type — includes Spațiu Comercial (was falling through to /sistem/teren.webp).
 function pickFallbackImage(propertyType: string): string {
-  if (propertyType === 'Apartament') return '/images/apartament.webp';
-  if (propertyType === 'Casă') return '/images/casa.webp';
-  if (propertyType === 'Spațiu Comercial') return '/images/spatiu-comercial.webp';
-  return '/images/teren.webp';
+  if (propertyType === 'Apartament') return '/sistem/apartament.webp';
+  if (propertyType === 'Casă') return '/sistem/casa.webp';
+  if (propertyType === 'Spațiu Comercial') return '/sistem/comercial.webp';
+  return '/sistem/teren.webp';
 }
 
 const propsForMap = visibleProperties.map((p, index) => {

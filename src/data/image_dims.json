@@ -1,37 +1,37 @@
 {
-  "/images/agent.webp": [
+  "/sistem/agent.webp": [
     1024,
     1024
   ],
-  "/images/apartament.webp": [
+  "/sistem/apartament.webp": [
     1024,
     1024
   ],
-  "/images/casa.webp": [
+  "/sistem/casa.webp": [
     1024,
     1024
   ],
-  "/images/comercial.webp": [
+  "/sistem/comercial.webp": [
     1024,
     1024
   ],
-  "/images/hero-1080.webp": [
+  "/sistem/hero-1080.webp": [
     1080,
     371
   ],
-  "/images/hero-1440.webp": [
+  "/sistem/hero-1440.webp": [
     1440,
     495
   ],
-  "/images/hero-1920.webp": [
+  "/sistem/hero-1920.webp": [
     1920,
     660
   ],
-  "/images/hero-720.webp": [
+  "/sistem/hero-720.webp": [
     720,
     247
   ],
-  "/images/hero.webp": [
+  "/sistem/hero.webp": [
     2400,
     826
   ],
@@ -39,7 +39,7 @@
     1024,
     1024
   ],
-  "/images/teren.webp": [
+  "/sistem/teren.webp": [
     1024,
     1024
   ],

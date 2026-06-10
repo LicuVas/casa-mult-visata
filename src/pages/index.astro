@@ -33,18 +33,18 @@ const zoneList = [
 <Layout
 	title="Casa Mult Visată — Agenție Imobiliară Piatra Neamț"
 	description="Agent imobiliar Cozma Vasile Piatra Neamț. Apartamente, case, terenuri. Comision 0% cumpărător. Sună 0747 814 263 sau WhatsApp."
-	ogImage="/images/hero.webp"
-	preloadImage="/images/hero-1440.webp"
-	preloadImageSrcset="/images/hero-720.webp 720w, /images/hero-1080.webp 1080w, /images/hero-1440.webp 1440w, /images/hero-1920.webp 1920w"
+	ogImage="/sistem/hero.webp"
+	preloadImage="/sistem/hero-1440.webp"
+	preloadImageSrcset="/sistem/hero-720.webp 720w, /sistem/hero-1080.webp 1080w, /sistem/hero-1440.webp 1440w, /sistem/hero-1920.webp 1920w"
 	preloadImageSizes="100vw"
 >
 
 	<!-- HERO FULL-BLEED -->
 	<section class="home-hero">
 		<picture class="home-hero-bg">
-			<source srcset="/images/hero-720.avif 720w, /images/hero-1080.avif 1080w, /images/hero-1440.avif 1440w, /images/hero-1920.avif 1920w" sizes="100vw" type="image/avif" />
-			<source srcset="/images/hero-720.webp 720w, /images/hero-1080.webp 1080w, /images/hero-1440.webp 1440w, /images/hero-1920.webp 1920w" sizes="100vw" type="image/webp" />
-			<img src="/images/hero-1440.webp" alt="" width="1920" height="660" fetchpriority="high" decoding="async" />
+			<source srcset="/sistem/hero-720.avif 720w, /sistem/hero-1080.avif 1080w, /sistem/hero-1440.avif 1440w, /sistem/hero-1920.avif 1920w" sizes="100vw" type="image/avif" />
+			<source srcset="/sistem/hero-720.webp 720w, /sistem/hero-1080.webp 1080w, /sistem/hero-1440.webp 1440w, /sistem/hero-1920.webp 1920w" sizes="100vw" type="image/webp" />
+			<img src="/sistem/hero-1440.webp" alt="" width="1920" height="660" fetchpriority="high" decoding="async" />
 		</picture>
 		<div class="home-hero-overlay"></div>
 		<div class="home-hero-inner container">
@@ -161,7 +161,7 @@ const zoneList = [
 
 			<div class="contact-sheet reveal" style="margin-top:2.5rem;">
 				{featuredProperties.map((prop) => {
-					const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/images/apartament.webp' : prop.data.propertyType === 'Casă' ? '/images/casa.webp' : '/images/teren.webp');
+					const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/sistem/apartament.webp' : prop.data.propertyType === 'Casă' ? '/sistem/casa.webp' : '/sistem/teren.webp');
 					let metaDetails = [];
 					if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} cam.`);
 					if (prop.data.surface) metaDetails.push(`${prop.data.surface} mp`);
@@ -247,9 +247,9 @@ const zoneList = [
 				<blockquote>&ldquo;Fiecare casă are o poveste. Te ajut să o găsești pe a ta.&rdquo;</blockquote>
 				<div class="home-quote-author">
 					<picture>
-						<source srcset="/images/agent.avif" type="image/avif" />
-						<source srcset="/images/agent.webp" type="image/webp" />
-						<img src="/images/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async" />
+						<source srcset="/sistem/agent.avif" type="image/avif" />
+						<source srcset="/sistem/agent.webp" type="image/webp" />
+						<img src="/sistem/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async" />
 					</picture>
 					<div>
 						<strong>Cozma Vasile</strong>
