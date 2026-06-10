@@ -106,7 +106,7 @@ const allPropsForClient = allProperties.map(p => {
         var article = document.createElement('article');
         article.className = 'cs-item';
         article.setAttribute('data-id', p.id);
-        var avifSrc = String(p.image || '').replace(/\.webp$/, '.avif');
+        var avifSrc = String(p.image || '').replace(/\.(webp|jpe?g|png)$/i, '.avif');
         var lsRibbon = '';
         var lsMap = { 'Vândut': 'vandut', 'Închiriat': 'inchiriat', 'Rezervat': 'rezervat' };
         if (lsMap[p.listingStatus]) {
@@ -120,7 +120,7 @@ const allPropsForClient = allProperties.map(p => {
           +   '<a href="/proprietati/' + encodeURIComponent(p.id) + '/">'
           +     '<picture>'
           +       '<source srcset="' + escapeHtml(avifSrc) + '" type="image/avif">'
-          +       '<source srcset="' + escapeHtml(p.image) + '" type="image/webp">'
+          +       '<source srcset="' + escapeHtml(p.image.replace(/\.(webp|jpe?g|png)$/i, '.webp')) + '" type="image/webp">'
           +       '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">'
           +     '</picture>'
           +   '</a>'

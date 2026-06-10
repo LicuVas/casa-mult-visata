@@ -381,8 +381,8 @@ const propsForMap = visibleProperties.map((p, index) => {
               </span>
               <a href={`/proprietati/${prop.id}`}>
                 <picture>
-                  <source srcset={imageSrc.replace(/\.webp$/, '.avif')} type="image/avif" />
-                  <source srcset={imageSrc} type="image/webp" />
+                  <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
+                  <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
                   <img src={imageSrc} alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
                 </picture>
               </a>

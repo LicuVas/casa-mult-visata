@@ -300,8 +300,8 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                         <span class="hero-watermark" aria-hidden="true">{listingStatus === 'Vândut' ? 'VÂNDUT' : listingStatus === 'Închiriat' ? 'ÎNCHIRIAT' : 'RETRAS'}</span>
                     )}
                     <picture>
-                        <source id="hero-source-avif" srcset={imageSrc.replace(/\.webp$/, '.avif')} type="image/avif" />
-                        <source id="hero-source-webp" srcset={imageSrc} type="image/webp" />
+                        <source id="hero-source-avif" srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
+                        <source id="hero-source-webp" srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
                         <img
                             id="hero-image"
                             src={imageSrc}
@@ -329,7 +329,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                             <a
                                 href={src}
                                 data-pswp-src={src}
-                                data-pswp-srcset={`${src.replace(/\.webp$/, '.avif')} ${w}w`}
+                                data-pswp-srcset={`${src.replace(/\.(webp|jpe?g|png)$/i, '.avif')} ${w}w`}
                                 data-pswp-width={w}
                                 data-pswp-height={h}
                                 class={`gallery-item ${i === 0 ? 'is-active' : ''}`}
@@ -337,8 +337,8 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                                 aria-label={`Vezi imaginea ${i + 1}`}
                             >
                                 <picture>
-                                    <source srcset={src.replace(/\.webp$/, '.avif')} type="image/avif" />
-                                    <source srcset={src} type="image/webp" />
+                                    <source srcset={src.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
+                                    <source srcset={src.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
                                     <img src={src} alt={`${prop.data.title} — imagine ${i + 1}`} width="160" height="120" loading="lazy" decoding="async" />
                                 </picture>
                             </a>);
@@ -488,8 +488,8 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                                             </span>
                                             <a href={`/proprietati/${s.id}`}>
                                                 <picture>
-                                                    <source srcset={sImg.replace(/\.webp$/, '.avif')} type="image/avif" />
-                                                    <source srcset={sImg} type="image/webp" />
+                                                    <source srcset={sImg.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
+                                                    <source srcset={sImg.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
                                                     <img src={sImg} alt={s.data.title} width="800" height="600" loading="lazy" decoding="async" />
                                                 </picture>
                                             </a>
