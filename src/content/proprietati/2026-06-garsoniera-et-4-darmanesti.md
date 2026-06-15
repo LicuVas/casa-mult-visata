@@ -1,5 +1,5 @@
 ---
-title: Garsoniera et 4 Darmanesti
+title: Garsoniera et 3 Darmanesti
 status: Vânzare
 propertyType: Apartament
 price: 14500
