@@ -14,7 +14,13 @@ surface: 68
 landSurface: null
 floor: '4'
 yearBuilt: null
-features: []
+features:
+  - -Ferestre termopan
+  - -2 Bai
+  - -Logie inchisa
+  - -balcon deschis
+  - -Usa metalica
+  - -Boxa
 exclusive: false
 comisionZero: true
 listingStatus: Activ
@@ -34,7 +40,7 @@ gallery:
   - /images/Screenshot_20260610_070316_Facebook.jpg
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: 4
