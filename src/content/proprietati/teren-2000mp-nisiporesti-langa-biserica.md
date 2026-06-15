@@ -21,13 +21,25 @@ features:
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 47.0772
+coords: '{"type":"Point","coordinates":[26.740488,47.078072]}'
+videoUrl: ''
+virtualTourUrl: ''
 featuredImage: /images/scraped/post016_0.webp
 gallery:
   - /images/scraped/post016_0.webp
   - /images/scraped/post016_1.webp
   - /images/scraped/post016_2.webp
   - /images/scraped/post016_3.webp
+cadastralNumber: ''
+floorsTotal: null
+orientation: ''
+balconies: null
+balconySurface: null
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+privateOwnerContact: ''
+privateNotes: ''
 ---
 
 Teren intravilan în suprafață de 2000 mp lângă biserica din centrul satului, situat în localitatea Nisiporești, jud. Neamț.
