@@ -14,8 +14,12 @@ surface: 52
 landSurface: null
 floor: '4'
 yearBuilt: null
-features: []
-exclusive: false
+features:
+  - '- Tamplarie termopan'
+  - -Centrala pe gaz
+  - -Parchet
+  - -Usa metalica
+exclusive: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
@@ -34,7 +38,7 @@ gallery:
   - /images/Screenshot_20260610_064855_Facebook.jpg
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: 4
