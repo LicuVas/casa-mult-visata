@@ -12,7 +12,7 @@ rooms: 1
 bathrooms: 1
 surface: 16
 landSurface: null
-floor: '4'
+floor: '3'
 yearBuilt: null
 features: []
 exclusive: false
