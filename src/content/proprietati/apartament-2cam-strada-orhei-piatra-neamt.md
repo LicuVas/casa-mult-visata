@@ -39,16 +39,22 @@ gallery:
   - /images/scraped/post010_2.webp
   - /images/scraped/post010_3.webp
   - /images/scraped/post010_4.webp
+intabulat: true
 cadastralNumber: ''
-floorsTotal: null
+compartimentare: Decomandat
+floorsTotal: 10
+heatingType: Centrală proprie pe gaz
 orientation: ''
-balconies: null
+balconies: 1
 balconySurface: null
-surfaceUtila: null
-surfaceConstruita: null
+condition: Necesită renovare
+surfaceUtila: 63
+surfaceConstruita: 69
 availableFrom: ''
-privateOwnerContact: ana loredana 0768035144
-privateNotes: ACC 50000 din pretul de achizitie.
+buildingType: Bloc
+confortClass: Confort 1
+privateOwnerContact: Claudia
+privateNotes: ACC 58000 din pretul de achizitie.
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 62,82 mp, situat la etajul 2, strada Orhei din Piatra Neamț.
