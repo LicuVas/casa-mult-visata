@@ -14,7 +14,13 @@ surface: 68
 landSurface: null
 floor: parter
 yearBuilt: null
-features: []
+features:
+  - -Centrala termica
+  - -Tamplarie termopan
+  - -Gresie
+  - -Faianta
+  - -Parchet laminat
+  - -Usa metalica
 exclusive: false
 comisionZero: true
 listingStatus: Activ
@@ -35,7 +41,7 @@ gallery:
   - /images/Screenshot_20260610_071609_Facebook.jpg
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: 4
