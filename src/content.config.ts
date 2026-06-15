@@ -15,6 +15,14 @@ const optBool = (def: boolean) => z.preprocess(
   z.boolean().default(def)
 );
 
+// Grouped per-type characteristic objects from the CMS (apartment/house/land).
+// Sveltia has no conditional fields, so each type has its own collapsible object;
+// values are booleans. Optional + record(unknown) → existing listings need no migration.
+const optObj = z.preprocess(
+  (v) => (v === null || v === '' ? undefined : v),
+  z.record(z.unknown()).optional()
+);
+
 // Required enum with null-safe preprocess (Sveltia writes null for empty selects).
 const reqEnum = <T extends readonly [string, ...string[]]>(values: T, fallback: T[number]) =>
   z.preprocess((v) => (v === null || v === '' ? fallback : v), z.enum(values));
@@ -106,6 +114,11 @@ const proprietati = defineCollection({
       (v) => (v === null || v === '' ? undefined : v),
       z.enum(['Confort 1', 'Confort 1 sporit', 'Confort 2', 'Confort 3']).optional()
     ),
+
+    // Caracteristici grupate pe tip (din CMS). Bifate = true; afișate în „Facilități și caracteristici".
+    caracteristiciApartament: optObj,
+    caracteristiciCasa: optObj,
+    caracteristiciTeren: optObj,
   }),
 });
 

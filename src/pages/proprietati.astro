@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import cartierCanon from '../../tools/cartier_canon.json';
+import { listingId } from '../utils/listingId';
 
 const allProperties = await getCollection('proprietati');
 
@@ -298,6 +299,7 @@ const propsForMap = visibleProperties.map((p, index) => {
       {visibleProperties.map((prop, index) => {
         const imageSrc = prop.data.featuredImage || pickFallbackImage(prop.data.propertyType);
         const region = isPN(prop.data.location) ? 'PN' : 'imprejurimi';
+        const lid = listingId(prop.id);
         const zoneAliases = prop.data.zone && ZONE_ALIASES[prop.data.zone] ? ZONE_ALIASES[prop.data.zone] : [];
         // Energy class as searchable token: "clasa A" / "clasa energetica B".
         const energyTokens = prop.data.energyClass ? [`clasa ${prop.data.energyClass}`, `clasa energetica ${prop.data.energyClass}`] : [];
@@ -319,6 +321,7 @@ const propsForMap = visibleProperties.map((p, index) => {
           prop.data.structureType,
           prop.data.confortClass,
           ...(prop.data.features || []),
+          lid,
           ...zoneAliases,
           ...energyTokens,
           ...intabulatTokens,
@@ -355,6 +358,7 @@ const propsForMap = visibleProperties.map((p, index) => {
           <article
             class="cs-item reveal"
             data-id={prop.id}
+            data-listing-id={lid}
             data-type={prop.data.propertyType}
             data-status={prop.data.status}
             data-zone={prop.data.zone ?? ''}
@@ -401,6 +405,7 @@ const propsForMap = visibleProperties.map((p, index) => {
               {metaDetails.length > 0 && (
                 <p class="meta">{metaDetails.map(d => <span>{d}</span>)}</p>
               )}
+              <p class="cs-id">Cod: {lid}</p>
             </div>
           </article>
         )

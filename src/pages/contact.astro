@@ -9,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
 			<div class="page-header reveal">
 				<p class="label">Hai să vorbim</p>
 				<h1>Contact</h1>
-				<p class="intro">Sunt aici să te ajut cu orice întrebare legată de imobiliare. Prima consultație e gratuită.</p>
+				<p class="intro">Sunt aici să te ajut cu orice întrebare legată de imobiliare. Prima consultație e gratuită și fără obligații.</p>
 			</div>
 
 			<div class="contact-grid reveal">
@@ -152,12 +152,13 @@ import Layout from '../layouts/Layout.astro';
 				var params = new URLSearchParams(window.location.search);
 				var prop = params.get('proprietate');
 				var interes = params.get('interes');
+				var anuntId = params.get('id');
 
 				if (prop) {
-					propInput.value = prop;
+					propInput.value = anuntId ? (prop + ' (cod ' + anuntId + ')') : prop;
 					propGroup.style.display = '';
 					if (!message.value) {
-						message.value = 'Bună ziua, vreau mai multe informații despre proprietatea: [' + prop + ']. Vă rog să mă contactați.';
+						message.value = 'Bună ziua, vreau mai multe informații despre proprietatea: [' + prop + ']' + (anuntId ? ' (cod ' + anuntId + ')' : '') + '. Vă rog să mă contactați.';
 					}
 					selectInterestByText('Vreau să cumpăr');
 				}

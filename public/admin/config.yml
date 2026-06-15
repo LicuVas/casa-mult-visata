@@ -61,8 +61,61 @@ collections:
       - {label: "Etaj", name: "floor", widget: "string", required: false}
       - {label: "An Construcție", name: "yearBuilt", widget: "number", value_type: "int", required: false}
       
-      - {label: "Caracteristici / Facilități (Listă)", name: "features", widget: "list", required: false}
-      
+      - {label: "Caracteristici / Facilități (Listă liberă)", name: "features", widget: "list", required: false, hint: "Listă liberă (orice text). Mai jos ai și bife pregătite pe tip de proprietate."}
+
+      # CARACTERISTICI PE TIP — completează DOAR grupul potrivit tipului proprietății.
+      # (Sveltia nu ascunde câmpuri condiționat — de aceea sunt 3 grupuri pliabile separate.)
+      - label: "Caracteristici — Apartament / Bloc"
+        name: "caracteristiciApartament"
+        widget: "object"
+        collapsed: true
+        required: false
+        hint: "Bifează doar pentru apartamente. Bifele apar în secțiunea „Facilități și caracteristici”."
+        fields:
+          - {label: "Lift", name: "lift", widget: "boolean", default: false, required: false}
+          - {label: "Centrală proprie", name: "centralaProprie", widget: "boolean", default: false, required: false}
+          - {label: "Aer condiționat", name: "aerConditionat", widget: "boolean", default: false, required: false}
+          - {label: "Interfon / videointerfon", name: "interfon", widget: "boolean", default: false, required: false}
+          - {label: "Boxă / pivniță", name: "boxa", widget: "boolean", default: false, required: false}
+          - {label: "Balcon închis", name: "balconInchis", widget: "boolean", default: false, required: false}
+          - {label: "Iluminat stradal", name: "iluminatStradal", widget: "boolean", default: false, required: false}
+          - {label: "Stradă asfaltată", name: "stradaAsfaltata", widget: "boolean", default: false, required: false}
+          - {label: "Transport în comun aproape", name: "transportInComun", widget: "boolean", default: false, required: false}
+      - label: "Caracteristici — Casă"
+        name: "caracteristiciCasa"
+        widget: "object"
+        collapsed: true
+        required: false
+        hint: "Bifează doar pentru case. Bifele apar în secțiunea „Facilități și caracteristici”."
+        fields:
+          - {label: "Curte împrejmuită", name: "curteImprejmuita", widget: "boolean", default: false, required: false}
+          - {label: "Grădină", name: "gradina", widget: "boolean", default: false, required: false}
+          - {label: "Garaj", name: "garaj", widget: "boolean", default: false, required: false}
+          - {label: "Anexe gospodărești", name: "anexe", widget: "boolean", default: false, required: false}
+          - {label: "Terasă", name: "terasa", widget: "boolean", default: false, required: false}
+          - {label: "Fosă septică", name: "fosaSeptica", widget: "boolean", default: false, required: false}
+          - {label: "Puț forat", name: "putForat", widget: "boolean", default: false, required: false}
+          - {label: "Panouri solare", name: "panouriSolare", widget: "boolean", default: false, required: false}
+          - {label: "Utilități la stradă (apă/curent/gaz/canalizare)", name: "utilitatiLaStrada", widget: "boolean", default: false, required: false}
+          - {label: "Iluminat stradal", name: "iluminatStradal", widget: "boolean", default: false, required: false}
+          - {label: "Stradă asfaltată", name: "stradaAsfaltata", widget: "boolean", default: false, required: false}
+          - {label: "Stradă pietruită", name: "stradaPietruita", widget: "boolean", default: false, required: false}
+      - label: "Caracteristici — Teren"
+        name: "caracteristiciTeren"
+        widget: "object"
+        collapsed: true
+        required: false
+        hint: "Bifează doar pentru terenuri. Bifele apar în secțiunea „Facilități și caracteristici”."
+        fields:
+          - {label: "Intravilan", name: "intravilan", widget: "boolean", default: false, required: false}
+          - {label: "Extravilan", name: "extravilan", widget: "boolean", default: false, required: false}
+          - {label: "Deschidere stradală", name: "deschidereStradala", widget: "boolean", default: false, required: false}
+          - {label: "Împrejmuit", name: "imprejmuit", widget: "boolean", default: false, required: false}
+          - {label: "Utilități la limită", name: "utilitatiLaLimita", widget: "boolean", default: false, required: false}
+          - {label: "Iluminat stradal", name: "iluminatStradal", widget: "boolean", default: false, required: false}
+          - {label: "Stradă asfaltată", name: "stradaAsfaltata", widget: "boolean", default: false, required: false}
+          - {label: "Stradă pietruită", name: "stradaPietruita", widget: "boolean", default: false, required: false}
+
       - {label: "Exclusivitate?", name: "exclusive", widget: "boolean", default: false, required: false}
       - {label: "Comision 0%?", name: "comisionZero", widget: "boolean", default: true, required: false}
 

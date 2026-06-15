@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import imageDims from '../../data/image_dims.json';
 import cartierCanon from '../../../tools/cartier_canon.json';
+import { listingId } from '../../utils/listingId';
 
 const DIMS = imageDims as Record<string, [number, number]>;
 function getDims(src: string): [number, number] {
@@ -250,6 +251,78 @@ const fbShareHref = `https://www.facebook.com/sharer/sharer.php?u=${encodeURICom
 const inquiryDefaultMsg = `Bună ziua! Sunt interesat(ă) de proprietatea ${prop.data.title}. Vă rog să mă contactați.`;
 
 const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
+
+// === Public listing code (stable, derived from slug) ===
+const lid = listingId(prop.id);
+
+// === Clickable taxonomy + location → filtered listing pages ===
+// Param names match the filter logic in /proprietati (type, status, zone, q).
+const statusHref = `/proprietati/?status=${encodeURIComponent(prop.data.status)}`;
+const typeHref = `/proprietati/?type=${encodeURIComponent(prop.data.propertyType)}`;
+const zoneHref = prop.data.zone ? `/proprietati/?zone=${encodeURIComponent(prop.data.zone)}` : null;
+const locHref = `/proprietati/?q=${encodeURIComponent(prop.data.location)}`;
+const streetHref = prop.data.street ? `/proprietati/?q=${encodeURIComponent(prop.data.street)}` : null;
+
+// === "Detalii imobiliare" rows (moved into main content, dellarte-style) ===
+const surfUtila = prop.data.surfaceUtila ?? prop.data.surface;
+const detalii: { label: string; value: string }[] = [];
+detalii.push({ label: 'ID anunț', value: lid });
+detalii.push({ label: 'Preț', value: formatPrice(prop.data.price, prop.data.currency) });
+detalii.push({ label: 'Tip', value: prop.data.propertyType });
+if (surfUtila) detalii.push({ label: 'Suprafață utilă', value: `${surfUtila} mp` });
+if (prop.data.surfaceConstruita) detalii.push({ label: 'Suprafață construită', value: `${prop.data.surfaceConstruita} mp` });
+if (prop.data.landSurface) detalii.push({ label: 'Suprafață teren', value: `${prop.data.landSurface} mp` });
+if (prop.data.rooms) detalii.push({ label: 'Camere', value: String(prop.data.rooms) });
+if (prop.data.bathrooms) detalii.push({ label: 'Băi', value: String(prop.data.bathrooms) });
+if (prop.data.floor) detalii.push({ label: 'Etaj', value: prop.data.floor });
+if (prop.data.floorsTotal) detalii.push({ label: 'Etaje clădire', value: String(prop.data.floorsTotal) });
+if (prop.data.compartimentare) detalii.push({ label: 'Compartimentare', value: prop.data.compartimentare });
+if (prop.data.yearBuilt) detalii.push({ label: 'An construcție', value: String(prop.data.yearBuilt) });
+if (prop.data.heatingType) detalii.push({ label: 'Încălzire', value: prop.data.heatingType });
+if (prop.data.energyClass) detalii.push({ label: 'Clasă energetică', value: prop.data.energyClass });
+if (prop.data.parking) detalii.push({ label: 'Parcare', value: prop.data.parking });
+if (prop.data.orientation) detalii.push({ label: 'Orientare', value: prop.data.orientation });
+if (prop.data.condition) detalii.push({ label: 'Stare', value: prop.data.condition });
+if (prop.data.buildingType) detalii.push({ label: 'Tip clădire', value: prop.data.buildingType });
+if (prop.data.structureType) detalii.push({ label: 'Structură', value: prop.data.structureType });
+if (prop.data.confortClass) detalii.push({ label: 'Confort', value: prop.data.confortClass });
+if (prop.data.balconies) detalii.push({ label: 'Balcoane', value: `${prop.data.balconies}${prop.data.balconySurface ? ` (${prop.data.balconySurface} mp)` : ''}` });
+if (prop.data.intabulat === true) detalii.push({ label: 'Cadastru', value: 'Intabulat' });
+if (prop.data.availableFrom) detalii.push({ label: 'Disponibil din', value: prop.data.availableFrom });
+
+// === Per-type extra characteristics (from CMS object groups) → friendly labels ===
+const CHAR_LABELS: Record<string, string> = {
+  // Apartament / bloc
+  lift: 'Lift', centralaProprie: 'Centrală proprie', aerConditionat: 'Aer condiționat',
+  interfon: 'Interfon / videointerfon', boxa: 'Boxă / pivniță', balconInchis: 'Balcon închis',
+  // Casă
+  curteImprejmuita: 'Curte împrejmuită', gradina: 'Grădină', garaj: 'Garaj',
+  anexe: 'Anexe gospodărești', fosaSeptica: 'Fosă septică', panouriSolare: 'Panouri solare',
+  putForat: 'Puț forat', terasa: 'Terasă',
+  // Teren
+  intravilan: 'Intravilan', extravilan: 'Extravilan', deschidereStradala: 'Deschidere stradală',
+  utilitatiLaLimita: 'Utilități la limită', imprejmuit: 'Împrejmuit',
+  // Comune (zonă / stradă)
+  iluminatStradal: 'Iluminat stradal', stradaAsfaltata: 'Stradă asfaltată',
+  stradaPietruita: 'Stradă pietruită', utilitatiLaStrada: 'Utilități la stradă',
+  transportInComun: 'Transport în comun',
+};
+const charGroups = [prop.data.caracteristiciApartament, prop.data.caracteristiciCasa, prop.data.caracteristiciTeren];
+const extraChars: string[] = [];
+for (const grp of charGroups) {
+  if (grp && typeof grp === 'object') {
+    for (const [k, v] of Object.entries(grp as Record<string, unknown>)) {
+      if (v === true && CHAR_LABELS[k]) extraChars.push(CHAR_LABELS[k]);
+    }
+  }
+}
+// Merge free-text features + structured per-type characteristics, dedupe.
+const allFeatures = Array.from(new Set([...(prop.data.features || []), ...extraChars]));
+
+// Inquiry / contact strings now carry the listing code.
+const inquiryMsg = `Bună ziua! Sunt interesat(ă) de proprietatea ${prop.data.title} (cod ${lid}). Vă rog să mă contactați.`;
+const contactWithId = `/contact/?proprietate=${encodeURIComponent(prop.data.title)}&id=${encodeURIComponent(lid)}`;
+const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.data.title} (cod ${lid})`;
 ---
 
 <Layout
@@ -269,27 +342,25 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
 
 		<div class="about-editorial">
 			<div class="body-text">
-                <span class="tag" style="font-family: var(--font-accent); font-variant: small-caps; letter-spacing: var(--letter-spacing-caps); text-transform: lowercase; font-size: 0.875rem; color: var(--accent); display: block; margin-bottom: 0.5rem;">
-                    De {prop.data.status.toLowerCase()}
-                </span>
-                {(prop.data.exclusive || prop.data.comisionZero) && (
-                    <div class="prop-badges" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-                        {prop.data.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
-                        {prop.data.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
-                    </div>
-                )}
+                <!-- TAGURI CLICKABILE (status + tip) → listări filtrate -->
+                <div class="prop-tags">
+                    <a class="prop-tag" href={statusHref}>{prop.data.status}</a>
+                    <a class="prop-tag" href={typeHref}>{prop.data.propertyType}</a>
+                    {prop.data.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
+                    {prop.data.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
+                </div>
                 <div class="title-row">
                     <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">{prop.data.title}</h1>
                     {listingStatus && listingStatus !== 'Activ' && (
                         <span class={`status-pill status-pill--${listingStatus === 'Vândut' ? 'vandut' : listingStatus === 'Închiriat' ? 'inchiriat' : listingStatus === 'Rezervat' ? 'rezervat' : 'retras'}`}>{listingStatus}</span>
                     )}
-                    <button type="button" class="fav-toggle fav-toggle--detail" id="detail-fav-btn" data-fav-id={prop.id} aria-pressed="false" aria-label="Salvează la favorite" title="Salvează la favorite">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                        <span class="fav-toggle-label">Salvează</span>
-                    </button>
                 </div>
-                <p style="font-family: var(--font-accent); font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                  {prop.data.street ? `${prop.data.street} · ` : ''}{prop.data.location}
+                <!-- LOCAȚIE CLICKABILĂ (oraș · zonă · stradă) → listări filtrate -->
+                <p class="prop-location">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <a href={locHref}>{prop.data.location}</a>
+                    {zoneHref && <>{' · '}<a href={zoneHref}>{prop.data.zone}</a></>}
+                    {streetHref && <>{' · '}<a href={streetHref}>{prop.data.street}</a></>}
                 </p>
                 {updatedAtFormatted && (
                     <p class="updated-stamp">Actualizat la {updatedAtFormatted}</p>
@@ -362,8 +433,45 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                     </button>
                 </div>
 
+                <!-- DETALII IMOBILIARE (mutat în conținut, cu cod anunț) -->
+                <section class="detail-card detalii-card" aria-labelledby="detalii-heading">
+                    <h3 id="detalii-heading" class="section-heading">Detalii imobiliare</h3>
+                    <dl class="detalii-grid">
+                        {detalii.map(row => (
+                            <div class="detalii-row">
+                                <dt>{row.label}</dt>
+                                <dd>{row.value}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </section>
+
+                <!-- DESCRIERE -->
+                <div class="prop-description" style="font-size: 1.125rem; line-height: 1.8;">
+                    <Content />
+                </div>
+
+                <!-- FACILITĂȚI ȘI CARACTERISTICI -->
+                {allFeatures.length > 0 && (
+                    <section class="detail-card facilitati-card" aria-labelledby="facilitati-heading">
+                        <h3 id="facilitati-heading" class="section-heading">Facilități și caracteristici</h3>
+                        <ul class="facilitati-grid">
+                            {allFeatures.map(feature => (
+                                <li class="facilitati-item">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                                    <span>{feature}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                <!-- PREȚ DEASUPRA HĂRȚII + HARTĂ -->
                 <section class="map-section" aria-labelledby="map-heading">
-                    <h3 id="map-heading" class="section-heading">Pe hartă</h3>
+                    <div class="map-price-row">
+                        <h3 id="map-heading" class="section-heading" style="margin:0;">Pe hartă</h3>
+                        <span class="map-price">{formatPrice(prop.data.price, prop.data.currency)}</span>
+                    </div>
                     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
                     <div
                         id="leaflet-map"
@@ -378,24 +486,6 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                         <p class="map-note">Zonă aproximativă. Adresa exactă se comunică doar persoanelor interesate, după contactul cu agentul.</p>
                     )}
                 </section>
-
-                <div style="font-size: 1.125rem; line-height: 1.8;">
-                    <Content />
-                </div>
-
-                {prop.data.features && prop.data.features.length > 0 && (
-                    <div style="margin-top: 3rem;">
-                        <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 1.5rem;">Caracteristici</h3>
-                        <ul style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
-                            {prop.data.features.map(feature => (
-                                <li style="font-family: var(--font-body); font-size: 0.9375rem; color: var(--text-secondary); position: relative; padding-left: 1.25rem;">
-                                    <span style="position: absolute; left: 0; color: var(--accent-green); font-weight: 600;">✓</span>
-                                    {feature}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
 
                 {hasTour && (
                     <section class="tour-section" aria-labelledby="tour-heading">
@@ -427,6 +517,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
 
                 <section class="inquiry-section" aria-labelledby="inquiry-heading">
                     <h3 id="inquiry-heading" class="section-heading">Programează vizionare sau cere detalii</h3>
+                    <p class="inquiry-code">Cod anunț: <strong>{lid}</strong></p>
                     <form
                         class="inquiry-form"
                         name="proprietate-inquiry"
@@ -437,6 +528,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                     >
                         <input type="hidden" name="form-name" value="proprietate-inquiry" />
                         <input type="hidden" name="proprietate" value={prop.data.title} />
+                        <input type="hidden" name="anunt-id" value={lid} />
                         <input type="hidden" name="proprietate-url" value={Astro.url.pathname} />
                         <p class="inquiry-honeypot" hidden>
                             <label>Nu completați acest câmp: <input name="bot-field" /></label>
@@ -457,7 +549,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                         </label>
                         <label class="inquiry-field">
                             <span>Mesaj</span>
-                            <textarea name="mesaj" rows="4" autocomplete="off" enterkeyhint="send">{inquiryDefaultMsg}</textarea>
+                            <textarea name="mesaj" rows="4" autocomplete="off" enterkeyhint="send">{inquiryMsg}</textarea>
                         </label>
                         <button type="submit" class="btn-primary inquiry-submit">Trimite mesajul</button>
                     </form>
@@ -518,132 +610,47 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
 			</div>
 
 			<aside class="sidebar" style="position: sticky; top: 100px;">
-                <div style="background: var(--surface-secondary); padding: 2rem; margin-bottom: 2rem;">
-                    <h4 style="margin-top:0;">Preț</h4>
-                    <div class="stat">
-                        <span class="stat-number" style="font-size: 2rem;">{formatPrice(prop.data.price, prop.data.currency)}</span>
-                        {prop.data.pricePerUnit && <span class="stat-label" style="display:block; margin-top:0.25rem; color: var(--text-secondary);">{prop.data.pricePerUnit}</span>}
-                        {prop.data.comisionZero && <span class="stat-label" style="color: var(--accent-green); font-weight: 600; display:block; margin-top:0.5rem;">COMISION 0% CUMPĂRĂTOR</span>}
+                <div class="detail-buy-box">
+                    <!-- PREȚ (stil curat, dellarte) -->
+                    <div class="buy-price">
+                        <span class="buy-price-label">Preț</span>
+                        <span class="buy-price-amount">{formatPrice(prop.data.price, prop.data.currency)}</span>
+                        {prop.data.pricePerUnit && <span class="buy-price-unit">{prop.data.pricePerUnit}</span>}
+                        {prop.data.comisionZero && <span class="buy-price-com">Comision 0% cumpărător</span>}
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0;">
-                        {prop.data.propertyType && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Tip</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.propertyType}</span>
-                            </div>
-                        )}
-                        {prop.data.surface && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Suprafață</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.surface} mp</span>
-                            </div>
-                        )}
-                        {prop.data.landSurface && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Teren</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.landSurface} mp</span>
-                            </div>
-                        )}
-                        {prop.data.rooms && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Camere</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.rooms}</span>
-                            </div>
-                        )}
-                        {prop.data.bathrooms && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Băi</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.bathrooms}</span>
-                            </div>
-                        )}
-                        {prop.data.floor && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Etaj</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.floor}</span>
-                            </div>
-                        )}
-                        {prop.data.yearBuilt && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">An</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.yearBuilt}</span>
-                            </div>
-                        )}
-                        {prop.data.floorsTotal && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Etaje total</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.floorsTotal}</span>
-                            </div>
-                        )}
-                        {prop.data.compartimentare && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Compartimentare</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.compartimentare}</span>
-                            </div>
-                        )}
-                        {prop.data.energyClass && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Clasă energetică</h4>
-                                <span class={`energy-badge energy-${prop.data.energyClass.replace(/[^A-G]/g, '') || 'pending'}`} style="font-family: var(--font-body); font-weight: 600;">{prop.data.energyClass}</span>
-                            </div>
-                        )}
-                        {prop.data.heatingType && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Încălzire</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.heatingType}</span>
-                            </div>
-                        )}
-                        {prop.data.parking && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Parcare</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.parking}</span>
-                            </div>
-                        )}
-                        {prop.data.orientation && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Orientare</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.orientation}</span>
-                            </div>
-                        )}
-                        {prop.data.condition && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Stare</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.condition}</span>
-                            </div>
-                        )}
-                        {prop.data.balconies && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Balcoane</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.balconies}{prop.data.balconySurface ? ` (${prop.data.balconySurface} mp)` : ''}</span>
-                            </div>
-                        )}
-                        {prop.data.intabulat === true && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Cadastru</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500; color: var(--accent-green);">✓ Intabulat</span>
-                            </div>
-                        )}
-                        {prop.data.buildingType && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Tip clădire</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.buildingType}</span>
-                            </div>
-                        )}
-                        {prop.data.availableFrom && (
-                            <div>
-                                <h4 style="font-size: 0.75rem; margin-bottom: 0.25rem;">Disponibil din</h4>
-                                <span style="font-family: var(--font-body); font-weight: 500;">{prop.data.availableFrom}</span>
-                            </div>
-                        )}
+                    <!-- 3 BUTOANE: Distribuie / Favorit / Printare -->
+                    <div class="buy-actions">
+                        <button type="button" class="buy-action" id="detail-share-btn" aria-label="Distribuie">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+                            <span>Distribuie</span>
+                        </button>
+                        <button type="button" class="buy-action fav-toggle fav-toggle--detail" id="detail-fav-btn" data-fav-id={prop.id} aria-pressed="false" aria-label="Salvează la favorite" title="Salvează la favorite">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            <span class="fav-toggle-label">Favorit</span>
+                        </button>
+                        <button type="button" class="buy-action" id="detail-print-btn" aria-label="Printează">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+                            <span>Printare</span>
+                        </button>
+                    </div>
+
+                    <!-- IMAGINEA PROPRIETĂȚII (în locul pozei agentului) -->
+                    <div class="buy-image">
+                        <picture>
+                            <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
+                            <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
+                            <img src={imageSrc} alt={prop.data.title} width="560" height="400" loading="lazy" decoding="async" />
+                        </picture>
                     </div>
 
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                         <a href={`tel:${contactPhone}`} class="btn-primary" style="text-align: center;">Sună Agentul</a>
-                        <a href={`https://wa.me/40${contactPhone.substring(1)}?text=${encodeURIComponent(whatsappMsg)}`} class="btn-whatsapp" target="_blank" rel="noopener" style="justify-content: center;">
+                        <a href={`https://wa.me/40${contactPhone.substring(1)}?text=${encodeURIComponent(waMsgWithId)}`} class="btn-whatsapp" target="_blank" rel="noopener" style="justify-content: center;">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                             Mesaj pe WhatsApp
                         </a>
-                        <a href={contactHref} style="font-family: var(--font-accent); font-size: 0.875rem; font-weight: 500; text-align: center; color: var(--accent); padding: 0.75rem 1.5rem; transition: 0.2s;">Programează Vizionare</a>
+                        <a href={contactWithId} style="font-family: var(--font-accent); font-size: 0.875rem; font-weight: 500; text-align: center; color: var(--accent); padding: 0.75rem 1.5rem; transition: 0.2s;">Programează Vizionare</a>
                     </div>
 
                     {prop.data.price && prop.data.rooms && (
@@ -672,18 +679,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                     )}
                 </div>
 
-                <a href="/despre/" class="agent-card-link" aria-label="Vezi profilul agentului Cozma Vasile">
-                    <picture>
-                        <source srcset="/sistem/agent.avif" type="image/avif" />
-                        <source srcset="/sistem/agent.webp" type="image/webp" />
-                        <img src="/sistem/agent.webp" alt="Cozma Vasile" width="560" height="560" loading="lazy" decoding="async">
-                    </picture>
-                    <div class="agent-card-info">
-                        <span class="agent-card-role">Agent Imobiliar</span>
-                        <span class="agent-card-name">Cozma Vasile</span>
-                        <span class="agent-card-cta">Vezi profilul →</span>
-                    </div>
-                </a>
+                <p class="buy-agent">Agent imobiliar: <a href="/despre/">Cozma Vasile — vezi profilul →</a></p>
 			</aside>
 		</div>
 	</div>
@@ -830,7 +826,7 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                     favBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
                     favBtn.setAttribute('aria-label', active ? 'Elimină de la favorite' : 'Salvează la favorite');
                     favBtn.setAttribute('title', active ? 'Elimină de la favorite' : 'Salvează la favorite');
-                    if (lblSpan) lblSpan.textContent = active ? 'Salvat' : 'Salvează';
+                    if (lblSpan) lblSpan.textContent = active ? 'Salvat' : 'Favorit';
                     var svg = favBtn.querySelector('svg');
                     if (svg) svg.setAttribute('fill', active ? 'currentColor' : 'none');
                 }
@@ -842,6 +838,30 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
                 document.addEventListener('favorites-changed', syncState);
                 syncState();
             }
+        });
+    </script>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sidebar "Distribuie" — native share sheet, fallback to clipboard.
+            var shareBtn = document.getElementById('detail-share-btn');
+            if (shareBtn) {
+                shareBtn.addEventListener('click', function () {
+                    var url = window.location.href;
+                    var title = document.title;
+                    if (navigator.share) {
+                        navigator.share({ title: title, url: url }).catch(function () {});
+                    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(url).then(function () {
+                            var lbl = shareBtn.querySelector('span');
+                            if (lbl) { var o = lbl.textContent; lbl.textContent = 'Copiat!'; setTimeout(function () { lbl.textContent = o; }, 1600); }
+                        }, function () {});
+                    }
+                });
+            }
+            // Sidebar "Printare"
+            var printBtn = document.getElementById('detail-print-btn');
+            if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
         });
     </script>
 
@@ -978,6 +998,88 @@ const hasTour = !!prop.data.videoUrl || !!prop.data.virtualTourUrl;
         .energy-F { background: #ff9800; }
         .energy-G { background: #f44336; }
         .energy-pending { background: var(--surface-secondary, #f3f1ec); color: var(--text-secondary); border: 1px dashed #999; }
+
+        /* ===== Clickable taxonomy tags ===== */
+        .prop-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
+        .prop-tag {
+            font-family: var(--font-accent); font-size: 0.8125rem; font-weight: 500;
+            letter-spacing: 0.02em; text-decoration: none;
+            color: var(--accent-green); background: var(--accent-light, #e7eee9);
+            padding: 0.3rem 0.85rem; border-radius: 999px; transition: background 0.18s, color 0.18s;
+        }
+        .prop-tag:hover { background: var(--accent-green); color: #fff; }
+
+        /* ===== Clickable location line ===== */
+        .prop-location {
+            display: flex; align-items: center; flex-wrap: wrap; gap: 0.15rem;
+            font-family: var(--font-accent); font-size: 1.05rem; color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .prop-location svg { color: var(--accent-green); margin-right: 0.35rem; flex-shrink: 0; }
+        .prop-location a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.18s, border-color 0.18s; }
+        .prop-location a:hover { color: var(--accent-green); border-bottom-color: var(--accent-green); }
+
+        /* ===== Content cards (Detalii / Facilități) ===== */
+        .detail-card {
+            background: var(--white, #fff); border: 1px solid var(--rule-color, #e7e2d8);
+            border-radius: 14px; padding: 2rem; margin-top: 2.5rem;
+            box-shadow: 0 8px 26px rgba(20, 30, 50, 0.05);
+        }
+        .detail-card .section-heading { margin-top: 0; margin-bottom: 1.5rem; }
+
+        .detalii-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem 2.5rem; margin: 0; }
+        .detalii-row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule-color, #efeae0); }
+        .detalii-row dt { font-family: var(--font-body); font-size: 0.9375rem; color: var(--text-secondary); margin: 0; }
+        .detalii-row dd { font-family: var(--font-body); font-weight: 600; color: var(--text-primary); margin: 0; text-align: right; }
+
+        .facilitati-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.85rem 1.5rem; }
+        .facilitati-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-body); font-size: 0.9375rem; color: var(--text-primary); }
+        .facilitati-item svg { color: var(--accent-green); flex-shrink: 0; }
+
+        /* ===== Price above the map ===== */
+        .map-price-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .map-price { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; color: var(--accent-green); }
+
+        /* ===== Inquiry listing code ===== */
+        .inquiry-code { font-family: var(--font-accent); font-size: 0.85rem; color: var(--text-secondary); margin: -0.5rem 0 1.25rem; }
+        .inquiry-code strong { color: var(--accent-green); letter-spacing: 0.03em; }
+
+        /* ===== Sidebar buy box (dellarte-inspired) ===== */
+        .detail-buy-box {
+            background: var(--surface-secondary); border-radius: 14px; padding: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .buy-price { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 1.25rem; }
+        .buy-price-label { font-family: var(--font-accent); font-variant: small-caps; text-transform: lowercase; letter-spacing: var(--letter-spacing-caps); font-size: 0.8rem; color: var(--text-secondary); }
+        .buy-price-amount { font-family: var(--font-display); font-size: 2.25rem; font-weight: 400; line-height: 1.05; color: var(--accent-green); }
+        .buy-price-unit { font-family: var(--font-body); font-size: 0.95rem; color: var(--text-secondary); }
+        .buy-price-com { font-family: var(--font-accent); font-size: 0.8rem; font-weight: 600; color: var(--accent-green); margin-top: 0.25rem; }
+
+        .buy-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1.25rem; }
+        .buy-action {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem;
+            background: var(--white, #fff); border: 1px solid var(--rule-color, #e7e2d8); border-radius: 10px;
+            padding: 0.7rem 0.4rem; cursor: pointer; color: var(--text-primary);
+            font-family: var(--font-accent); font-size: 0.78rem; font-weight: 500;
+            transition: border-color 0.18s, color 0.18s, background 0.18s;
+        }
+        .buy-action svg { color: var(--accent-green); }
+        .buy-action:hover { border-color: var(--accent-green); color: var(--accent-green); }
+        .buy-action.fav-toggle.is-active { border-color: var(--accent-green); color: var(--accent-green); }
+        .buy-action.fav-toggle.is-active svg { fill: var(--accent-green); }
+
+        .buy-image { border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; line-height: 0; }
+        .buy-image img { width: 100%; height: auto; display: block; aspect-ratio: 7 / 5; object-fit: cover; }
+
+        .buy-cta { display: flex; flex-direction: column; gap: 1rem; }
+        .buy-agent { font-family: var(--font-accent); font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+        .buy-agent a { color: var(--accent-green); text-decoration: none; font-weight: 500; }
+        .buy-agent a:hover { text-decoration: underline; }
+
+        @media (max-width: 700px) {
+            .detalii-grid { grid-template-columns: 1fr; gap: 0.5rem 0; }
+            .detail-card { padding: 1.5rem; }
+        }
     </style>
 
     {!isFaded && (
