@@ -1,5 +1,5 @@
 ---
-title: Garsoniera et 4 Darmanesti, Piatra Neamt
+title: Garsoniera et 4 Vandut, Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 14350
