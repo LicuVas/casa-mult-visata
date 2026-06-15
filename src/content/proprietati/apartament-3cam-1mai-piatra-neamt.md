@@ -33,6 +33,8 @@ comisionZero: true
 listingStatus: Activ
 updatedAt: ''
 coords: 46.9216
+videoUrl: ''
+virtualTourUrl: ''
 featuredImage: /images/scraped/post011_0.webp
 gallery:
   - /images/scraped/post011_0.webp
@@ -40,6 +42,22 @@ gallery:
   - /images/scraped/post011_2.webp
   - /images/scraped/post011_3.webp
   - /images/scraped/post011_4.webp
+intabulat: true
+cadastralNumber: ''
+floorsTotal: 4
+heatingType: Centrală proprie pe gaz
+orientation: ''
+parking: Stradă
+balconies: 1
+balconySurface: null
+condition: Renovat recent
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+buildingType: Bloc
+confortClass: Confort 1
+privateOwnerContact: ''
+privateNotes: ''
 ---
 
 Apartament cu 3 camere decomandat în suprafață utilă de 80,10 mp, situat la **parter**, zona 1 Mai, Piatra Neamț.
