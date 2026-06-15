@@ -2,19 +2,24 @@
 title: Apartament 3 cam et 1 Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 76900
+price: 79000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
 zone: Mărăței
 street: Bulevardul Traian
-rooms: 2
+rooms: 3
 bathrooms: 1
 surface: 67
 landSurface: null
 floor: '1'
 yearBuilt: null
-features: []
+features:
+  - -Tamplarie termopan
+  - -Centrala pe gaz
+  - -Parchet
+  - -Geam la baie
+  - -Usa metalica
 exclusive: false
 comisionZero: true
 listingStatus: Activ
@@ -36,7 +41,7 @@ gallery:
   - /images/20260129_170020.jpg
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: 10
