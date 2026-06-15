@@ -41,14 +41,21 @@ gallery:
   - /images/scraped/post021_2.webp
   - /images/scraped/post021_3.webp
   - /images/scraped/post021_4.webp
+intabulat: true
 cadastralNumber: ''
-floorsTotal: null
+compartimentare: Decomandat
+floorsTotal: 4
+heatingType: Centrală proprie pe gaz
 orientation: ''
-balconies: null
+parking: Stradă
+balconies: 2
 balconySurface: null
+condition: Renovat recent
 surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
+buildingType: Bloc
+confortClass: Confort 1
 privateOwnerContact: Andreea      0745281529      ACC   75000
 privateNotes: ''
 ---
