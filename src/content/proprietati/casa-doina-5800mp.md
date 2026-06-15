@@ -45,12 +45,17 @@ gallery:
   - /images/scraped/post002_4.webp
 cadastralNumber: ''
 floorsTotal: null
+heatingType: Sobă
 orientation: ''
+parking: Garaj
 balconies: null
 balconySurface: null
+condition: Bună stare
 surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
+buildingType: Casă
+structureType: Cărămidă
 privateOwnerContact: 0751 355 003      ACC  60000
 privateNotes: ''
 ---
