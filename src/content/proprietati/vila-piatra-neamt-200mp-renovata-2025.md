@@ -13,7 +13,7 @@ bathrooms: 1
 surface: 200
 landSurface: 400
 floor: ''
-yearBuilt: 2025
+yearBuilt: null
 features:
   - Vilă P+E
   - 4 camere
