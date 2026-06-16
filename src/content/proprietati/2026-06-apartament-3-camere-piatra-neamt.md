@@ -7,7 +7,7 @@ currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
 zone: Precista
-street: ''
+street: Pictor Nicolaie Grigorescu
 rooms: 3
 bathrooms: 2
 surface: 68
@@ -17,9 +17,14 @@ yearBuilt: null
 features:
   - -Ferestre termopan
   - -2 Bai
+  - -Hol generos
   - -Logie inchisa
-  - -balcon deschis
+  - -Balcon deschis
   - -Usa metalica
+  - -Parchet laminat
+  - -Gresie
+  - -Faianta
+  - -Pod acoperit
   - -Boxa
 exclusive: false
 comisionZero: true
