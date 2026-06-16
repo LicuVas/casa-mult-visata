@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { cdnImg, cdnSrcset } from '../lib/img';
 
 const allProperties = await getCollection('proprietati');
 
@@ -170,11 +171,7 @@ const zoneList = [
 						<article class="cs-item" data-id={prop.id}>
 							<div class="cs-media">
 								<a href={`/proprietati/${prop.id}/`}>
-									<picture>
-										<source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
-										<source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
-										<img src={imageSrc} alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
-									</picture>
+									<img src={cdnImg(imageSrc, { w: 800 })} srcset={cdnSrcset(imageSrc, [400, 600, 900])} sizes="(max-width: 700px) 100vw, 380px" alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
 								</a>
 								{(prop.data.listingStatus === 'Vândut' || prop.data.listingStatus === 'Închiriat' || prop.data.listingStatus === 'Rezervat') && (
 									<span class={`cs-ribbon cs-ribbon--${prop.data.listingStatus === 'Vândut' ? 'vandut' : prop.data.listingStatus === 'Închiriat' ? 'inchiriat' : 'rezervat'}`}>{prop.data.listingStatus}</span>

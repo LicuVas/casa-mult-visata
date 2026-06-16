@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import cartierCanon from '../../tools/cartier_canon.json';
 import { listingId } from '../utils/listingId';
+import { cdnImg, cdnSrcset } from '../lib/img';
 
 const allProperties = await getCollection('proprietati');
 
@@ -384,11 +385,7 @@ const propsForMap = visibleProperties.map((p, index) => {
                 {prop.data.pricePerUnit && <small>{prop.data.pricePerUnit}</small>}
               </span>
               <a href={`/proprietati/${prop.id}`}>
-                <picture>
-                  <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
-                  <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
-                  <img src={imageSrc} alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
-                </picture>
+                <img src={cdnImg(imageSrc, { w: 800 })} srcset={cdnSrcset(imageSrc, [400, 600, 900])} sizes="(max-width: 600px) 100vw, 400px" alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
               </a>
             </div>
             <div class="cs-caption">
@@ -1062,7 +1059,7 @@ const propsForMap = visibleProperties.map((p, index) => {
           const html = `
             <div class="map-popup">
               <a href="/proprietati/${p.id}/" class="map-popup-thumb">
-                <img src="${p.image}" alt="" loading="lazy">
+                <img src="${p.image && p.image.indexOf('/images/') === 0 ? '/.netlify/images?url=' + encodeURIComponent(p.image) + '&w=240&q=70&fit=cover' : p.image}" alt="" loading="lazy">
               </a>
               <div class="map-popup-body">
                 <h4><a href="/proprietati/${p.id}/">${p.title}</a></h4>

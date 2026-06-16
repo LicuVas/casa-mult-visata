@@ -106,7 +106,14 @@ const allPropsForClient = allProperties.map(p => {
         var article = document.createElement('article');
         article.className = 'cs-item';
         article.setAttribute('data-id', p.id);
-        var avifSrc = String(p.image || '').replace(/\.(webp|jpe?g|png)$/i, '.avif');
+        function cdnImg(src, w) {
+          if (!src || String(src).indexOf('/images/') !== 0) return src;
+          return '/.netlify/images?url=' + encodeURIComponent(src) + '&w=' + w + '&q=72&fit=cover';
+        }
+        function cdnSrcset(src, ws) {
+          if (!src || String(src).indexOf('/images/') !== 0) return '';
+          return ws.map(function (w) { return cdnImg(src, w) + ' ' + w + 'w'; }).join(', ');
+        }
         var lsRibbon = '';
         var lsMap = { 'Vândut': 'vandut', 'Închiriat': 'inchiriat', 'Rezervat': 'rezervat' };
         if (lsMap[p.listingStatus]) {
@@ -118,11 +125,7 @@ const allPropsForClient = allProperties.map(p => {
           +   '<span class="cs-status-tag">De ' + escapeHtml(String(p.status || '').toLowerCase()) + '</span>'
           +   '<span class="cs-price-tag">' + escapeHtml(formatPrice(p.price, p.currency)) + pricePerUnit + '</span>'
           +   '<a href="/proprietati/' + encodeURIComponent(p.id) + '/">'
-          +     '<picture>'
-          +       '<source srcset="' + escapeHtml(avifSrc) + '" type="image/avif">'
-          +       '<source srcset="' + escapeHtml(p.image.replace(/\.(webp|jpe?g|png)$/i, '.webp')) + '" type="image/webp">'
-          +       '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">'
-          +     '</picture>'
+          +     '<img src="' + escapeHtml(cdnImg(p.image, 800)) + '" srcset="' + escapeHtml(cdnSrcset(p.image, [400, 600, 900])) + '" sizes="(max-width: 700px) 100vw, 360px" alt="' + escapeHtml(p.title) + '" loading="lazy">'
           +   '</a>'
           + '</div>'
           + '<div class="cs-caption">'
