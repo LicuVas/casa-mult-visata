@@ -9,7 +9,7 @@ location: Gura Văii, jud. Neamț
 zone: Gura Văii
 street: ''
 rooms: 6
-bathrooms: null
+bathrooms: 2
 surface: 268
 landSurface: 8807
 floor: ''
