@@ -66,6 +66,4 @@ privateNotes: ''
 
 **Dotări:** ferestre termopan, gresie, faianță, parchet laminat, uși interioare din lemn.
 
-**Exterior:** curte frumos amenajată, garaj cu intrarea din strada principală, livadă cu pomi fructiferi. Zonă liniștită.
-
-Contact: 0747 814 263.
+**Exterior:** curte frumos amenajată, garaj cu intrarea din strada principală, livadă cu pomi fructiferi. Zonă liniștită.Contact: 0747 814 263.
