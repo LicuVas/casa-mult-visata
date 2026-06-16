@@ -36,7 +36,7 @@
 			'<div class="cmv-cb-inner">' +
 				'<div class="cmv-cb-text">' +
 					'<strong>Site-ul folosește cookie-uri tehnice esențiale.</strong> ' +
-					'Pentru harta Google Maps de pe pagina de contact este nevoie de acordul tău (poate seta cookie-uri Google). ' +
+					'Cu acordul tău folosim și cookie-uri pentru statistici anonime de trafic (Google Analytics) și pentru harta Google Maps de pe pagina de contact (Google poate seta cookie-uri). ' +
 					'Detalii: <a href="/cookies/">Politica de Cookies</a> · <a href="/confidentialitate/">Confidențialitate</a>.' +
 				'</div>' +
 				'<div class="cmv-cb-actions">' +
