@@ -8,7 +8,7 @@ pricePerUnit: ''
 location: Piatra Neamț
 zone: Centru
 street: ''
-rooms: 4
+rooms: 5
 bathrooms: 2
 surface: 240
 landSurface: 275
@@ -33,9 +33,9 @@ gallery:
   - /images/20260203_163900.jpg
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
-compartimentare: ''
+compartimentare: Decomandat
 floorsTotal: 1
 heatingType: Centrală proprie pe gaz
 orientation: ''
