@@ -1514,3 +1514,18 @@ a, button { -webkit-tap-highlight-color: rgba(138, 163, 153, 0.18); }
 .footer-credit a:hover { color: var(--accent-light); opacity: 1; }
 /* === END COOKIE BANNER === */
 
+
+/* === RECENZII GOOGLE (home) === */
+.home-reviews { padding: 3rem 2rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem 3rem; margin-top: 2.5rem; }
+.review-card { padding-top: 1.5rem; border-top: var(--rule-width) solid var(--rule-color); }
+.review-stars { font-size: 1.05rem; letter-spacing: 0.18em; margin-bottom: 1rem; line-height: 1; }
+.review-stars .stars-full { color: oklch(75% 0.14 80); }
+.review-stars .stars-empty { color: var(--rule-color); }
+.review-text { font-family: var(--font-display); font-weight: 300; font-style: italic; font-size: 1.1875rem; line-height: 1.6; color: var(--text-primary); margin: 0; }
+.review-author { margin-top: 1.25rem; display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
+.review-name { font-family: var(--font-accent); font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+.review-date { font-family: var(--font-accent); font-size: 0.8rem; color: var(--text-secondary); }
+.reviews-cta { margin-top: 3rem; }
+@media (max-width: 640px) { .reviews-grid { grid-template-columns: 1fr; gap: 2rem; } }
+/* === END RECENZII GOOGLE === */

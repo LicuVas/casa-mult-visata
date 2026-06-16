@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { cdnImg, cdnSrcset } from '../lib/img';
+import reviewsData from '../data/reviews.json';
+
+const reviews = reviewsData.items ?? [];
 
 const allProperties = await getCollection('proprietati');
 
@@ -257,6 +260,36 @@ const zoneList = [
 			</div>
 		</div>
 	</section>
+
+	<!-- RECENZII GOOGLE -->
+	{reviews.length > 0 && (
+		<section class="home-reviews">
+			<div class="container">
+				<div class="section-header reveal">
+					<hr>
+					<p class="label">Recenzii Google</p>
+					<h2>Ce spun clienții</h2>
+				</div>
+				<div class="reviews-grid reveal">
+					{reviews.map((r: any) => (
+						<figure class="review-card">
+							<div class="review-stars" aria-label={`${r.rating} din 5 stele`} role="img">
+								<span class="stars-full">{'★'.repeat(Math.max(0, Math.min(5, r.rating)))}</span><span class="stars-empty">{'★'.repeat(5 - Math.max(0, Math.min(5, r.rating)))}</span>
+							</div>
+							<blockquote class="review-text">{r.text}</blockquote>
+							<figcaption class="review-author">
+								<span class="review-name">{r.name}</span>
+								{r.date && <span class="review-date">{r.date}</span>}
+							</figcaption>
+						</figure>
+					))}
+				</div>
+				<div class="reviews-cta reveal">
+					<a href={reviewsData.googleReviewsUrl} class="editorial-link" target="_blank" rel="noopener">Vezi toate recenziile pe Google &rarr;</a>
+				</div>
+			</div>
+		</section>
+	)}
 
 	<!-- ZONE CLICKABLE -->
 	<section style="padding: 3rem 2rem 5rem;">
