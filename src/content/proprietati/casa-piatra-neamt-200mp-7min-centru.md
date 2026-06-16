@@ -2,18 +2,18 @@
 title: Casă 200 mp + 830 mp curte, la 7 min de centru — Piatra Neamț
 status: Vânzare
 propertyType: Casă
-price: 219500
+price: 219000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Centru
+zone: Vânători (Piatra Neamț)
 street: ''
 rooms: 5
 bathrooms: 2
 surface: 200
 landSurface: 830
-floor: ''
-yearBuilt: null
+floor: '1'
+yearBuilt: 1977
 features:
   - 5 dormitoare
   - Salon primitor
@@ -26,6 +26,7 @@ features:
   - Curte 830 mp
   - Acceptă schimb cu apartament + diferență
 comisionZero: true
+listingStatus: Activ
 updatedAt: ''
 coords: 46.9276
 videoUrl: ''
@@ -37,7 +38,9 @@ gallery:
   - /images/scraped/post012_2.webp
   - /images/scraped/post012_3.webp
   - /images/scraped/post012_4.webp
+intabulat: true
 cadastralNumber: ''
+compartimentare: Decomandat
 floorsTotal: 1
 heatingType: Centrală proprie pe gaz
 orientation: ''
@@ -45,8 +48,8 @@ parking: Loc suprateran
 balconies: null
 balconySurface: null
 condition: Renovat recent
-surfaceUtila: null
-surfaceConstruita: null
+surfaceUtila: 200
+surfaceConstruita: 225
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
