@@ -5,7 +5,7 @@ propertyType: Casă
 price: 65000
 currency: EUR
 pricePerUnit: ''
-location: Doina, jud. Neamț
+location: Neamț
 zone: Doina
 street: ''
 rooms: 2
@@ -43,6 +43,7 @@ gallery:
   - /images/scraped/post002_2.webp
   - /images/scraped/post002_3.webp
   - /images/scraped/post002_4.webp
+intabulat: true
 cadastralNumber: ''
 floorsTotal: null
 heatingType: Sobă
@@ -51,8 +52,8 @@ parking: Garaj
 balconies: null
 balconySurface: null
 condition: Bună stare
-surfaceUtila: null
-surfaceConstruita: null
+surfaceUtila: 95
+surfaceConstruita: 120
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
