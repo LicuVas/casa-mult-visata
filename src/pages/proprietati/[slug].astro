@@ -316,8 +316,14 @@ for (const grp of charGroups) {
     }
   }
 }
+// Curăță prefixele de listă lăsate de client în textul liber ("-Ferestre", "• Boxă", "– 2 băi")
+// — doar la afișare, fișierele .md rămân neatinse.
+const cleanFeature = (s: string) => s.replace(/^[\s\-–—•·*▪◦]+/, '').trim();
 // Merge free-text features + structured per-type characteristics, dedupe.
-const allFeatures = Array.from(new Set([...(prop.data.features || []), ...extraChars]));
+const allFeatures = Array.from(new Set([
+  ...(prop.data.features || []).map(cleanFeature).filter(Boolean),
+  ...extraChars,
+]));
 
 // Inquiry / contact strings now carry the listing code.
 const inquiryMsg = `Bună ziua! Sunt interesat(ă) de proprietatea ${prop.data.title} (cod ${lid}). Vă rog să mă contactați.`;
@@ -435,7 +441,7 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
 
                 <!-- DETALII IMOBILIARE (mutat în conținut, cu cod anunț) -->
                 <section class="detail-card detalii-card" aria-labelledby="detalii-heading">
-                    <h3 id="detalii-heading" class="section-heading">Detalii imobiliare</h3>
+                    <h3 id="detalii-heading" class="section-heading">Detalii</h3>
                     <dl class="detalii-grid">
                         {detalii.map(row => (
                             <div class="detalii-row">
@@ -446,10 +452,13 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                     </dl>
                 </section>
 
-                <!-- DESCRIERE -->
-                <div class="prop-description" style="font-size: 1.125rem; line-height: 1.8;">
-                    <Content />
-                </div>
+                <!-- DESCRIERE (în chenar ca celelalte secțiuni) -->
+                <section class="detail-card descriere-card" aria-labelledby="descriere-heading">
+                    <h3 id="descriere-heading" class="section-heading">Descriere</h3>
+                    <div class="prop-description" style="font-size: 1.0625rem; line-height: 1.8;">
+                        <Content />
+                    </div>
+                </section>
 
                 <!-- FACILITĂȚI ȘI CARACTERISTICI -->
                 {allFeatures.length > 0 && (
@@ -635,14 +644,16 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                         </button>
                     </div>
 
-                    <!-- IMAGINEA PROPRIETĂȚII (în locul pozei agentului) -->
-                    <div class="buy-image">
+                    <!-- AGENT (poza agentului) -->
+                    <a href="/despre/" class="buy-agent-card" aria-label="Vezi profilul agentului Cozma Vasile">
                         <picture>
-                            <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.avif')} type="image/avif" />
-                            <source srcset={imageSrc.replace(/\.(webp|jpe?g|png)$/i, '.webp')} type="image/webp" />
-                            <img src={imageSrc} alt={prop.data.title} width="560" height="400" loading="lazy" decoding="async" />
+                            <source srcset="/sistem/agent.avif" type="image/avif" />
+                            <source srcset="/sistem/agent.webp" type="image/webp" />
+                            <img src="/sistem/agent.webp" alt="Cozma Vasile — agent imobiliar" width="560" height="560" loading="lazy" decoding="async" />
                         </picture>
-                    </div>
+                        <span class="buy-agent-name">Cozma Vasile</span>
+                        <span class="buy-agent-role">Agent imobiliar · vezi profilul →</span>
+                    </a>
 
                     <div style="display: flex; flex-direction: column; gap: 1rem;">
                         <a href={`tel:${contactPhone}`} class="btn-primary" style="text-align: center;">Sună Agentul</a>
@@ -679,7 +690,6 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                     )}
                 </div>
 
-                <p class="buy-agent">Agent imobiliar: <a href="/despre/">Cozma Vasile — vezi profilul →</a></p>
 			</aside>
 		</div>
 	</div>
@@ -1068,13 +1078,14 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
         .buy-action.fav-toggle.is-active { border-color: var(--accent-green); color: var(--accent-green); }
         .buy-action.fav-toggle.is-active svg { fill: var(--accent-green); }
 
-        .buy-image { border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; line-height: 0; }
-        .buy-image img { width: 100%; height: auto; display: block; aspect-ratio: 7 / 5; object-fit: cover; }
+        .buy-agent-card { display: block; text-decoration: none; margin-bottom: 1.5rem; text-align: center; }
+        .buy-agent-card picture { display: block; border-radius: 10px; overflow: hidden; line-height: 0; }
+        .buy-agent-card img { width: 100%; height: auto; display: block; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; transition: transform 0.3s ease; }
+        .buy-agent-card:hover img { transform: scale(1.03); }
+        .buy-agent-name { display: block; font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-top: 0.65rem; }
+        .buy-agent-role { display: block; font-family: var(--font-accent); font-size: 0.8rem; color: var(--accent-green); margin-top: 0.1rem; }
 
         .buy-cta { display: flex; flex-direction: column; gap: 1rem; }
-        .buy-agent { font-family: var(--font-accent); font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
-        .buy-agent a { color: var(--accent-green); text-decoration: none; font-weight: 500; }
-        .buy-agent a:hover { text-decoration: underline; }
 
         @media (max-width: 700px) {
             .detalii-grid { grid-template-columns: 1fr; gap: 0.5rem 0; }
