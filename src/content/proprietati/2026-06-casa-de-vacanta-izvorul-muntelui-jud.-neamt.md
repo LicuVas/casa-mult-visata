@@ -5,7 +5,7 @@ propertyType: Casă
 price: 154800
 currency: EUR
 pricePerUnit: ''
-location: Neamt
+location: Bicaz,Neamt
 zone: ''
 street: ''
 rooms: 4
@@ -14,7 +14,12 @@ surface: 193
 landSurface: 590
 floor: ''
 yearBuilt: null
-features: []
+features:
+  - -5 Camere
+  - -2 Bai
+  - -2 Balcoane
+  - -Zona de gratar
+  - -Sauna
 exclusive: false
 comisionZero: true
 listingStatus: Activ
