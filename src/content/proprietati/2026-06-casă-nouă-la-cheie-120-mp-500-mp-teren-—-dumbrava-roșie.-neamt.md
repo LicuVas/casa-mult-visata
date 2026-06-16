@@ -25,14 +25,15 @@ features:
   - Centrală gaz
   - Încălzire în pardoseală
   - Termopan 3 sticle
-  - Gresie
-  - Faianță
-  - Parchet
+  - Gresie alese de client
+  - Faianță alese de client
+  - Parchet alese de client
   - Obiecte sanitare alese de client
   - Fosă septică
   - Izolație exterioară polistiren 10 cm (opțional vată bazaltică)
   - Izolație pod vată 15 cm
-  - Acceptă plată prin credit bancar
+  - Se acceptă plată numerar, prin credit bancar
+  - Termen de finalizare 8-10 luni
 caracteristiciApartament: null
 caracteristiciCasa: null
 caracteristiciTeren: null
