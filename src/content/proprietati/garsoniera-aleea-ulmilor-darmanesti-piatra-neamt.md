@@ -44,7 +44,7 @@ gallery:
 intabulat: true
 cadastralNumber: ''
 compartimentare: Semidecomandat
-floorsTotal: null
+floorsTotal: 4
 heatingType: Centrală proprie pe gaz
 orientation: ''
 balconies: null
