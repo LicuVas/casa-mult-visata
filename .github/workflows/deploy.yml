@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need previous commit so IndexNow can diff changed listings
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -57,3 +59,7 @@ jobs:
             --site=661dcad7-eac6-4f24-9249-4536939163e3 \
             --auth="$NETLIFY_AUTH_TOKEN" \
             --message="GitHub Action: $GITHUB_SHA"
+
+      - name: Notify IndexNow (Bing/Yandex -> minutes, also feeds ChatGPT Search)
+        run: node scripts/indexnow.mjs
+        continue-on-error: true   # a Bing hiccup must never fail the client's publish
