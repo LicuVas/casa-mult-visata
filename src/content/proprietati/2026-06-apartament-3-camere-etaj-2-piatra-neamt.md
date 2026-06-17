@@ -21,7 +21,16 @@ features:
   - -Spatiu de depozitare
   - -Geam la baie
   - -Usa metalica
-caracteristiciApartament: null
+caracteristiciApartament:
+  lift: false
+  centralaProprie: false
+  aerConditionat: false
+  interfon: false
+  boxa: false
+  balconInchis: false
+  iluminatStradal: false
+  stradaAsfaltata: false
+  transportInComun: false
 caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
