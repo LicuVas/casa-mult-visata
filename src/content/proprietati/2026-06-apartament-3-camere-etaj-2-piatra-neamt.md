@@ -2,7 +2,7 @@
 title: Apartament 3 camere  etaj 2 Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 58600
+price: 59600
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
