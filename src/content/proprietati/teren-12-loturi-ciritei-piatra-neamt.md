@@ -20,6 +20,15 @@ features:
   - PUZ existent
   - Cale de acces 7 m
   - Utilități la ~190-200 m
+caracteristiciTeren:
+  intravilan: true
+  extravilan: false
+  deschidereStradala: true
+  imprejmuit: false
+  utilitatiLaLimita: true
+  iluminatStradal: false
+  stradaAsfaltata: false
+  stradaPietruita: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
