@@ -14,23 +14,16 @@ surface: 56
 landSurface: null
 floor: '2'
 yearBuilt: 1962
-features:
-  - -Ferestre tip termopan
-  - -Centrala termica
-  - -Balcon deschis
-  - -Spatiu de depozitare
-  - -Geam la baie
-  - -Usa metalica
 caracteristiciApartament:
   lift: false
-  centralaProprie: false
+  centralaProprie: true
   aerConditionat: false
-  interfon: false
+  interfon: true
   boxa: false
   balconInchis: false
-  iluminatStradal: false
-  stradaAsfaltata: false
-  transportInComun: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
