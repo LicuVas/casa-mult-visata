@@ -28,6 +28,16 @@ features:
   - Parchet
   - Între Maielvi și piața din Dărmănești
   - Aproape de mijloace transport în comun
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: false
+  interfon: true
+  boxa: false
+  balconInchis: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
