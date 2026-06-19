@@ -38,6 +38,17 @@ videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
 featuredImage: /images/20260618_165224.jpg
+gallery:
+  - /images/20260618_163741.jpg
+  - /images/20260618_163822.jpg
+  - /images/20260618_163923.jpg
+  - /images/20260618_163746.jpg
+  - /images/20260618_164003.jpg
+  - /images/20260618_164119.jpg
+  - /images/20260618_163752.jpg
+  - /images/20260618_164053.jpg
+  - /images/20260618_164854.jpg
+  - /images/20260618_165232.jpg
 tech_separator: separator
 energyClass: ''
 intabulat: false
