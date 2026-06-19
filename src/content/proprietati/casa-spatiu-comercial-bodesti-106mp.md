@@ -27,6 +27,19 @@ features:
   - Autorizație DSV
   - Autorizație DSP
   - 'Posibilități: sediu firmă, birouri, salon, magazin etc.'
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: false
+  garaj: false
+  anexe: false
+  terasa: true
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
