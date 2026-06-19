@@ -14,12 +14,16 @@ surface: 67
 landSurface: null
 floor: '1'
 yearBuilt: null
-features:
-  - -Tamplarie termopan
-  - -Centrala pe gaz
-  - -Parchet
-  - -Geam la baie
-  - -Usa metalica
+caracteristiciApartament:
+  lift: true
+  centralaProprie: true
+  aerConditionat: false
+  interfon: true
+  boxa: true
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 exclusive: false
 comisionZero: true
 listingStatus: Activ
