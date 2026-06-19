@@ -14,21 +14,16 @@ surface: 80
 landSurface: null
 floor: Parter
 yearBuilt: 1990
-features:
-  - Decomandat
-  - Living generos
-  - 2 dormitoare
-  - Hol
-  - Baie
-  - Bucătărie
-  - Balcon închis
-  - Centrală termică
-  - Gresie
-  - Faianță
-  - Parchet laminat
-  - Boxă
-  - Loc de parcare
-  - Imobil cu 4 etaje
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: false
+  interfon: true
+  boxa: true
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
