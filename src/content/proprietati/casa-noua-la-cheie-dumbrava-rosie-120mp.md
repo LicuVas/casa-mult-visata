@@ -33,6 +33,19 @@ features:
   - Izolație exterioară polistiren 10 cm (opțional vată bazaltică)
   - Izolație pod vată 15 cm
   - Acceptă plată prin credit bancar
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: false
+  garaj: false
+  anexe: false
+  terasa: true
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: false
+  iluminatStradal: true
+  stradaAsfaltata: false
+  stradaPietruita: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
