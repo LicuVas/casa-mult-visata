@@ -18,6 +18,16 @@ features:
   - -2 sali
   - -2 grupuri sanitare
   - -terasa
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: true
+  interfon: false
+  boxa: false
+  balconInchis: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 exclusive: false
 comisionZero: true
 listingStatus: Activ
