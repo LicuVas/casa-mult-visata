@@ -18,7 +18,7 @@ caracteristiciApartament:
   lift: true
   centralaProprie: true
   aerConditionat: true
-  interfon: true
+  interfon: false
   boxa: true
   balconInchis: true
   iluminatStradal: true
