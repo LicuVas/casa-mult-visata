@@ -39,10 +39,7 @@ virtualTourUrl: ''
 floorPlan: ''
 featuredImage: /images/20260618_165224.jpg
 gallery:
-  - /images/20260618_165229.jpg
-  - /images/20260618_165232.jpg
   - /images/20260618_163913.jpg
-  - /images/20260618_164119.jpg
   - /images/20260618_163746.jpg
   - /images/20260618_163752.jpg
   - /images/20260618_163822.jpg
