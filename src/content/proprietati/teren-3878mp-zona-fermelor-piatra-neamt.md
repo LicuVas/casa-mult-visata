@@ -18,6 +18,15 @@ features:
   - 35 €/mp
   - Front stradal 15,7 m
   - Toate utilitățile
+caracteristiciTeren:
+  intravilan: true
+  extravilan: false
+  deschidereStradala: true
+  imprejmuit: false
+  utilitatiLaLimita: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
