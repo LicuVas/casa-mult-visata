@@ -5,7 +5,8 @@ propertyType: Casă
 price: 154800
 currency: EUR
 pricePerUnit: ''
-location: Bicaz,Neamt
+location: Neamt
+localitate: Neamț › Bicaz › Izvorul Muntelui
 zone: ''
 street: ''
 rooms: 4
@@ -20,6 +21,19 @@ features:
   - -2 Balcoane
   - -Zona de gratar
   - -Sauna
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: true
+  garaj: false
+  anexe: true
+  terasa: true
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: false
+  iluminatStradal: true
+  stradaAsfaltata: false
+  stradaPietruita: true
 exclusive: false
 comisionZero: true
 listingStatus: Activ
