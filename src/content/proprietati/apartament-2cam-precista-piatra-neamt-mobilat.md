@@ -14,20 +14,16 @@ surface: 56
 landSurface: null
 floor: Parter
 yearBuilt: null
-features:
-  - Decomandat
-  - Living generos
-  - Dormitor
-  - Hol
-  - Baie
-  - Bucătărie
-  - 2 balcoane închise
-  - Centrală termică
-  - Gresie
-  - Faianță
-  - Parchet laminat
-  - Mobilat + utilat complet
-  - Imobil cu 4 etaje
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: true
+  interfon: false
+  boxa: false
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
