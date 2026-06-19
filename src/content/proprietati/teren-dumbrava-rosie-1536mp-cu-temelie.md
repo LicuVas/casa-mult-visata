@@ -21,7 +21,7 @@ features:
   - Deschidere 21 m
   - Temelie existentă 240 mp
 comisionZero: true
-listingStatus: Activ
+listingStatus: Retras
 updatedAt: ''
 coords: 46.8832
 featuredImage: /images/scraped/post000_0.webp
