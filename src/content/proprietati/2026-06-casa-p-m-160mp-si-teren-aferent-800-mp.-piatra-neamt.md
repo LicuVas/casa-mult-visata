@@ -14,21 +14,26 @@ surface: 160
 landSurface: 800
 floor: ''
 yearBuilt: 2009
-features:
-  - '- Centrala termica'
-  - -Ferestre termopan
-  - -Caramida
-  - -Curent electric
-  - -Gaz metan
-  - -Apa
-  - -Fosa septica
-  - -Canalizare
-  - -Drum asfaltat
-  - -Iluminat public
-  - '-'
-caracteristiciApartament: null
+caracteristiciApartament:
+  lift: true
+  centralaProprie: true
+  aerConditionat: true
+  interfon: true
+  boxa: true
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 caracteristiciCasa: null
-caracteristiciTeren: null
+caracteristiciTeren:
+  intravilan: false
+  extravilan: false
+  deschidereStradala: false
+  imprejmuit: false
+  utilitatiLaLimita: false
+  iluminatStradal: false
+  stradaAsfaltata: false
+  stradaPietruita: false
 exclusive: false
 comisionZero: true
 listingStatus: Activ
