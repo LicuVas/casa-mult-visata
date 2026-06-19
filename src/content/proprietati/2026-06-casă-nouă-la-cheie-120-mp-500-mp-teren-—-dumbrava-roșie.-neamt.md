@@ -35,7 +35,19 @@ features:
   - Se acceptă plată numerar, prin credit bancar
   - Termen de finalizare 8-10 luni
 caracteristiciApartament: null
-caracteristiciCasa: null
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: true
+  garaj: false
+  anexe: false
+  terasa: true
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: true
+  iluminatStradal: true
+  stradaAsfaltata: false
+  stradaPietruita: true
 caracteristiciTeren: null
 exclusive: true
 comisionZero: true
