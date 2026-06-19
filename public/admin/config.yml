@@ -6,6 +6,19 @@ backend:
 media_folder: "public/images"
 public_folder: "/images"
 
+# Optimizare automată a pozelor ÎN BROWSER, înainte de commit (Sveltia native).
+# Fiecare poză de telefon (3-8 MB) → WebP, max 2048px → ~200-400 KB.
+# Astfel commit-ul rămâne sub limita GitHub, oricâte poze adaugă clientul.
+media_libraries:
+  default:
+    config:
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 2048
+          height: 2048
+
 site_url: https://casamultvisata.ro
 display_url: https://casamultvisata.ro
 
