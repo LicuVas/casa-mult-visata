@@ -2,17 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { cdnImg, cdnSrcset } from '../lib/img';
+import { displayZone } from '../utils/localitate';
 import reviewsData from '../data/reviews.json';
 
 const reviews = reviewsData.items ?? [];
 
 const allProperties = await getCollection('proprietati');
 
-// Pick featured: prefer items with featuredImage + exclusive/comisionZero, fill up to 6
-const withImage = allProperties.filter(p => p.data.featuredImage);
-const priority = withImage.filter(p => p.data.exclusive || p.data.comisionZero);
-const rest = withImage.filter(p => !(p.data.exclusive || p.data.comisionZero));
-const featuredProperties = [...priority, ...rest].slice(0, 6);
+// Homepage listing feed: toate proprietățile vizibile (fără Retras), ordonate ca relevanță —
+// cu poză + (exclusiv/comision 0) primele, apoi restul cu poză, apoi cele fără poză.
+// Paginate client-side 15/pagină cu butoane prev/next (vezi scriptul de jos).
+const HOME_PAGE_SIZE = 15;
+const visibleHome = allProperties.filter(p => (p.data.listingStatus || 'Activ') !== 'Retras');
+const homeProperties = [
+  ...visibleHome.filter(p => p.data.featuredImage && (p.data.exclusive || p.data.comisionZero)),
+  ...visibleHome.filter(p => p.data.featuredImage && !(p.data.exclusive || p.data.comisionZero)),
+  ...visibleHome.filter(p => !p.data.featuredImage),
+];
 
 const totalCount = allProperties.length;
 
@@ -163,15 +169,15 @@ const zoneList = [
 				<a href="/proprietati/" class="editorial-link">Vezi toate ({totalCount}) &rarr;</a>
 			</div>
 
-			<div class="contact-sheet reveal" style="margin-top:2.5rem;">
-				{featuredProperties.map((prop) => {
+			<div id="home-listings" class="contact-sheet reveal" style="margin-top:2.5rem;">
+				{homeProperties.map((prop, i) => {
 					const imageSrc = prop.data.featuredImage || (prop.data.propertyType === 'Apartament' ? '/sistem/apartament.webp' : prop.data.propertyType === 'Casă' ? '/sistem/casa.webp' : '/sistem/teren.webp');
 					let metaDetails = [];
 					if (prop.data.rooms) metaDetails.push(`${prop.data.rooms} cam.`);
 					if (prop.data.surface) metaDetails.push(`${prop.data.surface} mp`);
 					if (prop.data.landSurface && prop.data.propertyType === 'Teren') metaDetails.push(`${prop.data.landSurface} mp teren`);
 					return (
-						<article class="cs-item" data-id={prop.id}>
+						<article class="cs-item" data-id={prop.id} data-ph={i} style={i >= HOME_PAGE_SIZE ? 'display:none' : undefined}>
 							<div class="cs-media">
 								<a href={`/proprietati/${prop.id}/`}>
 									<img src={cdnImg(imageSrc, { w: 800 })} srcset={cdnSrcset(imageSrc, [400, 600, 900])} sizes="(max-width: 700px) 100vw, 380px" alt={prop.data.title} width="800" height="600" loading="lazy" decoding="async">
@@ -193,7 +199,7 @@ const zoneList = [
 									</div>
 								)}
 								<h3><a href={`/proprietati/${prop.id}/`}>{prop.data.title}</a></h3>
-								{prop.data.zone && <p class="cs-zone">{prop.data.zone}</p>}
+								{displayZone(prop.data) && <p class="cs-zone">{displayZone(prop.data)}</p>}
 								{metaDetails.length > 0 && (
 									<p class="meta">
 										{metaDetails.map(m => <span>{m}</span>)}
@@ -204,6 +210,12 @@ const zoneList = [
 					)
 				})}
 			</div>
+
+			<nav class="home-pagination" aria-label="Navigare pagini proprietăți" hidden>
+				<button type="button" id="home-prev" class="pg-btn" disabled>&larr; Pagina anterioară</button>
+				<span class="pg-status" id="home-pg-status" aria-live="polite"></span>
+				<button type="button" id="home-next" class="pg-btn">Pagina următoare &rarr;</button>
+			</nav>
 		</div>
 	</section>
 
@@ -337,5 +349,80 @@ const zoneList = [
 			</div>
 		</div>
 	</section>
+
+	<style>
+		.home-pagination {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 1.5rem;
+			margin-top: 3rem;
+			flex-wrap: wrap;
+		}
+		.home-pagination .pg-btn {
+			font-family: var(--font-accent);
+			font-size: 0.9rem;
+			font-weight: 500;
+			letter-spacing: 0.02em;
+			color: var(--accent, #5a6b52);
+			background: transparent;
+			border: 1px solid var(--accent, #5a6b52);
+			padding: 0.7rem 1.4rem;
+			cursor: pointer;
+			transition: background 0.2s, color 0.2s, opacity 0.2s;
+		}
+		.home-pagination .pg-btn:hover:not(:disabled) {
+			background: var(--accent, #5a6b52);
+			color: #fff;
+		}
+		.home-pagination .pg-btn:disabled {
+			opacity: 0.35;
+			cursor: default;
+		}
+		.home-pagination .pg-status {
+			font-family: var(--font-accent);
+			font-size: 0.85rem;
+			color: var(--muted, #8a8a82);
+			min-width: 9ch;
+			text-align: center;
+		}
+	</style>
+
+	<script is:inline>
+		(function () {
+			var PAGE = 15;
+			var grid = document.getElementById('home-listings');
+			if (!grid) return;
+			var items = Array.prototype.slice.call(grid.querySelectorAll('.cs-item'));
+			var nav = document.querySelector('.home-pagination');
+			var prev = document.getElementById('home-prev');
+			var next = document.getElementById('home-next');
+			var status = document.getElementById('home-pg-status');
+			if (!nav || !prev || !next || !status) return;
+			var pages = Math.ceil(items.length / PAGE);
+			var page = 0;
+			if (pages <= 1) { return; } // un singur ecran — fără paginare
+			nav.hidden = false;
+			function render() {
+				var start = page * PAGE;
+				for (var i = 0; i < items.length; i++) {
+					items[i].style.display = (i >= start && i < start + PAGE) ? '' : 'none';
+				}
+				status.textContent = 'Pagina ' + (page + 1) + ' din ' + pages;
+				prev.disabled = page === 0;
+				next.disabled = page >= pages - 1;
+			}
+			function go(delta) {
+				var np = page + delta;
+				if (np < 0 || np > pages - 1) return;
+				page = np;
+				render();
+				grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}
+			prev.addEventListener('click', function () { go(-1); });
+			next.addEventListener('click', function () { go(1); });
+			render();
+		})();
+	</script>
 
 </Layout>

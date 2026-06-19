@@ -40,6 +40,75 @@ collections:
       - {label: "Preț pe unitate (ex. 35 €/mp) - Opțional", name: "pricePerUnit", widget: "string", required: false}
       
       - {label: "Locație (Completă)", name: "location", widget: "string"}
+      # LOCALITATE STRUCTURATĂ (jud. Neamț → Localitate → Sat/Cartier).
+      # Valoarea încapsulează ierarhia: ex. „Neamț › Bicaz › Izvorul Muntelui".
+      # Opțional + aditiv: anunțurile vechi rămân pe „Zonă/Sat" de mai jos.
+      # Recomandat să folosești ACEST câmp la anunțuri noi. Adăugarea de localități = editezi lista de aici.
+      - label: "Localitate (Județ › Localitate › Sat/Cartier)"
+        name: "localitate"
+        widget: "select"
+        required: false
+        hint: "Alege localitatea structurat (Județ › Localitate › Sat/Cartier). Dacă lipsește o localitate/sat din listă, scrie-o în câmpul Locație (Completă) de mai sus și anunță-mă să o adaug."
+        options:
+          # — Piatra Neamț (cartiere) —
+          - "Neamț › Piatra Neamț › Centru"
+          - "Neamț › Piatra Neamț › Precista"
+          - "Neamț › Piatra Neamț › Mărăței"
+          - "Neamț › Piatra Neamț › Dărmănești"
+          - "Neamț › Piatra Neamț › 1 Mai"
+          - "Neamț › Piatra Neamț › Tei"
+          - "Neamț › Piatra Neamț › Ciritei"
+          - "Neamț › Piatra Neamț › Văleni"
+          - "Neamț › Piatra Neamț › Speranța"
+          - "Neamț › Piatra Neamț › Sărata"
+          - "Neamț › Piatra Neamț › Doamna"
+          - "Neamț › Piatra Neamț › Pietricica"
+          - "Neamț › Piatra Neamț › Vânători"
+          - "Neamț › Piatra Neamț › Obor"
+          # — Localități / comune din jurul Pietrei Neamț —
+          - "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+          - "Neamț › Dumbrava Roșie › Cut"
+          - "Neamț › Dumbrava Roșie › Brășăuți"
+          - "Neamț › Dumbrava Roșie › Izvoare"
+          - "Neamț › Săvinești › Săvinești"
+          - "Neamț › Girov › Girov"
+          - "Neamț › Girov › Doina"
+          - "Neamț › Girov › Gura Văii"
+          - "Neamț › Girov › Căciulești"
+          - "Neamț › Bodești › Bodești"
+          - "Neamț › Bodești › Bodești de Jos"
+          - "Neamț › Bodești › Oslobeni"
+          - "Neamț › Botești › Botești"
+          - "Neamț › Botești › Nisiporești"
+          - "Neamț › Dobreni › Dobreni"
+          - "Neamț › Dobreni › Negrești"
+          - "Neamț › Gârcina › Gârcina"
+          - "Neamț › Gârcina › Cuejdiu"
+          - "Neamț › Alexandru cel Bun › Viișoara"
+          - "Neamț › Alexandru cel Bun › Bistrița"
+          - "Neamț › Alexandru cel Bun › Vădurele"
+          - "Neamț › Alexandru cel Bun › Bisericani"
+          - "Neamț › Pângărați › Pângărați"
+          - "Neamț › Pângărați › Poiana"
+          - "Neamț › Pângărați › Stejaru"
+          - "Neamț › Piatra Șoimului › Piatra Șoimului"
+          - "Neamț › Piatra Șoimului › Luminiș"
+          # — Bicaz și împrejurimi —
+          - "Neamț › Bicaz › Bicaz"
+          - "Neamț › Bicaz › Izvorul Muntelui"
+          - "Neamț › Bicaz › Capșa"
+          - "Neamț › Bicaz › Dodeni"
+          - "Neamț › Bicaz › Potoci"
+          - "Neamț › Tarcău › Tarcău"
+          - "Neamț › Tarcău › Brateș"
+          # — Alte orașe Neamț —
+          - "Neamț › Roznov › Roznov"
+          - "Neamț › Roznov › Chintinici"
+          - "Neamț › Vânători-Neamț › Vânători-Neamț"
+          - "Neamț › Vânători-Neamț › Lunca"
+          - "Neamț › Târgu Neamț › Târgu Neamț"
+          - "Neamț › Târgu Neamț › Humulești"
+          - "Neamț › Roman › Roman"
       - label: "Zonă / Cartier / Sat"
         name: "zone"
         widget: "select"
@@ -85,7 +154,7 @@ collections:
         required: false
         hint: "Bifează doar pentru apartamente. Bifele apar în secțiunea „Facilități și caracteristici”."
         fields:
-          - {label: "Lift", name: "lift", widget: "boolean", default: false, required: false}
+          - {label: "Lift / ascensor", name: "lift", widget: "boolean", default: false, required: false, hint: "Bifează dacă blocul are lift — INDEPENDENT de numărul de etaje. Și blocurile de 4–6 etaje pot avea lift. Numărul de etaje se completează separat, mai jos la Etaje bloc (total)."}
           - {label: "Centrală proprie", name: "centralaProprie", widget: "boolean", default: false, required: false}
           - {label: "Aer condiționat", name: "aerConditionat", widget: "boolean", default: false, required: false}
           - {label: "Interfon / videointerfon", name: "interfon", widget: "boolean", default: false, required: false}
@@ -190,7 +259,7 @@ collections:
         required: false
         options: ["Decomandat", "Semidecomandat", "Nedecomandat", "Circular", "Open-space"]
         hint: "Pentru apartamente. Cel mai folosit filtru pe Storia/Imobiliare."
-      - {label: "Etaj total al clădirii", name: "floorsTotal", widget: "number", value_type: "int", required: false, hint: 'Ex: 4 (dacă „Etaj" este „3/4").'}
+      - {label: "Etaje bloc (total)", name: "floorsTotal", widget: "number", value_type: "int", required: false, hint: 'Numărul total de etaje al blocului/clădirii. Ex: 6 (dacă „Etaj" este „3/6"). Nu are legătură cu liftul — un bloc de 6 etaje poate avea lift.'}
       - label: "Tip încălzire"
         name: "heatingType"
         widget: "select"

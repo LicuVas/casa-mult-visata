@@ -37,6 +37,8 @@ const proprietati = defineCollection({
     pricePerUnit: optStr,
     location: z.string().min(1, 'Locația nu poate fi goală'),
     zone: optStr,
+    // Localitate structurată „Județ › Localitate › Sat/Cartier" (select CMS). Opțional, aditiv.
+    localitate: optStr,
     street: optStr,
     propertyType: reqEnum(['Apartament', 'Casă', 'Teren', 'Spațiu Comercial'] as const, 'Apartament'),
     rooms: optNum,

@@ -5,6 +5,7 @@ import imageDims from '../../data/image_dims.json';
 import cartierCanon from '../../../tools/cartier_canon.json';
 import { listingId } from '../../utils/listingId';
 import { cdnImg, cdnSrcset } from '../../lib/img';
+import { displayZone, parseLocalitate } from '../../utils/localitate';
 
 const DIMS = imageDims as Record<string, [number, number]>;
 function getDims(src: string): [number, number] {
@@ -207,9 +208,10 @@ if (normalizedCoords) {
   mapLat = normalizedCoords[0];
   mapLng = normalizedCoords[1];
   mapZoom = 15;
-} else if (prop.data.zone && ZONE_CENTROIDS_SERVER[prop.data.zone]) {
-  mapLat = ZONE_CENTROIDS_SERVER[prop.data.zone][0];
-  mapLng = ZONE_CENTROIDS_SERVER[prop.data.zone][1];
+} else if ((prop.data.zone || parseLocalitate(prop.data.localitate)?.sat) && ZONE_CENTROIDS_SERVER[prop.data.zone || parseLocalitate(prop.data.localitate)?.sat || '']) {
+  const zk = prop.data.zone || parseLocalitate(prop.data.localitate)?.sat || '';
+  mapLat = ZONE_CENTROIDS_SERVER[zk][0];
+  mapLng = ZONE_CENTROIDS_SERVER[zk][1];
   mapZoom = 14;
 } else {
   mapLat = 46.929;
@@ -260,7 +262,9 @@ const lid = listingId(prop.id);
 // Param names match the filter logic in /proprietati (type, status, zone, q).
 const statusHref = `/proprietati/?status=${encodeURIComponent(prop.data.status)}`;
 const typeHref = `/proprietati/?type=${encodeURIComponent(prop.data.propertyType)}`;
-const zoneHref = prop.data.zone ? `/proprietati/?zone=${encodeURIComponent(prop.data.zone)}` : null;
+// Zona efectivă: clasică sau frunza din `localitate` (sat/cartier), pt anunțuri noi structurate.
+const effZone = prop.data.zone || (parseLocalitate(prop.data.localitate)?.sat ?? '');
+const zoneHref = effZone ? `/proprietati/?zone=${encodeURIComponent(effZone)}` : null;
 const locHref = `/proprietati/?q=${encodeURIComponent(prop.data.location)}`;
 const streetHref = prop.data.street ? `/proprietati/?q=${encodeURIComponent(prop.data.street)}` : null;
 
@@ -327,7 +331,6 @@ const allFeatures = Array.from(new Set([
 ]));
 
 // Inquiry / contact strings now carry the listing code.
-const inquiryMsg = `Bună ziua! Sunt interesat(ă) de proprietatea ${prop.data.title} (cod ${lid}). Vă rog să mă contactați.`;
 const contactWithId = `/contact/?proprietate=${encodeURIComponent(prop.data.title)}&id=${encodeURIComponent(lid)}`;
 const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.data.title} (cod ${lid})`;
 ---
@@ -368,7 +371,7 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                 <p class="prop-location">
                     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     <a href={locHref}>{prop.data.location}</a>
-                    {zoneHref && <>{' · '}<a href={zoneHref}>{prop.data.zone}</a></>}
+                    {zoneHref && <>{' · '}<a href={zoneHref}>{effZone}</a></>}
                     {streetHref && <>{' · '}<a href={streetHref}>{prop.data.street}</a></>}
                 </p>
                 {updatedAtFormatted && (
@@ -524,45 +527,8 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                     </section>
                 )}
 
-                <section class="inquiry-section" aria-labelledby="inquiry-heading">
-                    <h3 id="inquiry-heading" class="section-heading">Programează vizionare sau cere detalii</h3>
-                    <p class="inquiry-code">Cod anunț: <strong>{lid}</strong></p>
-                    <form
-                        class="inquiry-form"
-                        name="proprietate-inquiry"
-                        method="POST"
-                        action="/multumesc/"
-                        data-netlify="true"
-                        netlify-honeypot="bot-field"
-                    >
-                        <input type="hidden" name="form-name" value="proprietate-inquiry" />
-                        <input type="hidden" name="proprietate" value={prop.data.title} />
-                        <input type="hidden" name="anunt-id" value={lid} />
-                        <input type="hidden" name="proprietate-url" value={Astro.url.pathname} />
-                        <p class="inquiry-honeypot" hidden>
-                            <label>Nu completați acest câmp: <input name="bot-field" /></label>
-                        </p>
-                        <div class="inquiry-row">
-                            <label class="inquiry-field">
-                                <span>Nume <em>*</em></span>
-                                <input type="text" name="nume" required autocomplete="name" enterkeyhint="next" />
-                            </label>
-                            <label class="inquiry-field">
-                                <span>Telefon <em>*</em></span>
-                                <input type="tel" name="telefon" required autocomplete="tel" inputmode="tel" enterkeyhint="next" pattern="[0-9 +()-]{7,20}" />
-                            </label>
-                        </div>
-                        <label class="inquiry-field">
-                            <span>Email</span>
-                            <input type="email" name="email" autocomplete="email" inputmode="email" enterkeyhint="next" />
-                        </label>
-                        <label class="inquiry-field">
-                            <span>Mesaj</span>
-                            <textarea name="mesaj" rows="4" autocomplete="off" enterkeyhint="send">{inquiryMsg}</textarea>
-                        </label>
-                        <button type="submit" class="btn-primary inquiry-submit">Trimite mesajul</button>
-                    </form>
-                </section>
+                {/* Secțiunea formular „Programează vizionare prin email" a fost eliminată la cererea clientului.
+                    Contactul se face prin telefon / WhatsApp (CTA în sidebar + bara sticky mobil). */}
 
                 {similar.length > 0 && (
                     <section class="similar-section" aria-labelledby="similar-heading">

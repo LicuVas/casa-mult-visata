@@ -7,7 +7,10 @@ on:
 
 concurrency:
   group: deploy-netlify
-  cancel-in-progress: true
+  # false = build-urile se pun la coadă și se termină pe rând (nu se anulează unul pe altul).
+  # Clientul salvează des din CMS → cu `true`, salvările rapide anulau build-urile în lanț
+  # și anunțurile/pozele noi nu mai ajungeau live. Coada garantează că ultima stare se publică.
+  cancel-in-progress: false
 
 jobs:
   deploy:

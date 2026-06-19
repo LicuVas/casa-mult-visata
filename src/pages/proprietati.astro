@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import cartierCanon from '../../tools/cartier_canon.json';
 import { listingId } from '../utils/listingId';
 import { cdnImg, cdnSrcset } from '../lib/img';
+import { displayZone, localitateTokens, parseLocalitate } from '../utils/localitate';
 
 const allProperties = await getCollection('proprietati');
 
@@ -111,7 +112,8 @@ function pickFallbackImage(propertyType: string): string {
 
 const propsForMap = visibleProperties.map((p, index) => {
   const coords = normalizeCoords(p.data.coords);
-  const zoneCentroid = p.data.zone && ZONE_CENTROIDS[p.data.zone] ? ZONE_CENTROIDS[p.data.zone] : null;
+  const centroidKey = p.data.zone || (parseLocalitate(p.data.localitate)?.sat ?? '');
+  const zoneCentroid = centroidKey && ZONE_CENTROIDS[centroidKey] ? ZONE_CENTROIDS[centroidKey] : null;
   const imageSrc = p.data.featuredImage || pickFallbackImage(p.data.propertyType);
   return {
     id: p.id,
@@ -302,9 +304,17 @@ const propsForMap = visibleProperties.map((p, index) => {
         const region = isPN(prop.data.location) ? 'PN' : 'imprejurimi';
         const lid = listingId(prop.id);
         const zoneAliases = prop.data.zone && ZONE_ALIASES[prop.data.zone] ? ZONE_ALIASES[prop.data.zone] : [];
+        const loc = parseLocalitate(prop.data.localitate);
+        // Zona efectivă pt filtru/centroid: zona clasică sau frunza din localitate (sat/cartier).
+        const effectiveZone = prop.data.zone || (loc ? loc.sat : '');
         // Energy class as searchable token: "clasa A" / "clasa energetica B".
         const energyTokens = prop.data.energyClass ? [`clasa ${prop.data.energyClass}`, `clasa energetica ${prop.data.energyClass}`] : [];
         const intabulatTokens = prop.data.intabulat === true ? ['intabulat', 'carte funciara', 'CF'] : [];
+        // Preț ca text căutabil: cifrele brute (52800) + cu monedă. Grupările (52.800 / 52,800)
+        // din interogare sunt normalizate la cifre brute (vezi mai jos), deci ambele forme găsesc anunțul.
+        const priceTokens = typeof prop.data.price === 'number' && prop.data.price > 0
+          ? [String(prop.data.price), `${prop.data.price} ${prop.data.currency}`]
+          : [];
         const searchBlobRaw = [
           prop.data.title,
           prop.data.location,
@@ -326,11 +336,16 @@ const propsForMap = visibleProperties.map((p, index) => {
           ...zoneAliases,
           ...energyTokens,
           ...intabulatTokens,
+          ...priceTokens,
+          ...localitateTokens(prop.data.localitate),
         ].filter(Boolean).join(' ').toLowerCase();
         // Normalize: strip diacritics + collapse punctuation to spaces so multi-word
         // search "centru piatra" matches stored "Centru, Piatra Neamț" (comma was breaking it).
+        // Numerele grupate (52.800 / 52,800 / 1.250.000) → cifre brute, ÎNAINTE de a sparge
+        // punctuația în spații, ca prețurile să fie căutabile în orice format.
         const searchBlob = searchBlobRaw
           .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/(\d)[.,](?=\d)/g, '$1')
           .replace(/[,.;:()\[\]{}!?"„"'']/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
@@ -362,7 +377,7 @@ const propsForMap = visibleProperties.map((p, index) => {
             data-listing-id={lid}
             data-type={prop.data.propertyType}
             data-status={prop.data.status}
-            data-zone={prop.data.zone ?? ''}
+            data-zone={effectiveZone}
             data-street={prop.data.street ?? ''}
             data-price={prop.data.price}
             data-surface={surfaceForFilter}
@@ -396,8 +411,8 @@ const propsForMap = visibleProperties.map((p, index) => {
                 </div>
               )}
               <h3><a href={`/proprietati/${prop.id}`}>{prop.data.title}</a></h3>
-              {(prop.data.zone || prop.data.location) && (
-                <p class="cs-zone">{prop.data.zone || prop.data.location}</p>
+              {(displayZone(prop.data) || prop.data.location) && (
+                <p class="cs-zone">{displayZone(prop.data) || prop.data.location}</p>
               )}
               {metaDetails.length > 0 && (
                 <p class="meta">{metaDetails.map(d => <span>{d}</span>)}</p>
@@ -534,6 +549,7 @@ const propsForMap = visibleProperties.map((p, index) => {
         // Same normalization as data-search blob: NFD diacritic strip + punctuation→space collapse.
         const qNorm = (searchInp.value || '').trim().toLowerCase()
           .normalize('NFD').replace(/[̀-ͯ]/g, '')
+          .replace(/(\d)[.,](?=\d)/g, '$1')
           .replace(/[,.;:()\[\]{}!?"„"'']/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
