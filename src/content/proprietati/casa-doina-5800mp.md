@@ -14,22 +14,20 @@ surface: 95
 landSurface: 5800
 floor: ''
 yearBuilt: null
-features:
-  - 2 dormitoare
-  - 2 holuri
-  - Bucătărie
-  - Spațiu depozitare
-  - Terasă
-  - Beci
-  - Mansardă cu balcon
-  - Ferestre lemn
-  - Uși interioare lemn
-  - Curent electric
-  - Apă rețea
-  - Garaj
-  - Anexe
-  - Pomi fructiferi
-  - Viță de vie
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: true
+  garaj: true
+  anexe: true
+  terasa: true
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: false
+  iluminatStradal: false
+  stradaAsfaltata: true
+  stradaPietruita: false
+caracteristiciTeren: null
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
