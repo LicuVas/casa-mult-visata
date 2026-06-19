@@ -19,6 +19,16 @@ features:
   - -Centrala pe gaz
   - -Parchet
   - -Usa metalica
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: false
+  interfon: true
+  boxa: true
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 exclusive: true
 comisionZero: true
 listingStatus: Activ
