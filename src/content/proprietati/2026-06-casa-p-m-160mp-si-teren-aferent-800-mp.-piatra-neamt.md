@@ -24,7 +24,19 @@ caracteristiciApartament:
   iluminatStradal: true
   stradaAsfaltata: true
   transportInComun: true
-caracteristiciCasa: null
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: true
+  garaj: false
+  anexe: false
+  terasa: false
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 caracteristiciTeren:
   intravilan: false
   extravilan: false
