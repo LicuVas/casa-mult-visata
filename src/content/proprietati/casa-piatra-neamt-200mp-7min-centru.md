@@ -15,16 +15,20 @@ landSurface: 830
 floor: '1'
 yearBuilt: 1977
 features:
-  - 5 dormitoare
-  - Salon primitor
-  - 2 băi
-  - Recent renovată
-  - Centrală gaz
-  - Încălzire în pardoseală
-  - Apă
-  - Curent electric
-  - Curte 830 mp
   - Acceptă schimb cu apartament + diferență
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: true
+  garaj: false
+  anexe: true
+  terasa: true
+  fosaSeptica: true
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
