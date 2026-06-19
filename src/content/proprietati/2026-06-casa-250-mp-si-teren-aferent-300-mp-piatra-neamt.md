@@ -15,6 +15,19 @@ landSurface: 275
 floor: '1'
 yearBuilt: null
 features: []
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: false
+  garaj: false
+  anexe: true
+  terasa: true
+  fosaSeptica: false
+  putForat: false
+  panouriSolare: false
+  utilitatiLaStrada: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 exclusive: false
 comisionZero: true
 listingStatus: Activ
