@@ -16,8 +16,15 @@ floor: ''
 yearBuilt: null
 features:
   - Toate utilitățile
-  - Deschidere 15 m
-  - Lângă biserica din centrul satului
+caracteristiciTeren:
+  intravilan: true
+  extravilan: false
+  deschidereStradala: true
+  imprejmuit: false
+  utilitatiLaLimita: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
