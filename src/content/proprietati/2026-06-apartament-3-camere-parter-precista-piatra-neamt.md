@@ -14,13 +14,16 @@ surface: 68
 landSurface: null
 floor: parter
 yearBuilt: null
-features:
-  - -Centrala termica
-  - -Tamplarie termopan
-  - -Gresie
-  - -Faianta
-  - -Parchet laminat
-  - -Usa metalica
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: false
+  interfon: true
+  boxa: true
+  balconInchis: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 exclusive: false
 comisionZero: true
 listingStatus: Activ
