@@ -14,18 +14,16 @@ surface: 62
 landSurface: null
 floor: '2'
 yearBuilt: 1983
-features:
-  - Decomandat
-  - Hol
-  - Baie
-  - Bucătărie
-  - 2 spații depozitare
-  - Balcon închis
-  - Centrală termică
-  - Ușă metalică
-  - Termopan
-  - Necesită renovare
-  - Imobil cu ascensor (10 etaje)
+caracteristiciApartament:
+  lift: true
+  centralaProprie: true
+  aerConditionat: true
+  interfon: true
+  boxa: true
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
