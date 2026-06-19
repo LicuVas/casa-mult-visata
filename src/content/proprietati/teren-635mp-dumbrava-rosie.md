@@ -19,6 +19,15 @@ features:
   - Apă
   - Curent electric
   - Gaz metan la 50 m
+caracteristiciTeren:
+  intravilan: true
+  extravilan: false
+  deschidereStradala: true
+  imprejmuit: false
+  utilitatiLaLimita: true
+  iluminatStradal: false
+  stradaAsfaltata: false
+  stradaPietruita: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
