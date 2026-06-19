@@ -9,7 +9,7 @@ location: Piatra Neamț
 zone: Centru
 street: ''
 rooms: null
-bathrooms: null
+bathrooms: 2
 surface: 500
 landSurface: null
 floor: '2'
@@ -30,6 +30,16 @@ features:
   - Curent electric
   - Gaz metan
   - 'Posibilități: sediu firmă, birouri, etc.'
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: true
+  interfon: false
+  boxa: false
+  balconInchis: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
