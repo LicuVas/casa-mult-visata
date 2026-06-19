@@ -30,6 +30,19 @@ features:
   - Fosă septică dublu compartimentată
   - Foișor cu chiuvetă/grătar/afumătoare/cuptor/plită
   - Teren împrejmuit cu gard
+caracteristiciCasa:
+  curteImprejmuita: true
+  gradina: true
+  garaj: true
+  anexe: true
+  terasa: true
+  fosaSeptica: true
+  putForat: true
+  panouriSolare: false
+  utilitatiLaStrada: false
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
