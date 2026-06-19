@@ -14,18 +14,16 @@ surface: 68
 landSurface: null
 floor: '4'
 yearBuilt: null
-features:
-  - -Ferestre termopan
-  - -2 Bai
-  - -Hol generos
-  - -Logie inchisa
-  - -Balcon deschis
-  - -Usa metalica
-  - -Parchet laminat
-  - -Gresie
-  - -Faianta
-  - -Pod acoperit
-  - -Boxa
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: false
+  interfon: true
+  boxa: true
+  balconInchis: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  transportInComun: true
 exclusive: false
 comisionZero: true
 listingStatus: Activ
