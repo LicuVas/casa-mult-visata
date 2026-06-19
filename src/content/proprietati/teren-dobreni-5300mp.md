@@ -19,6 +19,15 @@ features:
   - Apă (în fața terenului)
   - Asfalt
   - Deschidere 35 m
+caracteristiciTeren:
+  intravilan: true
+  extravilan: false
+  deschidereStradala: true
+  imprejmuit: true
+  utilitatiLaLimita: true
+  iluminatStradal: true
+  stradaAsfaltata: true
+  stradaPietruita: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
