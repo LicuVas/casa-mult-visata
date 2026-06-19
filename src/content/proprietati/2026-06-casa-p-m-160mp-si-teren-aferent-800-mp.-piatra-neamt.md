@@ -9,7 +9,7 @@ location: Piatra Neamț
 zone: 1 Mai
 street: ''
 rooms: 3
-bathrooms: 1
+bathrooms: 2
 surface: 160
 landSurface: 800
 floor: ''
@@ -99,4 +99,4 @@ privateOwnerContact: ''
 privateNotes: ''
 ---
 
-Casă în suprafață de 160 mp și teren aferen 800 mp situată în cartierul 1 Mai, Piatra Neamț. Parterul proprietății vă  oferă spre folosință 2 dormitoare,living, baie, hol,spatiu de depozitare, Mansarda vă pune la dispozitie 80 mp. ce poate fi compartimentată după dorința clientului.  Proprietatea are în dotare,ferestre tip termopan,gresie, faianță,parchet laminat, uși interioare din lemn,centrală termică și fosăseptică. În curtea din față locația vă mai oferă spre folosință și o casă bătrânească. Proprietatea se vinde complet mobilata si utilată,se afla situată intr-o zonă liniștită și ferită de zgomotul stradal, pentru mai multe detalii contactați-ne telefonic 0747 814 263.
+Casă în suprafață de 160 mp și teren aferen 800 mp situată în cartierul 1 Mai, Piatra Neamț. Parterul proprietății vă  oferă spre folosință 2 dormitoare,living, 2 bai, hol,spatiu de depozitare, Mansarda vă pune la dispozitie 80 mp. ce poate fi compartimentată după dorința clientului.  Proprietatea are în dotare,ferestre tip termopan,gresie, faianță,parchet laminat, uși interioare din lemn,centrală termică și fosăseptică. În curtea din față locația vă mai oferă spre folosință și o casă bătrânească. Proprietatea se vinde complet mobilata si utilată,se afla situată intr-o zonă liniștită și ferită de zgomotul stradal, pentru mai multe detalii contactați-ne telefonic 0747 814 263.
