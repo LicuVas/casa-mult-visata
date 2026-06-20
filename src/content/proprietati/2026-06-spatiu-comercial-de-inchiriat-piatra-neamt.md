@@ -16,20 +16,17 @@ landSurface: 400
 floor: ''
 yearBuilt: null
 features: []
-caracteristiciApartament: null
-caracteristiciCasa:
-  curteImprejmuita: true
-  gradina: true
-  garaj: false
-  anexe: false
-  terasa: false
-  fosaSeptica: false
-  putForat: false
-  panouriSolare: false
-  utilitatiLaStrada: true
+caracteristiciApartament:
+  lift: false
+  centralaProprie: true
+  aerConditionat: false
+  interfon: false
+  boxa: false
+  balconInchis: false
   iluminatStradal: true
   stradaAsfaltata: true
-  stradaPietruita: false
+  transportInComun: true
+caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
 comisionZero: false
