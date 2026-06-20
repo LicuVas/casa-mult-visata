@@ -4,7 +4,7 @@ status: Închiriere
 propertyType: Spațiu Comercial
 price: 2850
 currency: EUR
-pricePerUnit: ''
+pricePerUnit: '15'
 location: Piatra Neamț
 localitate: ''
 zone: Centru
