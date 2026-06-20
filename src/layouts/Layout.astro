@@ -279,13 +279,17 @@ const jsonLd = {
 
 		<script is:inline>
 		(function(){
-			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+			var all = document.querySelectorAll('.reveal');
+			function showAll(){ all.forEach(function(el){ el.classList.add('visible'); }); }
+			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { showAll(); return; }
 			const obs = new IntersectionObserver(function(entries){
 				entries.forEach(function(e){
 					if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
 				});
-			}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-			document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+			}, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+			all.forEach(function(el){ obs.observe(el); });
+			// Failsafe: never leave content invisible on quirky in-app webviews
+			setTimeout(showAll, 2500);
 		})();
 		</script>
 	</body>
