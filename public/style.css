@@ -187,8 +187,8 @@ ul { list-style: none; }
 picture { display: contents; }
 .cs-media img { width: 100%; height: auto; object-fit: cover; aspect-ratio: 4/3; transition: transform 0.45s ease; display: block; }
 .cs-item:hover .cs-media img { transform: scale(1.05); }
-.cs-status-tag { position: absolute; top: 0.85rem; left: 0.85rem; z-index: 2; background: rgba(255,255,255,0.95); color: var(--text-primary); padding: 0.38rem 0.75rem; font-family: var(--font-accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
-.cs-price-tag { position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2; background: var(--accent); color: var(--white); padding: 0.55rem 0.95rem; font-family: var(--font-accent); font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; box-shadow: 0 4px 14px rgba(0,0,0,0.20); text-align: right; line-height: 1.15; }
+.cs-status-tag { position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2; background: rgba(255,255,255,0.95); color: var(--text-primary); padding: 0.38rem 0.75rem; font-family: var(--font-accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+.cs-price-tag { position: absolute; bottom: 0.85rem; right: 0.85rem; z-index: 2; background: var(--accent); color: var(--white); padding: 0.55rem 0.95rem; font-family: var(--font-accent); font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; box-shadow: 0 4px 14px rgba(0,0,0,0.20); text-align: right; line-height: 1.15; }
 .cs-price-tag small { display: block; font-weight: 500; font-size: 0.7rem; opacity: 0.9; margin-top: 2px; }
 /* Bandă diagonală de stare (Vândut / Închiriat / Rezervat) peste coperta cardului.
    Clipată de .cs-media{overflow:hidden} → colț stânga-sus tăiat la 45°. */
@@ -290,6 +290,7 @@ picture { display: contents; }
     .mobile-toggle { display: block; }
     .masthead-nav.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--surface-primary); padding: 2rem; gap: 1.5rem; border-bottom: var(--rule-width) solid var(--rule-color); z-index: 100; }
     .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
     .cta-editorial { padding: 2.5rem 1.5rem; }
     .pull-quote { margin: 2.5rem 0; padding: 2rem 0; }
     .contact-sheet { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -622,7 +623,7 @@ a.agent-contact-value:hover { color: var(--accent); }
 
 /* VALUE PROPS */
 .home-valueprops {
-    padding: 3.5rem 2rem;
+    padding: 3.5rem 0;
     background: var(--surface-secondary);
 }
 .vp-grid {
@@ -661,7 +662,7 @@ a.agent-contact-value:hover { color: var(--accent); }
 
 /* PROCESS */
 .home-process {
-    padding: 5rem 2rem;
+    padding: 5rem 0;
     background: var(--surface-primary);
 }
 .process-grid {
@@ -794,7 +795,7 @@ a.agent-contact-value:hover { color: var(--accent); }
 .home-final-cta {
     background: var(--surface-dark);
     color: var(--white);
-    padding: 4.5rem 2rem;
+    padding: 4.5rem 0;
 }
 .home-final-cta-inner {
     display: grid;
