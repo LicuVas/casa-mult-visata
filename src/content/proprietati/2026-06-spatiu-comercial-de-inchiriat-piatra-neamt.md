@@ -1,5 +1,5 @@
 ---
-title: Spatiu comercial de inchiriat Piatra Neamt
+title: Spatiu comercial de inchiriat 190 mp. zona centrala Piatra Neamt
 status: Închiriere
 propertyType: Spațiu Comercial
 price: 2850
