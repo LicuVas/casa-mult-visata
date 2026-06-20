@@ -69,5 +69,4 @@ privateOwnerContact: Catalina 0726 740 855
 privateNotes: ''
 ---
 
-Apartament cu 3 camere in suprafata utila de 56 mp situat la etajul 2, zona centrala Piatra Neamt. Proprietatea va ofera spre folosinta,living, 2 camere,hol,baie,bucatarie,spatiu de depozitare, si balcon,are in dotare centrala termica,gresie,faianta si parchet.
-Locatia necesita renovare si se afla intr-o zona linistita si ferita de zgomotul stradal,intr-un imobil cu 4 etaj. Pentru mai multe detali contactatine telefonic 0747814263.
+Apartament cu 3 camere în suprafață utilă de 56 mp situat la etajul 2, zona centrală Piatra Neamt. Proprietatea vă oferă spre folosință, un living, 2 camere,hol,baie,bucătărie,spațiu de depozitare, balcon,și are în dotare centrală,termică,gresie,faianță și parchet. Locația necesită renovare și se află intr-o zonă liniștită și ferită de zgomotul stradal,intr-un imobil cu 4 etaj. Pentru mai multe detali contactatine telefonic 0747814263.
