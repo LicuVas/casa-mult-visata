@@ -39,7 +39,7 @@ gallery:
   - /images/20260527_100521.webp
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: ''
 floorsTotal: 2
