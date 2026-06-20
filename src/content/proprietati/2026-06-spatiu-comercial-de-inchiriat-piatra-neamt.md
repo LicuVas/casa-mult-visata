@@ -6,26 +6,17 @@ price: 2850
 currency: EUR
 pricePerUnit: '15'
 location: Piatra Neamț
-localitate: ''
+localitate: Neamț › Piatra Neamț › Centru
 zone: Centru
 street: ''
 rooms: null
 bathrooms: 2
 surface: 190
 landSurface: 400
-floor: ''
+floor: Parter
 yearBuilt: null
 features: []
-caracteristiciApartament:
-  lift: false
-  centralaProprie: true
-  aerConditionat: false
-  interfon: false
-  boxa: false
-  balconInchis: false
-  iluminatStradal: true
-  stradaAsfaltata: true
-  transportInComun: true
+caracteristiciApartament: null
 caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
