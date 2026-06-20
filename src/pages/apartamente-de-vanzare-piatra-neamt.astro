@@ -1,0 +1,73 @@
+---
+// SILOZ SEO — „apartamente de vanzare piatra neamt". Aditiv; reutilizează PropertyCard
+// + grila globală .contact-sheet. page-header FĂRĂ `reveal`.
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import PropertyCard from '../components/PropertyCard.astro';
+
+const all = await getCollection('proprietati');
+const order = (s?: string) => (s === 'Retras' ? 99 : s === 'Vândut' || s === 'Închiriat' ? 2 : s === 'Rezervat' ? 1 : 0);
+const items = all
+  .filter(p => p.data.propertyType === 'Apartament' && (p.data.listingStatus || 'Activ') !== 'Retras')
+  .sort((a, b) => order(a.data.listingStatus) - order(b.data.listingStatus));
+
+const origin = 'https://casamultvisata.ro';
+const path = '/apartamente-de-vanzare-piatra-neamt/';
+const extraSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'CollectionPage', '@id': `${origin}${path}#page`, 'name': 'Apartamente de Vânzare în Piatra Neamț',
+      'description': 'Apartamente și garsoniere de vânzare în Piatra Neamț — Precista, Mărăței, Dărmănești și alte zone.',
+      'url': `${origin}${path}`, 'isPartOf': { '@id': `${origin}/#website` }, 'about': { '@id': `${origin}/#agent` } },
+    { '@type': 'BreadcrumbList', 'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Acasă', 'item': `${origin}/` },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Proprietăți', 'item': `${origin}/proprietati/` },
+      { '@type': 'ListItem', 'position': 3, 'name': 'Apartamente de vânzare Piatra Neamț', 'item': `${origin}${path}` } ] },
+    { '@type': 'ItemList', 'name': 'Apartamente de vânzare Piatra Neamț', 'numberOfItems': items.length,
+      'itemListElement': items.map((p, i) => ({ '@type': 'ListItem', 'position': i + 1, 'url': `${origin}/proprietati/${p.id}`, 'name': p.data.title })) },
+  ],
+};
+---
+<Layout
+  title="Apartamente de Vânzare în Piatra Neamț | Casa Mult Visată"
+  description="Apartamente și garsoniere de vânzare în Piatra Neamț — 2 și 3 camere, în Precista, Mărăței, Dărmănești. Agent Cozma Vasile, comision 0% cumpărător."
+  canonicalPath={path}
+  extraSchema={extraSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Firimituri">
+      <a href="/">Acasă</a> › <a href="/proprietati">Proprietăți</a> › <span>Apartamente de vânzare</span>
+    </nav>
+    <div class="page-header">
+      <p class="label">Apartamente &amp; garsoniere</p>
+      <h1>Apartamente de Vânzare în Piatra Neamț</h1>
+      <p class="intro">Garsoniere, apartamente de 2 și 3 camere în Piatra Neamț — în blocuri din Precista, Mărăței, Dărmănești și zonele centrale. Fiecare anunț are codul proprietății, etajul, compartimentarea și prețul real, fără surprize la vizionare.</p>
+    </div>
+
+    {items.length > 0 ? (
+      <div class="contact-sheet" style="margin-top:1.5rem;">
+        {items.map(prop => <PropertyCard prop={prop} />)}
+      </div>
+    ) : (
+      <p class="intro">Momentan nu am un apartament listat public, dar adesea apar oferte noi. <a href="/contact">Spune-mi ce cauți</a> (zonă, număr de camere, buget) și îți trimit ce se potrivește.</p>
+    )}
+
+    <section class="silo-copy">
+      <h2>Ce verific la un apartament înainte să ți-l recomand</h2>
+      <p>La un apartament contează detaliile care nu se văd în poze: compartimentarea (decomandat sau semidecomandat), etajul și dacă blocul are lift, vechimea și starea instalațiilor, dar mai ales actele — intabulare, cărți funciare, eventuale sarcini. Verific aceste lucruri din timp, ca să mergi la vizionare informat și să negociezi de pe poziție bună.</p>
+      <h2>Pe ce zone găsești apartamente</h2>
+      <p>Cele mai căutate rămân Precista, Mărăței și Dărmănești, dar apar regulat oferte și în zona centrală sau în cartierele mai liniștite. Dacă vrei o anumită stradă sau un anumit etaj, spune-mi — pot căuta punctual, inclusiv proprietăți care nu sunt încă publicate.</p>
+      <p class="silo-cta">Cauți și case sau terenuri? Vezi <a href="/proprietati">tot portofoliul</a> sau <a href="/contact">scrie-mi direct</a>. Pentru cumpărători, comisionul este <strong>0%</strong>.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb { font-size: 0.85rem; color: var(--muted, #667); margin: 1.5rem 0 0.5rem; }
+  .breadcrumb a { color: inherit; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .silo-copy { max-width: 760px; margin: 3.5rem 0 1rem; }
+  .silo-copy h2 { margin-top: 1.75rem; }
+  .silo-copy p { line-height: 1.7; }
+  .silo-cta { margin-top: 1.75rem; }
+</style>

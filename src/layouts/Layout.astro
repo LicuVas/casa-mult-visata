@@ -183,7 +183,16 @@ const jsonLd = {
 					</button>
 					<ul class="masthead-nav">
 						<li><a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>Acasă</a></li>
-						<li><a href="/proprietati" aria-current={currentPath.startsWith('/proprietati') ? 'page' : undefined}>Proprietăți</a></li>
+						<li class="has-submenu">
+							<a href="/proprietati" aria-haspopup="true" aria-current={currentPath.startsWith('/proprietati') ? 'page' : undefined}>Proprietăți</a>
+							<ul class="nav-submenu">
+								<li><a href="/case-de-vanzare-piatra-neamt/" aria-current={currentPath.startsWith('/case-de-vanzare') ? 'page' : undefined}>Case de vânzare</a></li>
+								<li><a href="/apartamente-de-vanzare-piatra-neamt/" aria-current={currentPath.startsWith('/apartamente-de-vanzare') ? 'page' : undefined}>Apartamente</a></li>
+								<li><a href="/terenuri-de-vanzare-piatra-neamt/" aria-current={currentPath.startsWith('/terenuri-de-vanzare') ? 'page' : undefined}>Terenuri</a></li>
+								<li><a href="/spatii-comerciale-piatra-neamt/" aria-current={currentPath.startsWith('/spatii-comerciale') ? 'page' : undefined}>Spații comerciale</a></li>
+								<li><a href="/proprietati">Toate proprietățile</a></li>
+							</ul>
+						</li>
 						<li><a href="/proprietati/favorites/" class="nav-fav" aria-label="Favorite salvate" aria-current={currentPath.startsWith('/proprietati/favorites') ? 'page' : undefined}><span class="nav-fav-heart" aria-hidden="true">♥</span> <span class="fav-count">0</span></a></li>
 						<li><a href="/servicii" aria-current={currentPath === '/servicii' ? 'page' : undefined}>Servicii</a></li>
 						<li><a href="/despre" aria-current={currentPath === '/despre' ? 'page' : undefined}>Despre Mine</a></li>

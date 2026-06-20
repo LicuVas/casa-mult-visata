@@ -1,0 +1,73 @@
+---
+// SILOZ SEO — „spatii comerciale piatra neamt" (vânzare + închiriere). Aditiv;
+// reutilizează PropertyCard + grila globală .contact-sheet. page-header FĂRĂ `reveal`.
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import PropertyCard from '../components/PropertyCard.astro';
+
+const all = await getCollection('proprietati');
+const order = (s?: string) => (s === 'Retras' ? 99 : s === 'Vândut' || s === 'Închiriat' ? 2 : s === 'Rezervat' ? 1 : 0);
+const items = all
+  .filter(p => p.data.propertyType === 'Spațiu Comercial' && (p.data.listingStatus || 'Activ') !== 'Retras')
+  .sort((a, b) => order(a.data.listingStatus) - order(b.data.listingStatus));
+
+const origin = 'https://casamultvisata.ro';
+const path = '/spatii-comerciale-piatra-neamt/';
+const extraSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'CollectionPage', '@id': `${origin}${path}#page`, 'name': 'Spații Comerciale în Piatra Neamț — Vânzare și Închiriere',
+      'description': 'Spații comerciale de vânzare și de închiriat în Piatra Neamț — vad stradal, birouri, spații pentru afaceri.',
+      'url': `${origin}${path}`, 'isPartOf': { '@id': `${origin}/#website` }, 'about': { '@id': `${origin}/#agent` } },
+    { '@type': 'BreadcrumbList', 'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': 'Acasă', 'item': `${origin}/` },
+      { '@type': 'ListItem', 'position': 2, 'name': 'Proprietăți', 'item': `${origin}/proprietati/` },
+      { '@type': 'ListItem', 'position': 3, 'name': 'Spații comerciale Piatra Neamț', 'item': `${origin}${path}` } ] },
+    { '@type': 'ItemList', 'name': 'Spații comerciale Piatra Neamț', 'numberOfItems': items.length,
+      'itemListElement': items.map((p, i) => ({ '@type': 'ListItem', 'position': i + 1, 'url': `${origin}/proprietati/${p.id}`, 'name': p.data.title })) },
+  ],
+};
+---
+<Layout
+  title="Spații Comerciale Piatra Neamț — Vânzare și Închiriere | Casa Mult Visată"
+  description="Spații comerciale de vânzare și de închiriat în Piatra Neamț — vad stradal, birouri, spații pentru afaceri. Agent Cozma Vasile, comision 0% cumpărător."
+  canonicalPath={path}
+  extraSchema={extraSchema}
+>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Firimituri">
+      <a href="/">Acasă</a> › <a href="/proprietati">Proprietăți</a> › <span>Spații comerciale</span>
+    </nav>
+    <div class="page-header">
+      <p class="label">Spații comerciale</p>
+      <h1>Spații Comerciale în Piatra Neamț — Vânzare și Închiriere</h1>
+      <p class="intro">Spații cu vad comercial, birouri și spații pentru afaceri în Piatra Neamț, de vânzare sau de închiriat. Pentru fiecare îți spun suprafața utilă, destinația permisă și ce costuri presupune, ca să iei o decizie de business informată.</p>
+    </div>
+
+    {items.length > 0 ? (
+      <div class="contact-sheet" style="margin-top:1.5rem;">
+        {items.map(prop => <PropertyCard prop={prop} />)}
+      </div>
+    ) : (
+      <p class="intro">Momentan nu am un spațiu comercial listat public. <a href="/contact">Spune-mi ce cauți</a> (zonă, suprafață, vânzare sau închiriere, tip de activitate) și caut pentru tine.</p>
+    )}
+
+    <section class="silo-copy">
+      <h2>Ce contează la un spațiu comercial</h2>
+      <p>Pentru o afacere, locația face diferența: vadul comercial, vizibilitatea de la stradă, accesul și parcarea, dar și destinația permisă a spațiului și eventualele autorizații necesare. Te ajut să evaluezi dacă spațiul se potrivește activității tale — fie că vrei să cumperi pentru investiție, fie că închiriezi pentru a porni rapid.</p>
+      <h2>Vânzare sau închiriere?</h2>
+      <p>Găsești aici atât spații de vânzare (potrivite ca investiție pe termen lung), cât și spații de închiriat (flexibile, cu intrare rapidă în activitate). Dacă ai un buget lunar sau o sumă de investiție în minte, spune-mi și filtrez ofertele pentru tine.</p>
+      <p class="silo-cta">Cauți și case, apartamente sau terenuri? Vezi <a href="/proprietati">tot portofoliul</a> sau <a href="/contact">scrie-mi direct</a>.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb { font-size: 0.85rem; color: var(--muted, #667); margin: 1.5rem 0 0.5rem; }
+  .breadcrumb a { color: inherit; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .silo-copy { max-width: 760px; margin: 3.5rem 0 1rem; }
+  .silo-copy h2 { margin-top: 1.75rem; }
+  .silo-copy p { line-height: 1.7; }
+  .silo-cta { margin-top: 1.75rem; }
+</style>

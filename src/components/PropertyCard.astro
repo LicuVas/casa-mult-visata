@@ -1,0 +1,67 @@
+---
+// PropertyCard — card reutilizabil pentru paginile-siloz (categorii).
+// Markup identic cu cardul canonic din proprietati.astro (clasele .cs-item etc sunt
+// definite global în /style.css), DAR FĂRĂ clasa `reveal` (care e opacity:0 până când
+// IntersectionObserver-ul o face vizibilă — paginile-siloz nu rulează observer-ul, deci
+// cardul ar rămâne invizibil; vezi commit a5887c6/0ef7f4a). Pur aditiv: nu atinge
+// paginile existente, care își păstrează markup-ul inline.
+import type { CollectionEntry } from 'astro:content';
+import { listingId } from '../utils/listingId';
+import { cdnImg, cdnSrcset } from '../lib/img';
+import { displayZone } from '../utils/localitate';
+
+interface Props { prop: CollectionEntry<'proprietati'> }
+const { prop } = Astro.props;
+const d = prop.data;
+
+const formatPrice = (price: number, currency: string) =>
+  new Intl.NumberFormat('ro-RO', { style: 'currency', currency, maximumFractionDigits: 0 }).format(price);
+
+function pickFallbackImage(t: string): string {
+  if (t === 'Apartament') return '/sistem/apartament.webp';
+  if (t === 'Casă') return '/sistem/casa.webp';
+  if (t === 'Spațiu Comercial') return '/sistem/comercial.webp';
+  return '/sistem/teren.webp';
+}
+
+const imageSrc = d.featuredImage || pickFallbackImage(d.propertyType);
+const lid = listingId(prop.id);
+
+const metaDetails: string[] = [];
+if (d.rooms) metaDetails.push(`${d.rooms} cam`);
+if (d.bathrooms) metaDetails.push(`${d.bathrooms} ${d.bathrooms === 1 ? 'baie' : 'băi'}`);
+if (d.surface) metaDetails.push(`${d.surface} mp`);
+if (d.landSurface) metaDetails.push(d.propertyType === 'Teren' ? `${d.landSurface} mp teren` : `+${d.landSurface} mp teren`);
+if (d.floor) metaDetails.push(`Et. ${d.floor}`);
+---
+<article class="cs-item" data-listing-id={lid}>
+  <div class="cs-media">
+    {(d.listingStatus === 'Vândut' || d.listingStatus === 'Închiriat' || d.listingStatus === 'Rezervat') && (
+      <span class={`cs-ribbon cs-ribbon--${d.listingStatus === 'Vândut' ? 'vandut' : d.listingStatus === 'Închiriat' ? 'inchiriat' : 'rezervat'}`}>{d.listingStatus}</span>
+    )}
+    <span class="cs-status-tag">De {d.status.toLowerCase()}</span>
+    <span class="cs-price-tag">
+      {formatPrice(d.price, d.currency)}
+      {d.pricePerUnit && <small>{d.pricePerUnit}</small>}
+    </span>
+    <a href={`/proprietati/${prop.id}`}>
+      <img src={cdnImg(imageSrc, { w: 800 })} srcset={cdnSrcset(imageSrc, [400, 600, 900])} sizes="(max-width: 600px) 100vw, 400px" alt={d.title} width="800" height="600" loading="lazy" decoding="async" />
+    </a>
+  </div>
+  <div class="cs-caption">
+    {(d.exclusive || d.comisionZero) && (
+      <div class="prop-badges">
+        {d.exclusive && <span class="badge badge-exclusiv">Exclusiv</span>}
+        {d.comisionZero && <span class="badge badge-comision-zero">Comision 0%</span>}
+      </div>
+    )}
+    <h3><a href={`/proprietati/${prop.id}`}>{d.title}</a></h3>
+    {(displayZone(d) || d.location) && (
+      <p class="cs-zone">{displayZone(d) || d.location}</p>
+    )}
+    {metaDetails.length > 0 && (
+      <p class="meta">{metaDetails.map(m => <span>{m}</span>)}</p>
+    )}
+    <p class="cs-id">Cod: {lid}</p>
+  </div>
+</article>
