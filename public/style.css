@@ -709,7 +709,6 @@ a.agent-contact-value:hover { color: var(--accent); }
     align-items: center;
     padding: 3rem 0;
     border-top: 1px solid var(--rule-color);
-    border-bottom: 1px solid var(--rule-color);
 }
 .home-quote-block blockquote {
     font-family: var(--font-display);
@@ -1518,7 +1517,7 @@ a, button { -webkit-tap-highlight-color: rgba(138, 163, 153, 0.18); }
 
 
 /* === RECENZII GOOGLE (home) === */
-.home-reviews { padding: 3rem 2rem; }
+.home-reviews { padding: 3rem 0; }
 .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem 3rem; margin-top: 2.5rem; }
 .review-card { padding-top: 1.5rem; border-top: var(--rule-width) solid var(--rule-color); }
 .review-stars { font-size: 1.05rem; letter-spacing: 0.18em; margin-bottom: 1rem; line-height: 1; }
