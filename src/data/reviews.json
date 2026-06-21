@@ -1,5 +1,24 @@
 {
   "writeReviewUrl": "https://g.page/r/CQR2QrWHylm2EBM/review",
   "googleReviewsUrl": "https://search.google.com/local/reviews?placeid=ChIJYZBUDoZndiMRBHZCtYfKWbY",
-  "items": []
+  "items": [
+    {
+      "name": "Narcis Valentin",
+      "rating": 5,
+      "date": "iunie 2026",
+      "text": "Recomand cu drag! Acest om nu doar că a reușit să îmi vândă un teren cu casă mai puțin cu 1900 € decât voia proprietarul, însă a și făcut o mie și o sută de drumuri peste tot, a rezolvat cu toate actele și m-a mai chemat doar să semnat și atât. Este foarte priceput și poate avea bază în el oricine având în vedere anii de activitate, experiența și casele vândute. Mulțumim frumos domnu' Vasile!"
+    },
+    {
+      "name": "NT01NRC",
+      "rating": 5,
+      "date": "iunie 2026",
+      "text": "Am colaborat cu acest agent pentru achiziția unui teren și am fost foarte mulțumit de întreaga experiență. A dat dovadă de profesionalism, seriozitate și transparență pe tot parcursul procesului. A fost mereu disponibil pentru informații și sfaturi utile, iar tranzacția s-a desfășurat fără probleme. Îl recomand cu încredere tuturor celor care caută un agent imobiliar de încredere."
+    },
+    {
+      "name": "Valentin",
+      "rating": 5,
+      "date": "iunie 2026",
+      "text": "Un om de cuvânt și un profesionist adevărat. Tot procesul a fost clar, rapid și fără complicații. Mă bucur că am ales să colaborez cu el. Recomand!"
+    }
+  ]
 }
