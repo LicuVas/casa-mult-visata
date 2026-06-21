@@ -15,14 +15,14 @@ export default defineConfig({
       // the noindex meta tag handles SEO. For now, keep all listed and let noindex
       // do the work — sitemap filtering can be revisited if needed.
       filter: () => true,
-      // Emit <lastmod> (build timestamp) on every entry. A static site rebuilds
-      // all pages each deploy, so build time is an honest "last generated" signal —
-      // and without it engines can't tell the new silos are fresh, which hurts
-      // recrawl prioritization (observed 2026-06-20: sitemap had no lastmod).
-      serialize(item) {
-        item.lastmod = new Date().toISOString();
-        return item;
-      },
+      // NO <lastmod>. We deliberately omit it rather than stamp the build time on
+      // every page. Google only uses <lastmod> if it's "consistently and verifiably
+      // accurate" and IGNORES the whole signal (per Illyes/Mueller) when dates look
+      // faked — a blanket build-time stamp on all 47 pages is exactly that anti-pattern
+      // (verified 2026-06-21 against developers.google.com/search/.../sitemaps/build-sitemap).
+      // No lastmod is neutral; a fake one is worse than none. If we ever want real
+      // per-page lastmod, derive it from each source's git commit date / .md frontmatter
+      // in a post-build step — not from new Date().
     }),
   ],
 });
