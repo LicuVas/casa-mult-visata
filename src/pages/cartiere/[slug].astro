@@ -1,0 +1,99 @@
+---
+// Ghid hiperlocal per cartier (rută dinamică). ADITIV: reutilizează PropertyCard,
+// grila .contact-sheet și stilurile silozurilor. Nu atinge anunțurile .md.
+import Layout from '../../layouts/Layout.astro';
+import PropertyCard from '../../components/PropertyCard.astro';
+import { getCollection } from 'astro:content';
+import { cartiere } from '../../data/cartiere';
+
+export async function getStaticPaths() {
+  return cartiere.map((c) => ({ params: { slug: c.slug }, props: { cartier: c } }));
+}
+
+const { cartier } = Astro.props;
+const all = await getCollection('proprietati');
+
+const order = (s?: string) => (s === 'Retras' ? 99 : s === 'Vândut' || s === 'Închiriat' ? 2 : s === 'Rezervat' ? 1 : 0);
+const props = all
+  .filter((p) => cartier.zoneMatch.includes((p.data.zone || '').trim()) && (p.data.listingStatus || 'Activ') !== 'Retras')
+  .sort((a, b) => order(a.data.listingStatus) - order(b.data.listingStatus));
+
+const origin = 'https://casamultvisata.ro';
+const url = `${origin}/cartiere/${cartier.slug}/`;
+const extraSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${url}#page`,
+      'name': cartier.h1,
+      'description': cartier.metaDescription,
+      'url': url,
+      'isPartOf': { '@id': `${origin}/#website` },
+      'about': { '@id': `${origin}/#agent` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Acasă', 'item': `${origin}/` },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Cartiere Piatra Neamț', 'item': `${origin}/cartiere-piatra-neamt/` },
+        { '@type': 'ListItem', 'position': 3, 'name': cartier.name, 'item': url },
+      ],
+    },
+    ...(props.length > 0
+      ? [{
+          '@type': 'ItemList',
+          'name': cartier.h1,
+          'numberOfItems': props.length,
+          'itemListElement': props.map((p, i) => ({
+            '@type': 'ListItem',
+            'position': i + 1,
+            'url': `${origin}/proprietati/${p.id}`,
+            'name': p.data.title,
+          })),
+        }]
+      : []),
+  ],
+};
+---
+<Layout title={`${cartier.title} | Casa Mult Visată`} description={cartier.metaDescription} canonicalPath={`/cartiere/${cartier.slug}/`} extraSchema={extraSchema}>
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Firimituri">
+      <a href="/">Acasă</a> › <a href="/cartiere-piatra-neamt">Cartiere</a> › <span>{cartier.name}</span>
+    </nav>
+
+    <div class="page-header">
+      <p class="label">Cartier Piatra Neamț</p>
+      <h1>{cartier.h1}</h1>
+      <p class="intro">{cartier.intro}</p>
+    </div>
+
+    {props.length > 0 ? (
+      <div class="contact-sheet" style="margin-top:1.5rem;">
+        {props.map((prop) => <PropertyCard prop={prop} />)}
+      </div>
+    ) : (
+      <p class="intro">Momentan nu am o ofertă listată public în {cartier.name}, dar adesea am proprietăți înainte să ajungă pe site. <a href="/contact">Scrie-mi ce cauți</a> și îți trimit ce se potrivește.</p>
+    )}
+
+    <section class="silo-copy">
+      {cartier.sections.map((s) => (
+        <>
+          <h2>{s.h2}</h2>
+          <p>{s.body}</p>
+        </>
+      ))}
+      <p class="silo-cta">Cauți în altă zonă? Vezi <a href="/cartiere-piatra-neamt">toate cartierele</a>, <a href="/proprietati">tot portofoliul</a> sau <a href="/contact">contactează-mă direct</a>.</p>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb { font-size: 0.85rem; color: var(--muted, #667); margin: 1.5rem 0 0.5rem; }
+  .breadcrumb a { color: inherit; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .silo-copy { max-width: 760px; margin: 3.5rem 0 1rem; }
+  .silo-copy h2 { margin-top: 1.75rem; }
+  .silo-copy p { line-height: 1.7; }
+  .silo-cta { margin-top: 1.75rem; }
+</style>
