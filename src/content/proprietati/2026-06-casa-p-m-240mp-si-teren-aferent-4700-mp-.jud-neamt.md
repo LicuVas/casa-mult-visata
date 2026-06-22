@@ -1,5 +1,5 @@
 ---
-title: Casa P+M 240mp si teren aferent 4700 mp .jud Neamt
+title: Casa P+M 240mp si teren aferent 470 mp .jud Neamt
 status: Vânzare
 propertyType: Casă
 price: 159000
