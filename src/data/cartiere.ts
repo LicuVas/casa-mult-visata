@@ -11,6 +11,8 @@ export interface CartierGuide {
   metaDescription: string;
   h1: string;
   intro: string;
+  // Data ultimei revizuiri a ghidului (ISO) — semnal E-E-A-T de prospețime + autor.
+  updated: string;
   // Paragrafe de orientare reală pentru cumpărător (titlu + corp).
   sections: { h2: string; body: string }[];
 }
@@ -20,6 +22,7 @@ export const cartiere: CartierGuide[] = [
     slug: 'centru',
     name: 'Centru',
     zoneMatch: ['Centru'],
+    updated: '2026-06-25',
     title: 'Case și Apartamente de Vânzare în Centru Piatra Neamț',
     metaDescription:
       'Proprietăți de vânzare în Centrul Piatra Neamț: apartamente și case lângă Curtea Domnească și zona pietonală. Oferte verificate de agentul Cozma Vasile.',
@@ -43,6 +46,7 @@ export const cartiere: CartierGuide[] = [
     slug: 'precista',
     name: 'Precista',
     zoneMatch: ['Precista'],
+    updated: '2026-06-25',
     title: 'Case și Apartamente de Vânzare în Precista, Piatra Neamț',
     metaDescription:
       'Proprietăți de vânzare în cartierul Precista, Piatra Neamț — zonă rezidențială liniștită aproape de centru. Oferte verificate, agent Cozma Vasile, comision 0% cumpărător.',
@@ -66,6 +70,7 @@ export const cartiere: CartierGuide[] = [
     slug: 'maratei',
     name: 'Mărăței',
     zoneMatch: ['Mărăței'],
+    updated: '2026-06-25',
     title: 'Case și Apartamente de Vânzare în Mărăței, Piatra Neamț',
     metaDescription:
       'Proprietăți de vânzare în cartierul Mărăței, Piatra Neamț — zonă rezidențială cu prețuri accesibile și acces bun. Oferte verificate de agentul Cozma Vasile.',
@@ -89,6 +94,7 @@ export const cartiere: CartierGuide[] = [
     slug: 'darmanesti',
     name: 'Dărmănești',
     zoneMatch: ['Dărmănești'],
+    updated: '2026-06-25',
     title: 'Case și Apartamente de Vânzare în Dărmănești, Piatra Neamț',
     metaDescription:
       'Proprietăți de vânzare în cartierul Dărmănești, Piatra Neamț — zonă rezidențială liniștită, potrivită pentru familii. Oferte verificate, agent Cozma Vasile.',
@@ -112,6 +118,7 @@ export const cartiere: CartierGuide[] = [
     slug: '1-mai',
     name: '1 Mai',
     zoneMatch: ['1 Mai'],
+    updated: '2026-06-25',
     title: 'Apartamente și Case de Vânzare în Cartierul 1 Mai, Piatra Neamț',
     metaDescription:
       'Proprietăți de vânzare în cartierul 1 Mai, Piatra Neamț — zonă rezidențială cu acces bun și comerț de proximitate. Oferte verificate, agent Cozma Vasile.',
