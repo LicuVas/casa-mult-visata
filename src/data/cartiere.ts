@@ -20,6 +20,28 @@ export interface CartierGuide {
   sections: { h2: string; body: string }[];
 }
 
+// Resurse oficiale utile pt cumpărători în zona Piatra Neamț (outbound links editoriale
+// către surse cu autoritate — semnal de calitate E-E-A-T pe paginile informative).
+// URL-uri verificate live (200). Relevante pt verificările dinainte de cumpărare.
+export interface LocalResource { label: string; url: string; note: string; }
+export const localResources: LocalResource[] = [
+  {
+    label: 'ANCPI — Cartea Funciară',
+    url: 'https://www.ancpi.ro',
+    note: 'Verifică intabularea și situația juridică a oricărei proprietăți.',
+  },
+  {
+    label: 'Primăria Piatra Neamț',
+    url: 'https://www.primariapn.ro',
+    note: 'Urbanism, PUG, certificate de urbanism și taxe locale.',
+  },
+  {
+    label: 'Notarii Publici din România',
+    url: 'https://www.notarpublic.ro',
+    note: 'Găsește un notar pentru autentificarea actelor de vânzare-cumpărare.',
+  },
+];
+
 export const cartiere: CartierGuide[] = [
   {
     slug: 'centru',

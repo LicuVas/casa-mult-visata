@@ -4,7 +4,7 @@
 import Layout from '../../layouts/Layout.astro';
 import PropertyCard from '../../components/PropertyCard.astro';
 import { getCollection } from 'astro:content';
-import { cartiere } from '../../data/cartiere';
+import { cartiere, localResources } from '../../data/cartiere';
 
 export async function getStaticPaths() {
   return cartiere.map((c) => ({ params: { slug: c.slug }, props: { cartier: c } }));
@@ -95,6 +95,17 @@ const extraSchema = {
       ))}
       <p class="silo-cta">Cauți în altă zonă? Vezi <a href="/cartiere-piatra-neamt">toate cartierele</a>, <a href="/proprietati">tot portofoliul</a> sau <a href="/contact">contactează-mă direct</a>.</p>
     </section>
+
+    <aside class="guide-resources">
+      <h2>Resurse oficiale utile înainte de cumpărare</h2>
+      <ul>
+        {localResources.map((r) => (
+          <li>
+            <a href={r.url} target="_blank" rel="noopener">{r.label}</a> — {r.note}
+          </li>
+        ))}
+      </ul>
+    </aside>
   </div>
 </Layout>
 
@@ -109,4 +120,10 @@ const extraSchema = {
   .silo-copy h2 { margin-top: 1.75rem; }
   .silo-copy p { line-height: 1.7; }
   .silo-cta { margin-top: 1.75rem; }
+  .guide-resources { max-width: 760px; margin: 2.5rem 0 1rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-color, #e5e2dc); }
+  .guide-resources h2 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+  .guide-resources ul { list-style: none; padding: 0; margin: 0; }
+  .guide-resources li { margin: 0.4rem 0; line-height: 1.6; color: var(--text-secondary); }
+  .guide-resources a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .guide-resources a:hover { text-decoration: underline; }
 </style>
