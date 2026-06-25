@@ -1,11 +1,12 @@
 ---
-title: Teren intravilan 5300 mp — Dobreni
+title: Teren intravilan 5300 mp — Dobreni Neamt
 status: Vânzare
 propertyType: Teren
 price: 41500
 currency: EUR
 pricePerUnit: ''
 location: Dobreni, jud. Neamț
+localitate: Neamț › Dobreni › Dobreni
 zone: Dobreni
 street: ''
 rooms: null
