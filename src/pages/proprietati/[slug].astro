@@ -73,6 +73,14 @@ const contactPhone = "0747814263";
 const displayPhone = "0747 814 263";
 const whatsappMsg = `Bună ziua! Vreau informații despre proprietatea: ${prop.data.title}`;
 
+// SEO title: titlul clientului + preț + zonă (pârghie CTR/relevanță; NU atinge .md-ul).
+// Prețul în titlu e cel mai puternic semnal de click pt imobiliare; zona se adaugă doar
+// dacă nu e deja în titlu, ca să nu se repete.
+const seoPrice = (prop.data.price && prop.data.price > 0) ? formatPrice(prop.data.price, prop.data.currency) : '';
+const seoZone = (prop.data.zone && !prop.data.title.toLowerCase().includes(String(prop.data.zone).toLowerCase())) ? String(prop.data.zone) : '';
+const seoTitleExtras = [seoPrice, seoZone].filter(Boolean).join(', ');
+const seoTitle = `${prop.data.title}${seoTitleExtras ? ` – ${seoTitleExtras}` : ''} | Casa Mult Visată Piatra Neamț`;
+
 // SEO / OG
 const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://casamultvisata.ro';
 const absoluteOgImage = imageSrc.startsWith('http') ? imageSrc : `${siteOrigin}${imageSrc.startsWith('/') ? imageSrc : '/' + imageSrc}`;
@@ -336,7 +344,7 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
 ---
 
 <Layout
-	title={`${prop.data.title} | Casa Mult Visată Piatra Neamț`}
+	title={seoTitle}
 	description={metaDescription}
 	ogImage={absoluteOgImage}
 	preloadImage={cdnImg(imageSrc, { w: 1200 })}

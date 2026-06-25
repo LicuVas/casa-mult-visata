@@ -6,6 +6,9 @@
 export interface CartierGuide {
   slug: string;
   name: string;
+  // Eticheta de deasupra titlului. Default „Cartier Piatra Neamț"; pt comune/zone din afara
+  // orașului se suprascrie (ex. „Zonă lângă Piatra Neamț").
+  label?: string;
   zoneMatch: string[];
   title: string;
   metaDescription: string;
@@ -135,6 +138,31 @@ export const cartiere: CartierGuide[] = [
         h2: 'Ce verific pentru tine',
         body:
           'Verific actele, intabularea și starea instalațiilor pentru fiecare proprietate din 1 Mai, te însoțesc la vizionări și negociez în numele tău. Pentru cumpărători, comisionul este 0%.',
+      },
+    ],
+  },
+  {
+    slug: 'dumbrava-rosie',
+    name: 'Dumbrava Roșie',
+    label: 'Zonă lângă Piatra Neamț',
+    zoneMatch: ['Dumbrava Roșie'],
+    updated: '2026-06-25',
+    title: 'Case și Terenuri de Vânzare în Dumbrava Roșie, lângă Piatra Neamț',
+    metaDescription:
+      'Proprietăți de vânzare în Dumbrava Roșie, comuna de la marginea Piatra Neamț — case noi și terenuri, la câteva minute de oraș. Oferte verificate, agent Cozma Vasile, comision 0% cumpărător.',
+    h1: 'Proprietăți de Vânzare în Dumbrava Roșie',
+    intro:
+      'Dumbrava Roșie este comuna lipită de Piatra Neamț, peste râul Bistrița, spre Bacău — una dintre cele mai căutate zone pentru cine vrea o casă cu curte la câteva minute de oraș. Mai jos vezi ce am acum la vânzare în Dumbrava Roșie și satele din jur.',
+    sections: [
+      {
+        h2: 'Cum e să locuiești în Dumbrava Roșie',
+        body:
+          'Așezată chiar la marginea estică a municipiului, pe DN15 spre Bacău, Dumbrava Roșie (cu satele Cut, Brășăuți și Izvoare) a devenit zona de extindere rezidențială a orașului: multe case noi, loturi de teren și un ritm mai liniștit, dar cu orașul la 5–10 minute cu mașina. Este alegerea potrivită pentru familiile care vor curte și aer mai curat fără să se rupă de Piatra Neamț — de școli, spital sau locul de muncă.',
+      },
+      {
+        h2: 'La ce să fii atent când cumperi în Dumbrava Roșie',
+        body:
+          'La terenuri contează statutul (intravilan/extravilan), accesul la utilități și deschiderea la drum; la casele noi, autorizația, recepția la terminarea lucrărilor și intabularea. Verific pentru fiecare proprietate actele, cartea funciară și situația reală în teren înainte să ți-o recomand, te însoțesc la vizionări și mă ocup de negociere. Pentru cumpărători, comisionul meu este 0%.',
       },
     ],
   },
