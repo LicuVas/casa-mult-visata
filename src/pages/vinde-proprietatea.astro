@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{ "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://casamultvisata.ro/" },
+		{ "@type": "ListItem", "position": 2, "name": "Vinde proprietatea", "item": "https://casamultvisata.ro/vinde-proprietatea/" }
+	]
+};
+---
+
+<Layout
+	title="Vinde-ți Proprietatea în Piatra Neamț | Vânzare Apartament, Casă, Teren | Casa Mult Visată"
+	description="Vrei să vinzi un apartament, o casă sau un teren în Piatra Neamț? Te ajut din prima zi până la notar: evaluare, fotografii, promovare pe OLX/Storia/Facebook, vizionări și negociere. Agent local Cozma Vasile."
+	extraSchema={breadcrumbSchema}
+>
+
+	<section class="services-editorial">
+		<div class="container">
+			<div class="page-header reveal">
+				<p class="label">Pentru proprietari care vor să vândă</p>
+				<h1>Vinde-ți proprietatea fără stres, la prețul corect</h1>
+				<p class="intro">Vânzarea unei locuințe în Piatra Neamț nu trebuie să însemne luni de telefoane, vizionări fără rost și negocieri obositoare. Mă ocup eu de tot — tu iei doar deciziile care contează.</p>
+			</div>
+
+			<div class="cta-editorial reveal" style="margin-top:0; margin-bottom:3.5rem;">
+				<h2>Începe cu o evaluare gratuită</h2>
+				<p>Primul pas e să afli cât valorează cu adevărat proprietatea ta. Fără cost, fără obligația de a vinde prin mine.</p>
+				<a href="/evaluare-gratuita/">Cere evaluarea gratuită &rarr;</a>
+			</div>
+
+			<div class="service-item reveal">
+				<h3>Ce fac eu, ca să nu faci tu</h3>
+				<div>
+					<p>Te scap de partea grea și consumatoare de timp a vânzării. Fiecare proprietate primește același tratament complet:</p>
+					<ul class="service-detail">
+						<li>Evaluare gratuită și stabilirea unui preț corect de piață</li>
+						<li>Fotografii profesionale care chiar atrag cumpărători</li>
+						<li>Promovare pe OLX, Storia, Facebook, Instagram + baza mea de clienți</li>
+						<li>Filtrarea curioșilor — îți aduc doar cumpărători serioși</li>
+						<li>Gestionarea vizionărilor și a negocierii în numele tău</li>
+						<li>Asistență cu actele și prezență la notar până la semnătură</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="service-item reveal">
+				<h3>Comision transparent</h3>
+				<div>
+					<p>Discutăm comisionul deschis, de la început, înainte de orice contract — fără surprize la final. Cumpărătorul pe care îl aduc eu nu plătește comision; standardul meu.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- PROCES VÂNZARE -->
+	<section class="home-process">
+		<div class="container">
+			<div class="section-header reveal">
+				<p class="label">Cum decurge</p>
+				<h2>Procesul de vânzare, în 4 pași</h2>
+			</div>
+			<div class="process-grid reveal">
+				<div class="process-step">
+					<span class="process-num">1</span>
+					<h3>Evaluare</h3>
+					<p>Vedem împreună proprietatea și stabilim un preț corect, bazat pe piața reală din zona ta.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-num">2</span>
+					<h3>Pregătire &amp; promovare</h3>
+					<p>Fotografii, anunț bine scris și promovare pe toate platformele unde caută cumpărătorii.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-num">3</span>
+					<h3>Vizionări &amp; negociere</h3>
+					<p>Mă ocup de programări, vizionări și de obținerea celui mai bun preț pentru tine.</p>
+				</div>
+				<div class="process-step">
+					<span class="process-num">4</span>
+					<h3>Acte &amp; notar</h3>
+					<p>Te asist cu documentele și suntem împreună la notar până la semnarea contractului.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="container">
+		<div class="cta-editorial reveal">
+			<h2>Gata să vinzi?</h2>
+			<p>Începe cu o evaluare gratuită sau sună-mă direct — primul pas e o conversație onestă.</p>
+			<a href="/evaluare-gratuita/">Cere evaluarea gratuită &rarr;</a>
+			<p style="margin-top:1.25rem; font-size:0.95rem;">
+				sau <a href="tel:0747814263">0747 814 263</a> ·
+				<a href="https://wa.me/40747814263?text=Bun%C4%83%20ziua!%20Vreau%20s%C4%83%20vând%20o%20proprietate." target="_blank" rel="noopener">WhatsApp</a>
+			</p>
+		</div>
+	</div>
+
+</Layout>

@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const breadcrumbSchema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [
+		{ "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://casamultvisata.ro/" },
+		{ "@type": "ListItem", "position": 2, "name": "Evaluare gratuită", "item": "https://casamultvisata.ro/evaluare-gratuita/" }
+	]
+};
+---
+
+<Layout
+	title="Evaluare Gratuită Proprietate Piatra Neamț | Cât Valorează | Casa Mult Visată"
+	description="Află gratuit și fără obligații cât valorează apartamentul, casa sau terenul tău în Piatra Neamț. Analiză de piață obiectivă de la agentul local Cozma Vasile — răspuns rapid."
+	extraSchema={breadcrumbSchema}
+>
+
+	<section style="padding: var(--section-padding);">
+		<div class="container">
+			<div class="page-header reveal">
+				<p class="label">Evaluare gratuită · fără obligații</p>
+				<h1>Cât valorează proprietatea ta în Piatra Neamț?</h1>
+				<p class="intro">Completează formularul de mai jos și primești o estimare de preț bazată pe o analiză reală a pieței locale — apartament, casă sau teren. Gratuit, fără cost ascuns și fără obligația de a vinde prin mine.</p>
+			</div>
+
+			<div class="contact-grid reveal">
+				<div>
+					<h3 style="font-family:var(--font-display); font-size:1.5rem; font-weight:500; margin-bottom:2rem;">Cere evaluarea</h3>
+					<form
+						name="evaluare"
+						method="POST"
+						action="/multumesc"
+						data-netlify="true"
+						netlify-honeypot="bot-field"
+						id="evaluare-form"
+					>
+						<input type="hidden" name="form-name" value="evaluare">
+						<p hidden>
+							<label>Don't fill: <input name="bot-field"></label>
+						</p>
+
+						<div class="form-group">
+							<label for="name">Nume complet</label>
+							<input type="text" id="name" name="name" required aria-required="true" autocomplete="name" enterkeyhint="next" placeholder="Ion Popescu">
+						</div>
+						<div class="form-group">
+							<label for="phone">Telefon</label>
+							<input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" inputmode="tel" enterkeyhint="next" pattern="[0-9 +()-]{7,20}" placeholder="07XX XXX XXX">
+						</div>
+						<div class="form-group">
+							<label for="email">Email <span style="font-weight:400; opacity:.7;">(opțional)</span></label>
+							<input type="email" id="email" name="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="email@exemplu.ro">
+						</div>
+						<div class="form-group">
+							<label for="tip">Tip proprietate</label>
+							<select id="tip" name="tip-proprietate">
+								<option>Apartament</option>
+								<option>Casă</option>
+								<option>Teren</option>
+								<option>Spațiu comercial</option>
+								<option>Altceva</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="zona">Zonă / cartier</label>
+							<input type="text" id="zona" name="zona" autocomplete="off" enterkeyhint="next" placeholder="ex: Mărăței, Centru, Dărmănești...">
+						</div>
+						<div class="form-group">
+							<label for="detalii">Detalii proprietate <span style="font-weight:400; opacity:.7;">(suprafață, nr. camere, etaj, an)</span></label>
+							<textarea id="detalii" name="detalii" autocomplete="off" enterkeyhint="send" placeholder="ex: apartament 2 camere, 54 mp, etaj 3, an 1985, semidecomandat"></textarea>
+						</div>
+						<div class="cmv-gdpr">
+							<input type="checkbox" id="gdpr-consent" name="gdpr-consent" required aria-required="true" value="da">
+							<label for="gdpr-consent">
+								Sunt de acord ca datele mele să fie folosite pentru a primi evaluarea. Am citit
+								<a href="/confidentialitate/" target="_blank" rel="noopener">Politica de Confidențialitate</a>.
+							</label>
+						</div>
+						<button type="submit" id="submit-btn" class="btn-primary" style="width:100%; text-align:center;">Trimite cererea de evaluare</button>
+					</form>
+				</div>
+
+				<div>
+					<div class="contact-info-card">
+						<h3>De ce o evaluare corectă contează</h3>
+						<div class="contact-info-item">
+							<h4>Preț prea mare</h4>
+							<p>Proprietatea stă luni întregi, devine „arsă" pe piață și ajungi tot acolo — dar mai târziu și mai jos.</p>
+						</div>
+						<div class="contact-info-item">
+							<h4>Preț prea mic</h4>
+							<p>Se vinde repede, dar pierzi bani care erau ai tăi. O estimare obiectivă îți arată intervalul real.</p>
+						</div>
+						<hr style="border:none; border-top:1px solid var(--rule-color); margin:1.5rem 0;">
+						<div class="contact-info-item">
+							<h4>Ce primești de la mine</h4>
+							<p>Analiză comparativă pe tranzacții reale din zona ta, nu o cifră aruncată. 4 ani și 50+ tranzacții în Piatra Neamț.</p>
+						</div>
+						<div class="contact-info-item">
+							<h4>Preferi să vorbim direct?</h4>
+							<p>
+								<a href="tel:0747814263">0747 814 263</a> ·
+								<a href="https://wa.me/40747814263?text=Bun%C4%83%20ziua!%20Vreau%20o%20evaluare%20a%20propriet%C4%83%C8%9Bii." target="_blank" rel="noopener" style="color:var(--accent-green); font-weight:500;">WhatsApp →</a>
+							</p>
+						</div>
+						<hr style="border:none; border-top:1px solid var(--rule-color); margin:1.5rem 0;">
+						<div class="contact-info-item">
+							<h4>Vrei tot procesul de vânzare?</h4>
+							<p>Vezi cum te ajut din prima zi până la notar: <a href="/vinde-proprietatea/">Vinde cu mine →</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script is:inline>
+		document.addEventListener('DOMContentLoaded', function () {
+			var form = document.getElementById('evaluare-form');
+			var phone = document.getElementById('phone');
+			var submitBtn = document.getElementById('submit-btn');
+			var name = document.getElementById('name');
+			var gdpr = document.getElementById('gdpr-consent');
+
+			if (name) {
+				name.addEventListener('invalid', function () { name.setCustomValidity('Te rog completează numele tău.'); });
+				name.addEventListener('input', function () { name.setCustomValidity(''); });
+			}
+			if (phone) {
+				phone.addEventListener('invalid', function () {
+					if (phone.validity.valueMissing) { phone.setCustomValidity('Te rog completează numărul de telefon.'); }
+					else { phone.setCustomValidity('Introdu un număr valid (ex: 0747 814 263 sau +40747814263).'); }
+				});
+				phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+			}
+			if (gdpr) {
+				gdpr.addEventListener('invalid', function () { gdpr.setCustomValidity('Te rog confirmă că ești de acord cu Politica de Confidențialitate.'); });
+				gdpr.addEventListener('change', function () { gdpr.setCustomValidity(''); });
+			}
+			if (form && submitBtn) {
+				form.addEventListener('submit', function () {
+					submitBtn.disabled = true;
+					submitBtn.textContent = 'Se trimite...';
+				});
+			}
+		});
+	</script>
+
+</Layout>
