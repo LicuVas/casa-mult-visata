@@ -1,5 +1,5 @@
 ---
-title: Teren intravilan 3632
+title: Teren intravilan 3632 mp. Bodesti de Jos,  Neamt
 status: Vânzare
 propertyType: Teren
 price: 18400
