@@ -168,6 +168,7 @@ recenzii afișate (3×5★, fără schema Review proprie = corect) · social în
 Editorială/AI** · **outbound links oficiale (ANCPI/Primărie/Notari) pe ghiduri**.
 
 **🟡 TODO REAL (al nostru, aditiv):**
+0. ~~Pagini captare-vânzător~~ → **DONE 25.06.2026 (cu acces GSC real):** `/evaluare-gratuita/` (formular Netlify `evaluare`) + `/vinde-proprietatea/` (pilon, proces 4 pași) LIVE; linkuri interne homepage+servicii+footer; breadcrumb schema; în sitemap. Confirmat live 200. Datele GSC care au motivat: 59 clicuri TOATE pe homepage (brand), discovery 0 clicuri, casa-de-vacanta 62 afișări/0 clicuri.
 1. **Blog editorial** (`/blog` lipsește) — articole proces/legal/fiscal + market report.
 2. **streetAddress + postalCode în JSON-LD** (`Layout.astro`, ambele PostalAddress au doar addressLocality)
    — DE FĂCUT **după** ce GBP primește pinul + cod poștal; string adresă IDENTIC peste GBP+schema+legale.
