@@ -1,5 +1,5 @@
 ---
-title: Garsoniera et 3 Darmanesti
+title: Garsoniera et 3 Darmanesti Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 14500
