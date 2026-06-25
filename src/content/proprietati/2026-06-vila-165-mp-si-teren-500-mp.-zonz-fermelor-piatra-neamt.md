@@ -6,7 +6,7 @@ price: 160000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-localitate: ''
+localitate: Neamț › Piatra Neamț › Pietricica
 zone: ''
 street: ''
 rooms: 5
@@ -78,7 +78,7 @@ floorsTotal: null
 heatingType: Centrală proprie pe lemne/peleți
 orientation: ''
 parking: Stradă
-balconies: 2
+balconies: 3
 balconySurface: null
 condition: Nou
 surfaceUtila: 165
@@ -100,7 +100,7 @@ Proprietatea vă oferă spre folosință.
 
 - Parter: living generos cu ieșire pe balcon și șemineu
 
-Etaj: 3 dormitoare,baie balcon. 
+Etaj: 3 dormitoare,baie,2 balcoane 
 
 Locația dispune de  parchet,gresie,faianță, ferestre termopan, beci,fântână proprire și la cerințele clientului se poate amenajata zonă de gratar și garaj.Este situată intr-o zonă liniștită, deosebit de frumoasa,fiind locația ideală pentru cei se iubesc natura și farmecul ei.
 
