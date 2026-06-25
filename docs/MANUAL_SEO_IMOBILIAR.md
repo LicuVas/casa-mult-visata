@@ -1,4 +1,5 @@
 # Manual SEO Imobiliar Local — casamultvisata.ro
+> ➜ **Cunoaștere generalizată în arborele viu:** `C:\00\AI_0\knowledge\webdev_seo\90_per_tip_site\imobiliare\` (+ ramurile universale 10-80). Acest manual rămâne ca dosar specific casamultvisata.
 
 > **Document viu / suport de curs.** Strânge tot ce am învățat despre SEO/AEO local pentru un
 > site imobiliar (din sursele NotebookLM 2009→2026 + audituri + munca reală pe casamultvisata.ro).
