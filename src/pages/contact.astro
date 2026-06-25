@@ -18,15 +18,8 @@ import Layout from '../layouts/Layout.astro';
 					<form
 						name="contact"
 						method="POST"
-						action="/multumesc"
-						data-netlify="true"
-						netlify-honeypot="bot-field"
 						id="contact-form"
 					>
-						<input type="hidden" name="form-name" value="contact">
-						<p hidden>
-							<label>Don't fill: <input name="bot-field"></label>
-						</p>
 
 						<div class="form-group">
 							<label for="name">Nume complet</label>
@@ -66,7 +59,8 @@ import Layout from '../layouts/Layout.astro';
 								<a href="/confidentialitate/" target="_blank" rel="noopener">Politica de Confidențialitate</a>.
 							</label>
 						</div>
-						<button type="submit" id="submit-btn" class="btn-primary" style="width:100%; text-align:center;">Trimite Mesaj</button>
+						<button type="submit" id="submit-btn" class="btn-primary" style="width:100%; text-align:center;">Trimite pe WhatsApp</button>
+						<p style="font-size:0.85rem; opacity:.75; margin-top:0.75rem; text-align:center;">Se deschide WhatsApp cu mesajul deja completat — apeși doar „trimite".</p>
 					</form>
 				</div>
 
@@ -209,11 +203,20 @@ import Layout from '../layouts/Layout.astro';
 			}
 			setMessages();
 
-			// Submit state
-			if (form && submitBtn) {
-				form.addEventListener('submit', function () {
-					submitBtn.disabled = true;
-					submitBtn.textContent = 'Se trimite...';
+			// Submit -> compose WhatsApp message (Cozma: doar WhatsApp, fără email)
+			if (form) {
+				form.addEventListener('submit', function (e) {
+					e.preventDefault();
+					if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+					var v = function (id) { var el = document.getElementById(id); return el ? String(el.value).trim() : ''; };
+					var lines = ['Mesaj de pe site', 'Nume: ' + v('name'), 'Telefon: ' + v('phone')];
+					if (v('email')) lines.push('Email: ' + v('email'));
+					if (v('interest')) lines.push('Interes: ' + v('interest'));
+					if (v('proprietate')) lines.push('Proprietate: ' + v('proprietate'));
+					if (v('message')) lines.push('Mesaj: ' + v('message'));
+					var msg = encodeURIComponent(lines.join('\n'));
+					if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Se deschide WhatsApp...'; }
+					window.location.href = 'https://wa.me/40747814263?text=' + msg;
 				});
 			}
 
