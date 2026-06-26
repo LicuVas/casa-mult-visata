@@ -41,6 +41,7 @@ const proprietati = defineCollection({
     // Locație structurată „Județ › Localitate › Sat/Cartier" (select CMS) — câmpul principal de locație.
     localitate: optStr,
     street: optStr,
+    reper: optStr,
     propertyType: reqEnum(['Apartament', 'Casă', 'Teren', 'Spațiu Comercial'] as const, 'Apartament'),
     rooms: optNum,
     bathrooms: optNum,

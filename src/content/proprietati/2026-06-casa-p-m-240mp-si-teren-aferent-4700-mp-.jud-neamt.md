@@ -6,8 +6,8 @@ price: 159000
 currency: EUR
 pricePerUnit: ''
 location: NEAMT
-localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
-zone: Dumbrava Roșie
+localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+zone: ''
 street: ''
 rooms: 4
 bathrooms: 2

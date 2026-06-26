@@ -6,7 +6,7 @@ price: 154800
 currency: EUR
 pricePerUnit: ''
 location: Neamt
-localitate: Neamț › Bicaz › Izvorul Muntelui
+localitate: "Neamț › Bicaz › Izvoru Muntelui"
 zone: ''
 street: ''
 rooms: 4

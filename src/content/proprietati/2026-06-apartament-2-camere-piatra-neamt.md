@@ -6,7 +6,8 @@ price: 52800
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Mărăței
+localitate: "Neamț › Piatra-Neamț › Mărăței"
+zone: ''
 street: ''
 rooms: 2
 bathrooms: 1

@@ -6,7 +6,8 @@ price: 58400
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Centru
+localitate: "Neamț › Piatra-Neamț › Centru"
+zone: ''
 street: Strada Orhei
 rooms: 2
 bathrooms: 1

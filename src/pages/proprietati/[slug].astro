@@ -382,6 +382,12 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                     {zoneHref && <>{' · '}<a href={zoneHref}>{effZone}</a></>}
                     {streetHref && <>{' · '}<a href={streetHref}>{prop.data.street}</a></>}
                 </p>
+                {prop.data.reper && (
+                    <p class="prop-reper">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+                        {prop.data.reper}
+                    </p>
+                )}
                 {updatedAtFormatted && (
                     <p class="updated-stamp">Actualizat la {updatedAtFormatted}</p>
                 )}
@@ -998,6 +1004,12 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
         .prop-location svg { color: var(--accent-green); margin-right: 0.35rem; flex-shrink: 0; }
         .prop-location a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.18s, border-color 0.18s; }
         .prop-location a:hover { color: var(--accent-green); border-bottom-color: var(--accent-green); }
+        .prop-reper {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-family: var(--font-accent); font-size: 0.9rem; color: var(--text-secondary);
+            margin: -1rem 0 1.5rem; opacity: 0.85;
+        }
+        .prop-reper svg { color: var(--accent-green); flex-shrink: 0; }
 
         /* ===== Content cards (Detalii / Facilități) ===== */
         .detail-card {

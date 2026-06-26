@@ -6,7 +6,8 @@ price: 219000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Vânători (Piatra Neamț)
+localitate: "Neamț › Piatra-Neamț › Vânători"
+zone: ''
 street: ''
 rooms: 5
 bathrooms: 2

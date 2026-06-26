@@ -6,8 +6,8 @@ price: 62700
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-localitate: Neamț › Piatra Neamț › Precista
-zone: Precista
+localitate: "Neamț › Piatra-Neamț › Precista"
+zone: ''
 street: ''
 rooms: 2
 bathrooms: 2

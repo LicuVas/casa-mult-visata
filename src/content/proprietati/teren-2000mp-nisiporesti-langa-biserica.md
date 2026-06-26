@@ -6,7 +6,8 @@ price: 23800
 currency: EUR
 pricePerUnit: ''
 location: Nisiporești, jud. Neamț
-zone: Nisiporești
+localitate: "Neamț › Boțești › Nisiporești"
+zone: ''
 street: ''
 rooms: null
 bathrooms: null

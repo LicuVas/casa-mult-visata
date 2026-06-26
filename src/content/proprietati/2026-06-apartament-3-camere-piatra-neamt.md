@@ -6,7 +6,8 @@ price: 64800
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Precista
+localitate: "Neamț › Piatra-Neamț › Precista"
+zone: ''
 street: Pictor Nicolaie Grigorescu
 rooms: 3
 bathrooms: 2

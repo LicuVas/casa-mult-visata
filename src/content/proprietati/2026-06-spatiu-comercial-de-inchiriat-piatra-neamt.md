@@ -6,8 +6,8 @@ price: 2850
 currency: EUR
 pricePerUnit: '15'
 location: Piatra Neamț
-localitate: Neamț › Piatra Neamț › Centru
-zone: Centru
+localitate: "Neamț › Piatra-Neamț › Centru"
+zone: ''
 street: ''
 rooms: null
 bathrooms: 2

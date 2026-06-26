@@ -6,7 +6,8 @@ price: 34000
 currency: EUR
 pricePerUnit: ''
 location: Bodești de Jos, jud. Neamț
-zone: Bodești de Jos
+localitate: "Neamț › Bodești › Bodeștii de Jos"
+zone: ''
 street: ''
 rooms: 2
 bathrooms: 1

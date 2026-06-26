@@ -6,7 +6,8 @@ price: 65000
 currency: EUR
 pricePerUnit: ''
 location: Neamț
-zone: Doina
+localitate: "Neamț › Girov › Doina"
+zone: ''
 street: ''
 rooms: 2
 bathrooms: 1

@@ -6,8 +6,8 @@ price: 50000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-localitate: Neamț › Piatra Neamț › Centru
-zone: Centru
+localitate: "Neamț › Piatra-Neamț › Centru"
+zone: ''
 street: Ana Ipatescu
 rooms: 1
 bathrooms: 1

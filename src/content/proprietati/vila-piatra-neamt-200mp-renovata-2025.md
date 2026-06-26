@@ -6,7 +6,8 @@ price: 274000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: 1 Mai
+localitate: "Neamț › Piatra-Neamț › 1 Mai"
+zone: ''
 street: ''
 rooms: 4
 bathrooms: 1

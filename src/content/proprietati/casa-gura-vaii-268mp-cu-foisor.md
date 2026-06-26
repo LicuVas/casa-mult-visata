@@ -6,7 +6,8 @@ price: 270000
 currency: EUR
 pricePerUnit: ''
 location: Gura Văii, jud. Neamț
-zone: Gura Văii
+localitate: "Neamț › Girov › Gura Văii"
+zone: ''
 street: ''
 rooms: 6
 bathrooms: 2

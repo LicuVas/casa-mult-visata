@@ -6,7 +6,7 @@ price: 17000
 currency: EUR
 pricePerUnit: ''
 location: Turturesti
-localitate: Neamț › Girov › Căciulești
+localitate: "Neamț › Girov › Turturești"
 zone: ''
 street: ''
 rooms: null

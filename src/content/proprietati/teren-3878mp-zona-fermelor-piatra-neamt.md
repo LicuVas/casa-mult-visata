@@ -6,7 +6,8 @@ price: 135730
 currency: EUR
 pricePerUnit: 35 €/mp
 location: Piatra Neamț
-zone: Obor
+localitate: "Neamț › Piatra-Neamț › Obor"
+zone: ''
 street: Strada Fermelor
 rooms: null
 bathrooms: null

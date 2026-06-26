@@ -6,7 +6,8 @@ price: 18500
 currency: EUR
 pricePerUnit: ''
 location: Dumbrava Roșie, jud. Neamț
-zone: Dumbrava Roșie
+localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+zone: ''
 street: ''
 rooms: null
 bathrooms: null

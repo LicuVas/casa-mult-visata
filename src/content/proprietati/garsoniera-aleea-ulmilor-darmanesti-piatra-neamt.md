@@ -6,7 +6,8 @@ price: 21800
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Dărmănești
+localitate: "Neamț › Piatra-Neamț › Dărmănești"
+zone: ''
 street: Aleea Ulmilor
 rooms: 1
 bathrooms: 1

@@ -6,7 +6,7 @@ price: 160000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-localitate: Neamț › Piatra Neamț › Pietricica
+localitate: "Neamț › Piatra-Neamț › Pietricica"
 zone: ''
 street: ''
 rooms: 5

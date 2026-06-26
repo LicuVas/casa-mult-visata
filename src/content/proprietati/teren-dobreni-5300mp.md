@@ -6,8 +6,8 @@ price: 41500
 currency: EUR
 pricePerUnit: ''
 location: Dobreni, jud. Neamț
-localitate: Neamț › Dobreni › Dobreni
-zone: Dobreni
+localitate: "Neamț › Dobreni › Dobreni"
+zone: ''
 street: ''
 rooms: null
 bathrooms: null

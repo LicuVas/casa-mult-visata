@@ -419,12 +419,13 @@ collections:
           - "Neamț › Vânatori-Neamț › Vânători-Neamț"
           - "Neamț › Zănești › Traian"
           - "Neamț › Zănești › Zănești"
-      - label: "Zonă / Cartier / Sat"
+      - label: "Zonă (opțional)"
         name: "zone"
         widget: "string"
         required: false
-        hint: "Cartierul sau zona (ex. Centru, Precista, Mărăței). Se poate scrie liber. Pentru cartierele cu pagină proprie (Centru, Precista, Mărăței, Dărmănești, 1 Mai, Dumbrava Roșie) potrivirea ignoră majuscule și diacritice."
-      - {label: "Stradă", name: "street", widget: "string", required: false, hint: "Numele străzii (ex. Strada Orhei, Aleea Ulmilor). Lasă gol dacă nu se aplică."}
+        hint: "Lasă de obicei GOL — cartierul/satul se alege deja în câmpul Locație de mai sus. Completează doar dacă vrei o sub-zonă diferită de cartierul din Locație."
+      - {label: "Stradă (opțional)", name: "street", widget: "string", required: false, hint: "Numele străzii (ex. Strada Orhei, Aleea Ulmilor). Lasă gol dacă nu se aplică."}
+      - {label: "Reper / Puncte de interes (opțional)", name: "reper", widget: "string", required: false, hint: "Repere lângă proprietate (ex. „lângă Școala 3”, „aproape de Dedeman”). Apare discret pe pagina anunțului, ajută cumpărătorul să se orienteze."}
       
       - {label: "Număr Camere", name: "rooms", widget: "number", value_type: "int", required: false}
       - {label: "Număr Băi", name: "bathrooms", widget: "number", value_type: "int", required: false}

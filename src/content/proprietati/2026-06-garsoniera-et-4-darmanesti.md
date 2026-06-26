@@ -6,7 +6,8 @@ price: 14500
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Dărmănești
+localitate: "Neamț › Piatra-Neamț › Dărmănești"
+zone: ''
 street: ''
 rooms: 1
 bathrooms: 1

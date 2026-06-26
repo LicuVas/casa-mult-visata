@@ -6,7 +6,8 @@ price: 170000
 currency: EUR
 pricePerUnit: ''
 location: Piatra Neamț
-zone: Ciritei
+localitate: "Neamț › Piatra-Neamț › Ciritei"
+zone: ''
 street: ''
 rooms: null
 bathrooms: null
