@@ -5,7 +5,7 @@ import imageDims from '../../data/image_dims.json';
 import cartierCanon from '../../../tools/cartier_canon.json';
 import { listingId } from '../../utils/listingId';
 import { cdnImg, cdnSrcset } from '../../lib/img';
-import { displayZone, parseLocalitate } from '../../utils/localitate';
+import { displayZone, displayLocation, parseLocalitate, normZone } from '../../utils/localitate';
 
 const DIMS = imageDims as Record<string, [number, number]>;
 function getDims(src: string): [number, number] {
@@ -90,7 +90,7 @@ const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
 const rawBody = (prop.body || '').replace(/[#*_>`\-\[\]\(\)!]/g, '').replace(/\s+/g, ' ').trim();
 const metaDescription = rawBody.length > 0
   ? rawBody.slice(0, 160)
-  : `${prop.data.propertyType} de ${prop.data.status.toLowerCase()} în ${prop.data.location}.`;
+  : `${prop.data.propertyType} de ${prop.data.status.toLowerCase()} în ${displayLocation(prop.data)}.`;
 const jsonLdDescription = rawBody.length > 0 ? rawBody.slice(0, 200) : metaDescription;
 
 // JSON-LD RealEstateListing
@@ -115,7 +115,7 @@ const realEstateListing: Record<string, any> = {
   "datePosted": datePostedLd,
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": prop.data.location,
+    "addressLocality": displayLocation(prop.data),
     "addressRegion": "Neamț",
     "addressCountry": "RO"
   },
@@ -240,7 +240,7 @@ const sameType = eligibleForSimilar.filter(p => p.data.propertyType === prop.dat
 let similar = sameType.slice(0, 3);
 if (similar.length < 3) {
   const sameZone = eligibleForSimilar.filter(p =>
-    p.data.zone && prop.data.zone && p.data.zone === prop.data.zone &&
+    normZone(p.data.zone) && normZone(prop.data.zone) && normZone(p.data.zone) === normZone(prop.data.zone) &&
     !similar.find(s => s.id === p.id)
   );
   for (const cand of sameZone) {
@@ -273,7 +273,7 @@ const typeHref = `/proprietati/?type=${encodeURIComponent(prop.data.propertyType
 // Zona efectivă: clasică sau frunza din `localitate` (sat/cartier), pt anunțuri noi structurate.
 const effZone = prop.data.zone || (parseLocalitate(prop.data.localitate)?.sat ?? '');
 const zoneHref = effZone ? `/proprietati/?zone=${encodeURIComponent(effZone)}` : null;
-const locHref = `/proprietati/?q=${encodeURIComponent(prop.data.location)}`;
+const locHref = `/proprietati/?q=${encodeURIComponent(displayLocation(prop.data))}`;
 const streetHref = prop.data.street ? `/proprietati/?q=${encodeURIComponent(prop.data.street)}` : null;
 
 // === "Detalii imobiliare" rows (moved into main content, dellarte-style) ===
@@ -378,7 +378,7 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                 <!-- LOCAȚIE CLICKABILĂ (oraș · zonă · stradă) → listări filtrate -->
                 <p class="prop-location">
                     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <a href={locHref}>{prop.data.location}</a>
+                    <a href={locHref}>{displayLocation(prop.data)}</a>
                     {zoneHref && <>{' · '}<a href={zoneHref}>{effZone}</a></>}
                     {streetHref && <>{' · '}<a href={streetHref}>{prop.data.street}</a></>}
                 </p>
@@ -573,8 +573,8 @@ const waMsgWithId = `Bună ziua! Vreau informații despre proprietatea: ${prop.d
                                                 </div>
                                             )}
                                             <h3><a href={`/proprietati/${s.id}`}>{s.data.title}</a></h3>
-                                            {(s.data.zone || s.data.location) && (
-                                                <p class="cs-zone">{s.data.zone || s.data.location}</p>
+                                            {(displayZone(s.data) || displayLocation(s.data)) && (
+                                                <p class="cs-zone">{displayZone(s.data) || displayLocation(s.data)}</p>
                                             )}
                                             {sMeta.length > 0 && (
                                                 <p class="meta">{sMeta.map(d => <span>{d}</span>)}</p>

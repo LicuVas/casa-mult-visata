@@ -29,6 +29,20 @@ export function displayZone(data: { localitate?: string | null; zone?: string | 
   return data.zone || '';
 }
 
+// Localitatea afișată (oraș/comună) pentru SEO/breadcrumb/căutare: derivată din `localitate`
+// structurat dacă există, altfel câmpul vechi liber `location` (compatibilitate anunțuri vechi).
+export function displayLocation(data: { localitate?: string | null; location?: string | null }): string {
+  const p = parseLocalitate(data.localitate);
+  if (p) return p.localitate || p.leaf;
+  return data.location || '';
+}
+
+// Normalizare pentru potrivirea cartierelor: trim + lowercase + fără diacritice.
+// Folosită la /cartiere/ ca să lege anunțurile chiar dacă `zone` e scris liber.
+export function normZone(s?: string | null): string {
+  return (s || '').trim().toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
+}
+
 // Tokeni de căutare derivați din `localitate` (toate segmentele, pt filtrul text).
 export function localitateTokens(v?: string | null): string[] {
   const p = parseLocalitate(v);

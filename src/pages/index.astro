@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { cdnImg, cdnSrcset } from '../lib/img';
-import { displayZone } from '../utils/localitate';
+import { displayZone, displayLocation } from '../utils/localitate';
 import reviewsData from '../data/reviews.json';
 
 const reviews = reviewsData.items ?? [];
@@ -29,7 +29,7 @@ const formatPrice = (price: number, currency: string) => {
 // Zone counts for clickable chips
 const zoneCounts: Record<string, number> = {};
 for (const p of allProperties) {
-  const z = p.data.zone || p.data.location;
+  const z = displayZone(p.data) || displayLocation(p.data);
   if (z) zoneCounts[z] = (zoneCounts[z] || 0) + 1;
 }
 // Canonical PN cartiere from tools/cartier_canon.json, sorted alphabetically (Romanian locale)

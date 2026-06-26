@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { displayLocation } from '../../utils/localitate';
 
 const allProperties = await getCollection('proprietati');
 
@@ -15,7 +16,7 @@ const allPropsForClient = allProperties.map(p => {
     currency: p.data.currency,
     pricePerUnit: p.data.pricePerUnit || null,
     propertyType: p.data.propertyType,
-    location: p.data.location,
+    location: displayLocation(p.data),
     zone: p.data.zone || null,
     rooms: p.data.rooms || null,
     bathrooms: p.data.bathrooms || null,

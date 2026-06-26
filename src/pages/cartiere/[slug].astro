@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import PropertyCard from '../../components/PropertyCard.astro';
 import { getCollection } from 'astro:content';
 import { cartiere, localResources } from '../../data/cartiere';
+import { normZone, parseLocalitate } from '../../utils/localitate';
 
 export async function getStaticPaths() {
   return cartiere.map((c) => ({ params: { slug: c.slug }, props: { cartier: c } }));
@@ -19,7 +20,7 @@ const updatedHuman = new Date(cartier.updated).toLocaleDateString('ro-RO', {
 
 const order = (s?: string) => (s === 'Retras' ? 99 : s === 'Vândut' || s === 'Închiriat' ? 2 : s === 'Rezervat' ? 1 : 0);
 const props = all
-  .filter((p) => cartier.zoneMatch.includes((p.data.zone || '').trim()) && (p.data.listingStatus || 'Activ') !== 'Retras')
+  .filter((p) => cartier.zoneMatch.some((z) => normZone(z) === normZone(p.data.zone || parseLocalitate(p.data.localitate)?.sat)) && (p.data.listingStatus || 'Activ') !== 'Retras')
   .sort((a, b) => order(a.data.listingStatus) - order(b.data.listingStatus));
 
 const origin = 'https://casamultvisata.ro';

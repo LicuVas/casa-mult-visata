@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import cartierCanon from '../../tools/cartier_canon.json';
 import { listingId } from '../utils/listingId';
 import { cdnImg, cdnSrcset } from '../lib/img';
-import { displayZone, localitateTokens, parseLocalitate } from '../utils/localitate';
+import { displayZone, displayLocation, localitateTokens, parseLocalitate } from '../utils/localitate';
 
 const allProperties = await getCollection('proprietati');
 
@@ -42,7 +42,7 @@ const orphanPN: string[] = [];
 const orphanImp: string[] = [];
 for (const z of orphanZones) {
   const sample = allProperties.find(p => p.data.zone === z);
-  const region = sample && /Piatra Neam/i.test(sample.data.location) ? 'PN' : 'imprejurimi';
+  const region = sample && /Piatra Neam/i.test(displayLocation(sample.data)) ? 'PN' : 'imprejurimi';
   if (region === 'PN') orphanPN.push(z); else orphanImp.push(z);
 }
 
@@ -301,7 +301,7 @@ const propsForMap = visibleProperties.map((p, index) => {
     <div class="contact-sheet" style="margin-top:2rem;" id="properties-grid">
       {visibleProperties.map((prop, index) => {
         const imageSrc = prop.data.featuredImage || pickFallbackImage(prop.data.propertyType);
-        const region = isPN(prop.data.location) ? 'PN' : 'imprejurimi';
+        const region = isPN(displayLocation(prop.data)) ? 'PN' : 'imprejurimi';
         const lid = listingId(prop.id);
         const zoneAliases = prop.data.zone && ZONE_ALIASES[prop.data.zone] ? ZONE_ALIASES[prop.data.zone] : [];
         const loc = parseLocalitate(prop.data.localitate);
@@ -411,8 +411,8 @@ const propsForMap = visibleProperties.map((p, index) => {
                 </div>
               )}
               <h3><a href={`/proprietati/${prop.id}`}>{prop.data.title}</a></h3>
-              {(displayZone(prop.data) || prop.data.location) && (
-                <p class="cs-zone">{displayZone(prop.data) || prop.data.location}</p>
+              {(displayZone(prop.data) || displayLocation(prop.data)) && (
+                <p class="cs-zone">{displayZone(prop.data) || displayLocation(prop.data)}</p>
               )}
               {metaDetails.length > 0 && (
                 <p class="meta">{metaDetails.map(d => <span>{d}</span>)}</p>

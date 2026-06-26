@@ -4,10 +4,11 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { cartiere } from '../data/cartiere';
+import { normZone, parseLocalitate } from '../utils/localitate';
 
 const all = await getCollection('proprietati');
 const countFor = (zoneMatch: string[]) =>
-  all.filter((p) => zoneMatch.includes((p.data.zone || '').trim()) && (p.data.listingStatus || 'Activ') !== 'Retras').length;
+  all.filter((p) => zoneMatch.some((z) => normZone(z) === normZone(p.data.zone || parseLocalitate(p.data.localitate)?.sat)) && (p.data.listingStatus || 'Activ') !== 'Retras').length;
 
 const items = cartiere.map((c) => ({ ...c, count: countFor(c.zoneMatch) }));
 

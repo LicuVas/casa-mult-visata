@@ -35,9 +35,10 @@ const proprietati = defineCollection({
     price: z.preprocess((v) => (v === null || v === '' ? 0 : v), z.number().nonnegative()),
     currency: reqEnum(['EUR', 'RON'] as const, 'EUR'),
     pricePerUnit: optStr,
-    location: z.string().min(1, 'Locația nu poate fi goală'),
+    // Câmp vechi (liber). Acum opțional: anunțurile noi folosesc `localitate`; cele vechi îl păstrează ca fallback.
+    location: optStr,
     zone: optStr,
-    // Localitate structurată „Județ › Localitate › Sat/Cartier" (select CMS). Opțional, aditiv.
+    // Locație structurată „Județ › Localitate › Sat/Cartier" (select CMS) — câmpul principal de locație.
     localitate: optStr,
     street: optStr,
     propertyType: reqEnum(['Apartament', 'Casă', 'Teren', 'Spațiu Comercial'] as const, 'Apartament'),
