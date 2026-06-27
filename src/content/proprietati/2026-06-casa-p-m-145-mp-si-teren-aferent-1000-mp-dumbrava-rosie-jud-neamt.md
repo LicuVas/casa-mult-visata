@@ -81,6 +81,8 @@ privateOwnerContact: Gabi 0732 142 036
 privateNotes: Ofera 2000 euro Comision
 ---
 
-Casă P+M în suprafață utilă de 155 mp și teren aferent 1000 mp situată în Dumbrava Roșie jud.Neamț.
+Casă P+M în suprafață utilă de 155 mp și teren aferent 1000 mp situată în DumbravaRoșie jud.Neamt
 
-Proprietatea construită din cărămidă în 2018, interiorul la stadiul de gri, masarda se poate compartimentata după  placul clientului, placată pe exterior cu polistiren de 10cm, racordată la curentul electric,sursa de apa în fața locației, și gazul metan la aproximativ 100 metri. Pentru mai multe  detalii contactati-ne telefonic 0747 814 263
+ Locația vă oferă spre folosință 2 dormitoare, baie, bucătărie, hol și o masardă in suprafață utilă de 55 mp. ce poate fi compartimentată după placul clientului. 
+
+Proprietatea construită din cărămidă în 2018, interiorul la stadiul de gri, placată pe exterior cu polistiren de 10cm, racordată la curentul electric,sursa de apa în fața locației, și gazul metan la aproximativ 100 metri. Pentru mai multe  detalii contactati-ne telefonic 0747 814 263
