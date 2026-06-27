@@ -2,11 +2,10 @@
 title: Teren intravilan 614 mp — Dumbrava Roșie
 status: Vânzare
 propertyType: Teren
-price: 18500
+price: 18000
 currency: EUR
 pricePerUnit: ''
-location: Dumbrava Roșie, jud. Neamț
-localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
 zone: ''
 street: ''
 rooms: null
@@ -50,6 +49,7 @@ surfaceConstruita: null
 availableFrom: ''
 privateOwnerContact: ''
 privateNotes: ''
+location: Dumbrava Roșie, jud. Neamț
 ---
 
 Teren intravilan în suprafață de 614 mp situat în Dumbrava Roșie.
