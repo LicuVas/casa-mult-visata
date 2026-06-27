@@ -77,8 +77,8 @@ buildingType: Casă
 structureType: Cărămidă
 confortClass: Confort 1
 private_separator: separator
-privateOwnerContact: ''
-privateNotes: ''
+privateOwnerContact: Gabi 0732 142 036
+privateNotes: Ofera 2000 euro Comision
 ---
 
 Casă P+M în suprafață utilă de 155 mp și teren aferent 1000 mp situată în Dumbrava Roșie jud.Neamț.
