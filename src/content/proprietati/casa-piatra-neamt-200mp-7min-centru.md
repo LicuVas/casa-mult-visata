@@ -1,20 +1,20 @@
 ---
-title: Casă 200 mp + 830 mp curte, la 7 min de centru — Piatra Neamț
+title: Casă 200 mp + 830 mp curte,  Piatra Neamț
 status: Vânzare
 propertyType: Casă
 price: 219000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Vânători"
+localitate: Neamț › Piatra-Neamț › Vânători
 zone: ''
 street: ''
+reper: ''
 rooms: 5
 bathrooms: 2
 surface: 200
 landSurface: 830
 floor: '1'
-yearBuilt: 1977
+yearBuilt: 2007
 features:
   - Acceptă schimb cu apartament + diferență
 caracteristiciCasa:
@@ -38,11 +38,35 @@ videoUrl: ''
 virtualTourUrl: ''
 featuredImage: /images/scraped/post012_0.webp
 gallery:
-  - /images/scraped/post012_0.webp
-  - /images/scraped/post012_1.webp
-  - /images/scraped/post012_2.webp
-  - /images/scraped/post012_3.webp
-  - /images/scraped/post012_4.webp
+  - /images/FB_IMG_1782535335716.webp
+  - /images/FB_IMG_1782535338738.webp
+  - /images/FB_IMG_1782535341975.webp
+  - /images/FB_IMG_1782535344086.webp
+  - /images/FB_IMG_1782535347037.webp
+  - /images/FB_IMG_1782535349964.webp
+  - /images/FB_IMG_1782535353079.webp
+  - /images/FB_IMG_1782535356071.webp
+  - /images/FB_IMG_1782535358591.webp
+  - /images/FB_IMG_1782535361296.webp
+  - /images/FB_IMG_1782535364311.webp
+  - /images/FB_IMG_1782535370626.webp
+  - /images/FB_IMG_1782535373270.webp
+  - /images/FB_IMG_1782535376079.webp
+  - /images/FB_IMG_1782535380287.webp
+  - /images/FB_IMG_1782535344086.webp
+  - /images/FB_IMG_1782535356071.webp
+  - /images/FB_IMG_1782535376079.webp
+  - /images/FB_IMG_1782535380287.webp
+  - /images/FB_IMG_1782535373270.webp
+  - /images/FB_IMG_1782535364311.webp
+  - /images/FB_IMG_1782535361296.webp
+  - /images/FB_IMG_1782535358591.webp
+  - /images/FB_IMG_1782535353079.webp
+  - /images/FB_IMG_1782535349964.webp
+  - /images/FB_IMG_1782535347037.webp
+  - /images/FB_IMG_1782535370626.webp
+  - /images/FB_IMG_1782535338738.webp
+  - /images/FB_IMG_1782535341975.webp
 intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
@@ -60,6 +84,7 @@ buildingType: Casă
 structureType: Cărămidă
 privateOwnerContact: EMILIAN        0750 100 265
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 La doar **7 minute de centrul orașului Piatra Neamț** se află o casă pregătită să devină căminul unei noi familii.
@@ -69,8 +94,10 @@ Cu 200 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis
 - 5 dormitoare
 - Un salon primitor
 - 2 băi pentru confortul zilnic
+- Anexa 28 mp
+- Terasa 
 
-Recent renovată, casa îmbină căldura unui cămin cu confortul modern: **încălzire în pardoseală, centrală pe gaz**, apă și curent electric.
+Recent renovată, casa îmbină căldura unui cămin cu confortul modern: **încălzire în pardoseală, centrală pe gaz**, apă, curent electric si fosa septica
 
 Curtea de **830 mp** este locul unde viața se trăiește altfel — dimineți cu cafea în aer liber, copii care aleargă fără griji, seri liniștite privind cerul.
 
