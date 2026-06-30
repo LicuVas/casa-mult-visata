@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 cam, et 2 Piatra Neamt
+title: Apartament 2 cam, et 2 Maratei Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 33000
