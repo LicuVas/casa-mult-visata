@@ -1,5 +1,5 @@
 ---
-title: Casa 90 mp SI Teren 615 mp Dumbrava Rosie jud. Neamt
+title: Casa 90 mp si Teren 615 mp Dumbrava Rosie jud. Neamt
 status: Vânzare
 propertyType: Casă
 price: 75000
