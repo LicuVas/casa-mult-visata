@@ -63,7 +63,7 @@ buildingType: Bloc
 structureType: ''
 confortClass: ''
 private_separator: separator
-privateOwnerContact: ''
+privateOwnerContact: 0771 750 604   ACC   32000
 privateNotes: ''
 ---
 
