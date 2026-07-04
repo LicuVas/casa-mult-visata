@@ -86,12 +86,19 @@ const siteOrigin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'http
 const absoluteOgImage = imageSrc.startsWith('http') ? imageSrc : `${siteOrigin}${imageSrc.startsWith('/') ? imageSrc : '/' + imageSrc}`;
 const canonicalUrl = `${siteOrigin}${Astro.url.pathname}`;
 
-// Description: first 160 chars from body or fallback
-const rawBody = (prop.body || '').replace(/[#*_>`\-\[\]\(\)!]/g, '').replace(/\s+/g, ' ').trim();
+// Description: first ~160 chars from body (word-boundary cut, spacing normalized) or fallback
+const rawBody = (prop.body || '').replace(/[#*_>`\-\[\]\(\)!]/g, '').replace(/\s+/g, ' ').trim()
+  .replace(/([,;:])(?=[A-Za-zĂÂÎȘȚăâîșț])/g, '$1 ')
+  .replace(/\.(?=[A-ZĂÂÎȘȚ])/g, '. ');
+const truncateAtWord = (s, max) => {
+  if (s.length <= max) return s;
+  const cut = s.lastIndexOf(' ', max - 1);
+  return (cut > 40 ? s.slice(0, cut) : s.slice(0, max - 1)).replace(/[,;:.]$/, '') + '…';
+};
 const metaDescription = rawBody.length > 0
-  ? rawBody.slice(0, 160)
+  ? truncateAtWord(rawBody, 158)
   : `${prop.data.propertyType} de ${prop.data.status.toLowerCase()} în ${displayLocation(prop.data)}.`;
-const jsonLdDescription = rawBody.length > 0 ? rawBody.slice(0, 200) : metaDescription;
+const jsonLdDescription = rawBody.length > 0 ? truncateAtWord(rawBody, 200) : metaDescription;
 
 // JSON-LD RealEstateListing
 const listingStatusForLd = prop.data.listingStatus || 'Activ';
