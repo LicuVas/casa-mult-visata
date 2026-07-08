@@ -2,7 +2,7 @@
 title: Garsoniera et 1 Mărăței Piatra Neamț
 status: Vânzare
 propertyType: Apartament
-price: 25500
+price: 24500
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Mărăței
@@ -68,4 +68,4 @@ Garsonieră în suprafață utilă de 22 mp situat la etajul 1, zona Mărăței 
 
 Locația se află intr-o zonă liniștită și ferită de zgomotul stradal,intr-un imobil cu 4 etaje.
 
-Proprietatea se poate achiziționa și complet mobilată și utilată, pretul fiind de 25500 euro. Pentru mai multe detalii contactați-ne telefonic. 0747 814 263
+Proprietatea se poate achiziționa și complet mobilată și utilată, pretul fiind de 24500 euro. Pentru mai multe detalii contactați-ne telefonic. 0747 814 263
