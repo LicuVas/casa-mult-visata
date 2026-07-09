@@ -12,7 +12,7 @@ reper: ''
 rooms: null
 bathrooms: null
 surface: null
-landSurface: null
+landSurface: 852
 floor: ''
 yearBuilt: null
 features: []
@@ -62,4 +62,4 @@ privateOwnerContact: ''
 privateNotes: ''
 ---
 
-Teren intravilan în suprafață de 1000 mp situat în zona Fermelor din Piatra Neamț. Proprietatea are o deschidere de 49.27 metri,cu utilitățile în apropiere,se află într-o zonă liniștită și ferită de zgomotul stradal,pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Teren intravilan în suprafață de 852 mp situat în zona Fermelor din Piatra Neamț. Proprietatea are o deschidere de 49.27 metri,cu utilitățile în apropiere,se află într-o zonă liniștită și ferită de zgomotul stradal,pentru mai multe detalii contactati-ne telefonic 0747 814 263.
