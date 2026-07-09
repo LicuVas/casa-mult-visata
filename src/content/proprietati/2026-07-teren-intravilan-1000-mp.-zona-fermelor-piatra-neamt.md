@@ -58,7 +58,7 @@ buildingType: ''
 structureType: ''
 confortClass: ''
 private_separator: separator
-privateOwnerContact: ''
+privateOwnerContact: Ionut    0748 086 909       ACC 43000
 privateNotes: ''
 ---
 
