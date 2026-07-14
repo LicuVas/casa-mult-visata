@@ -5,13 +5,13 @@ propertyType: Apartament
 price: 59600
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Centru"
+localitate: Neamț › Piatra-Neamț › Centru
 zone: ''
 street: ''
+reper: ''
 rooms: 3
 bathrooms: 1
-surface: 56
+surface: 54
 landSurface: null
 floor: '2'
 yearBuilt: 1962
@@ -57,10 +57,10 @@ heatingType: Centrală proprie pe gaz
 orientation: vest
 parking: ''
 balconies: 1
-balconySurface: null
+balconySurface: 5
 condition: Necesită renovare
-surfaceUtila: 56
-surfaceConstruita: 61
+surfaceUtila: 60
+surfaceConstruita: 68
 availableFrom: ''
 buildingType: Bloc
 structureType: ''
@@ -68,6 +68,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: Catalina 0726 740 855
 privateNotes: ''
+location: Piatra Neamț
 ---
 
-Apartament cu 3 camere în suprafață utilă de 56 mp situat la etajul 2, zona centrală Piatra Neamt. Proprietatea vă oferă spre folosință, un living, 2 camere,hol,baie,bucătărie,spațiu de depozitare, balcon,și are în dotare centrală,termică,gresie,faianță și parchet. Locația necesită renovare și se află intr-o zonă liniștită și ferită de zgomotul stradal,intr-un imobil cu 4 etaj. Pentru mai multe detali contactatine telefonic 0747814263.
+Apartament cu 3 camere în suprafață utilă de 60,20 mp situat la etajul 2, zona centrală Piatra Neamt. Proprietatea vă oferă spre folosință, un living, 2 camere,hol,baie,bucătărie,spațiu de depozitare, balcon,și are în dotare centrală,termică,gresie,faianță și parchet. Locația necesită renovare și se află intr-o zonă liniștită și ferită de zgomotul stradal,intr-un imobil cu 4 etaj. Pentru mai multe detali contactatine telefonic 0747814263.
