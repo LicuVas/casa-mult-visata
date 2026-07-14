@@ -2,7 +2,7 @@
 title: Casa 90 mp si Teren 615 mp Dumbrava Rosie jud. Neamt
 status: Vânzare
 propertyType: Casă
-price: 75000
+price: 70000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
