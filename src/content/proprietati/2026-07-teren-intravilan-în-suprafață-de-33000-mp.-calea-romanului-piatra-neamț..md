@@ -2,7 +2,7 @@
 title: Teren intravilan în suprafață de 33000 mp. Calea Romanului Piatra Neamț.
 status: Vânzare
 propertyType: Teren
-price: 495000
+price: 15
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Piatra-Neamț
