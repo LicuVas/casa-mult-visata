@@ -69,4 +69,4 @@ privateOwnerContact: Cristina   0039 320 047 1907   ACC 450000
 privateNotes: Comision de 3%
 ---
 
-Teren intravilan în suprafață de 33000 mp situat pe Calea Romanului,Piatra Neamț. Proprietatea are o deschidere la DN 15 de 54.03 metri,cu utilitățile în apropiere. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Teren intravilan în suprafață de 33000 mp situat pe Calea Romanului,Piatra Neamț. Proprietatea are o deschidere la DN 15 de 54.03 metri,cu utilitățile în apropiere.  Pretul este de 15euro /mp..Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
