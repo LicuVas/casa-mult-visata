@@ -38,8 +38,8 @@ updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
 virtualTourUrl: ''
-floorPlan: /images/20260716_151324.webp
-featuredImage: ''
+floorPlan: ''
+featuredImage: /images/20260716_151324.webp
 gallery:
   - /images/20260716_151230.webp
   - /images/20260716_150315.webp
