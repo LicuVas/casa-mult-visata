@@ -11,10 +11,10 @@ street: ''
 reper: ''
 rooms: 5
 bathrooms: 3
-surface: 240
+surface: 232
 landSurface: 2500
 floor: P+1+M
-yearBuilt: 2022
+yearBuilt: 2009
 features: []
 caracteristiciApartament: null
 caracteristiciCasa:
@@ -65,11 +65,11 @@ floorsTotal: 2
 heatingType: ''
 orientation: Sud
 parking: Garaj
-balconies: 1
-balconySurface: 2
+balconies: 2
+balconySurface: null
 condition: Nou
 surfaceUtila: 200
-surfaceConstruita: 240
+surfaceConstruita: 232
 availableFrom: ''
 buildingType: Vilă
 structureType: Cărămidă
@@ -79,4 +79,4 @@ privateOwnerContact: Popescu   0755 396 600       Sotia  0746 178 312
 privateNotes: ACC   100.000
 ---
 
-Casă P+M+1 în suprafață de 240 mp și teren aferent 2500 mp.situată în localitatea Pangarati  jud. Neamt. Proprietatea vă pune la dispoziție 4 camere, living generos,2 holuri, 3 băi, bucătărie,camera centralei,balcon si garaj, necesită finisaje interoiare si are in dotare  ferestre tip termopan,racordată la curentul elctric și apa este la poarta.  Locatia  se află intr-o zona linistita, aproape de Lacul Pangarati, Manastire Pangarati, si alte zone turistice,etc, inconjurata de privelistea pitoreasca si aproape de punctele de interes în comun. Pentru mai multe detalii contactați-mă telefonic 0747 814 263
+Casă P+M+1 în suprafață de 232 mp și teren aferent 2500 mp.situată în localitatea Pangarati  jud. Neamt. Proprietatea vă pune la dispoziție 4 camere, living generos,2 holuri, 3 băi, bucătărie,camera centralei,balcon si garaj, necesită finisaje interoiare si are in dotare  ferestre tip termopan,racordată la curentul elctric și apa este la poarta.  Locatia  se află intr-o zona linistita, aproape de Lacul Pangarati, Manastire Pangarati, si alte zone turistice,etc, inconjurata de privelistea pitoreasca si aproape de punctele de interes în comun. Pentru mai multe detalii contactați-mă telefonic 0747 814 263
