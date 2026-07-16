@@ -2,7 +2,7 @@
 title: Casă P+M+1 situată în  localitatea Pangarati jud. Neamt.
 status: Vânzare
 propertyType: Casă
-price: 110000
+price: 105000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Pângarați › Pângărați
