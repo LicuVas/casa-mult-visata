@@ -1,5 +1,5 @@
 ---
-title: Casă P+M+1 situată în  localitatea Pangarati jud. Neamt.
+title: Casă P+M+1 situată în  localitatea Pângărațit jud. Neamt.
 status: Vânzare
 propertyType: Casă
 price: 105000
@@ -79,4 +79,4 @@ privateOwnerContact: Popescu   0755 396 600       Sotia  0746 178 312
 privateNotes: ACC   100.000
 ---
 
-Casă P+M+1 în suprafață de 232 mp și teren aferent 2500 mp.situată în localitatea Pangarati  jud. Neamt. Proprietatea vă pune la dispoziție 4 camere, living generos,2 holuri, 3 băi, bucătărie,camera centralei,balcon si garaj, necesită finisaje interoiare si are in dotare  ferestre tip termopan,racordată la curentul elctric și apa este la poarta.  Locatia  se află intr-o zona linistita, aproape de Lacul Pangarati, Manastire Pangarati, si alte zone turistice,etc, inconjurata de privelistea pitoreasca si aproape de punctele de interes în comun. Pentru mai multe detalii contactați-mă telefonic 0747 814 263
+Casă P+M+1 în suprafață de 232 mp și teren aferent 2500 mp.situată în localitatea Pângărați jud. Neamt. Proprietatea vă pune la dispoziție 4 camere, living generos,2 holuri, 3 băi, bucătărie,camera centralei,balcon și garaj, necesită finisaje interoiare și are în dotare ferestre tip termopan,racordată la curentul elctric, și apa este la poartă. Locația se află într-o zonă liniștită, aproape de Lacul Pângărați, Mănăstirea Pângărați, și alte zone turistice, inconjurata de o  priveliște pitorească și  aproape de punctele de interes în comun. Pentru mai multe detalii contactați-mă telefonic 0747 814 263
