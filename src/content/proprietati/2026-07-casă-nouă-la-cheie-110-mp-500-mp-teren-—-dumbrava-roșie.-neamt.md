@@ -88,9 +88,9 @@ Casă în suprafață totală de 110 mp și teren aferent 500 mp, situată în D
 - Tâmplărie termopan 
 - Centrală pe gaz,
 - Fosă septică
-- Curte pavata
+- Curte pavată
 - Gazon
 - Izolație exterioară polistiren 10 cm 
 - Izolație pod cu vată minerala 20 cm
-- **Se acceptă plată și prin credit bancar!**
+- **Se acceptă plată și prin credit**  ipotecar
 - Pentru mai multe detalii contactați-ne telefonic: 0747 814 263
