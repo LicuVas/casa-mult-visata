@@ -2,11 +2,10 @@
 title: Teren intravilan 550 mp. Turturesti Neamt
 status: Vânzare
 propertyType: Teren
-price: 17000
+price: 16000
 currency: EUR
 pricePerUnit: ''
-location: Turturesti
-localitate: "Neamț › Girov › Turturești"
+localitate: Neamț › Girov › Turturești
 zone: ''
 street: ''
 rooms: null
@@ -66,6 +65,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: ALEXANDRU COROABA
 privateNotes: ''
+location: Turturesti
 ---
 
 Teren intravilan în suprafață de 550 mp situat in localitatea Turturești, județul Neamț. Proprietatea se află intr-o zonă liniștită și ferită de zgomotul stradal,cu o priveliste deosebit de frumoasa,are o deschidere de 26 metri, ca utilități apă și curent electric trase pe teren.Pentru mai multe detalii contactati-ne telefonic 0747 814 263
