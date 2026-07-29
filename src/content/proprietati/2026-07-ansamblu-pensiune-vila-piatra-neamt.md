@@ -41,25 +41,13 @@ virtualTourUrl: ''
 floorPlan: ''
 featuredImage: /images/20260728_142737.webp
 gallery:
-  - /images/20260728_143654.webp
-  - /images/20260728_143928.webp
-  - /images/20260728_143957.webp
-  - /images/20260728_144013.webp
-  - /images/20260728_143818.webp
-  - /images/20260728_143857.webp
-  - /images/20260728_143403.webp
-  - /images/20260728_143415.webp
-  - /images/20260728_143427.webp
-  - /images/20260728_143451.webp
   - /images/20260728_143147.webp
   - /images/20260728_143236.webp
   - /images/20260728_143251.webp
   - /images/20260728_142914.webp
   - /images/20260728_142749.webp
-  - /images/20260728_142837.webp
   - /images/20260728_143346.webp
   - /images/20260728_142654.webp
-  - /images/20260728_142647.webp
   - /images/20260728_142809.webp
   - /images/20260728_142817.webp
 tech_separator: separator
