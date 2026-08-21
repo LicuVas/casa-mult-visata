@@ -2,19 +2,21 @@
 title: Casă 95 mp + teren 5800 mp — Doina
 status: Vânzare
 propertyType: Casă
-price: 65000
+price: 55000
 currency: EUR
 pricePerUnit: ''
-location: Neamț
-localitate: "Neamț › Girov › Doina"
+localitate: Neamț › Girov › Doina
 zone: ''
 street: ''
+reper: ''
 rooms: 2
 bathrooms: 1
 surface: 95
 landSurface: 5800
 floor: ''
 yearBuilt: null
+features: []
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: true
@@ -29,12 +31,14 @@ caracteristiciCasa:
   stradaAsfaltata: true
   stradaPietruita: false
 caracteristiciTeren: null
+exclusive: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9186
+coords: '46.9186'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post002_0.webp
 gallery:
   - /images/scraped/post002_0.webp
@@ -42,8 +46,11 @@ gallery:
   - /images/scraped/post002_2.webp
   - /images/scraped/post002_3.webp
   - /images/scraped/post002_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
+compartimentare: ''
 floorsTotal: null
 heatingType: Sobă
 orientation: ''
@@ -56,8 +63,11 @@ surfaceConstruita: 120
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
+confortClass: ''
+private_separator: separator
 privateOwnerContact: 0751 355 003      ACC  60000
 privateNotes: ''
+location: Neamț
 ---
 
 Casă în suprafață de 95 mp și teren intravilan aferent 5800 mp, situată în localitatea Doina, jud. Neamț.
