@@ -74,4 +74,4 @@ privateOwnerContact: IONELA  0755 344 842
 privateNotes: ''
 ---
 
-Casa tip Duplex in suprafata de 119 mp. si teren aferent 38 mp. situata in zona Fermelor Piatra Neamt. Locatia data in folosinta in 2023, va pune la dispozitie pe parter: hol,living generos,bucatarie,baie, camera centralei si o terasa acoperita,iar etajul va ofera 3  dormitoare,si baie. Proprietatea se vinde complet mobilata,utilata,dispune si de 2 locuri de parcare. Pentru mai multe detalii contactati-ne telefoni 0747814263
+Casă tip Duplex în suprafață de 119 mp. și teren aferent 38 mp. situată în zona Fermelor Piatra Neamț. Locația dată în folosință în 2023, vă pune la dispoziție pe parter: hol,living generos open space cu bucătărie,baie, camera centralei și o terasă acoperită,iar etajul vă oferă 3  dormitoare,și  baie. Proprietatea se vinde complet mobilată,utilată,dispune și de 2 locuri de parcare. Pentru mai multe detalii contactați-ne telefonic 0747814263
