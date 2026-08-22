@@ -33,7 +33,7 @@ caracteristiciCasa:
 caracteristiciTeren: null
 exclusive: false
 comisionZero: true
-listingStatus: Retras
+listingStatus: Activ
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
@@ -62,7 +62,7 @@ orientation: ''
 parking: Loc suprateran
 balconies: null
 balconySurface: null
-condition: Nou
+condition: Bună stare
 surfaceUtila: 110
 surfaceConstruita: 119
 availableFrom: ''
