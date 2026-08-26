@@ -2,7 +2,7 @@
 title: Casă P+M în suprafață de 140 mp și teren aferent 400 mp.situată în com.Savinesti jud. Neamt.
 status: Vânzare
 propertyType: Casă
-price: 56000
+price: 60000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Săvinești › Săvinești
@@ -64,8 +64,8 @@ buildingType: Casă
 structureType: Cărămidă
 confortClass: ''
 private_separator: separator
-privateOwnerContact: 0742 362 330  ACC    50000
-privateNotes: ''
+privateOwnerContact: Bogdan parc auto Buhusi
+privateNotes: ACC           58000
 ---
 
 Casă P+M în suprafață de 140 mp și teren aferent 400 mp.situată în com.Savinesti jud. Neamt. Proprietatea
