@@ -2,13 +2,13 @@
 title: Spatiu comercial de inchiriat 190 mp. zona centrala Piatra Neamt
 status: Închiriere
 propertyType: Spațiu Comercial
-price: 2850
+price: 14
 currency: EUR
 pricePerUnit: '15'
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Centru"
+localitate: Neamț › Piatra-Neamț › Centru
 zone: ''
 street: ''
+reper: ''
 rooms: null
 bathrooms: 2
 surface: 190
@@ -58,6 +58,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: ilinca
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Spațiu comercial de închiriat, cu o suprafață generoasă de 190 mp, situat în zona centrală din Piatra Neamț cu acces facil și vizibilitate foarte bună. Proprietatea dispune de un open-space luminos și versatil, ideal pentru showroom, birouri, magazin, sală de prezentare, clinică, salon sau alte activități comerciale.
