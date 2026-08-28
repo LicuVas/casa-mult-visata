@@ -2,7 +2,7 @@
 title: Teren intravilan 7042 mp.  Pângărați, jud.Neamț
 status: Vânzare
 propertyType: Teren
-price: 197000
+price: 196269
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Pângarați › Pângărăcior
