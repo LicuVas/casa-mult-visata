@@ -70,4 +70,4 @@ Oferim spre vânzare un teren intravilan în suprafață de 7042 mp situat în l
 
 -Pivniță zidită din piatră
 
--de curent electric,apă și poate fi achiziționată in diferite scopuri. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+- curent electric,apă și poate fi achiziționată in diferite scopuri. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
