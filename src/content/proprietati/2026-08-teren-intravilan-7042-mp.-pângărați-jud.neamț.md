@@ -35,12 +35,25 @@ coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/20260828_123125.webp
+featuredImage: /images/IMG-20260828-WA0021.webp
 gallery:
-  - /images/20260828_123129.webp
-  - /images/20260828_123131.webp
   - /images/20260828_123139.webp
+  - /images/IMG-20260828-WA0012.webp
+  - /images/IMG-20260828-WA0014.webp
+  - /images/IMG-20260828-WA0029.webp
+  - /images/IMG-20260828-WA0031.webp
+  - /images/20260828_123131.webp
+  - /images/IMG-20260828-WA0021.webp
+  - /images/IMG-20260828-WA0016.webp
+  - /images/20260828_123129.webp
   - /images/20260828_123145.webp
+  - /images/IMG-20260828-WA0028.webp
+  - /images/IMG-20260828-WA0024.webp
+  - /images/IMG-20260828-WA0022.webp
+  - /images/IMG-20260828-WA0030.webp
+  - /images/IMG-20260828-WA0013.webp
+  - /images/IMG-20260828-WA0017.webp
+  - /images/IMG-20260828-WA0021.webp
 tech_separator: separator
 energyClass: ''
 intabulat: false
