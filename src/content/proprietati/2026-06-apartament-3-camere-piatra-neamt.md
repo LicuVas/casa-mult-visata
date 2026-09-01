@@ -2,18 +2,20 @@
 title: Apartament 3 camere et 4 Precista Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 64800
+price: 66000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Precista
 zone: ''
 street: Pictor Nicolaie Grigorescu
+reper: ''
 rooms: 3
 bathrooms: 2
 surface: 68
 landSurface: null
 floor: '4'
 yearBuilt: null
+features: []
 caracteristiciApartament:
   lift: false
   centralaProprie: true
@@ -24,6 +26,8 @@ caracteristiciApartament:
   iluminatStradal: true
   stradaAsfaltata: true
   transportInComun: true
+caracteristiciCasa: null
+caracteristiciTeren: null
 exclusive: false
 comisionZero: true
 listingStatus: Activ
