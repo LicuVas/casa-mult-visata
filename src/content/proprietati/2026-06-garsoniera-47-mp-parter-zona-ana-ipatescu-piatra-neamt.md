@@ -2,13 +2,13 @@
 title: Garsoniera 47 mp parter zona Ana Ipatescu Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 50000
+price: 45000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Centru"
+localitate: Neamț › Piatra-Neamț › Centru
 zone: ''
 street: Ana Ipatescu
+reper: ''
 rooms: 1
 bathrooms: 1
 surface: 37
@@ -65,6 +65,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: ''
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Garsonieră in suprafață construită de 47mp. situată la parter in zona centrală din Piatra Neamț.  Proprietatea vă oferă spre folosință un hol generos, dormitor,baie,bucătărie, boxă și loc de parcare.  Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
