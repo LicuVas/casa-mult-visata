@@ -1,14 +1,14 @@
 ---
-title: Apartament 3 cam, et 1, Piatra Neamt
+title: Apartament 3 cam, et 1, zonz 1 Mai, Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 93400
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › 1 Mai"
+localitate: Neamț › Piatra-Neamț › 1 Mai
 zone: ''
 street: ''
+reper: ''
 rooms: 3
 bathrooms: 2
 surface: 80
@@ -81,6 +81,7 @@ confortClass: Confort 1
 private_separator: separator
 privateOwnerContact: ANA MARIA
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Apartament 3 camere decomandat,etajul 1, în suprafață totală de 114mp.zona 1 Mai, Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, living generos,bucătărie, hol, 2 băi,2 balcoane și boxă. Locația are in dotare ferestre tip termopan, centrală termică, gresie, faianță, parchet laminat și se află aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
