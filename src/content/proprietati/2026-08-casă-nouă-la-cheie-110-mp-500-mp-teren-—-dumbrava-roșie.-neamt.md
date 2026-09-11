@@ -2,7 +2,7 @@
 title: Casă nouă la cheie, 110 mp + 500 mp teren — Dumbrava Roșie. Neamt
 status: Vânzare
 propertyType: Casă
-price: 125000
+price: 148000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
@@ -40,15 +40,6 @@ videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
 featuredImage: /images/20260717_102847.webp
-gallery:
-  - /images/20260717_102655.webp
-  - /images/20260717_102705.webp
-  - /images/20260717_102711.webp
-  - /images/20260717_102755.webp
-  - /images/20260717_102838.webp
-  - /images/20260717_102905.webp
-  - /images/20260717_102907.webp
-  - /images/20260717_103106.webp
 tech_separator: separator
 energyClass: ''
 intabulat: true
@@ -68,7 +59,7 @@ buildingType: Casă
 structureType: Cărămidă
 confortClass: ''
 private_separator: separator
-privateOwnerContact: ''
+privateOwnerContact: Mihai Constructor
 privateNotes: ''
 ---
 
