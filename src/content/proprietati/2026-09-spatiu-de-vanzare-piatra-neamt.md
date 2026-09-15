@@ -50,7 +50,7 @@ gallery:
   - /images/20260915_112300.webp
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: ''
 floorsTotal: null
@@ -71,4 +71,18 @@ privateOwnerContact: Lucian 0744 510 131
 privateNotes: ''
 ---
 
-Spatiu de vanzare
+**Spațiu comercial** în suprafață totală de 400 mp, situat pe 2 nivele, si teren aferent 415mp  situat pe B-dul General Dascalescu din  Piatra Neamț.
+
+**Locația vă pune la dispoziție:**
+
+- 2 spații generoase
+- 1 băi
+- Spațiu de depozitare
+- intrarea se face din Bulevard
+
+**Autorizații:** ISU, DSV, DSP.
+**Utilități:** curent electric, fosa 
+
+Proprietatea poate fi folosită în diferite scopuri, în funcție de activitatea dorită: sediu firmă, birouri etc.
+
+Contact: 0747 814 263.
