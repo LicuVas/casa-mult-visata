@@ -62,4 +62,4 @@ privateOwnerContact: Liviu 0744 510131
 privateNotes: ''
 ---
 
-Teren intravilan în suprafață de 685 mp situat la strada principala,cartierul Vanatori din Piatra Neamț. Proprietatea are o deschidere de 13 metri,cu utilitățile in fata locatiei. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Teren intravilan în suprafață de 685 mp situat la strada principala,cartierul Vanatori din Piatra Neamț. Proprietatea are o deschidere de 12.91 metri,cu utilitățile in fata locatiei. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
