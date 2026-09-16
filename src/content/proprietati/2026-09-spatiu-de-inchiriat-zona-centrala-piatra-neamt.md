@@ -58,7 +58,7 @@ privateNotes: ''
 
 **Locația vă pune la dispoziție:**
 
-- 1 spațiu generos
+- 1 spațiu generos cu o capacitate de 120, persoane
 - 3 băi
 - 1 vestiare
 - bucatarie in suprafata de 60 mp.
