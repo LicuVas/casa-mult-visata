@@ -2,7 +2,7 @@
 title: Apartament 3 camere et 4 Precista Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 66000
+price: 65000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Precista
