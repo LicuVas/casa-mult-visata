@@ -54,7 +54,7 @@ privateOwnerContact: ''
 privateNotes: ''
 ---
 
-**Spațiu comercial** în suprafață utila de 260 mp, zona centrală din Piatra Neamț.
+**Spațiu comercial situat la parter** în suprafață utila de 200 mp, zona centrală din Piatra Neamț. Locatia se preteaza pentru diferite activitati comerciale, dar poate fi folosit si in alte scopuri,in functie de domeniul de activitate ales, cu posibilitatea de extindere cu un spatiu de 60 mp. ce poate fi transformat in spatii de depozitare bucatarie,etc.
 
 **Locația vă pune la dispoziție:**
 
@@ -65,6 +65,7 @@ privateNotes: ''
 - Spațiu de depozitare
 - Cameră tehnică
 - 2 intrări
+- 
 
 **Autorizații:** ISU, DSV, DSP.
 **Utilități:** curent electric 220-380, gaz metan.
