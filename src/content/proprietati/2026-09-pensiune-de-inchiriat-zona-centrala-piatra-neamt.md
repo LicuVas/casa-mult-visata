@@ -1,8 +1,8 @@
 ---
-title: Pensiune de inchiriat,zona centrala Piatra Neamt
+title: Pensiune 4 camere in regim hotelier,zona centrala Piatra Neamt
 status: Închiriere
 propertyType: Casă
-price: 15
+price: 40
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Centru
