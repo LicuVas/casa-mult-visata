@@ -46,7 +46,7 @@ coords: '46.9276'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/scraped/post004_0.webp
+featuredImage: /images/IMG-20260917-WA0002.webp
 gallery:
   - /images/scraped/post004_0.webp
   - /images/scraped/post004_1.webp
