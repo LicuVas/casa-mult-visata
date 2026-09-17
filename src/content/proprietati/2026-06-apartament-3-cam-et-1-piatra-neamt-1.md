@@ -2,7 +2,7 @@
 title: Apartament 3 cam, et 1, zonz 1 Mai, Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 93400
+price: 92400
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › 1 Mai
