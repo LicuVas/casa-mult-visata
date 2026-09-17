@@ -2,13 +2,13 @@
 title: Vilă 200 mp + 400 mp teren, renovată complet 2025 — Piatra Neamț
 status: Vânzare
 propertyType: Casă
-price: 274000
+price: 220000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › 1 Mai"
+localitate: Neamț › Piatra-Neamț › 1 Mai
 zone: ''
 street: ''
+reper: ''
 rooms: 4
 bathrooms: 1
 surface: 200
@@ -35,13 +35,17 @@ features:
   - Parchet laminat
   - Canalizare oraș
   - Renovată complet 2025
+caracteristiciApartament: null
+caracteristiciCasa: null
+caracteristiciTeren: null
 exclusive: true
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9276
+coords: '46.9276'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post004_0.webp
 gallery:
   - /images/scraped/post004_0.webp
@@ -49,8 +53,11 @@ gallery:
   - /images/scraped/post004_2.webp
   - /images/scraped/post004_3.webp
   - /images/scraped/post004_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
+compartimentare: ''
 floorsTotal: 1
 heatingType: Centrală proprie pe gaz
 orientation: ''
@@ -58,14 +65,16 @@ parking: Stradă
 balconies: 1
 balconySurface: null
 condition: Renovat recent
-surfaceUtila: null
+surfaceUtila: 200
 surfaceConstruita: null
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
 confortClass: Confort 1
-privateOwnerContact: ''
+private_separator: separator
+privateOwnerContact: Carmen 0742 741 312
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Vilă în suprafață utilă de 200 mp și teren aferent 400 mp, situată în Piatra Neamț. **Proprietatea este renovată complet în 2025.**
