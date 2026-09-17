@@ -2,7 +2,7 @@
 title: Spatiu de inchiriat zona centrala Piatra Neamt
 status: Închiriere
 propertyType: Spațiu Comercial
-price: 15
+price: 13
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Centru
@@ -70,6 +70,6 @@ privateNotes: ''
 **Autorizații:** ISU, DSV, DSP.
 **Utilități:** curent electric 220-380, gaz metan.
 
-Proprietatea poate fi folosită în diferite scopuri, în funcție de activitatea dorită: sediu firmă, birouri, restaurant, pizzerie, etc.
+Proprietatea poate fi folosită în diferite scopuri, în funcție de activitatea dorită:  Showroom, sediu firmă, birouri, restaurant, pizzerie, etc.
 
 Contact: 0747 814 263.
