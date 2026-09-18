@@ -2,7 +2,7 @@
 title: Apartament 3 cam et 1 Piatra Neamt
 status: Vânzare
 propertyType: Apartament
-price: 70000
+price: 73000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Mărăței
