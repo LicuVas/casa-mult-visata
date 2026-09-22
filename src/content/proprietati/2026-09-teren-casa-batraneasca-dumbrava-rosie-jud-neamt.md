@@ -2,7 +2,7 @@
 title: Teren +casa batraneasca Dumbrava Rosie,jud, Neamt
 status: Vânzare
 propertyType: Teren
-price: 84500
+price: 80000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
