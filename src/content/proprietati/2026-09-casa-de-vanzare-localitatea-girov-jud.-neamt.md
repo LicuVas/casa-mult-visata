@@ -41,20 +41,21 @@ virtualTourUrl: ''
 floorPlan: ''
 featuredImage: /images/20260923_115641.webp
 gallery:
+  - /images/20260923_114843.webp
+  - /images/20260923_114903.webp
   - /images/20260923_114922.webp
   - /images/20260923_114917.webp
-  - /images/20260923_114903.webp
   - /images/20260923_114855.webp
-  - /images/20260923_114803.webp
-  - /images/20260923_114843.webp
   - /images/20260923_114823.webp
+  - /images/20260923_114745.webp
+  - /images/20260923_114803.webp
   - /images/20260923_114808.webp
   - /images/20260923_115044.webp
+  - /images/20260923_115053.webp
   - /images/20260923_115106.webp
-  - /images/20260923_115028.webp
-  - /images/20260923_115544.webp
+  - /images/20260923_115158.webp
   - /images/20260923_115554.webp
-  - /images/20260923_115203.webp
+  - /images/20260923_114730.webp
 tech_separator: separator
 energyClass: ''
 intabulat: true
