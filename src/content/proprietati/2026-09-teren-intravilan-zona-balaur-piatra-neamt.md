@@ -2,7 +2,7 @@
 title: Teren intravilan zona Balaur, Piatra Neamt
 status: Vânzare
 propertyType: Teren
-price: 30
+price: 27
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Piatra-Neamț
@@ -12,7 +12,7 @@ reper: ''
 rooms: null
 bathrooms: null
 surface: null
-landSurface: 5200
+landSurface: 5048
 floor: ''
 yearBuilt: null
 features: []
@@ -65,7 +65,7 @@ structureType: ''
 confortClass: ''
 private_separator: separator
 privateOwnerContact: Victor  0754 450 085
-privateNotes: ACC   26-27-28 Euro/mp
+privateNotes: ACC   25 Euro/mp
 ---
 
-De vanzare teren intravilan cu o suprafata de 5200 mp. cu o deschidere de 46 metri la strada si este  situata intr-o oaza de liniste cu o priveliste superba, zona Balaur Piatra Neamt.Proprietatea este compusa din teren cu livada tanara pe rod si vita de vie, plus o casuta cocheta pe structura de lemn, ideala pentru locuit, vacanta sau ca refugiu de weekend departe de agitatia orasului. Vei avea propriile fructe bio din livada - meri, pruni, ciresi, nuci, vita de vie nobila pentru vin si struguri de masa, aer curat, liniste totala, vecini civilizati. Pentru mai multe detalii contactati-ne telefonic 0747814263.
+De vanzare teren intravilan cu o suprafata de 5048 mp. cu o deschidere de 46 metri la strada si este  situata intr-o oaza de liniste cu o priveliste superba, zona Balaur Piatra Neamt.Proprietatea este compusa din teren cu livada tanara pe rod si vita de vie, plus o casuta cocheta pe structura de lemn, ideala pentru locuit, vacanta sau ca refugiu de weekend departe de agitatia orasului. Vei avea propriile fructe bio din livada - meri, pruni, ciresi, nuci, vita de vie nobila pentru vin si struguri de masa, aer curat, liniste totala, vecini civilizati. Pentru mai multe detalii contactati-ne telefonic 0747814263.
