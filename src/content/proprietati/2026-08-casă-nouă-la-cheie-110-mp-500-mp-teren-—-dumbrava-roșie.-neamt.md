@@ -85,8 +85,8 @@ Casă în suprafață totală de 110 mp și teren aferent 500 mp, situată în D
 - baie
 - Bucătărie
 - Living
-- **Casa se predă la cheie cu:**
-- Gresie, faianță, parchet, uși, obiecte sanitare (alese de client)
+- **Dotari:**
+- Gresie, faianță, parchet, uși, obiecte sanitare 
 - Tâmplărie termopan
 - Centrală pe gaz,
 - Fosă septică
@@ -94,5 +94,5 @@ Casă în suprafață totală de 110 mp și teren aferent 500 mp, situată în D
 - Gazon
 - Izolație exterioară polistiren 10 cm
 - Izolație pod cu vată minerala 20 cm
-- **Se acceptă plată și prin credit** ipotecar
+- **Se acceptă plata cash sau prin credit** ipotecar
 - Pentru mai multe detalii contactați-ne telefonic: 0747 814 263
