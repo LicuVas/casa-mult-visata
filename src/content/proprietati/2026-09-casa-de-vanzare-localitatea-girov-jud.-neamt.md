@@ -79,4 +79,4 @@ privateOwnerContact: Emilia 0725 763 460
 privateNotes: ACC comision de 3%
 ---
 
-Casa in suprafata de 122 mp si teren aferent 3600 mp situata in localitatea Girov jud. Neamt. Proprietatea dispune de 4 dormitoare, living, 2 băi (inclusiv una cu hidromasaj), bucătărie, piscină, grădină, zonz de grătar, terasă si fosa septica. Locatia este racordata la apa,curent electri, incalzirea in pardoseala electrica. Pentru mai multe detalii contactati-ne telefonic 0747814263
+Casă în suprafață de 122 mp și teren aferent 3600 mp situată în localitatea Girov jud. Neamț. Proprietatea dispune de 4 dormitoare, living, 2 băi (inclusiv una cu hidromasaj), bucătărie, piscină, grădină, zonă de grătar, terasă și fosă septică. Locația este racordată la apă,curent electric, încălzirea în pardoseală pe curent electric. Pentru mai multe detalii contactați-ne telefonic 0747814263
