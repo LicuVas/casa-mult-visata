@@ -2,7 +2,7 @@
 title: Teren intravilan 5000 mp zona Pietricica Piatra Neamt
 status: Vânzare
 propertyType: Teren
-price: 65
+price: 55
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Pietricica
