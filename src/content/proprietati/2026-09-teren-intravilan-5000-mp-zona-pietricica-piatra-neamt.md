@@ -35,11 +35,15 @@ coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/20260925_105154.webp
+featuredImage: /images/20260928_100559.webp
 gallery:
   - /images/20260925_105216.webp
-  - /images/20260925_105154.webp
-  - /images/20260925_105200.webp
+  - /images/20260928_100559.webp
+  - /images/20260928_100609.webp
+  - /images/20260928_100611.webp
+  - /images/20260928_100620.webp
+  - /images/20260928_100633.webp
+  - /images/20260928_100637.webp
 tech_separator: separator
 energyClass: ''
 intabulat: true
