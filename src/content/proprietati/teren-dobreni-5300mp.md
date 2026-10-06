@@ -2,13 +2,13 @@
 title: Teren intravilan 5300 mp — Dobreni Neamt
 status: Vânzare
 propertyType: Teren
-price: 41500
+price: 39000
 currency: EUR
 pricePerUnit: ''
-location: Dobreni, jud. Neamț
-localitate: "Neamț › Dobreni › Dobreni"
+localitate: Neamț › Dobreni › Dobreni
 zone: ''
 street: ''
+reper: ''
 rooms: null
 bathrooms: null
 surface: null
@@ -20,6 +20,8 @@ features:
   - Apă (în fața terenului)
   - Asfalt
   - Deschidere 35 m
+caracteristiciApartament: null
+caracteristiciCasa: null
 caracteristiciTeren:
   intravilan: true
   extravilan: false
@@ -29,12 +31,14 @@ caracteristiciTeren:
   iluminatStradal: true
   stradaAsfaltata: true
   stradaPietruita: false
+exclusive: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9918
+coords: '46.9918'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post001_0.webp
 gallery:
   - /images/scraped/post001_0.webp
@@ -42,16 +46,28 @@ gallery:
   - /images/scraped/post001_2.webp
   - /images/scraped/post001_3.webp
   - /images/scraped/post001_4.webp
+tech_separator: separator
+energyClass: ''
+intabulat: false
 cadastralNumber: ''
+compartimentare: ''
 floorsTotal: null
+heatingType: ''
 orientation: ''
+parking: ''
 balconies: null
 balconySurface: null
+condition: ''
 surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
+buildingType: ''
+structureType: ''
+confortClass: ''
+private_separator: separator
 privateOwnerContact: 0754 933 061
 privateNotes: ''
+location: Dobreni, jud. Neamț
 ---
 
 Teren intravilan în suprafață de 5300 mp situat în localitatea Dobreni, jud. Neamț. Proprietatea se află într-o zonă ferită de zgomotul stradal, dispune de o deschidere de 35 metri la strada asfaltată, cu utilitățile în fața terenului (apă și curent electric).
