@@ -2,13 +2,13 @@
 title: Casă/Spațiu comercial 106 mp cu autorizații — Bodești de Jos
 status: Vânzare
 propertyType: Casă
-price: 34000
+price: 32000
 currency: EUR
 pricePerUnit: ''
-location: Bodești de Jos, jud. Neamț
-localitate: "Neamț › Bodești › Bodeștii de Jos"
+localitate: Neamț › Bodești › Bodeștii de Jos
 zone: ''
 street: ''
+reper: ''
 rooms: 2
 bathrooms: 1
 surface: 106
@@ -28,6 +28,7 @@ features:
   - Autorizație DSV
   - Autorizație DSP
   - 'Posibilități: sediu firmă, birouri, salon, magazin etc.'
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: false
@@ -41,12 +42,15 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: true
   stradaPietruita: false
+caracteristiciTeren: null
+exclusive: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 47.0275
+coords: '47.0275'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post022_0.webp
 gallery:
   - /images/scraped/post022_0.webp
@@ -54,10 +58,15 @@ gallery:
   - /images/scraped/post022_2.webp
   - /images/scraped/post022_3.webp
   - /images/scraped/post022_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
+compartimentare: ''
 floorsTotal: null
+heatingType: ''
 orientation: ''
+parking: ''
 balconies: null
 balconySurface: null
 condition: Bună stare
@@ -66,8 +75,11 @@ surfaceConstruita: null
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
+confortClass: ''
+private_separator: separator
 privateOwnerContact: Elena  0726 693 185
 privateNotes: ''
+location: Bodești de Jos, jud. Neamț
 ---
 
 Casă sau spațiu comercial în suprafață utilă de 106 mp, situat în localitatea Bodești de Jos, jud. Neamț.
