@@ -2,7 +2,7 @@
 title: Casă P+M,220 mp strada Ștefan cel Mare, Piatra Neamț.
 status: Vânzare
 propertyType: Casă
-price: 539000
+price: 535000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Centru
