@@ -2,13 +2,13 @@
 title: Casă P+M cărămidă 226 mp + 1286 mp teren — Dumbrava Roșie
 status: Vânzare
 propertyType: Casă
-price: 169800
+price: 167800
 currency: EUR
 pricePerUnit: ''
-location: Dumbrava Roșie, jud. Neamț
-localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
 zone: ''
 street: ''
+reper: ''
 rooms: 2
 bathrooms: 2
 surface: 226
@@ -27,6 +27,7 @@ features:
   - Curte amenajată
   - Garaj cu intrare din strada principală
   - Livadă cu pomi fructiferi
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: true
@@ -40,12 +41,15 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: true
   stradaPietruita: false
+caracteristiciTeren: null
+exclusive: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.8832
+coords: '46.8832'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post015_0.webp
 gallery:
   - /images/scraped/post015_0.webp
@@ -53,6 +57,8 @@ gallery:
   - /images/scraped/post015_2.webp
   - /images/scraped/post015_3.webp
   - /images/scraped/post015_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
@@ -68,8 +74,11 @@ surfaceConstruita: null
 availableFrom: ''
 buildingType: Vilă
 structureType: Cărămidă
+confortClass: ''
+private_separator: separator
 privateOwnerContact: Gigi   0745 211 201
 privateNotes: ''
+location: Dumbrava Roșie, jud. Neamț
 ---
 
 **Casă P+M din cărămidă** în suprafață de 226 mp și teren aferent 1286 mp, situată în Dumbrava Roșie, jud. Neamț.
