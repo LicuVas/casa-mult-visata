@@ -9,7 +9,7 @@ localitate: Neamț › Săvinești › Săvinești
 zone: ''
 street: ''
 reper: ''
-rooms: 4
+rooms: 5
 bathrooms: 2
 surface: 120
 landSurface: 400
@@ -80,4 +80,4 @@ privateOwnerContact: Bogdan parc auto Buhusi
 privateNotes: ''
 ---
 
-Casa P+1 in suprafata utila de 120 mp. si teren aferent 400 mp. situata in localitatea Savinesti jud. Neamt. Proprietatea compusa din 3 dormitoare, hol, bucatarie,living ,2 bai si spatiu de depozitare, racordata la curentul electric si apa iar gazul metan si canalizarea se afla in fata proprietati.Locatia este izolata exterior iar interiorul este decopertat pana la caramida pentru a da posibilitatea noilor cumparatori de a-si amenaja spatiul dupa preferintele sale. Pentru mai multe detalii contactati-ne telefonic 0747814263.
+Casa P+1 in suprafata utila de 120 mp. si teren aferent 400 mp. situata in localitatea Savinesti jud. Neamt. Proprietatea compusa din 4 dormitoare, hol, bucatarie,living ,2 bai si spatiu de depozitare, racordata la curentul electric si apa iar gazul metan si canalizarea se afla in fata proprietati.Locatia este izolata exterior iar interiorul este decopertat pana la caramida pentru a da posibilitatea noilor cumparatori de a-si amenaja spatiul dupa preferintele sale. Casa poate fi acchizitionata prin cash,credit ipotecar dar si cu un avans de 25000 euro si diferenta rate direct cu proprietarul.  Pentru mai multe detalii contactati-ne telefonic 0747814263.
