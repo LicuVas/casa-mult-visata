@@ -2,7 +2,7 @@
 title: Teren intravilan 2117 mp Piatra Neamt
 status: Vânzare
 propertyType: Teren
-price: 59800
+price: 60
 currency: EUR
 pricePerUnit: '60'
 localitate: Neamț › Piatra-Neamț › Vânători
