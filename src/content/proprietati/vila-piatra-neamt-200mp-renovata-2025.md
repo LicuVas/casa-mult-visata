@@ -2,7 +2,7 @@
 title: Vilă 200 mp + 400 mp teren, renovată complet 2025 — Piatra Neamț
 status: Vânzare
 propertyType: Casă
-price: 220000
+price: 219500
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › 1 Mai
