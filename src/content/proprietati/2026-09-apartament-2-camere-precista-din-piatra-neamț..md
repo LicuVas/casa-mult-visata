@@ -2,7 +2,7 @@
 title: Apartament 2 camere  Precista din Piatra Neamț.
 status: Vânzare
 propertyType: Apartament
-price: 63000
+price: 59400
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Precista
