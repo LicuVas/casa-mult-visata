@@ -5,10 +5,10 @@ propertyType: Spațiu Comercial
 price: 170000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Centru"
+localitate: Neamț › Piatra-Neamț › Centru
 zone: ''
 street: ''
+reper: ''
 rooms: 2
 bathrooms: 2
 surface: 141
@@ -29,9 +29,11 @@ caracteristiciApartament:
   iluminatStradal: true
   stradaAsfaltata: true
   transportInComun: true
+caracteristiciCasa: null
+caracteristiciTeren: null
 exclusive: false
 comisionZero: true
-listingStatus: Activ
+listingStatus: Retras
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.370772,46.930484]}'
 videoUrl: ''
@@ -63,6 +65,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: ''
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 De vânzare spațiu comercial open-space cu destinație bar, club, restaurant, sală fitness, sală evenimente, situat în zona centrală a orașului Piatra Neamț. 
