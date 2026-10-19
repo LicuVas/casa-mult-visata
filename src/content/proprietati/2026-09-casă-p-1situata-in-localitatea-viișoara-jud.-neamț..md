@@ -2,7 +2,7 @@
 title: Casă P+1situata in localitatea Viișoara,jud. Neamț.
 status: Vânzare
 propertyType: Casă
-price: 199000
+price: 198000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Alexandru cel Bun › Viișoara
