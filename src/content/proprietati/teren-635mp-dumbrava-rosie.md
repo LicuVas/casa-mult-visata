@@ -5,10 +5,10 @@ propertyType: Teren
 price: 16500
 currency: EUR
 pricePerUnit: ''
-location: Dumbrava Roșie, jud. Neamț
-localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
 zone: ''
 street: ''
+reper: ''
 rooms: null
 bathrooms: null
 surface: null
@@ -20,6 +20,8 @@ features:
   - Apă
   - Curent electric
   - Gaz metan la 50 m
+caracteristiciApartament: null
+caracteristiciCasa: null
 caracteristiciTeren:
   intravilan: true
   extravilan: false
@@ -29,12 +31,14 @@ caracteristiciTeren:
   iluminatStradal: false
   stradaAsfaltata: false
   stradaPietruita: true
+exclusive: false
 comisionZero: true
-listingStatus: Activ
+listingStatus: Rezervat
 updatedAt: ''
-coords: 46.8832
+coords: '46.8832'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/20260430_141442.jpg
 gallery:
   - /images/scraped/post009_0.webp
@@ -42,6 +46,28 @@ gallery:
   - /images/scraped/post009_2.webp
   - /images/scraped/post009_3.webp
   - /images/scraped/post009_4.webp
+tech_separator: separator
+energyClass: ''
+intabulat: false
+cadastralNumber: ''
+compartimentare: ''
+floorsTotal: null
+heatingType: ''
+orientation: ''
+parking: ''
+balconies: null
+balconySurface: null
+condition: ''
+surfaceUtila: null
+surfaceConstruita: null
+availableFrom: ''
+buildingType: ''
+structureType: ''
+confortClass: ''
+private_separator: separator
+privateOwnerContact: ''
+privateNotes: ''
+location: Dumbrava Roșie, jud. Neamț
 ---
 
 Teren intravilan în suprafață de 635 mp situat în Dumbrava Roșie, jud. Neamț.
