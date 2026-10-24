@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 camere,situat in Piatra Neamț.
+title: Apartament 2 camere,situat in Maratei, Piatra Neamț.
 status: Vânzare
 propertyType: Apartament
 price: 50500
