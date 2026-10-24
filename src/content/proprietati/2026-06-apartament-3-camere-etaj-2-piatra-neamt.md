@@ -30,7 +30,7 @@ caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
 comisionZero: true
-listingStatus: Activ
+listingStatus: Rezervat
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.376935,46.936037]}'
 videoUrl: ''
