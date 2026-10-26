@@ -35,9 +35,11 @@ coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/Screenshot_20261024_060657_Google Earth.webp
+featuredImage: /images/20261025_085348.webp
 gallery:
-  - /images/IMG-20261024-WA6100.webp
+  - /images/20261025_085404.webp
+  - /images/20261025_085409.webp
+  - /images/20261025_085435.webp
 tech_separator: separator
 energyClass: ''
 intabulat: true
