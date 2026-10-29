@@ -2,13 +2,13 @@
 title: Casa 250 mp si teren aferent 300 mp Piatra Neamt
 status: Vânzare
 propertyType: Casă
-price: 242000
+price: 209000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Centru"
+localitate: Neamț › Piatra-Neamț › Centru
 zone: ''
 street: ''
+reper: ''
 rooms: 5
 bathrooms: 2
 surface: 240
@@ -16,6 +16,7 @@ landSurface: 275
 floor: '1'
 yearBuilt: null
 features: []
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: false
@@ -29,6 +30,7 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: true
   stradaPietruita: false
+caracteristiciTeren: null
 exclusive: false
 comisionZero: true
 listingStatus: Activ
@@ -66,6 +68,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: Corlateanu  0747 909 472
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Casă P+M în suprafață de 250 mp și teren aferent 275 mp.situată pe strada Ștefan cel Mare din Piatra Neamț. Proprietatea este renovată în totalitate în 2025 și 
