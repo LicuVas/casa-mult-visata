@@ -14,7 +14,7 @@ bathrooms: 1
 surface: 105
 landSurface: 500
 floor: Parter
-yearBuilt: 2025
+yearBuilt: 2026
 features: []
 caracteristiciApartament: null
 caracteristiciCasa:
@@ -33,13 +33,13 @@ caracteristiciCasa:
 caracteristiciTeren: null
 exclusive: false
 comisionZero: true
-listingStatus: Activ
+listingStatus: Rezervat
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/IMG-20260813-WA0005.webp
+featuredImage: ''
 gallery:
   - /images/20260717_102711.webp
   - /images/20260717_102705.webp
