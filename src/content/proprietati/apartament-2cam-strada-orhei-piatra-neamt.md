@@ -2,19 +2,20 @@
 title: Apartament 2 camere decomandat, 62,82 mp — str. Orhei, Piatra Neamț
 status: Vânzare
 propertyType: Apartament
-price: 58400
+price: 58000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Centru"
+localitate: Neamț › Piatra-Neamț › Centru
 zone: ''
 street: Strada Orhei
+reper: ''
 rooms: 2
 bathrooms: 1
 surface: 62
 landSurface: null
 floor: '2'
 yearBuilt: 1983
+features: []
 caracteristiciApartament:
   lift: true
   centralaProprie: true
@@ -25,12 +26,16 @@ caracteristiciApartament:
   iluminatStradal: true
   stradaAsfaltata: true
   transportInComun: true
+caracteristiciCasa: null
+caracteristiciTeren: null
+exclusive: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9292
+coords: '46.9292'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post010_0.webp
 gallery:
   - /images/scraped/post010_0.webp
@@ -38,12 +43,15 @@ gallery:
   - /images/scraped/post010_2.webp
   - /images/scraped/post010_3.webp
   - /images/scraped/post010_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: 10
 heatingType: Centrală proprie pe gaz
 orientation: ''
+parking: ''
 balconies: 1
 balconySurface: null
 condition: Necesită renovare
@@ -51,9 +59,12 @@ surfaceUtila: 63
 surfaceConstruita: 69
 availableFrom: ''
 buildingType: Bloc
+structureType: ''
 confortClass: Confort 1
+private_separator: separator
 privateOwnerContact: Claudia
 privateNotes: ACC 58000 din pretul de achizitie.
+location: Piatra Neamț
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 62,82 mp, situat la etajul 2, strada Orhei din Piatra Neamț.
