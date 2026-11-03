@@ -11,12 +11,13 @@ street: ''
 reper: ''
 rooms: 5
 bathrooms: 2
-surface: 200
-landSurface: 830
+surface: 184
+landSurface: 645
 floor: '1'
 yearBuilt: 2007
 features:
   - Acceptă schimb cu apartament + diferență
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: true
@@ -30,12 +31,15 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: true
   stradaPietruita: false
+caracteristiciTeren: null
+exclusive: false
 comisionZero: true
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9276
+coords: '46.9276'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post012_0.webp
 gallery:
   - /images/FB_IMG_1782535335716.webp
@@ -67,6 +71,8 @@ gallery:
   - /images/FB_IMG_1782535370626.webp
   - /images/FB_IMG_1782535338738.webp
   - /images/FB_IMG_1782535341975.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
@@ -77,11 +83,13 @@ parking: Loc suprateran
 balconies: null
 balconySurface: null
 condition: Renovat recent
-surfaceUtila: 200
+surfaceUtila: 184
 surfaceConstruita: 225
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
+confortClass: ''
+private_separator: separator
 privateOwnerContact: EMILIAN        0750 100 265
 privateNotes: ''
 location: Piatra Neamț
@@ -89,7 +97,7 @@ location: Piatra Neamț
 
 La doar **7 minute de centrul orașului Piatra Neamț** se află o casă pregătită să devină căminul unei noi familii.
 
-Cu 200 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis:
+Cu 184 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis:
 
 - 5 dormitoare
 - Un salon primitor
@@ -99,7 +107,7 @@ Cu 200 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis
 
 Recent renovată, casa îmbină căldura unui cămin cu confortul modern: **încălzire în pardoseală, centrală pe gaz**, apă, curent electric si fosa septica
 
-Curtea de **830 mp** este locul unde viața se trăiește altfel — dimineți cu cafea în aer liber, copii care aleargă fără griji, seri liniștite privind cerul.
+Curtea de 645 **mp** este locul unde viața se trăiește altfel — dimineți cu cafea în aer liber, copii care aleargă fără griji, seri liniștite privind cerul.
 
 **Se acceptă și schimb cu apartament + diferență.**
 
