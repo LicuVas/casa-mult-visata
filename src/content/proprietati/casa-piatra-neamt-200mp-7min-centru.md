@@ -1,8 +1,8 @@
 ---
-title: Casă 200 mp + 830 mp curte,  Piatra Neamț
+title: Casă 184 mp + 840 mp curte,  Piatra Neamț
 status: Vânzare
 propertyType: Casă
-price: 219000
+price: 198000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Vânători
@@ -12,7 +12,7 @@ reper: ''
 rooms: 5
 bathrooms: 2
 surface: 184
-landSurface: 645
+landSurface: 840
 floor: '1'
 yearBuilt: 2007
 features:
@@ -107,7 +107,7 @@ Cu 184 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis
 
 Recent renovată, casa îmbină căldura unui cămin cu confortul modern: **încălzire în pardoseală, centrală pe gaz**, apă, curent electric si fosa septica
 
-Curtea de 645 **mp** este locul unde viața se trăiește altfel — dimineți cu cafea în aer liber, copii care aleargă fără griji, seri liniștite privind cerul.
+Curtea de 840 **mp** este locul unde viața se trăiește altfel — dimineți cu cafea în aer liber, copii care aleargă fără griji, seri liniștite privind cerul.
 
 **Se acceptă și schimb cu apartament + diferență.**
 
