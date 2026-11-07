@@ -15,7 +15,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,6 +40,22 @@ jobs:
           test -d dist/images || (echo "::error::dist/images missing - would wipe Netlify CDN"; exit 1)
           test -d dist/admin || (echo "::error::dist/admin missing"; exit 1)
           echo "dist OK ($(ls dist | wc -l) entries, $(ls dist/images | wc -l) images)"
+
+      - name: Upload dist (pentru publicarea din ramura protejata)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 3
+          compression-level: 0
+          include-hidden-files: true
+          if-no-files-found: error
+
+      - name: Amprenta cheii vechi (o singura data; pasul dispare la schimbarea urmatoare)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          echo "amprenta sha256 (primele 12) $(printf %s "$NETLIFY_AUTH_TOKEN" | sha256sum | cut -c1-12)"
 
       - name: Check secret presence
         env:
