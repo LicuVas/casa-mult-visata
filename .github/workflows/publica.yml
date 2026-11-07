@@ -1,0 +1,100 @@
+name: Publica pe Netlify (din ramura protejata)
+
+# De ce exista (07.11.2026): cheia Netlify NU mai sta in secretele depozitului, unde orice cont cu drept
+# de scriere o poate citi. Sta in mediul "productie", la care ajung DOAR rularile de pe ramura "publicare".
+# Ramura "publicare" e pazita de o regula (ruleset): nimeni n-o poate schimba sau sterge.
+# Rularea NU executa cod din depozit: descarca situl gata construit de deploy.yml (artefactul "dist")
+# si il urca pe Netlify cu aceeasi unealta ca inainte (netlify-cli 17). Pe alta ramura, jobul se sare.
+# Copia de pe master exista doar ca GitHub sa accepte pornirea manuala; conteaza cea de pe "publicare".
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Rularea deploy.yml care a construit situl (artefactul dist)"
+        required: true
+      sha:
+        description: "Commit-ul construit (40 de caractere)"
+        required: true
+      ciorna:
+        description: "true = publicare de proba (ciorna), nu productie"
+        required: false
+        default: "false"
+
+run-name: "publica ${{ inputs.sha }} din rularea ${{ inputs.run_id }}"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: publica-netlify
+  cancel-in-progress: false
+
+jobs:
+  publica:
+    if: github.ref == 'refs/heads/publicare'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: productie
+    env:
+      SITE_ID: 661dcad7-eac6-4f24-9249-4536939163e3
+      RUN_ID: ${{ inputs.run_id }}
+      SHA: ${{ inputs.sha }}
+      CIORNA: ${{ inputs.ciorna }}
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Verifica cererea
+        run: |
+          set -eu
+          [[ "$RUN_ID" =~ ^[0-9]{1,15}$ ]] || { echo "::error::run_id invalid"; exit 1; }
+          [[ "$SHA" =~ ^[0-9a-f]{40}$ ]] || { echo "::error::sha invalid"; exit 1; }
+          [[ "$CIORNA" == "true" || "$CIORNA" == "false" ]] || { echo "::error::ciorna invalid"; exit 1; }
+          gh api "repos/$GH_REPO/actions/runs/$RUN_ID" --jq '[.path, .head_sha, .head_branch] | @tsv' > run.tsv
+          read -r WF HSHA HBR < run.tsv
+          [ "$WF" = ".github/workflows/deploy.yml" ] || { echo "::error::rularea nu e deploy.yml ($WF)"; exit 1; }
+          [ "$HSHA" = "$SHA" ] || { echo "::error::rularea a construit $HSHA, nu $SHA"; exit 1; }
+          [ "$HBR" = "master" ] || { echo "::error::rularea nu e de pe master ($HBR)"; exit 1; }
+          echo "OK: rularea $RUN_ID a construit $SHA pe master"
+
+      - name: Nu publica peste un commit mai nou
+        if: env.CIORNA == 'false'
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          set -eu
+          curl -fsS -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" "https://api.netlify.com/api/v1/sites/$SITE_ID" > site.json
+          VIU=$(python3 -c 'import json,re; d=json.load(open("site.json")).get("published_deploy") or {}; m=re.search(r"\b[0-9a-f]{40}\b", d.get("title") or ""); print(d.get("commit_ref") or (m.group(0) if m else ""))')
+          rm -f site.json
+          echo "commit viu: ${VIU:-necunoscut}"
+          if [ -n "$VIU" ] && [ "$VIU" != "$SHA" ]; then
+            ST=$(gh api "repos/$GH_REPO/compare/$VIU...$SHA" --jq .status 2>/dev/null || echo necunoscut)
+            echo "$SHA fata de viu: $ST"
+            if [ "$ST" = "behind" ]; then
+              echo "SARIT=1" >> "$GITHUB_ENV"
+              echo "::notice::pe sit e deja un commit mai nou ($VIU); nu public $SHA"
+            fi
+          fi
+
+      - name: Descarca situl construit
+        if: env.SARIT != '1'
+        run: |
+          set -eu
+          mkdir -p lucru
+          gh run download "$RUN_ID" -n dist -D lucru/site
+          test -d lucru/site/images || { echo "::error::artefactul nu are images/"; exit 1; }
+          echo "fisiere: $(find lucru/site -type f | wc -l)"
+
+      - name: Publica pe Netlify
+        if: env.SARIT != '1'
+        working-directory: lucru
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          set -eu
+          [ -n "$NETLIFY_AUTH_TOKEN" ] || { echo "::error::lipseste cheia NETLIFY_AUTH_TOKEN din mediul productie"; exit 1; }
+          PROD="--prod"
+          if [ "$CIORNA" = "true" ]; then PROD=""; fi
+          npx --yes netlify-cli@17.38.1 deploy $PROD --dir=site --site="$SITE_ID" --message="GitHub Action: $SHA" --json > rezultat.json
+          python3 -c 'import json; d=json.load(open("rezultat.json")); print("deploy_id:", d.get("deploy_id")); print("deploy_url:", d.get("deploy_url"))' || tail -c 600 rezultat.json
