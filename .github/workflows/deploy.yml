@@ -5,6 +5,10 @@ on:
     branches: [master]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  actions: write
+
 concurrency:
   group: deploy-netlify
   # false = build-urile se pun la coadă și se termină pe rând (nu se anulează unul pe altul).
@@ -15,7 +19,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,33 +55,27 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
 
-      - name: Amprenta cheii vechi (o singura data; pasul dispare la schimbarea urmatoare)
+      - name: Publish (ramura protejata "publicare", mediul "productie")
+        # Cheia Netlify NU mai sta in depozit (07.11.2026). Publicarea o face publica.yml de pe ramura
+        # "publicare", singura care ajunge la mediul "productie"; aici doar o pornim si asteptam rezultatul.
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
         run: |
-          echo "amprenta sha256 (primele 12) $(printf %s "$NETLIFY_AUTH_TOKEN" | sha256sum | cut -c1-12)"
-
-      - name: Check secret presence
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: |
-          if [ -z "$NETLIFY_AUTH_TOKEN" ]; then
-            echo "::error::NETLIFY_AUTH_TOKEN secret is missing or empty"
-            exit 1
-          fi
-          echo "Token present, length: ${#NETLIFY_AUTH_TOKEN}"
-
-      - name: Deploy to Netlify
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: 661dcad7-eac6-4f24-9249-4536939163e3
-        run: |
-          npx netlify-cli@17 deploy \
-            --prod \
-            --dir=dist \
-            --site=661dcad7-eac6-4f24-9249-4536939163e3 \
-            --auth="$NETLIFY_AUTH_TOKEN" \
-            --message="GitHub Action: $GITHUB_SHA"
+          set -eu
+          gh workflow run publica.yml --ref publicare -f run_id="$GITHUB_RUN_ID" -f sha="$GITHUB_SHA" -f ciorna=false
+          ID=""
+          for i in $(seq 1 36); do
+            sleep 5
+            ID=$(gh run list --workflow publica.yml --branch publicare --event workflow_dispatch --limit 30 \
+                 --json databaseId,displayTitle \
+                 --jq ".[] | select(.displayTitle | endswith(\"din rularea $GITHUB_RUN_ID\")) | .databaseId" | head -1)
+            [ -n "$ID" ] && break
+          done
+          [ -n "$ID" ] || { echo "::error::nu gasesc rularea publica.yml pornita acum"; exit 1; }
+          echo "publicarea: https://github.com/$GH_REPO/actions/runs/$ID"
+          gh run watch "$ID" --exit-status --interval 15 > /dev/null || { echo "::error::publicarea a picat: https://github.com/$GH_REPO/actions/runs/$ID"; exit 1; }
+          echo "publicat pe Netlify"
 
       - name: Notify IndexNow (Bing/Yandex -> minutes, also feeds ChatGPT Search)
         run: node scripts/indexnow.mjs
