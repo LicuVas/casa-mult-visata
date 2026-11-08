@@ -21,7 +21,7 @@ caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
 comisionZero: true
-listingStatus: Activ
+listingStatus: Rezervat
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
