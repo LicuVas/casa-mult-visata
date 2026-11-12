@@ -2,13 +2,13 @@
 title: Vila 165 mp si teren 500 mp. zonz Fermelor Piatra Neamt
 status: Vânzare
 propertyType: Casă
-price: 160000
+price: 185000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Pietricica"
+localitate: Neamț › Piatra-Neamț › Pietricica
 zone: ''
 street: ''
+reper: ''
 rooms: 5
 bathrooms: 2
 surface: 165
@@ -33,7 +33,7 @@ caracteristiciCasa:
 caracteristiciTeren: null
 exclusive: false
 comisionZero: true
-listingStatus: Activ
+listingStatus: Retras
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
@@ -90,6 +90,7 @@ confortClass: Confort 1
 private_separator: separator
 privateOwnerContact: IONUT 0752 508 656
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Vilă în suprafață utilă de 165 mp. construită din cărămidă,desfasurata pe D+P+1 și teren aferent 500 mp situată în zona Fermelor din Piatra Neamț. 
