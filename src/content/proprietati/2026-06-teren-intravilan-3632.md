@@ -5,10 +5,10 @@ propertyType: Teren
 price: 18400
 currency: EUR
 pricePerUnit: ''
-location: Neamt
-localitate: "Neamț › Bodești › Bodeștii de Jos"
+localitate: Neamț › Bodești › Bodeștii de Jos
 zone: ''
 street: ''
+reper: ''
 rooms: null
 bathrooms: null
 surface: null
@@ -16,8 +16,11 @@ landSurface: 3632
 floor: ''
 yearBuilt: null
 features: []
+caracteristiciApartament: null
+caracteristiciCasa: null
+caracteristiciTeren: null
 exclusive: false
-comisionZero: true
+comisionZero: false
 listingStatus: Vândut
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
@@ -48,6 +51,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: Nicoleta
 privateNotes: ''
+location: Neamt
 ---
 
 Teren intravilan în suprafață de 3632mp situat în localitatea Bodești deJos, jud.Neamț. Proprietatea are o deschidere de 25 metri la strada asfaltată și vă oferă spre folosință,1004 mp teren intravilan și 2628 mp. teren arabil. Locația este racordată la curentul electric, apa se află in fața terenului și este situată intr-o zonă liniștită, ferită de zgomotul stradal,pentru mai multe detalii contactati-ne telefonic 0747 814 263
