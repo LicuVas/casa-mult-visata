@@ -39,7 +39,7 @@ caracteristiciApartament: null
 caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: true
-comisionZero: true
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
 coords: '46.9276'
