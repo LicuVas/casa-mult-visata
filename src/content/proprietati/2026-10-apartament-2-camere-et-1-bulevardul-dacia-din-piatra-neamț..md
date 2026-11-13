@@ -1,5 +1,5 @@
 ---
-title: Apartament  2 camere,et 1, bulevardul Dacia din Piatra Neamț.
+title: Apartament  2 camere,et 1/4, bulevardul Dacia din Piatra Neamț.
 status: Vânzare
 propertyType: Apartament
 price: 67500
