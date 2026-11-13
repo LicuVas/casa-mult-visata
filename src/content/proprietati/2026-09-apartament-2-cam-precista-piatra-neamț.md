@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 cam, et 4, Precista, Piatra Neamț
+title: Apartament 2 cam, et 4/4, Precista, Piatra Neamț
 status: Vânzare
 propertyType: Apartament
 price: 49500
