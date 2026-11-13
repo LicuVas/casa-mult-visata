@@ -5,16 +5,17 @@ propertyType: Apartament
 price: 94600
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › 1 Mai"
+localitate: Neamț › Piatra-Neamț › 1 Mai
 zone: ''
 street: ''
+reper: ''
 rooms: 3
 bathrooms: 1
 surface: 80
 landSurface: null
 floor: Parter
 yearBuilt: 1990
+features: []
 caracteristiciApartament:
   lift: false
   centralaProprie: true
@@ -25,12 +26,16 @@ caracteristiciApartament:
   iluminatStradal: true
   stradaAsfaltata: true
   transportInComun: true
-comisionZero: true
+caracteristiciCasa: null
+caracteristiciTeren: null
+exclusive: false
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9216
+coords: '46.9216'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post011_0.webp
 gallery:
   - /images/scraped/post011_0.webp
@@ -38,8 +43,11 @@ gallery:
   - /images/scraped/post011_2.webp
   - /images/scraped/post011_3.webp
   - /images/scraped/post011_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
+compartimentare: ''
 floorsTotal: 4
 heatingType: Centrală proprie pe gaz
 orientation: ''
@@ -51,9 +59,12 @@ surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
 buildingType: Bloc
+structureType: ''
 confortClass: Confort 1
+private_separator: separator
 privateOwnerContact: ''
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Apartament cu 3 camere decomandat în suprafață utilă de 80,10 mp, situat la **parter**, zona 1 Mai, Piatra Neamț.
