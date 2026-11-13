@@ -5,10 +5,10 @@ propertyType: Casă
 price: 119500
 currency: EUR
 pricePerUnit: ''
-location: Dumbrava Roșie, jud. Neamț
-localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
 zone: ''
 street: ''
+reper: ''
 rooms: 2
 bathrooms: 1
 surface: 80
@@ -34,6 +34,7 @@ features:
   - Izolație exterioară polistiren 10 cm (opțional vată bazaltică)
   - Izolație pod vată 15 cm
   - Acceptă plată prin credit bancar
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: false
@@ -47,12 +48,15 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: false
   stradaPietruita: true
-comisionZero: true
+caracteristiciTeren: null
+exclusive: false
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
-coords: 46.8832
+coords: '46.8832'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post005_0.webp
 gallery:
   - /images/scraped/post005_0.webp
@@ -60,6 +64,9 @@ gallery:
   - /images/scraped/post005_2.webp
   - /images/scraped/post005_3.webp
   - /images/scraped/post005_4.webp
+tech_separator: separator
+energyClass: ''
+intabulat: false
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: null
@@ -75,8 +82,10 @@ availableFrom: ''
 buildingType: Casă
 structureType: BCA
 confortClass: Confort 1
+private_separator: separator
 privateOwnerContact: Dragos
 privateNotes: ''
+location: Dumbrava Roșie, jud. Neamț
 ---
 
 Casă în suprafață totală de 90 mp și teren aferent 500 mp, situată în Dumbrava Roșie, jud. Neamț.
