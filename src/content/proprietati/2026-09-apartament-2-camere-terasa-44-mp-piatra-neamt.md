@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 camere +terasa 44 mp Piatra Neamt
+title: Apartament 2 camere, et 1/9, zona 1 Mai, Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 112000
