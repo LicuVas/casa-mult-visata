@@ -5,10 +5,10 @@ propertyType: Apartament
 price: 14500
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Dărmănești"
+localitate: Neamț › Piatra-Neamț › Dărmănești
 zone: ''
 street: ''
+reper: ''
 rooms: 1
 bathrooms: 1
 surface: 16
@@ -16,8 +16,11 @@ landSurface: null
 floor: '3'
 yearBuilt: null
 features: []
+caracteristiciApartament: null
+caracteristiciCasa: null
+caracteristiciTeren: null
 exclusive: false
-comisionZero: true
+comisionZero: false
 listingStatus: Vândut
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
@@ -50,6 +53,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: ''
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Garsonieră  în suprafață utilă de 16,10 mp situat la etajul 3 in cartierul Dărmănești jud. Neamț Proprietatea vă pune la dispoziție un dormitor,bucătărie, baie și dispune de ferestre termopan,gresie,faianță  și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
