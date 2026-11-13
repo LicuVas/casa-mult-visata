@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 camere decomandat etaj 4 Piatra Neamt
+title: Apartament 2 camere, et 4, Precista, Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 62700
