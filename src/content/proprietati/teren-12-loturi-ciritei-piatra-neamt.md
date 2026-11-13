@@ -5,10 +5,10 @@ propertyType: Teren
 price: 170000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Ciritei"
+localitate: Neamț › Piatra-Neamț › Ciritei
 zone: ''
 street: ''
+reper: ''
 rooms: null
 bathrooms: null
 surface: null
@@ -21,6 +21,8 @@ features:
   - PUZ existent
   - Cale de acces 7 m
   - Utilități la ~190-200 m
+caracteristiciApartament: null
+caracteristiciCasa: null
 caracteristiciTeren:
   intravilan: true
   extravilan: false
@@ -30,10 +32,11 @@ caracteristiciTeren:
   iluminatStradal: false
   stradaAsfaltata: false
   stradaPietruita: true
-comisionZero: true
+exclusive: false
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
-coords: 46.932
+coords: '46.932'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: /images/Screenshot_20260508_061427_Gallery.jpg
@@ -43,17 +46,28 @@ gallery:
   - /images/scraped/post006_1.webp
   - /images/scraped/post006_2.webp
   - /images/scraped/post006_3.webp
+tech_separator: separator
+energyClass: ''
+intabulat: false
 cadastralNumber: ''
+compartimentare: ''
 floorsTotal: null
+heatingType: ''
 orientation: ''
+parking: ''
 balconies: null
 balconySurface: null
 condition: Nou
 surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
+buildingType: ''
+structureType: ''
+confortClass: ''
+private_separator: separator
 privateOwnerContact: ''
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 De vânzare **12 loturi de teren** în suprafață de 10.000 mp, situat în cartierul Ciritei, Piatra Neamț.
