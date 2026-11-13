@@ -5,10 +5,10 @@ propertyType: Casă
 price: 154800
 currency: EUR
 pricePerUnit: ''
-location: Neamt
-localitate: "Neamț › Bicaz › Izvoru Muntelui"
+localitate: Neamț › Bicaz › Izvoru Muntelui
 zone: ''
 street: ''
+reper: ''
 rooms: 4
 bathrooms: 2
 surface: 193
@@ -21,6 +21,7 @@ features:
   - -2 Balcoane
   - -Zona de gratar
   - -Sauna
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: true
@@ -34,8 +35,9 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: false
   stradaPietruita: true
+caracteristiciTeren: null
 exclusive: false
-comisionZero: true
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
@@ -78,6 +80,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: ''
 privateNotes: ''
+location: Neamt
 ---
 
 Casă în suprafață de 193 mp si teren aferen 590 mp situată in localitatea Izvorul Muntelui,jud. Neamt. Parterul proprietății vă oferă spre folosință,un dormitoar, living, bucătărie, dining,baie, camera centralei și 2 terase. Mansarda vă pune la dispoziție, 4 dormitoare,baie și 2 balcoane.Proprietatea are in dotare,ferestre tip termopan,gresie, faianță,parchet laminat și usi interioare din lemn. Curtea vă mai oferă spre folosință, o terasă acoperită, zonă de gratar, saună și spațiu de depozitare. Locația se vinde complet mobilată, utilată și se află situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
