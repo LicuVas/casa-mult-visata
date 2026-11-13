@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 camere mobilat, parter — Precista, Piatra Neamț
+title: Apartament 2 camere,parter/4 — Precista, Piatra Neamț
 status: Vânzare
 propertyType: Apartament
 price: 75000
