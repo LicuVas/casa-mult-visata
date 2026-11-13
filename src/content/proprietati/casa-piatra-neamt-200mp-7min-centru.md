@@ -33,7 +33,7 @@ caracteristiciCasa:
   stradaPietruita: false
 caracteristiciTeren: null
 exclusive: false
-comisionZero: true
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
 coords: '46.9276'
