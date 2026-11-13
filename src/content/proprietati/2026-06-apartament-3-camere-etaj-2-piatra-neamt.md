@@ -1,5 +1,5 @@
 ---
-title: Apartament 3 camere  etaj 2 Piatra Neamt
+title: Apartament 3 camere  etaj 2/4 Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 58600
