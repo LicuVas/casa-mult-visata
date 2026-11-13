@@ -1,5 +1,5 @@
 ---
-title: Apartament cu 2 camere,zona Mărăței din Piatra Neamț.
+title: Apartament cu 2 camere, et 3/4,Mărăței din Piatra Neamț.
 status: Vânzare
 propertyType: Apartament
 price: 46000
