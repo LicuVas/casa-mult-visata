@@ -51,7 +51,7 @@ caracteristiciCasa:
   stradaPietruita: true
 caracteristiciTeren: null
 exclusive: true
-comisionZero: true
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
