@@ -20,7 +20,7 @@ caracteristiciApartament: null
 caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
-comisionZero: false
+comisionZero: true
 listingStatus: Activ
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
