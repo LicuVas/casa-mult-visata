@@ -9,11 +9,11 @@ localitate: Neamț › Piatra-Neamț › 1 Mai
 zone: ''
 street: ''
 reper: ''
-rooms: null
-bathrooms: null
+rooms: 2
+bathrooms: 1
 surface: null
 landSurface: null
-floor: ''
+floor: '1'
 yearBuilt: null
 features: []
 caracteristiciApartament: null
