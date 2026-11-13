@@ -1,5 +1,5 @@
 ---
-title: Apartament 3 camere et 4 Precista Piatra Neamt
+title: Apartament 3 camere et 4/4 Precista Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 65000
