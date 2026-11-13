@@ -32,8 +32,8 @@ caracteristiciTeren:
   stradaAsfaltata: false
   stradaPietruita: true
 exclusive: false
-comisionZero: true
-listingStatus: Activ
+comisionZero: false
+listingStatus: Retras
 updatedAt: ''
 coords: '46.8832'
 videoUrl: ''
