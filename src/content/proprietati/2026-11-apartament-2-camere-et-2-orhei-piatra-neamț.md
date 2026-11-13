@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 camere, et 1 Orhei Piatra Neamț
+title: Apartament 2 camere, et 1/9 Orhei Piatra Neamț
 status: Vânzare
 propertyType: Apartament
 price: 61000
