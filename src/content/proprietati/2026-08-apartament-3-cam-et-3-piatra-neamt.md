@@ -1,5 +1,5 @@
 ---
-title: Apartament 4 cam et 3 Piatra Neamt
+title: Apartament 4 cam et 3/4 Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 74800
