@@ -5,16 +5,17 @@ propertyType: Apartament
 price: 75000
 currency: EUR
 pricePerUnit: ''
-location: Piatra Neamț
-localitate: "Neamț › Piatra-Neamț › Precista"
+localitate: Neamț › Piatra-Neamț › Precista
 zone: ''
 street: ''
+reper: ''
 rooms: 2
 bathrooms: 1
 surface: 56
 landSurface: null
 floor: Parter
 yearBuilt: null
+features: []
 caracteristiciApartament:
   lift: false
   centralaProprie: true
@@ -25,12 +26,16 @@ caracteristiciApartament:
   iluminatStradal: true
   stradaAsfaltata: true
   transportInComun: true
-comisionZero: true
+caracteristiciCasa: null
+caracteristiciTeren: null
+exclusive: false
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9299
+coords: '46.9299'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post021_0.webp
 gallery:
   - /images/scraped/post021_0.webp
@@ -38,6 +43,8 @@ gallery:
   - /images/scraped/post021_2.webp
   - /images/scraped/post021_3.webp
   - /images/scraped/post021_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
@@ -52,9 +59,12 @@ surfaceUtila: null
 surfaceConstruita: null
 availableFrom: ''
 buildingType: Bloc
+structureType: ''
 confortClass: Confort 1
+private_separator: separator
 privateOwnerContact: Andreea      0745281529      ACC   75000
 privateNotes: ''
+location: Piatra Neamț
 ---
 
 Apartament cu 2 camere decomandat în suprafață utilă de 56,47 mp, situat la **parter**, zona Precista, Piatra Neamț.
