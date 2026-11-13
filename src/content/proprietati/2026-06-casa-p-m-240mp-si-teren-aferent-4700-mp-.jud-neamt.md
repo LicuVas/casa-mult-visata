@@ -5,10 +5,10 @@ propertyType: Casă
 price: 159000
 currency: EUR
 pricePerUnit: ''
-location: NEAMT
-localitate: "Neamț › Dumbrava Roșie › Dumbrava Roșie"
+localitate: Neamț › Dumbrava Roșie › Dumbrava Roșie
 zone: ''
 street: ''
+reper: ''
 rooms: 4
 bathrooms: 2
 surface: 219
@@ -32,7 +32,7 @@ caracteristiciCasa:
   stradaPietruita: true
 caracteristiciTeren: null
 exclusive: true
-comisionZero: true
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
@@ -88,6 +88,7 @@ confortClass: ''
 private_separator: separator
 privateOwnerContact: dan miron cumnat
 privateNotes: ''
+location: NEAMT
 ---
 
 Casa in suprafata de 240 mp si teren aferen 470 mp situata in localitatea Dumbrava Rosie,jud. Neamt. Parterul proprietatii va ofera spre folosinta un living generos, baie,camera centralei, la etaj va pune la dispozitie 3 dormitoare,baie, balcon si la masarda un spatiu generos de depozitare.  Proprietatea are in dotare,ferestre tip termopan,gresie, faianta,parchet laminat,si usi interioare din lemn. In curtea din fata locatia va mai ofera spre folosinta un foisor cu zona de gratar,garaj si curtea pavata. Proprietatea se vinde complet mobilata si utilata,se afla situata intr-o zona linistita si ferita de zgomotul stradal, iar pentru mai multe detalii contactati-ne telefonic 0747814263.
