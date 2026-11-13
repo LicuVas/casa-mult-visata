@@ -1,5 +1,5 @@
 ---
-title: Apartament 2 camere Dărmănești, Piatra Neamț.
+title: Apartament 2 camere, et 4/10 Dărmănești, Piatra Neamț.
 status: Vânzare
 propertyType: Apartament
 price: 53600
