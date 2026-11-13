@@ -1,5 +1,5 @@
 ---
-title: Apartament 3 camere decomandat, 80 mp, parter — 1 Mai, Piatra Neamț
+title: Apartament 3 camere, parter/4 — 1 Mai, Piatra Neamț
 status: Vânzare
 propertyType: Apartament
 price: 94600
