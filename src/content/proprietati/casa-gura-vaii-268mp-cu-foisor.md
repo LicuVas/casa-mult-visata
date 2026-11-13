@@ -5,10 +5,10 @@ propertyType: Casă
 price: 270000
 currency: EUR
 pricePerUnit: ''
-location: Gura Văii, jud. Neamț
-localitate: "Neamț › Girov › Gura Văii"
+localitate: Neamț › Girov › Gura Văii
 zone: ''
 street: ''
+reper: ''
 rooms: 6
 bathrooms: 2
 surface: 268
@@ -31,6 +31,7 @@ features:
   - Fosă septică dublu compartimentată
   - Foișor cu chiuvetă/grătar/afumătoare/cuptor/plită
   - Teren împrejmuit cu gard
+caracteristiciApartament: null
 caracteristiciCasa:
   curteImprejmuita: true
   gradina: true
@@ -44,12 +45,15 @@ caracteristiciCasa:
   iluminatStradal: true
   stradaAsfaltata: true
   stradaPietruita: false
-comisionZero: true
+caracteristiciTeren: null
+exclusive: false
+comisionZero: false
 listingStatus: Activ
 updatedAt: ''
-coords: 46.9569
+coords: '46.9569'
 videoUrl: ''
 virtualTourUrl: ''
+floorPlan: ''
 featuredImage: /images/scraped/post007_0.avif
 gallery:
   - /images/scraped/post007_0.webp
@@ -57,6 +61,8 @@ gallery:
   - /images/scraped/post007_2.webp
   - /images/scraped/post007_3.webp
   - /images/scraped/post007_4.webp
+tech_separator: separator
+energyClass: ''
 intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
@@ -72,8 +78,11 @@ surfaceConstruita: null
 availableFrom: ''
 buildingType: Casă
 structureType: Cărămidă
+confortClass: ''
+private_separator: separator
 privateOwnerContact: Tatiana    0744 430 771
 privateNotes: ''
+location: Gura Văii, jud. Neamț
 ---
 
 Casă de vânzare în localitatea Gura Văii, jud. Neamț.
