@@ -32,7 +32,7 @@ caracteristiciTeren:
   stradaAsfaltata: false
   stradaPietruita: true
 exclusive: false
-comisionZero: true
+comisionZero: false
 listingStatus: Rezervat
 updatedAt: ''
 coords: '46.8832'
