@@ -1,5 +1,5 @@
 ---
-title: Apartament 3 camere,et 4,Dărmănești, Piatra Neamț
+title: Apartament 3 camere,et 4/4,Dărmănești, Piatra Neamț
 status: Vânzare
 propertyType: Apartament
 price: 49600
