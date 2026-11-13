@@ -1,5 +1,5 @@
 ---
-title: Apartament 3 cam et 1 Piatra Neamt
+title: Apartament 3 cam et 1/10 Piatra Neamt
 status: Vânzare
 propertyType: Apartament
 price: 72800
