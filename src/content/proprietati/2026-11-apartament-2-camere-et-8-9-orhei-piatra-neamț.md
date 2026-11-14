@@ -60,4 +60,4 @@ privateOwnerContact: Răzvan   0049 176 599 48 247
 privateNotes: ACC orice ofertă
 ---
 
-Apartament cu 2 camere, în suprafață utilă de 64,38, et 8/9, situat pe strada Orhei din Piatra Neamț, Proprietatea vă pune la dispoziție 2 camere,2 holuri,bucătărie, baie, balcon și boxă. Locația necesită renovare,dispune de centrală termică,ferestre tip termopan și balcon inchis. Pentru mai multe detalii contactați-ne telefonic 0747814263.
+Se acceptă și schimb cu garsonieră în zona centrală + diferență         Apartament cu 2 camere, în suprafață utilă de 64,38, et 8/9, situat pe strada Orhei din Piatra Neamț, Proprietatea vă pune la dispoziție 2 camere,2 holuri,bucătărie, baie, balcon și boxă. Locația necesită renovare,dispune de centrală termică,ferestre tip termopan, balcon inchis.  Pentru mai multe detalii contactați-ne telefonic 0747814263.
