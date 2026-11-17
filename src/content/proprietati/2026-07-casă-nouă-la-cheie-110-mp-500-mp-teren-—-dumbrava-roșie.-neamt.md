@@ -22,14 +22,14 @@ caracteristiciCasa:
   gradina: false
   garaj: false
   anexe: false
-  terasa: false
+  terasa: true
   fosaSeptica: true
   putForat: false
   panouriSolare: false
   utilitatiLaStrada: true
-  iluminatStradal: false
+  iluminatStradal: true
   stradaAsfaltata: false
-  stradaPietruita: false
+  stradaPietruita: true
 caracteristiciTeren: null
 exclusive: false
 comisionZero: false
@@ -39,37 +39,37 @@ coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: ''
+featuredImage: /images/20261103_145947.webp
 gallery:
-  - /images/20260717_102711.webp
-  - /images/20260717_102705.webp
-  - /images/20260717_102655.webp
-  - /images/20260717_102601.webp
-  - /images/20260717_102755.webp
-  - /images/20260717_102905.webp
-  - /images/20260717_102907.webp
-  - /images/20260717_103106.webp
-  - /images/20260717_102838.webp
-  - /images/20260717_102838.webp
-  - /images/20260717_102847.webp
+  - /images/20261022_094230.webp
+  - /images/20261103_145839.webp
+  - /images/20261103_145842.webp
+  - /images/20261103_150040.webp
+  - /images/20261022_094139.webp
+  - /images/20261022_094206.webp
+  - /images/20261022_094224.webp
+  - /images/20261022_094248.webp
+  - /images/20261022_094255.webp
+  - /images/20261103_145947.webp
+  - /images/20261103_145949.webp
 tech_separator: separator
 energyClass: ''
 intabulat: false
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: null
-heatingType: ''
+heatingType: Centrală proprie pe gaz
 orientation: ''
-parking: ''
+parking: Stradă
 balconies: null
 balconySurface: null
-condition: ''
-surfaceUtila: null
-surfaceConstruita: null
+condition: Nou
+surfaceUtila: 104
+surfaceConstruita: 119
 availableFrom: ''
-buildingType: ''
-structureType: ''
-confortClass: ''
+buildingType: Casă
+structureType: Cărămidă
+confortClass: Confort 1
 private_separator: separator
 privateOwnerContact: Mihai 0744 758 202
 privateNotes: ACC 110000
