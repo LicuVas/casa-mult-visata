@@ -60,4 +60,4 @@ privateOwnerContact: ADRIAN 0034 643 35 90 60
 privateNotes: ACC    63000
 ---
 
-De vânzare apartament cu 2 camere, în suprafață utilă de 53 mp. etajul 1 situat pe strada Ana Ipătescu din Piatra Neamț.  Proprietatea necesită renovare și vă oferă spre folosință 2 camere,bucătărie, hol,baie,balcon închis și boxă. Locația are în dotare centrală termică, ferestre tip termopan, gresie, faianță și parchet. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                               De vânzare apartament cu 2 camere, în suprafață utilă de 53 mp. etajul 1 situat pe strada Ana Ipătescu din Piatra Neamț.  Proprietatea necesită renovare și vă oferă spre folosință 2 camere,bucătărie, hol,baie,balcon închis și boxă. Locația are în dotare centrală termică, ferestre tip termopan, gresie, faianță și parchet. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
