@@ -30,13 +30,13 @@ caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
 comisionZero: false
-listingStatus: Rezervat
+listingStatus: Vândut
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.376935,46.936037]}'
 videoUrl: ''
 virtualTourUrl: ''
 floorPlan: ''
-featuredImage: /images/20260617_112418.jpg
+featuredImage: ''
 gallery:
   - /images/20260617_112429.jpg
   - /images/20260617_112532.jpg
