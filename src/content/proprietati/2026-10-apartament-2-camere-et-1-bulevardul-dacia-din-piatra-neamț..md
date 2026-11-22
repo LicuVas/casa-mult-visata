@@ -60,4 +60,4 @@ privateOwnerContact: Stan Marian   0738 536 679
 privateNotes: ACC  65
 ---
 
-De vânzare un apartament cu 2 camere, în suprafață construită de 58.86 mp. etajul 1 situat pe bulevardul Dacia din Piatra Neamț.  Proprietatea este complet renovată de la 0 și vă oferă spre folosință 2 camere,bucătărie, 2 holuri,baie,balcon închis, deține centrală termică, ferestre tip termopan, gresie, faianță, parchet laminat și loc de parcare. Locația se vinde complet mobilată și utilată. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+De vânzare un apartament cu 2 camere, în suprafață construită de 58.86 mp. etajul 1 situat pe bulevardul Dacia din Piatra Neamț.  Proprietatea este complet renovată de la 0 și vă oferă spre folosință 2 camere,bucătărie, 2 holuri,baie,balcon închis, deține centrală termică, ferestre tip termopan, gresie, faianță, parchet laminat și loc de parcare. Locația se vinde complet mobilată și utilată. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
