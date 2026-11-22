@@ -59,4 +59,4 @@ privateOwnerContact: Daniel verisor daniel
 privateNotes: ''
 ---
 
-Se vinde apartament cu 2 camere,în suprafață utilă de 53,92 mp. situat la etajul 4,zona biserica nouă Precista, Piatra Neamț. Proprietatea vă oferă spre folosință 2 dormitoare, 2 holuri,dining, bucătărie,baie și balcon.Locația este renovată ( pereți dați cu var, turnată șapă), instalație încalzire, calorifere, termopane, ușă metalică  nouă. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                               Se vinde apartament cu 2 camere,în suprafață utilă de 53,92 mp. situat la etajul 4,zona biserica nouă Precista, Piatra Neamț. Proprietatea vă oferă spre folosință 2 dormitoare, 2 holuri,dining, bucătărie,baie și balcon.Locația este renovată ( pereți dați cu var, turnată șapă), instalație încalzire, calorifere, termopane, ușă metalică  nouă. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
