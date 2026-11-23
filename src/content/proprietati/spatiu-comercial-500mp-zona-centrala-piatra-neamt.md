@@ -82,11 +82,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-**Spațiu comercial** în suprafață totală de 500 mp, situat pe 2 nivele în zona centrală a Piatra Neamț.
-
-**Preț 750.000 € — TVA inclus.**
-
-**Locația vă pune la dispoziție:**
+Comision 0% cumpărător.                                                                                                 **Spațiu comercial** în suprafață totală de 500 mp, situat pe 2 nivele în zona centrală a Piatra Neamț.                                                                                               **Locația vă pune la dispoziție:**
 
 - 2 spații generoase
 - 4 băi
