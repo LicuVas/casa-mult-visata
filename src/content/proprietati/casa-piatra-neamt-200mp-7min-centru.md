@@ -95,7 +95,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-La doar **7 minute de centrul orașului Piatra Neamț** se află o casă pregătită să devină căminul unei noi familii.
+Comision 0% cumpărător.                                                                                                       La doar **7 minute de centrul orașului Piatra Neamț** se află o casă pregătită să devină căminul unei noi familii.
 
 Cu 184 mp suprafață utilă, această casă îți oferă loc pentru fiecare vis:
 
