@@ -62,4 +62,4 @@ privateOwnerContact: Bogdan 0749 391 316
 privateNotes: OFERA COMISION 3% din pretul acceptat
 ---
 
-Teren intravilan în suprafață de 805 mp situat in localitatea Dumbrava Rosie, județul Neamț. Proprietatea dispune si de o casa batraneasca in suprafata de 60 mp. compusa di 2 camere si bucatarie. Locatia se află intr-o zonă liniștită și ferită de zgomotul stradal,are o deschidere la 2 strazi de 17,70 si 42 metri, cu toate utilități (apă,curent electric,gaz metan si canalizare),in fata locatiei, Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                                        Teren intravilan în suprafață de 805 mp situat in localitatea Dumbrava Rosie, județul Neamț. Proprietatea dispune si de o casa batraneasca in suprafata de 60 mp. compusa di 2 camere si bucatarie. Locatia se află intr-o zonă liniștită și ferită de zgomotul stradal,are o deschidere la 2 strazi de 17,70 si 42 metri, cu toate utilități (apă,curent electric,gaz metan si canalizare),in fata locatiei, Pentru mai multe detalii contactati-ne telefonic 0747 814 263
