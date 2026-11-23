@@ -56,4 +56,4 @@ privateOwnerContact: ''
 privateNotes: ''
 ---
 
-Spatiu de vânzare in suprafata totală de 90 mp. pe 2 nivele, situat în Mărăței Piatra Neamț. Proprietatea se desfasoara pe parter si etaj,este complet renovata, dispune de centrală termică, ferestre termopan, parchet și se află la aproximativ 15 min. de zona centrală a orașului și poate fi folosită în diferite scopuri în funcție de activitatea dorită, birouri, salon de manichiură, pedichiură etc.Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                         Spatiu de vânzare in suprafata totală de 90 mp. pe 2 nivele, situat în Mărăței Piatra Neamț. Proprietatea se desfasoara pe parter si etaj,este complet renovata, dispune de centrală termică, ferestre termopan, parchet și se află la aproximativ 15 min. de zona centrală a orașului și poate fi folosită în diferite scopuri în funcție de activitatea dorită, birouri, salon de manichiură, pedichiură etc.Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
