@@ -55,6 +55,6 @@ privateOwnerContact: Mondan
 privateNotes: ''
 ---
 
-Spațiu birouri în suprafață utilă de 45 mp. zona centrală, Piatra Neamț. Locația vă  pune la dispoziție 2 camere,baie și sală de asteptare.Proprietatea este renovată,deține centrală termică, ferestre tip termopan, parchet laminat și poate fi achiziționată in diferite scopuri, în funcție de activitatea dorită:
+Comision 0% cumpărător.                                                                                             Spațiu birouri în suprafață utilă de 45 mp. zona centrală, Piatra Neamț. Locația vă  pune la dispoziție 2 camere,baie și sală de asteptare.Proprietatea este renovată,deține centrală termică, ferestre tip termopan, parchet laminat și poate fi achiziționată in diferite scopuri, în funcție de activitatea dorită:
 
 sediu firmă,birouri, salon,frizerie,etc… Pentru mai multe detalii contactati-ne telefonic 0747814263
