@@ -70,7 +70,7 @@ privateNotes: ''
 location: Neamț
 ---
 
-Casă în suprafață de 95 mp și teren intravilan aferent 5800 mp, situată în localitatea Doina, jud. Neamț.
+Comision 0% cumpărător.                                                                                               Casă în suprafață de 95 mp și teren intravilan aferent 5800 mp, situată în localitatea Doina, jud. Neamț.
 
 **Parter:** 2 dormitoare, 2 holuri, bucătărie, spațiu de depozitare, terasă și beci.
 
