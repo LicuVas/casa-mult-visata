@@ -56,4 +56,4 @@ privateOwnerContact: Nicolae 0752 340 418
 privateNotes: ''
 ---
 
-Teren intravilan în suprafață de 703mp. situată în localitatea Bistrița jud Neamț. Proprietatea dispune și de o casă bătrânească, compusă din 3 camere, este racordată la curentul electric, apa, iar gazul metan se află in fața porții. Locația este situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                                            Teren intravilan în suprafață de 703mp. situată în localitatea Bistrița jud Neamț. Proprietatea dispune și de o casă bătrânească, compusă din 3 camere, este racordată la curentul electric, apa, iar gazul metan se află in fața porții. Locația este situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
