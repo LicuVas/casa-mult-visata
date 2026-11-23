@@ -65,4 +65,4 @@ privateOwnerContact: Braiescu 0787 641 144
 privateNotes: ACC 150000
 ---
 
-De vânzare teren intravilan 5786 mp. cu o deschidere la stradă de 20.76 metri, situat pe strada Bănci, zona Fermelor din Piatra Neamț. Proprietatea dispune de toate utilitățile (apă, curent electric, gaz metan și canalizare). Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                                 De vânzare teren intravilan 5786 mp. cu o deschidere la stradă de 20.76 metri, situat pe strada Bănci, zona Fermelor din Piatra Neamț. Proprietatea dispune de toate utilitățile (apă, curent electric, gaz metan și canalizare). Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
