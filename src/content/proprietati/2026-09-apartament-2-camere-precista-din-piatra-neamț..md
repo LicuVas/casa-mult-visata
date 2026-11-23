@@ -68,4 +68,4 @@ privateOwnerContact: Baciu 0773 257 156
 privateNotes: ACC 62000
 ---
 
-Apartament cu 2 camere decomandat în suprafață  de 53,10 mp. situat la parter in cartierul Precista din Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, hol,baie, bucătărie și are în dotare,ferestre tip termopan, gresie,faianță și parchet laminat. Proprietatea este complet renovată și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                           Apartament cu 2 camere decomandat în suprafață  de 53,10 mp. situat la parter in cartierul Precista din Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, hol,baie, bucătărie și are în dotare,ferestre tip termopan, gresie,faianță și parchet laminat. Proprietatea este complet renovată și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
