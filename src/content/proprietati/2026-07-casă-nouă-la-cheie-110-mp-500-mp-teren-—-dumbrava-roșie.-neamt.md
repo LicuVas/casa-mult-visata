@@ -54,7 +54,7 @@ gallery:
   - /images/20261103_145949.webp
 tech_separator: separator
 energyClass: ''
-intabulat: false
+intabulat: true
 cadastralNumber: ''
 compartimentare: Decomandat
 floorsTotal: null
