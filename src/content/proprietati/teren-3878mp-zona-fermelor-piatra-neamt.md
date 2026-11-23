@@ -64,9 +64,9 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Teren intravilan în suprafață de 3878 mp situat în zona Fermelor din Piatra Neamț.
+Comision 0% cumpărător.                                                                                          Teren intravilan în suprafață de 3878 mp situat în zona Fermelor din Piatra Neamț.
 
-**Preț:** 35 €/mp (total ~135.700 € pentru întregul lot).
+**Preț:** 35 €/mp (total \~135.700 € pentru întregul lot).
 
 **Front stradal:** 15,7 metri.
 **Utilități:** dispune de toate utilitățile necesare.
