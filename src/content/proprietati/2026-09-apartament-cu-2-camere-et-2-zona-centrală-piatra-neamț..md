@@ -65,4 +65,4 @@ privateOwnerContact: Daniel 0755 250 537
 privateNotes: ACC 77
 ---
 
-Apartament cu 2 camere decomandat,etajul 2, situat în zona centrală Piatra Neamț. Locația este complet renovat in 2026 și se vinde complet mobilată,utilată. Pentru mai multe detalii contactati-ne telefonic 0747814263.
+Comision 0% cumpărător.                                                                                   Apartament cu 2 camere decomandat,etajul 2, situat în zona centrală Piatra Neamț. Locația este complet renovat in 2026 și se vinde complet mobilată,utilată. Pentru mai multe detalii contactati-ne telefonic 0747814263.
