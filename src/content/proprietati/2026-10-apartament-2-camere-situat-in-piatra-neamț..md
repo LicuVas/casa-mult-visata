@@ -58,4 +58,4 @@ privateOwnerContact: Veber    0742 016 108
 privateNotes: ''
 ---
 
-Apartament cu 2 camere decomandat in suprafață utilă de 56,27 mp. etajul 4, situat în apropiere de stația de salvare din Piatra Neamț. Proprietatea vă pune la dispoziție 2 camere hol,baie bucătărie, balcon inchis și are în dotare centrală termică,ferestre tip termopan,gresie,faianță și parchet laminat. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                            Apartament cu 2 camere decomandat in suprafață utilă de 56,27 mp. etajul 4, situat în apropiere de stația de salvare din Piatra Neamț. Proprietatea vă pune la dispoziție 2 camere hol,baie bucătărie, balcon inchis și are în dotare centrală termică,ferestre tip termopan,gresie,faianță și parchet laminat. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
