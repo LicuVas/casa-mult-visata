@@ -69,6 +69,6 @@ privateOwnerContact: 0751 504 674
 privateNotes: ACC 190000
 ---
 
-Casă P+1 in suprafață construită de 230 mp si teren aféŕent 618 mp.situată in localitatea Viișoara,jud. Neamț. Proprietatea este construită pe structură de beton,cărămidă și vă pune la 
+Comision 0% cumpărător.                                                                                           Casă P+1 in suprafață construită de 230 mp si teren aféŕent 618 mp.situată in localitatea Viișoara,jud. Neamț. Proprietatea este construită pe structură de beton,cărămidă și vă pune la 
 dispoziție un living generos, 5 dormitoare,2 holuri,3 băi,bucatarie,spațiu de depozitare,beci,2 balcoane și anexe.
 Locația dispune de centrală termică, ferestre termopan,parchet laminat,gresie,faianță,fosă septică și se vinde complet mobilată si partial utilată,se află aproape de punctele de interes in comun și este renovată in 2024 de la zero. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
