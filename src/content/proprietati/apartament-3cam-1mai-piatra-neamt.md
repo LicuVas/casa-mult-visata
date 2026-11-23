@@ -67,7 +67,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Apartament cu 3 camere decomandat în suprafață utilă de 80,10 mp, situat la **parter**, zona 1 Mai, Piatra Neamț.
+Comision 0% cumpărător.                                                                                   Apartament cu 3 camere decomandat în suprafață utilă de 80,10 mp, situat la **parter**, zona 1 Mai, Piatra Neamț.
 
 Proprietatea a fost dată în folosință în anul 1990 și oferă: un living generos, 2 dormitoare, hol, baie, bucătărie și balcon închis.
 
