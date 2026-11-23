@@ -68,4 +68,4 @@ privateOwnerContact: Ghiocel  0750 871 268
 privateNotes: ACC 45000
 ---
 
-Apartament cu 2 camere decomandat în suprafață de 53,10 mp. situat la etajul 3,lângă alimentara 28,zona Mărăței din Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, hol,baie, bucătărie,balcon inchis și are în dotare,ferestre tip termopan,centrală termică, gresie,faianță și parchet. Proprietatea necesită renovare și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                  Apartament cu 2 camere decomandat în suprafață de 53,10 mp. situat la etajul 3,lângă alimentara 28,zona Mărăței din Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, hol,baie, bucătărie,balcon inchis și are în dotare,ferestre tip termopan,centrală termică, gresie,faianță și parchet. Proprietatea necesită renovare și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
