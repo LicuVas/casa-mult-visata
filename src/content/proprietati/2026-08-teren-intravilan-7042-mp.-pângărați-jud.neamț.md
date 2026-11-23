@@ -77,7 +77,7 @@ privateOwnerContact: Luminita 0044 7447 072 103
 privateNotes: ACC 180000
 ---
 
-Oferim spre vânzare un teren intravilan în suprafață de 7042 mp situat în localitatea Pângărați, jud.Neamț. Proprietatea se află la aproximativ 200 metri Lacul Pângărați, cu o deschidere la stradă de 20 metri și se află intr-o zonă deosebit de frumoasă înconjurată de pădure oferind un cadru perfect pentru cei ce iubesc natura și farmecul ei. Locația dispune de: -Anexa în suprafață de 32 mp,(dormitor cu baie),
+Comision 0% cumpărător.                                                                                 Teren intravilan în suprafață de 7042 mp situat în localitatea Pângărați, jud.Neamț. Proprietatea se află la aproximativ 200 metri Lacul Pângărați, cu o deschidere la stradă de 20 metri și se află intr-o zonă deosebit de frumoasă înconjurată de pădure oferind un cadru perfect pentru cei ce iubesc natura și farmecul ei. Locația dispune de: -Anexa în suprafață de 32 mp,(dormitor cu baie),
 
 -Anexă (bucătărie și terasă)
 
