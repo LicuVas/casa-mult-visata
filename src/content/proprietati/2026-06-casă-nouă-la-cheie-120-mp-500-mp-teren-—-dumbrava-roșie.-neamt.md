@@ -92,7 +92,7 @@ privateNotes: ''
 location: Neamt
 ---
 
-Casă în suprafață totală de 90 mp și teren aferent 500 mp, situată în Dumbrava Roșie, jud. Neamț.
+Comision 0% cumpărător.                                                                                              Casă în suprafață totală de 90 mp și teren aferent 500 mp, situată în Dumbrava Roșie, jud. Neamț.
 
 **Compartimentare:**
 
