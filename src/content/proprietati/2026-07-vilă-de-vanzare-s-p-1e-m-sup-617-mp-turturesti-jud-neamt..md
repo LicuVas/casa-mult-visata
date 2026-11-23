@@ -14,7 +14,7 @@ bathrooms: 4
 surface: 580
 landSurface: 1664
 floor: S+P+1E+M
-yearBuilt: 2025
+yearBuilt: 2024
 features: []
 caracteristiciApartament: null
 caracteristiciCasa:
@@ -78,4 +78,4 @@ privateOwnerContact: Nicu   0039 388 818 6522
 privateNotes: ACC 300000
 ---
 
-Vilă în suprafață de 617 mp.și teren aferent 1664, situată în localitatea Turturesti, jud Neamț.  Proprietatea vă pune la dispoziție 10 camere,living, 3 holuri,4 băi,bucătărie,2 spații de depozitare, camera centralei,3 balcoane și garaj. Locația se află la stadiu de gri,dispune de ferestre tip termopan și curent electric. Proprietatea se pretează în diferite scopuri in funcție de activitatea dorită, ( pensiune,clinică,azil de bătrâni,etc).  Pentru mai multe detalii contactați-ne telefonic 0747814263
+Comision 0% cumpărător.                                                                                                   Vilă în suprafață de 617 mp.și teren aferent 1664, situată în localitatea Turturesti, jud Neamț.  Proprietatea vă pune la dispoziție 10 camere,living, 3 holuri,4 băi,bucătărie,2 spații de depozitare, camera centralei,3 balcoane și garaj. Locația se află la stadiu de gri,dispune de ferestre tip termopan și curent electric. Proprietatea se pretează în diferite scopuri in funcție de activitatea dorită, ( pensiune,clinică,azil de bătrâni,etc).  Pentru mai multe detalii contactați-ne telefonic 0747814263
