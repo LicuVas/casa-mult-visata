@@ -62,4 +62,4 @@ privateOwnerContact: Ionut    0748 086 909       ACC 43000
 privateNotes: ''
 ---
 
-Teren intravilan în suprafață de 852 mp situat în zona Fermelor din Piatra Neamț. Proprietatea are o deschidere de 49.27 metri,cu utilitățile în apropiere,se află într-o zonă liniștită și ferită de zgomotul stradal,pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                              Teren intravilan în suprafață de 852 mp situat în zona Fermelor din Piatra Neamț. Proprietatea are o deschidere de 49.27 metri,cu utilitățile în apropiere,se află într-o zonă liniștită și ferită de zgomotul stradal,pentru mai multe detalii contactati-ne telefonic 0747 814 263.
