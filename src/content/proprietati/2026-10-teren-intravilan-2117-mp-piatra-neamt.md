@@ -57,4 +57,4 @@ privateOwnerContact: Ramona  0769 318 809
 privateNotes: ACC 120 + COMISIONUL MEU
 ---
 
-Teren intravilan în suprafață de 2117 mp situat la strada principală Piatra Neamț-Bacău,cu o deschidere de 16 metri și toate utilitățile necesare (curent electric, apă, gaz metan și canalizare)+ casa bătrânească la pachet. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                           Teren intravilan în suprafață de 2117 mp situat la strada principală Piatra Neamț-Bacău,cu o deschidere de 16 metri și toate utilitățile necesare (curent electric, apă, gaz metan și canalizare)+ casa bătrânească la pachet. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
