@@ -60,4 +60,4 @@ privateOwnerContact: 0740 302 900
 privateNotes: ACC   44-45
 ---
 
-Apartament cu 3 camere decomandat în suprafață de 54 mp.etajul 4 situat în cartierul Dărmănești, jud.Neamț. Proprietatea vă pune la dispoziție 2 dormitoare,living,2 holuri,baie, bucatarie, balcon inchis, boxă și loc de parcare. Proprietatea are în dotare centrală termică,ferestre termopan,gresie,faianță, parchet și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                            Apartament cu 3 camere decomandat în suprafață de 54 mp.etajul 4 situat în cartierul Dărmănești, jud.Neamț. Proprietatea vă pune la dispoziție 2 dormitoare,living,2 holuri,baie, bucatarie, balcon inchis, boxă și loc de parcare. Proprietatea are în dotare centrală termică,ferestre termopan,gresie,faianță, parchet și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
