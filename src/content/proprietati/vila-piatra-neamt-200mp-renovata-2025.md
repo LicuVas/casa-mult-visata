@@ -77,7 +77,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Vilă în suprafață utilă de 200 mp și teren aferent 400 mp, situată în Piatra Neamț. **Proprietatea este renovată complet în 2025.**
+Comision 0% cumpărător.                                                                                                  Vilă în suprafață utilă de 200 mp și teren aferent 400 mp, situată în Piatra Neamț. **Proprietatea este renovată complet în 2025.**
 
 Se desfășoară pe parter și etaj și vă oferă: 4 camere, bucătărie, baie, dresing, balcoane, terasă, spațiu de depozitare și curte pavată.
 
