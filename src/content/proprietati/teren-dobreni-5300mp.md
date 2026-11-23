@@ -70,6 +70,6 @@ privateNotes: ''
 location: Dobreni, jud. Neamț
 ---
 
-Teren intravilan în suprafață de 5300 mp situat în localitatea Dobreni, jud. Neamț. Proprietatea se află într-o zonă ferită de zgomotul stradal, dispune de o deschidere de 35 metri la strada asfaltată, cu utilitățile în fața terenului (apă și curent electric).
+Comision 0% cumpărător.                                                                                          Teren intravilan în suprafață de 5300 mp situat în localitatea Dobreni, jud. Neamț. Proprietatea se află într-o zonă ferită de zgomotul stradal, dispune de o deschidere de 35 metri la strada asfaltată, cu utilitățile în fața terenului (apă și curent electric).
 
 Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
