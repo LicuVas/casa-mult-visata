@@ -29,7 +29,7 @@ caracteristiciTeren:
   stradaPietruita: false
 exclusive: true
 comisionZero: false
-listingStatus: Activ
+listingStatus: Rezervat
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
