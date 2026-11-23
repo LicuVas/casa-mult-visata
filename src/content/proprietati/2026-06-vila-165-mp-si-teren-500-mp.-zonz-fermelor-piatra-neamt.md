@@ -93,7 +93,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Vilă în suprafață utilă de 165 mp. construită din cărămidă,desfasurata pe D+P+1 și teren aferent 500 mp situată în zona Fermelor din Piatra Neamț. 
+Comision 0% cumpărător.                                                                                                Vilă în suprafață utilă de 165 mp. construită din cărămidă,desfasurata pe D+P+1 și teren aferent 500 mp situată în zona Fermelor din Piatra Neamț. 
 
 Proprietatea vă oferă spre folosință.
 
