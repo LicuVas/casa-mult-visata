@@ -71,4 +71,4 @@ privateNotes: |-
   Olga    0746 026 657
 ---
 
-Apartament cu 2 camere  in suprafață utilă de 59 mp situat la etajul 4 din 10 în cartierul Dărmănești, strada 1 Decembrie, Piatra Neamț. Proprietatea vă pune la dispoziție 2 camere,baie, bucătărie,spațiu de depozitare, hol generos și un balcon închis. Locația are în dotare: centrală termică,ferestre tip termopan,gresie, faianță, parchet, balcon inchis și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                          Apartament cu 2 camere  in suprafață utilă de 59 mp situat la etajul 4 din 10 în cartierul Dărmănești, strada 1 Decembrie, Piatra Neamț. Proprietatea vă pune la dispoziție 2 camere,baie, bucătărie,spațiu de depozitare, hol generos și un balcon închis. Locația are în dotare: centrală termică,ferestre tip termopan,gresie, faianță, parchet, balcon inchis și se află foarte aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
