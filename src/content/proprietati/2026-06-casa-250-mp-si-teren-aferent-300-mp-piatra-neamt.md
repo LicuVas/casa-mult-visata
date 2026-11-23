@@ -71,7 +71,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Casă P+M în suprafață de 250 mp și teren aferent 275 mp.situată pe strada Ștefan cel Mare din Piatra Neamț. Proprietatea este renovată în totalitate în 2025 și 
+Comision 0% cumpărător.                                                                                                    Casă P+M în suprafață de 250 mp și teren aferent 275 mp.situată pe strada Ștefan cel Mare din Piatra Neamț. Proprietatea este renovată în totalitate în 2025 și 
 
 vă pune la dispoziție 3 dormitoare, living generos, birou, 2 holuri, 2 băi, spațiu de depozitare,bucătărie,balcon și beci. 
 
