@@ -53,4 +53,4 @@ privateOwnerContact: DANA    0740 631 557
 privateNotes: ACC 22
 ---
 
-Teren intravilan în suprafață de 600 mp situat în localitatea Dumbrava Rosie, jud. Neamț. Proprietatea se află într-o zonă ferită de zgomotul stradal, dispune de o deschidere de 20 metri la strada, cu utilitățile în apropiere (apă și curent electric).Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                           Teren intravilan în suprafață de 600 mp situat în localitatea Dumbrava Rosie, jud. Neamț. Proprietatea se află într-o zonă ferită de zgomotul stradal, dispune de o deschidere de 20 metri la strada, cu utilitățile în apropiere (apă și curent electric).Pentru mai multe detalii contactați-ne telefonic 0747 814 263.
