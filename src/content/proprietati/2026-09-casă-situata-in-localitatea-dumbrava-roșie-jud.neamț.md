@@ -74,6 +74,6 @@ privateOwnerContact: Iulian   0745 335 933
 privateNotes: ACC 70-72
 ---
 
-Casă din cărămidă în suprafață desfășurată 120 mp și teren aferent 600 mp situata in localitatea Dumbrava Roșie, jud.Neamț
+Comision 0% cumpărător.                                                                                             Casă din cărămidă în suprafață desfășurată 120 mp și teren aferent 600 mp situata in localitatea Dumbrava Roșie, jud.Neamț
 
 Proprietatea construită în 2026,pe cadre de beton și cărămidă, la stadiu de rosu,ce vă oferă spre folosință 2 dormitoare, living generos, baie,camera centralei, terasă acoperită, dispune de curent electic, sursă de apă, gazul metan la stradă, interiorul este la roșu. Pentru vizionari si alte detalii contactati-ne telefonic. 0747814263.
