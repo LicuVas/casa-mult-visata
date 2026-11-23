@@ -73,4 +73,4 @@ privateOwnerContact: Magda Nicorescu 0751 408 070
 privateNotes: ACC 80
 ---
 
-Teren intravilan în suprafață de 1320mp situat localitatea Dumbrava Rosie,jud. Neamț. Proprietatea dispune și de o casă bătrânească in suprafață de 80 mp. compusă di 3 camere, 2 holuri,bucătărie, baie, beci,o anexa, este racordată la curentul electric, apa, iar gazul metan se află in fața terenului. Locația este situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                                                  Teren intravilan în suprafață de 1320mp situat localitatea Dumbrava Rosie,jud. Neamț. Proprietatea dispune și de o casă bătrânească in suprafață de 80 mp. compusă di 3 camere, 2 holuri,bucătărie, baie, beci,o anexa, este racordată la curentul electric, apa, iar gazul metan se află in fața terenului. Locația este situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
