@@ -85,24 +85,4 @@ privateNotes: ''
 location: Gura Văii, jud. Neamț
 ---
 
-Casă de vânzare în localitatea Gura Văii, jud. Neamț.
-
-**3 niveluri — suprafață desfășurată 268 mp + 21 mp terasă acoperită și închisă cu termopan:**
-
-**Subsol:** beci, 2 camere.
-
-**Parter:** living, bucătărie, baie, camera centralei, garaj cu 2 locuri (peste toată suprafața beciului), terasa închisă cu geamuri termopan în partea din față. Din garaj e acces direct în bucătărie și în beci, prin uși automatizate cu telecomandă, una dintre ele având și ușă de acces pietonal.
-
-**Mansardă:** 3 camere, hol, baie și un spațiu de depozitare 70 mp.
-
-**Construcție 2012:** fundații beton, pereți cărămidă, acoperiș tip șarpantă, învelitoare tablă.
-
-**Încălzire:** centrală duală pe peleți (cu posibilitate schimb pe lemn), calorifere aluminiu. La parter și șemineu pe lemne.
-
-**Apă:** puț propriu cu hidrofor / fosă septică dublu compartimentată.
-
-**Foișor:** platformă betonată cu gresie, acoperit cu tablă, închis cu folie lateral, dotat cu ansamblu monobloc chiuvetă/grătar/afumătoare/cuptor/plită.
-
-**Teren 8807 mp**, împrejmuit cu gard.
-
-Contact: 0747 814 263.
+Comision 0% cumpărător.                                                                                                   Casă de vânzare în localitatea Gura Văii, jud. Neamț.                                                             **3 niveluri — suprafață desfășurată 268 mp + 21 mp terasă acoperită și închisă cu termopan:                                                                                               Subsol:** beci, 2 camere.                                                                                               **Parter:** living, bucătărie, baie, camera centralei, garaj cu 2 locuri (peste toată suprafața beciului), terasa închisă cu geamuri termopan în partea din față. Din garaj e acces direct în bucătărie și în beci, prin uși automatizate cu telecomandă, una dintre ele având și ușă de acces pietonal.                                **Mansardă:** 3 camere, hol, baie și un spațiu de depozitare 70 mp.   **Construcție 2012:** fundații beton, pereți cărămidă, acoperiș tip șarpantă, învelitoare tablă.                                                                                                         **Încălzire:** centrală duală pe peleți (cu posibilitate schimb pe lemn), calorifere aluminiu. La parter și șemineu pe lemne.                                                          **Apă:** puț propriu cu hidrofor / fosă septică dublu compartimentată.                   **Foișor:** platformă betonată cu gresie, acoperit cu tablă, închis cu folie lateral, dotat cu ansamblu monobloc chiuvetă/grătar/afumătoare/cuptor/plită.                **Teren 8807 mp**, împrejmuit cu gard. Contact: 0747 814 263.
