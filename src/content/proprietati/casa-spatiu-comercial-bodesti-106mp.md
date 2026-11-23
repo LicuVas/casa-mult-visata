@@ -82,7 +82,7 @@ privateNotes: ''
 location: Bodești de Jos, jud. Neamț
 ---
 
-Casă sau spațiu comercial în suprafață utilă de 106 mp, situat în localitatea Bodești de Jos, jud. Neamț.
+Comision 0% cumpărător.                                                                                                Casă sau spațiu comercial în suprafață utilă de 106 mp, situat în localitatea Bodești de Jos, jud. Neamț.
 
 **Compartimentare:** 2 camere generoase, baie, spațiu de depozitare.
 
