@@ -80,7 +80,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-**Garsonieră** în suprafață totală de 24 mp situată la etajul 4, strada Aleea Ulmilor, între Maielvi și piața din Dărmănești, Piatra Neamț.
+Comision 0% cumpărător.                                                                                  **Garsonieră** în suprafață totală de 24 mp situată la etajul 4, strada Aleea Ulmilor, între Maielvi și piața din Dărmănești, Piatra Neamț.
 
 **Compartimentare:** dormitor, hol, baie, bucătărie și spațiu de depozitare.
 
