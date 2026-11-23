@@ -64,4 +64,4 @@ privateOwnerContact: ''
 privateNotes: ''
 ---
 
-Apartament 2 camere in suprafata utila de 59.63 mp si un balcon generos in suprafata de 44 mp. etajul 1, zona 1 Mai Piatra Neamt.
+Comision 0% cumpărător.                                                                                       Apartament 2 camere in suprafata utila de 59.63 mp si un balcon generos in suprafata de 44 mp. etajul 1, zona 1 Mai Piatra Neamt.
