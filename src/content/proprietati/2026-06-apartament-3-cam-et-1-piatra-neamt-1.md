@@ -84,4 +84,4 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Apartament 3 camere decomandat,etajul 1, în suprafață totală de 114mp.zona 1 Mai, Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, living generos,bucătărie, hol, 2 băi,2 balcoane și boxă. Locația are in dotare ferestre tip termopan, centrală termică, gresie, faianță, parchet laminat și se află aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                                Apartament 3 camere decomandat,etajul 1, în suprafață totală de 114mp.zona 1 Mai, Piatra Neamț. Proprietatea vă pune la dispoziție 2 dormitoare, living generos,bucătărie, hol, 2 băi,2 balcoane și boxă. Locația are in dotare ferestre tip termopan, centrală termică, gresie, faianță, parchet laminat și se află aproape de punctele de interes in comun. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
