@@ -81,4 +81,4 @@ privateOwnerContact: Cristi
 privateNotes: ''
 ---
 
-Casă P+M in suprafață construită de 216 mp. și teren aferent 330 mp. situată pe strada Ștefan cel Mare, Piatra Neamț. Proprietatea vă oferă spre folosință 3 dormitoare, living generos, bucătărie, 2 băi, 2 holuri, terasă acoperită și beci.  Locația dispune de ferestre termopan,centrală termică, gresie, faianță, parchet din lemn masiv și racordată la toate utilitățile( apă, curent electric, gaz metan, canalizare) și curtea frumos amenajată. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
+Comision 0% cumpărător.                                                                                          Casă P+M in suprafață construită de 216 mp. și teren aferent 330 mp. situată pe strada Ștefan cel Mare, Piatra Neamț. Proprietatea vă oferă spre folosință 3 dormitoare, living generos, bucătărie, 2 băi, 2 holuri, terasă acoperită și beci.  Locația dispune de ferestre termopan,centrală termică, gresie, faianță, parchet din lemn masiv și racordată la toate utilitățile( apă, curent electric, gaz metan, canalizare) și curtea frumos amenajată. Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
