@@ -70,7 +70,7 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-De vânzare **12 loturi de teren** în suprafață de 10.000 mp, situat în cartierul Ciritei, Piatra Neamț.
+Comision 0% cumpărător.                                                                                                       De vânzare **12 loturi de teren** în suprafață de 10.000 mp, situat în cartierul Ciritei, Piatra Neamț.
 
 **Acte:** se deține certificat de urbanism și PUZ.
 **Acces:** cale de acces de 7 metri.
