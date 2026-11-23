@@ -81,7 +81,7 @@ privateNotes: ''
 location: Dumbrava Roșie, jud. Neamț
 ---
 
-**Casă P+M din cărămidă** în suprafață de 226 mp și teren aferent 1286 mp, situată în Dumbrava Roșie, jud. Neamț.
+Comision 0% cumpărător.                                                                                              **Casă P+M din cărămidă** în suprafață de 226 mp și teren aferent 1286 mp, situată în Dumbrava Roșie, jud. Neamț.
 
 **Parter:** living generos, bucătărie, baie, camera centralei, spațiu de depozitare și beci.
 
