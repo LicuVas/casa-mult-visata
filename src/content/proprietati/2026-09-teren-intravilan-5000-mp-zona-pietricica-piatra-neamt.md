@@ -67,4 +67,4 @@ privateOwnerContact: Ana 0751 914 636
 privateNotes: ACC 60
 ---
 
-Teren intravilan 5000 mp. zona Fermelor din Piatra Neamț. Locația are o deschidere la strada asfaltată de 72 metri,cu utilitățile în vecinătate, se poate parcela și in loturi de 1000 mp. se deține și un certificat de urbanism unde se poate construi P+2. Pentru mai multe detalii contactati-ne telefonic
+Comision 0% cumpărător.                                                                                         Teren intravilan 5000 mp. zona Fermelor din Piatra Neamț. Locația are o deschidere la strada asfaltată de 72 metri,cu utilitățile în vecinătate, se poate parcela și in loturi de 1000 mp. se deține și un certificat de urbanism unde se poate construi P+2. Pentru mai multe detalii contactati-ne telefonic
