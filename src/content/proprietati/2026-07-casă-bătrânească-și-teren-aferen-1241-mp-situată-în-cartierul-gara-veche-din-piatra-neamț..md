@@ -62,4 +62,4 @@ privateOwnerContact: Eugenia vaslui  0760 842 389 - 327 063 1401
 privateNotes: ''
 ---
 
-Teren intravilan în suprafață de 1241mp situat în cartierul Gara Veche din Piatra Neamț. Proprietatea dispune și de o casă bătrânească in suprafață de 89 mp. compusă di 2 camere, hol,bucătărie, spațiu de depozitare, beci,2 anexe, este racordată la curentul electric, apa, iar canalizarea și gazul metan se află in fața terenului. Locația este situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
+Comision 0% cumpărător.                                                                                        Teren intravilan în suprafață de 1241mp situat în cartierul Gara Veche din Piatra Neamț. Proprietatea dispune și de o casă bătrânească in suprafață de 89 mp. compusă di 2 camere, hol,bucătărie, spațiu de depozitare, beci,2 anexe, este racordată la curentul electric, apa, iar canalizarea și gazul metan se află in fața terenului. Locația este situată intr-o zonă liniștită și ferită de zgomotul stradal. Pentru mai multe detalii contactati-ne telefonic 0747 814 263
