@@ -75,9 +75,7 @@ privateOwnerContact: Mihai 0744 758 202
 privateNotes: ACC 110000
 ---
 
-Casă în suprafață totală de 110 mp și teren aferent 500 mp, situată în Dumbrava Roșie, jud. Neamț.
-
-**Compartimentare:**
+Comision 0% cumpărător.                                                                                                Casă în suprafață totală de 110 mp și teren aferent 500 mp, situată în Dumbrava Roșie, jud. Neamț.                                                                   **Compartimentare:**
 
 - 2 dormitoare
 - baie
