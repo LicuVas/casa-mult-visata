@@ -63,6 +63,6 @@ privateOwnerContact: Ilinca  0744 702 917
 privateNotes: ACC 60000 Comision 3%
 ---
 
-Ansamblu de 5 spatii, dintre care 4 spații, fiecare în suprafață de 23,39 mp. + un spațiu în suprafață de 46,11 mp, cu baie proprie, ce pot fi transformate în 6 garsoniere, situate la parterul unui bloc construit in 1979, zona Mărăței din Piatra Neamț. 
+Comision 0% cumpărător.                                                                            Ansamblu de 5 spatii, dintre care 4 spații, fiecare în suprafață de 23,39 mp. + un spațiu în suprafață de 46,11 mp, cu baie proprie, ce pot fi transformate în 6 garsoniere, situate la parterul unui bloc construit in 1979, zona Mărăței din Piatra Neamț. 
 
 Pentru mai multe detalii contactati-ne telefonic 0747 814 263.
