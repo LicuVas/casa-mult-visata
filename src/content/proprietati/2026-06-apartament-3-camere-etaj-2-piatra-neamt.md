@@ -72,4 +72,4 @@ privateNotes: ''
 location: Piatra Neamț
 ---
 
-Apartament cu 3 camere în suprafață utilă de 60,20 mp situat la etajul 2, zona centrală Piatra Neamt. Proprietatea vă oferă spre folosință, un living, 2 camere,hol,baie,bucătărie,spațiu de depozitare, balcon,și are în dotare centrală,termică,gresie,faianță și parchet. Locația necesită renovare și se află intr-o zonă liniștită și ferită de zgomotul stradal,intr-un imobil cu 4 etaj. Pentru mai multe detali contactatine telefonic 0747814263.
+Comision 0% cumpărător.                                                                                  Apartament cu 3 camere în suprafață utilă de 60,20 mp situat la etajul 2, zona centrală Piatra Neamt. Proprietatea vă oferă spre folosință, un living, 2 camere,hol,baie,bucătărie,spațiu de depozitare, balcon,și are în dotare centrală,termică,gresie,faianță și parchet. Locația necesită renovare și se află intr-o zonă liniștită și ferită de zgomotul stradal,intr-un imobil cu 4 etaj. Pentru mai multe detali contactatine telefonic 0747814263.
