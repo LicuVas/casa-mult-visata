@@ -2,7 +2,7 @@
 title: Casă/Spațiu comercial 106 mp cu autorizații — Bodești de Jos
 status: Vânzare
 propertyType: Casă
-price: 32000
+price: 29000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Bodești › Bodeștii de Jos
