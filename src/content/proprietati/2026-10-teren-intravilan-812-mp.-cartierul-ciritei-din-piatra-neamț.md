@@ -2,7 +2,7 @@
 title: Teren intravilan 812 mp. cartierul Ciritei din Piatra Neamț,
 status: Vânzare
 propertyType: Teren
-price: 39
+price: 32
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Ciritei
@@ -29,7 +29,7 @@ caracteristiciTeren:
   stradaPietruita: false
 exclusive: true
 comisionZero: false
-listingStatus: Rezervat
+listingStatus: Vândut
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
