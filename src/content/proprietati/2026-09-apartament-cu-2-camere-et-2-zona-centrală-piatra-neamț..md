@@ -2,7 +2,7 @@
 title: Apartament cu 2 camere, et 2/2, zona centrală, Piatra Neamț.
 status: Vânzare
 propertyType: Apartament
-price: 79900
+price: 84000
 currency: EUR
 pricePerUnit: ''
 localitate: Neamț › Piatra-Neamț › Centru
@@ -21,7 +21,7 @@ caracteristiciCasa: null
 caracteristiciTeren: null
 exclusive: false
 comisionZero: false
-listingStatus: Retras
+listingStatus: Activ
 updatedAt: ''
 coords: '{"type":"Point","coordinates":[26.371,46.929]}'
 videoUrl: ''
