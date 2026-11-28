@@ -34,7 +34,7 @@ caracteristiciCasa:
 caracteristiciTeren: null
 exclusive: false
 comisionZero: false
-listingStatus: Activ
+listingStatus: Rezervat
 updatedAt: ''
 coords: '46.9276'
 videoUrl: ''
